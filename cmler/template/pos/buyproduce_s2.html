@@ -1,0 +1,139 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/myjs.js" type=text/javascript></SCRIPT> 
+<script language=javascript> 
+
+var requestSubmitted = false;
+
+function submit_save(){
+
+	 if(form1.produce_id.value==""){
+	 	  alert("请选择商品");
+	 	  form1.produce_id.focus();
+	 	  return;
+	 }
+	 	 if(form1.number.value==""){
+	 	  alert("请填写数量");
+	 	  form1.number.focus();
+	 	  return;
+	 }
+	 	  if(form1.employee_id.value==""){
+	 	  alert("请选择销售人员");
+	 	  form1.employee_id.focus();
+	 	  return;
+	 }
+
+	 	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+
+  form1.submit();
+}
+
+
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+  if(!strItem){return}
+  arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+} 
+</script>
+<BODY   topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">购买商品</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="?action=step3" method="post" name="form1">
+            <input name='action'  type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+    <table width="610" border="0" cellspacing="0" ID=servicetable class=InputFrameMain style="display:[#servicetabledisplay#]">
+      <tr> <a name="inputpro">
+    <td width="140" align="center" class=inputtitle>消耗产品信息</td>
+    </a>
+    <td width="189" align="center" class=inputtitleright><input name='ser_act'   type="hidden"  id="ser_act" value="[#ser_action#]">
+      <input name='s_updid'  type="hidden"  value='[#s_updid#]'>
+      <input name='ser_updid'  type="hidden"   value='[#ser_updid#]'></td>
+    <td width="80" align="center">&nbsp;</td>
+    <td width="193" align="center">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td   height="30" align="right" class=form_label>项目代码：</td>
+    <td height="30" align="left"><input  type="hidden" name="produce_id" value="[#produce_id#]">
+      <input class=input style="ime-mode:disabled"  name="produce_no" type="text" value="[#produce_no#]" size="20" onKeyPress="keypresscomm()"></td>
+    <td height="30" align="right" class=form_label>单位：</td>
+    <td height="30" align="left"><input class=input_disabled name="standardunit" type="text" value="[#standardunit#]" size="10" readonly="1"></td>
+  </tr>
+  <tr>
+    <td height="30" align="right"><span class="form_label">项目名称：</td>
+    <td width="189" height="30"><input class=input_disabled  name="produce_name" type="text" value="[#produce_name#]" size="20" readonly ></td>
+    <td width="80" height="30" align="right"><span class="form_label">牌价：</span></td>
+    <td height="30" colspan="2"><input class=input_disabled name="price" type="text" value="[#price#]" size="10" readonly="1">
+元 </td>
+  </tr>
+    <tr>
+      <td height="30" align="right" class="form_label">数量：</td>
+      <td height="30"><input class=input name="number" type="text" value="[#number#]" size="10" ></td>
+    <td width="80" height="30" align="right"><span class="form_label">售价：</span></td>
+    <td height="30" colspan="2"><input class=input name="value" type="text" value="[#value#]" size="10" >
+元 </td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">顾问：</td>
+    <td height="30"><INPUT type='hidden' name=employee_id value="[#employee_id#]">
+      <input class=input_disabled type="text" name="employee_name" size="10" maxlength="20" value="[#employee_name#]" readonly="1">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putcon() type="button" value=查找 name=xuan>      <span class=form_label>*</span></td>
+    <td height="30" align="right" class="form_label">美容师：</td>
+    <td height="30" colspan="2"><span class="InputFrameLine">
+      <input class=input_disabled type="text" name="beauty_name" size="10" maxlength="20" value="[#beauty_name#]" readonly="1">
+      <INPUT type=hidden name=beauty_id value="[#beauty_id#]">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putbeauty() type="button" value=查找 name=xuan2>
+      <span class=form_label>*</span></span></td>
+  </tr>
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" AccessKey=t  onClick="submit_save()"  {buttondisabled} >
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq2 type=reset value="撤销" AccessKey=z  >
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq type=button value="返回" AccessKey=b  onClick="location.href='buyproduce.php';"></td>
+  </tr>
+    </table>
+    <table width="610" border="0" cellspacing="0" class=InputFrameMain style="display:[#servicetabledisplay#]">
+      <tr> </tr>
+    </table>
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"></div>
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

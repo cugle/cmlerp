@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META http-equiv=ljz content=no-cache><LINK 
+href="[#path#]/css/button_css.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]/css/page_title.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]/css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="[#path#]/editlib.js"></SCRIPT>
+<SCRIPT language=JavaScript>
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}
+function tourl(url)
+{
+	window.location.href=url;
+}
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	var cid='';
+	var cname='';
+	var chandphone='';
+	var birthday='';
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				arrItems = idarray[m].split("@@@");
+				if(cid ==""){cid=arrItems[0];
+				} else {
+				cid=cid+';'+arrItems[0];}
+				if(cname =="")
+				{cname=arrItems[1];
+				} else {
+				cname=cname+';'+arrItems[1];}
+				if(chandphone ==""){chandphone=arrItems[2];
+				} else {
+				chandphone=chandphone+';'+arrItems[2];}
+				if(birthday ==""){birthday=arrItems[3];
+				} else {
+				birthday=birthday+';'+arrItems[3];}
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(";");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	var url = "?action=del&delid="+id+"&qgtype="+qgtype;
+
+	if(qgtype == "call")
+	{
+	url='visiterecord.php?action=add&chandphone='+chandphone+'&customer_id='+cid+'&customer_name='+encodeURI(cname)+'&birthday='+birthday+'&visitetypeid=3';
+	tourl(url);
+	}
+	else if(qgtype=="message"){
+	//v=document.getElementById("TheID").value;
+	 url='?action=add&chandphone='+chandphone+'&cid='+cid+'&cname='+encodeURI(cname)+'&birthday='+birthday;
+
+	tourl(url);
+
+	}
+	else
+	{
+		tourl(url);
+	}
+}	
+	</SCRIPT>
+<STYLE type=text/css>
+.flat_input {
+	BORDER-RIGHT: #546485 1px solid; BORDER-TOP: #546485 1px solid; BORDER-LEFT: #546485 1px solid; BORDER-BOTTOM: #546485 1px solid
+}
+findbox_close {
+	BACKGROUND-IMAGE: url([#path#]img/browse_findbox_close.gif); WIDTH: 30px; HEIGHT: 30px
+}
+.findbox_close {
+	BORDER-RIGHT: #546485 0px; PADDING-RIGHT: 0px; BORDER-TOP: #546485 0px; PADDING-LEFT: 0px; BACKGROUND-IMAGE: url([#path#]img/guanbi.gif); PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: #546485 0px; WIDTH: 30px; PADDING-TOP: 0px; BORDER-BOTTOM: #546485 0px; HEIGHT: 30px
+}
+#form1 {
+	margin: 0px;
+	padding: 0px;
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.6003" name=GENERATOR></HEAD>
+<BODY text=#000000 leftMargin=2 topMargin=0 width="100%">
+<CENTER>
+<FORM id=form1 name=form1 action="" method=post>
+<DIV>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=pagetitle vAlign=center colSpan=2 height=30>&nbsp;&nbsp;<IMG 
+      src="[#path#]/img/nowspace.jpg" align=absMiddle> <SPAN>会员生日查看 
+    </SPAN></TD></TR>
+  <TR>
+    <TD align=left colSpan=2>
+      <DIV style="MARGIN: 0px 0px 0px 12px"><IMG 
+      src="[#path#]/img/line.jpg"></DIV></TD></TR>
+  <TR>
+    <TD align=left colSpan=2 height=3></TD></TR></TBODY></TABLE></DIV>
+<TABLE height=31 cellSpacing=0 cellPadding=0 width="98%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=button_labelleft>&nbsp;&nbsp;</TD>
+    <TD class=button_label height=31><A 
+      href="?month=1&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/1[#c1#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=2&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/2[#c2#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=3&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/3[#c3#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=4&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/4[#c4#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=5&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/5[#c5#].gif" width=33 border=0></A></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=6&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/6[#c6#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=7&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/7[#c7#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=8&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/8[#c8#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=9&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/9[#c9#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=10&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/10[#c10#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=11&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/11[#c11#].gif" width=33 border=0></A></TD>
+    <TD class=button_label height=31><A 
+      href="?month=12&amp;year=2010"><IMG 
+      height=31 src="[#path#]/img/12[#c12#].gif" width=33 border=0></A></TD>
+    <TD class=button_labelright></TD></TR></TBODY></TABLE>
+<TABLE class=tableframe style="WORD-BREAK: break-all" width="98%" 
+  align=center><TBODY>
+  <TR class=listtitle>
+   <TD class=listcelltitle noWrap align=middle height=25><input name="checkbox2" type="checkbox" onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></TD>
+    <TD class=listcelltitle noWrap align=middle height=25>日期</TD>
+    <TD class=listcelltitle noWrap align=middle>会员姓名</TD>
+    <TD class=listcelltitle noWrap align=middle>性别</TD>
+    <TD class=listcelltitle noWrap align=middle>邮箱地址</TD>
+    <TD class=listcelltitle noWrap align=middle>手机</TD>
+    <TD class=listcelltitle noWrap align=middle>家庭电话</TD>
+    <TD class=listcelltitle noWrap align=middle>状态</TD>
+    <TD class=listcelltitle noWrap align=middle>出生日期</TD>
+    <TD class=listcelltitle noWrap align=middle>      操作</TD>
+  </TR>
+	  <!-- BEGIN mainlist -->
+  <TR class=listrow1 onMouseOver="this.style.backgroundColor='#DAE2ED';" 
+  onmouseout="this.style.backgroundColor='[#bgColor#]'"  bgColor="[#bgColor#]">
+    <TD class=listcellrow align=middle height=25><span class="listcellrow" style="WIDTH: 10px">
+      <input name="The_ID[]" type="hidden" value="[#customer_id#]" />
+      <input name="TheID[]" type="checkbox" value="[#customer_id#]@@@[#customer_name#]@@@[#handphone#]@@@[#birthday#]"/>
+    </span></TD>
+    <TD class=listcellrow align=middle height=25>[#day#]号 星期[#date#]</TD>
+    <TD class=listcellrow align=middle>[#customer_name#]</TD>
+    <TD class=listcellrow align=middle>[#gender#]</TD>
+    <TD class=listcellrow align=middle>[#email#]</TD>
+    <TD class=listcellrow align=middle>[#handphone#]</TD>
+    <TD class=listcellrow align=middle>[#tel#]</TD>
+    <TD class=listcellrow align=middle>[#remind#]</TD>
+    <TD class=listcellrow align=middle>[#birthday#]</TD>
+    <TD class=listcellrow align=middle><a onClick="tourl('memberbday.php?action=add&chandphone=[#handphone#]&cid=[#customer_id#]&cname='+encodeURI('[#customer_name#]')+'&birthday=[#birthday#]');" href="#">发送短信</a> <a  onClick="tourl('visiterecord.php?action=add&customer_id=[#customer_id#]&customer_name='+encodeURI('[#customer_name#]')+'&visitetypeid=3')" href="#">新增通话</a></TD>
+  </TR>
+
+  
+	 <!-- END mainlist --> 
+  </TBODY></TABLE>
+<TABLE class=tableend height=26 cellSpacing=0 cellPadding=0 width="98%" 
+align=center border=0>
+  <TBODY>
+  <TR vAlign=center>
+    <TD class=listtail align=left><span class="listcelltitle">
+      <input name="button" type=button class=buttonsmall  value=全选 onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" />
+    </span>
+      <input name="button" type=button class=buttonsmall id=buttonq accesskey=s onClick="javascript:qg_pl('call')"  value=电话祝福 title="添加电话祝福记录">
+      <input name="button222" type=button class=buttonsmall id=button22 accesskey=s onClick='window.showModalDialog("../getdata/getvisiterecord.html?category=visitetypeid&keywords=3","","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;")' value=查看通话  title="查看此月祝福记录">
+      <input name="button2" type=button class=buttonsmall id=button accesskey=s onClick="javascript:qg_pl('message')"; value=短信祝福  title="发送生日祝福短信"> <input name="button22" type=button class=buttonsmall id=button2 accesskey=s onClick='window.showModalDialog("../getdata/getmessagerecord.html?category=messagetypeid&keywords=1","","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;")' value=查看已发  title="查看此月份已发祝福短信"></TD>
+    <TD class=listtail align=right>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR></TBODY></TABLE>
+</FORM></CENTER></BODY></HTML>

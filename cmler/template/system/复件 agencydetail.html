@@ -1,0 +1,142 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<link href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="[#path#]js/calendar.js" 
+type=text/javascript></SCRIPT>
+<script type="text/javascript" src="[#path#]js/jquery-1.2.1.pack.js"></script>
+<script type="text/javascript">
+	function lookup(inputString) {
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+			$('#suggestions').hide();
+		} else {
+			$.post("rpc.php", {queryString: ""+inputString+""}, function(data){
+				if(data.length >0) {
+					$('#suggestions').show();
+					$('#autoSuggestionsList').html(data);
+				}
+			});
+		}
+	} // lookup
+	
+	function fill(customerid,customername,address,tel,handphone) {
+    	$('#customerid').val(customerid);
+		$('#customername').val(customername);
+		$('#address').val(address);
+		$('#tel').val(tel);
+		$('#handphone').val(handphone);
+		
+		setTimeout("$('#suggestions').hide();", 200);
+	}
+</script>
+<script type="text/javascript">
+  function search_customer(){ 
+   var customername=document.getElementById("customername").value;  
+   if(customername!=""){
+   window.open('select_customer.php?cateid=customername&keywords='+encodeURI(customername),'','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50');
+  }
+  else{
+     window.open('select_customer.php','','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50');
+
+  }
+  } 
+</script>
+
+<style type="text/css">
+	.suggestionsBox {
+	left: 120px;
+	top: 131px;
+	margin: 10px 0px 0px 0px;
+	width: 450px;
+	background-color: #eff3ff;
+		-moz-border-radius: 7px;
+		-webkit-border-radius: 7px;
+	border: 1px solid #999999;
+	color: #000000;
+	position: absolute;
+	}
+	
+	.suggestionList {
+		margin: 0px;
+		padding: 0px;
+		
+	}
+	
+	.suggestionList li {
+		
+		margin: 0px 0px 3px 0px;
+		padding: 3px;
+		cursor: pointer;
+	}
+
+	.suggestionList li:hover {
+		background-color: #659CD8;
+	}
+</style>
+</head>
+<body>
+<h3>[#actionName#]机构</h3>
+<FORM id=form style="DISPLAY: inline" name="form" method="post"  action="agency.php" >
+<TABLE width="100%" height="264" border=0 align=center cellPadding=0 cellSpacing=0>
+        <TBODY><TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>机构信息 [#agency_id#]
+            <input name='action' type="hidden" value="[#action#]">
+          <input name='updid' type='hidden' value='[#updid#]'></TD>
+        </TR>
+        <TR>
+          <TD align=right width="12%" height=30>机构代码：</TD>
+          <TD align=left width="33%">
+			  <input type="text" size="30"   name="agency_no" id="agency_no" value="[#agency_no#]" />
+			<div class="suggestionsBox" id="suggestions" style="display: none;">
+				<img src="[#path#]}img/upArrow.png" style="position: relative; top: -12px; left: 100px;" alt="upArrow" />
+				<div class="suggestionList" id="autoSuggestionsList">
+&nbsp;				</div>
+			</div>		  </TD>
+          <TD align=right width="12%" height=30>机构简称：</TD>
+		  	
+          <TD align=left width="43%"><input class=INPUT id=agency_easyname
+            maxlength=100 size=30 value="[#agency_easyname#]" name=agency_easyname></TD>
+        </TR>
+        <TR>
+          <TD align=right height=30>机构全称：</TD>
+          <TD align=left><input class=INPUT id=agency_name 
+            maxlength=100 size=30 value="[#agency_name#]" name=agency_name></TD>
+
+          <TD align=right height=30>店面电话：</TD>
+          <TD align=left><input class=INPUT id='tel'
+            maxlength=100 size=30 value='[#tel1#]' name='agency_tel'></TD>
+        </TR>
+        <TR>
+          <TD align=right width="12%" height=30>开张时间：</TD>
+          <TD align=left width="33%"><input class=INPUT id='opendate'
+            maxlength=100 size=30 value='[#opendate#]' name='opendate' onfocus="calendar(EventUtil.getEvent().target)"></TD>
+          <TD align=right width="12%" height=30>机构类别：</TD>
+          <TD align=left width="43%"><select name="agencytype_id" >
+            <option value='1' >总部</option>
+            <option value='2' >分公司</option>
+            <option value='3' >代理商</option>
+            <option value='4' >直营店</option>
+            <option value='5' >其他</option>
+          </select></TD>	
+        </TR><TR>
+          <TD align=right height=30>负责人：</TD>
+          <TD align=left><input class=INPUT id=principal  maxlength=100 
+            size=30 name=principal  value="[#principal#]"></TD>
+          <TD align=right height=30>客户手机：</TD>
+          <TD align=left><input class=INPUT id=mobile  
+            maxlength=100 size=30 value="[#mobile#]" name=agency_mobile ></TD>
+        </TR>
+    <TD align=left bgColor=lightsteelblue colSpan=4>描述信息</TD></TR>
+        <TR>
+          <TD align=right width="12%" height=80>机构描述：</TD>
+          <TD align=left colSpan=3><TEXTAREA id=memo  name=memo  rows=5 cols=80>[#memo#]</TEXTAREA></TD></TR>
+        <TR>
+          <TD align=middle colSpan=4><input type="submit" name="Submit2" value=" 提 交 ">
+            &nbsp; 
+<INPUT class=button id=re type=reset value=" 重 置 " name=re></TD></TR></TABLE>
+</TD></TR></FORM>
+</body>
+</html>

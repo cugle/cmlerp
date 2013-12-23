@@ -1,0 +1,142 @@
+<HTML><HEAD><TITLE>销售分析</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<script>
+function viewbill(sellid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../analysis/viewbill.php?sellid="+sellid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+function printbill(){
+	
+	url='?action=printbill&bgdate=[#bgdate#]&enddate=[#enddate#]';
+
+	 window.open(url);
+ 
+}  
+</script>
+
+<style type="text/css">
+.NOPRINT {
+ font-family: "宋体";
+ font-size: 9pt;
+}
+
+-->
+</style>
+<style media=print>
+.Noprint{
+display:none;
+}
+</style>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+}
+.page_titlebar_bg {
+	font-size: 16px;
+	font-weight: bold;
+}
+-->
+</style></HEAD>
+<BODY>
+<div class="Noprint" >
+
+  <OBJECT  id=WebBrowser  classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2  height=0  width=0>
+  </OBJECT>
+  <input  type=button  value=打印          onclick=document.all.WebBrowser.ExecWB(6,1)>
+  <input  type=button  value=直接打印  onclick=document.all.WebBrowser.ExecWB(6,6)>
+  <input  type=button  value=页面设置  onclick=document.all.WebBrowser.ExecWB(8,1)>
+  <input name=button  type=button  onclick=document.all.WebBrowser.ExecWB(7,1)  value=打印预览 />
+  <input name=button  type=button      onclick=javascript:window.close()  value=返回>
+  <span class="onlyShow">&nbsp;</span>
+
+
+</div>
+<center>
+ <form action="incomestatement" method="post" name="form1">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">  
+  </table>
+  <span class="page_titlebar_bg"><span class="page_titlebar_bg">损益表</span></span>
+  <table width="250" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td bgcolor="#666666" height=1></td>
+      </tr>
+    <tr>
+      <td height=2></td>
+      </tr>
+    <tr>
+      <td bgcolor="#666666" height=1></td>
+      </tr>
+    <tr>
+      <td align="center" height=30>[#year#]年度[#month#]月份<br>
+        ([#bgdate#]至[#enddate#])</td>
+      </tr>
+      <tr>
+      <td align="center" height=10></td>
+      </tr>
+</table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="33%" align="left" height="25">行业：[#hangye_name#]</td>
+      <td width="35%" align="center">&nbsp;</td>
+      <td align="left"> 企业 02 表</td>
+      </tr>
+       <tr>
+      <td width="33%" align="left" height="25">编制单位：[#currentorganname#]</td>
+      <td width="35%" align="center">&nbsp;</td>
+      <td width="33%" align="left"> 单位：元(RMB)</td>
+    </tr> 
+    <tr>
+      <td colspan="3" align="left" > </td>
+    </tr>
+  </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="399" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="table_browse_titlebar_font">项目</span></td>
+        <td width="105" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">行次&nbsp;</td>
+        <td width="215" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">本月数</td>
+        <td width="431" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="white_word">本年累计数</span></td>
+        </tr>
+    <!-- BEGIN main -->
+      <tr >
+        <td height="20" align="left" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">&nbsp;<span style="white-space:nowrap">[#zcname#] </span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#zcno#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#thismonth#]&nbsp;</td>
+
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#addup#]&nbsp;</td>
+        </tr>
+ <!-- END main -->
+      <tr>
+        <td height="28"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        </tr>
+    </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr>
+      <td align="left" class="table_bgcolor"><span class="onlyShow">&nbsp;单位财务负责人:</span></td>
+      <td align="left" class="table_bgcolor">&nbsp;</td>
+      <td align="left" class="table_bgcolor" >编制人:</td>
+    </tr>
+    <tr> 
+      <td width="17%" align="left" class="table_bgcolor">&nbsp;</td>
+      <td width="54%" align="left" class="table_bgcolor">&nbsp;</td>
+      <td width="29%" align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+  </table>
+  </form>
+  
+
+</center>
+</BODY>
+</HTML>

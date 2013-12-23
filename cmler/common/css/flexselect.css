@@ -1,0 +1,13 @@
+@charset "utf-8";
+.flexselect_dropdown {
+	BORDER-RIGHT: windowframe 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: windowframe 1px solid; OVERFLOW-Y: auto; DISPLAY: none; PADDING-LEFT: 0px; Z-INDEX: 999; OVERFLOW-X: hidden; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: windowframe 1px solid; COLOR: windowtext; PADDING-TOP: 0px; BORDER-BOTTOM: windowframe 1px solid; POSITION: absolute; BACKGROUND-COLOR: window; TEXT-ALIGN: left; max-height: 200px;height: 200px; box-shadow: 0 6px 12px #ccc; webkit-box-shadow: 0 6px 12px #ccc
+}
+.flexselect_dropdown UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; LIST-STYLE-POSITION: outside; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.flexselect_dropdown LI {
+	PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 0px; FONT: Menu; OVERFLOW: hidden; WIDTH: 100%; CURSOR: pointer; PADDING-TOP: 2px;font-size: 12px
+}
+.flexselect_selected {
+	COLOR: highlighttext; BACKGROUND-COLOR: highlight;font-size: 12px
+}

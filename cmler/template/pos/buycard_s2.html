@@ -1,0 +1,325 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/myjs.js" type=text/javascript></SCRIPT>
+<script language=javascript> 
+
+var requestSubmitted = false;
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#F3F3F3'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function submit_save(){
+
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	
+	var m = 0;
+	var tarray = new Array();//定义一个数组
+	var parray = new Array();//定义一个数组
+	var cv1 = document.getElementsByName("services_times_[]");	
+	var cv2 = document.getElementsByName("pricepertime_[]");	
+	
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				tarray[m] = cv1[i].value;
+				parray[m] = cv2[i].value;
+				
+				m++;
+			}
+		}
+	}
+	var id = idarray.join("||");
+	var t = tarray.join("||");
+	var p = parray.join("||");
+ 
+	
+
+ form1.pricepertimelist.value=p;
+ form1.services_timeslist.value=t;
+
+	 	  if(form1.employee_id.value==""){
+	 	  alert("请选择销售人员");
+	 	  form1.employee_id.focus();
+	 	  return;
+	 }
+
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+
+   form1.submit();
+}
+
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	var tarray = new Array();//定义一个数组
+	var parray = new Array();//定义一个数组
+	var cv1 = document.getElementsByName("services_times_[]");	
+	var cv2 = document.getElementsByName("pricepertime_[]");	
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				tarray[m] = cv1[i].value;
+				parray[m] = cv2[i].value;
+				m++;
+			}
+		}
+	}
+	var t = tarray.join(",");
+	var p = parray.join(",");
+
+}
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   if(!strItem){return}
+   arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+} 
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}
+</script>
+<BODY   topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">购买卡项</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="buycard_s.php?action=step3" method="post" name="form1">
+            <input name='action'  type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+    <table width="610" border="0" cellspacing="0" ID=servicetable class=InputFrameMain style="display:[#servicetabledisplay#]">
+      <tr> <a name="inputpro">
+    <td width="138" align="center" class=inputtitle>详细信息</td>
+    </a>
+    <td width="188" align="center" class=inputtitleright><input name='act'   type="hidden"  id="act" value="[#action#]">
+      <input name='updid'  type="hidden"  value='[#updid#]'>
+      <input name='updid'  type="hidden"   value='[#updid#]'></td>
+    <td width="90" align="center">&nbsp;</td>
+    <td width="186" align="center">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td   height="30" align="right" class=form_label>卡项名称：</td>
+    <td height="30" align="left"><input  type="hidden" name="marketingcard_id" value="[#marketingcard_id#]">
+      <input class=input style="ime-mode:disabled"  name="marketingcard_name" type="text" value="[#marketingcard_name#]" size="20" onKeyPress="keypresscomm()"></td>
+    <td height="30" align="right" class=form_label>时限：</td>
+    <td height="30" align="left"><input class=input name="timelimit" type="text" value="[#timelimit#]" size="10" >
+      <span class="inputtitleright">
+      <input name='assignservice'  type="hidden"   value='[#assignservice#]'>
+      </span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right">卡项类别<span class="form_label">：</td>
+    <td width="188" height="30"><input class=input_disabled  name="produce_name" type="text" value="[#marketingcardtype_name#]" size="20" readonly >
+      <span class="inputtitleright">
+      <input name='cardtypeid'  type="hidden"   value='[#cardtypeid#]'>
+      </span></td>
+    <td width="90" height="30" align="right"><span class="form_label">牌价：</span></td>
+    <td height="30" colspan="2"><input class=input name="price" type="text" value="[#price#]" size="10" >
+元  </td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">总次数：</td>
+    <td height="30"><input class=input name="totaltimes" type="text" value="[#totaltimes#]" size="10" >
+次 </td>
+    <td height="30" align="right" class="form_label"><span style="visibility:[#pricepertime1hidden#]">每次补交：</span></td>
+    <td height="30" colspan="2"><span style="visibility:[#pricepertime1hidden#]"> <input class=input name="pricepertime1" type="text" value="[#pricepertime1#]" size="10" ></span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">数量：</td>
+    <td height="30"><input class=input name="number" type="text" value="[#number#]" size="10" ></td>
+    <td height="30" align="right" class="form_label"><select  id=pricetype  tabindex="2"  
+                  style="FONT-SIZE: 12px" name=pricetype>
+      <option value="0" [#pricetype0selected#]>开卡费</option>
+      <option value="1" [#pricetype1selected#]>手工费</option>
+      
+		       
+  
+                     [#accounttitlelist#]    
+
+                  
+
+          
+	         
+    </select>
+      ：</td>
+    <td height="30" colspan="2"><input class=input name="value" type="text" value="[#value#]" size="10" >
+元  
+  <span style="visibility:hidden"><input type="checkbox" name="giving" value="10"  [#givingchecked#]></span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">顾问：</td>
+    <td height="30"><INPUT type=hidden name=employee_id value="[#employee_id#]">
+      <input class=input_disabled type="text" name="employee_name" size="10" maxlength="20" value="[#employee_name#]" readonly="1">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putcon() type="button" value=查找 name=xuan2>
+      <span class=form_label>*</span></td>
+    <td height="30" align="right" class="form_label">美容师：</td>
+    <td height="30" colspan="2"><INPUT type=hidden name=beauty_id value="[#beauty_id#]">
+        <input class=input_disabled type="text" name="beauty_name" size="10" maxlength="20" value="[#beauty_name#]" readonly="1">
+        <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putbeauty() type="button" value=查找 name=xuan>
+        <span class=form_label>*</span></td>
+  </tr>
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" AccessKey=t  onClick="submit_save()"  {buttondisabled} >
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq2 type=reset value="撤销" AccessKey=z   >
+      <span class="inputtitleright">
+      <input name='pricepertimelist'  type="hidden" >
+      <input name='services_timeslist'  type="hidden"  >
+      </span></td>
+  </tr>
+</table>
+
+<table width="612" border="0" cellspacing="1"  style="display:[#categorylisttabledisplay#]" class=tableborder  id="categorylisttable">
+      <tr class=listtitle>
+        <td align="center" ><input name="checkbox" type="checkbox" [#clistchecked#]  onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+        <td width="163" align="center" class="white_word">服务类别编号</td>
+        <td width="170" align="center" class="white_word">服务类别</td>
+        
+        <td width="117" align="center" class="white_word">每次补交费用</td>
+        <td width="124" align="center" class="white_word">次数</td>
+       
+      </tr>
+      <!-- BEGIN cat_mainlist -->
+      [#clistbg#]
+      <tr onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgcolor="#DAE2ED">
+        <td width="22" align="center" ><input name="The_ID[]" type="checkbox"  value="[#servicecategory_id#]" style="display:none" />
+          <input name="TheID[]" type="checkbox" value="[#servicecategory_id#]" [#clistchecked#] /></td>
+        <td align="center" >[#servicecategory_id#]</td>
+        <td align="center" >[#category_name#]&nbsp;</td>
+        
+        <td align="center" ><input class=input name="pricepertime_[]" type="text" value="[#pricepertime#]" size="10" >&nbsp;</td>
+        <td align="center" ><input class=input name="services_times_[]" type="text" value="[#services_times#]" size="10" >&nbsp;</td>
+        
+      </tr>
+      <tr id={trid} style="display:none">
+        <td colspan="2" align="center" class=tdcolor>备注</td>
+        <td colspan="3" align="left" class=tdcolor>[#cat_memo#]&nbsp;</td>
+      </tr>
+       [#clistend#]
+      <!-- END cat_mainlist -->
+      <tr>
+        <td colspan="2" align="left" class=tdcolor>&nbsp;</td>
+        <td align="left" class=tdcolor>&nbsp;</td>
+       
+        <td align="center" class=tdcolor>&nbsp;</td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+      
+      </tr>
+    </table>
+   
+  
+<table width="612" border="0" cellspacing="1"  style="display:[#servicelisttabledisplay#]" class=tableborder id="servicelisttable">
+	  <tr class=listtitle>
+        <td align="center" ><input name="checkbox" type="checkbox" [#slistchecked#]  onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+        <td width="100" align="center" class="white_word">服务代码</td>
+        <td width="126" align="center" class="white_word">服务类别</td>
+        <td width="122" align="center" class="white_word">服务名称</td>
+        <td width="108" align="center" class="white_word">每次补交费用</td>
+		<td width="117" align="center" class="white_word">次数</td>
+       
+	  </tr>
+      <!-- BEGIN ser_mainlist -->[#slistbg#] 
+	  <tr onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgcolor="#DAE2ED">
+        <td width="20" align="center" >
+          <input name="The_ID[]" type="checkbox"  value="[#services_id#]" style="display:none" />
+        <input name="TheID[]" type="checkbox" value="[#services_id#]"  [#slistchecked#]/>	    </td>
+        <td align="center" >[#services_no#]</td>
+        <td align="center" >[#category_name#]&nbsp;</td>
+        <td align="center" >[#services_name#]&nbsp;</td>
+        <td align="center" ><input class=input name="pricepertime_[]" type="text" value="[#pricepertime#]" size="10" >&nbsp;</td>
+		<td align="center" ><input class=input name="services_times_[]" type="text" value="[#services_times#]" size="10" >&nbsp;</td>
+        
+	  </tr>
+	   <tr id={trid} style="display:none">
+        <td colspan="2" align="center" class=tdcolor>备注</td>
+        <td colspan="4" align="left" class=tdcolor>[#ser_memo#]&nbsp;</td>
+      </tr>
+       [#slistend#]
+	<!-- END ser_mainlist -->
+    <tr>
+        <td colspan="2" align="left" class=tdcolor>&nbsp;</td>
+        <td align="left" class=tdcolor>&nbsp;</td>
+        <td align="center" class=tdcolor></td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+       
+    </tr>
+    </table>
+
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"></div>
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

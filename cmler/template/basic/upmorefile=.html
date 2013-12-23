@@ -1,0 +1,46 @@
+<HTML>
+<base target="_self">
+<style type="text/css">
+<!--
+body {
+	margin-top: 0px;
+}
+-->
+</style><HEAD>
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<TITLE>上传图片</TITLE>
+<SCRIPT language=JavaScript>
+function closewindow(){
+	window.returnValue="flage" ;
+	window.close();
+}
+
+    function checkfile(){
+        var ofile = document.getElementById('upfile').value;
+        if(ofile == ""){
+            window.alert("请选择上传文件");
+            return false;
+        }    
+        return true;
+    } 
+</SCRIPT>
+<BODY>
+<form  method="post" action="" enctype="multipart/form-data"  name="upform" onSubmit="return checkfile();">
+<input type="hidden" name="action" value="add">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0"  class=InputFrameMain>
+    <tr class=InputFrameLine> 
+      <td id="upid" height="65" class=form_label> 图片路径: 
+        <input type="file" name="upfile" id="upfile" style="width:400"  value="">
+      </td>
+    </tr>
+    <tr>
+      <td align="center"> 
+        <input type="submit"  class="buttonsmall" name="upload" value="上传" >
+        <input type="button" class="buttonsmall"  name="button" value="关闭" onClick="closewindow()">
+      </td>
+    </tr>
+</table>
+</form>
+</BODY>
+</HTML>

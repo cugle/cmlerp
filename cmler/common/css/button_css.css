@@ -1,0 +1,100 @@
+@charset "utf-8";
+.button_help {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/help.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_new {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/new.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_edit {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/edit.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_outexcel {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/outexcel.jpg); BORDER-LEFT: thin; WIDTH: 96px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_infile {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/infile.jpg); BORDER-LEFT: thin; WIDTH: 96px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_delete {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/delete.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_reset {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/reset.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_recovery {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/recovery.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_save {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/save.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+.button_find {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/find.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #e9f1fc
+}
+
+.button_save_as {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/save_as.gif); BORDER-LEFT: thin; WIDTH: 70px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 25px; BACKGROUND-COLOR: #000000
+}
+.button_submit {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/submit.gif); BORDER-LEFT: thin; WIDTH: 70px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 25px; BACKGROUND-COLOR: #000000
+}
+.button_button {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/button.gif); BORDER-LEFT: thin; WIDTH: 70px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 25px; BACKGROUND-COLOR: #000000
+}
+.button_copy {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/copy.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #000000
+}
+.button_cut {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/cut.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #000000
+}
+.button_paste {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/paste.jpg); BORDER-LEFT: thin; WIDTH: 60px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 31px; BACKGROUND-COLOR: #000000
+}
+.button_refreshit {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/refreshit.gif); BORDER-LEFT: thin; WIDTH: 70px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 25px; BACKGROUND-COLOR: #000000
+}
+.button_stop {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center center; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/stop.gif); BORDER-LEFT: thin; WIDTH: 70px; CURSOR: hand; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 25px; BACKGROUND-COLOR: #000000
+}
+.button_go {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/browse_changepage.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 74px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.first_page {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/first_page.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 27px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.next_page {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/next_page.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 19px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.last_page {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/last_page.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 27px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.front_page {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/front_page.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 19px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.first_page_gray {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/first_page_gray.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 27px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.next_page_gray {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/next_page_gray.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 19px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.last_page_gray {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/last_page_gray.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 27px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.front_page_gray {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/front_page_gray.jpg); BORDER-LEFT: #888888 0px solid; WIDTH: 19px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.button_changesmall {
+	BORDER-RIGHT: #888888 0px solid; BACKGROUND-POSITION: center center; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/browse_change.jpg); BORDER-LEFT: #8888880px solid; WIDTH: 74px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; TOP: 0px; HEIGHT: 21px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left
+}
+.form_button_find {
+	BORDER-RIGHT: #888888 0px solid; BORDER-TOP: #888888 0px solid; LEFT: 0px; BACKGROUND-IMAGE: url(../img/form_button_find.gif); BORDER-LEFT: #888888 0px solid; WIDTH: 55px; CURSOR: hand; BORDER-BOTTOM: #888888 0px solid; BACKGROUND-REPEAT: no-repeat; TOP: 0px; HEIGHT: 19px
+}
+.buttonsmall {
+	BORDER-RIGHT: thin; BACKGROUND-POSITION: center 50%; BORDER-TOP: thin; BACKGROUND-IMAGE: url(../img/bottonsmall.jpg); BORDER-LEFT: thin; WIDTH: 69px; CURSOR: hand; COLOR: #000000; BORDER-BOTTOM: thin; BACKGROUND-REPEAT: no-repeat; HEIGHT: 21px; BACKGROUND-COLOR: #f4f4f4; TEXT-ALIGN: center
+}
+.shouyinbutton {
+	WIDTH: 80px;
+	CURSOR: hand;
+	HEIGHT: 35px;
+	TEXT-ALIGN: center;
+	font-size: 16px;
+	font-weight: bold;
+}

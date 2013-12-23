@@ -1,0 +1,91 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<title>无标题文档</title>
+<script language="javascript">
+function reloadpage(){
+	var groupid = document.getElementById('groupid').value;
+	location.href = 'grouprule.php?groupid='+groupid;
+}
+</script>
+</head>
+
+<body>
+<h4>工作组权限明细</h4>
+<form method="POST" action="grouprule.php">
+<input name="action" value="upd" type="hidden">
+选择组
+<select name="groupid" id="groupid" onChange="reloadpage();">
+<!-- BEGIN grouprow -->
+<option value="{groupid}"{gselected}>{groupname}</option>
+<!-- END grouprow -->
+</select>
+ <input type="submit" name="Submit" value="修改"{bdisabled}>
+ <br>
+ <br>
+ 全局权限 
+ <table width="100%"  border="0" cellpadding="2" cellspacing="1" class="borderStyle">
+   <tr height="23" class="tabTh">
+     <td width="20%">权限名称</td>
+     <td width="30%">权限设置值</td>
+     <td width="20%">权限名称</td>
+     <td>权限设置值</td>
+   </tr>
+   <!-- BEGIN ttr -->
+   <tr height="23" class="tdBgColor">
+     <!-- BEGIN ttd -->
+     <td align="right" class="colBgColor">{name}</td>
+     <td><table width="100%">
+         <tr>
+           <td width="25%">{value}</td>
+         </tr>
+     </table></td>
+     <!-- END ttd -->
+   </tr>
+   <!-- END ttr -->
+ </table> 
+ <br>
+ 菜单权限
+ <table width="100%" border="0" cellpadding="2" cellspacing="1" class="borderStyle">
+   <tr class="tabTh">
+     <td width="200" rowspan="2">菜单名称</td>
+     <td colspan="9">基本权限</td>
+     <td rowspan="2">扩展权限</td>
+   </tr>
+   <tr class="tabTh">
+     <td width="50">超用户</td>
+     <td width="50">浏览</td>
+     <td width="50">增加</td>
+     <td width="50">修改</td>
+     <td width="50">删除</td>
+     <td width="50">导入</td>
+     <td width="50">导出</td>
+     <td width="50">反冲</td>
+     <td width="50">审核</td>
+   </tr>
+   <!-- BEGIN row -->
+   <tr class="tdBgColor">
+     <td height="25">{space}{rulename}</td>
+     <td align="center"><span style="display:'{display}';"><input type="{rstype}" name="rules[{ruleid}][S]" value="1"{rschecked}{rsdisabled}>{rsstate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{rbtype}" name="rules[{ruleid}][B]" value="1"{rbchecked}{rbdisabled}>{rbstate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{ratype}" name="rules[{ruleid}][A]" value="1"{rachecked}{radisabled}>{rastate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{rmtype}" name="rules[{ruleid}][M]" value="1"{rmchecked}{rmdisabled}>{rmstate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{rdtype}" name="rules[{ruleid}][D]" value="1"{rdchecked}{rddisabled}>{rdstate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{ritype}" name="rules[{ruleid}][I]" value="1"{richecked}{ridisabled}>{ristate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{retype}" name="rules[{ruleid}][E]" value="1"{rechecked}{redisabled}>{restate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{rrtype}" name="rules[{ruleid}][R]" value="1"{rrchecked}{rrdisabled}>{rrstate}</span></td>
+     <td align="center"><span style="display:'{display}';"><input type="{rhtype}" name="rules[{ruleid}][H]" value="1"{rhchecked}{rhdisabled}>{rhstate}</span></td>
+     <td><table border="0" cellpadding="2" cellspacing="1">
+<!-- BEGIN attachList -->
+         <tr><td align="right">{name}:</td><td>{value}</td></tr>
+<!-- END attachList -->
+       </table></td>
+   </tr>
+   <!-- END row -->
+ </table>
+</form>
+</body>
+</html>

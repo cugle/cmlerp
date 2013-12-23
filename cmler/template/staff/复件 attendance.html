@@ -1,0 +1,375 @@
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/DatePicker.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/dateobject.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/datepicker.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/editlib.js"></SCRIPT>
+<style type="text/css">
+<!--
+.STYLE3 {font-size: 12px}
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+var requestSubmitted = false;
+
+function tourl(url)
+{
+	window.location.href=url;
+}
+function CheckAll(form){
+     for (var i=0;i<form.elements.length;i++){ 
+         var strelement = form.elements[i];
+         if (strelement.name != 'chkall' && !strelement.disabled){
+             strelement.checked = form.chkall.checked;
+         }
+      }
+}
+
+function submit_save(){
+      
+		if(form1.batch.value == ""){
+           alert("ƣ");
+		   return;
+		}
+	if(requestSubmitted == true){
+    alert("Ѿύȴһ");
+    return (false);
+   } 
+  requestSubmitted = true; 	
+		
+    form1.action.value = "save";
+	form1.submit();
+	  
+}
+
+function change(){
+      
+	form1.submit();
+	  
+}
+
+function InitAjax()
+{
+var ajax=false; 
+try { 
+ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+} catch (e) { 
+try { 
+ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+} catch (E) { 
+ajax = false; 
+} 
+} 
+if (!ajax && typeof XMLHttpRequest!='undefined') { 
+ajax = new XMLHttpRequest(); 
+} 
+return ajax;
+}
+
+
+function ForDight(Dight,How) 
+{ 
+Dight = Math.round (Dight*Math.pow(10,How))/Math.pow(10,How); 
+return Dight; 
+} 
+
+
+
+function countwage(staid){    
+	  var saletcid = "saletc"+staid;
+	  var serid    = "sertc"+staid;
+	  var jiangjinid    = "jiangjin"+staid;
+	  
+	  //var itemid      = "item@"+staid+"@"+leimid
+	  
+	  var yf_wage = parseFloat(document.getElementById(saletcid).value)+parseFloat(document.getElementById(serid).value)+parseFloat(document.getElementById(jiangjinid).value)
+	  
+	  var kc_wage=0;
+	  var sf_wage=0;
+	  var postStr =""
+    //ҪAjaxURLַ
+    var url = "../ajaxread/getlitem.php";
+    //ʵAjax
+    var ajax = InitAjax();
+    //ʹPOSTʽ
+    ajax.open("POST", url, true);
+       //崫ļHTTPͷϢ
+    ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+    //POST
+    ajax.send(postStr);
+    //ȡִ״̬
+    ajax.onreadystatechange = function() { 
+  //ִ״̬ôͰѷصݸֵָĲ
+  if(ajax.readyState == 4 && ajax.status == 200) { 	 
+		  var strcommArray = new Array();   
+		  var strcommArray2 = new Array();   
+          strcommArray = ajax.responseText.split("@"); 
+          
+		 
+		   for(i=0; i<strcommArray.length ; i++){
+		       
+			   strcommArray2 = strcommArray[i].split("!"); 
+			   var itemid = "item@"+staid+"@"+strcommArray2[0];
+			   if(strcommArray2[1]==1){
+			     kc_wage=parseFloat(kc_wage)+parseFloat(document.getElementById(itemid).value);
+			   }else{
+			     yf_wage=parseFloat(yf_wage)+parseFloat(document.getElementById(itemid).value);
+			   }
+			   			   
+		   }
+		   var xjid    = "xj"+staid;
+
+		   kc_wage = parseFloat(kc_wage)+parseFloat(document.getElementById(xjid).value);
+		   sf_wage = parseFloat(yf_wage)-parseFloat(kc_wage);
+		   
+		   var yfid = "yf"+staid;
+		   var kcid = "kc"+staid;
+		   var sfid = "sf"+staid;
+		   		   
+		   
+		   yf_wage= ForDight(yf_wage,2);
+		   kc_wage= ForDight(kc_wage,2);
+		   sf_wage= ForDight(sf_wage,2);
+		   document.getElementById(yfid).innerHTML= yf_wage; //Ӧ 
+		   document.getElementById(kcid).innerHTML= kc_wage; //۳
+		   document.getElementById(sfid).innerHTML= sf_wage; //ʵ
+
+		 
+		 //form1.lch_price.value = strcommArray[0];
+	     //form1.lch_jf.value = strcommArray[1];
+	     // form1.lch_totalprice.value = parseFloat(form1.lch_price.value)*parseFloat(form1.lch_quantity.value);
+   }
+    }
+	  	  	  	   
+	 
+}
+
+
+
+function help(){  
+   if(document.getElementById("helpid").style.pixelHeight == 0 &&  document.getElementById("helpid").style.display == "none"){      
+       document.getElementById("helpid").style.display = "";
+	  ChS();
+   }else{   
+	   HhS();    	  
+   }
+}
+
+function ChS(){
+if(helpid.style.pixelHeight<450){helpid.style.pixelHeight+=10;setTimeout("ChS()",0.5);
+} 
+}
+function HhS(){
+if(helpid.style.pixelHeight > 0){helpid.style.pixelHeight-=10;setTimeout("HhS()",0.5);
+}
+if(helpid.style.pixelHeight == 0){
+ document.getElementById("helpid").style.display = "none";
+ }
+}
+
+function CheckAll(form){
+     for (var i=0;i<form.elements.length;i++){ 
+         var strelement = form.elements[i];
+         if (strelement.name != 'chkall' && !strelement.disabled){
+             strelement.checked = form.chkall.checked;
+         }
+      }
+   }
+
+
+
+// -->
+</script>
+
+<BODY  onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle"> 出勤情况</td>
+			<tr>
+           <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+          </tr>	
+  </table>
+  <center>
+    <FORM name=form1 action="" method=post>
+      <INPUT type=hidden name=action>
+      <INPUT 
+type=hidden value={id} name=id>
+      <TABLE height=31 cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+          <TR>
+            <TD class=button_labelleft></TD>
+            <TD class=button_label><DIV style="MARGIN: 0px" align=left>
+              <INPUT class=button_new onMouseOver="this.style.backgroundImage='url([#path#]img//new_sel.jpg)'" style="FONT-SIZE: 9pt" accessKey=h onclick=javascript:help() onMouseOut="this.style.backgroundImage='url([#path#]img/new.jpg)'" type=button value="     帮助" name=save32>
+              <input style="display:[#canadd#]"  class=button_new onMouseOver="this.style.backgroundImage='url([#path#]img/new_sel.jpg)'" accesskey=n onClick="location.href='?action=add'"  onMouseOut="this.style.backgroundImage='url([#path#]img/new.jpg)'" type=button value="  新增" name=thenew> 
+                <INPUT class=button_save onMouseOver="this.style.backgroundImage='url([#path#]img/save_sel.jpg)'" style="FONT-SIZE: 9pt" accessKey=s onclick=javascript:submit_save() onMouseOut="this.style.backgroundImage='url([#path#]img/save.jpg)'" type=button value="     保存" name=save3>
+                <INPUT class=button_reset onMouseOver="this.style.backgroundImage='url([#path#]img/reset_sel.jpg)'" style="FONT-SIZE: 9pt" accessKey=z onMouseOut="this.style.backgroundImage='url([#path#]img/reset.jpg)'" type=reset value="     撤销" name=qqq>
+                <input  style="display:[#canimport#]" class=button_infile onMouseOver="this.style.backgroundImage='url([#path#]img/infile_sel.jpg)'" accesskey=i onClick="javascript:tourl('attendanceimport.php?agencyid=[#agencyid#]&pre=[#pre#]')" onMouseOut="this.style.backgroundImage='url([#path#]img/infile.jpg)'" type=button value="  导入考勤" name=theinputfile>
+            </DIV></TD>
+            <TD class=button_labelright></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <BR>
+      <TABLE class=InputFrameMain cellSpacing=0 cellPadding=0 width=758 border=0>
+        <TBODY>
+          <TR>
+            <TD align=left colSpan=4><TABLE cellSpacing=0 cellPadding=0 border=0>
+                <TBODY>
+                  <TR>
+                    <TD class=inputtitle align=middle width=150>资料输入</TD>
+                    <TD class=inputtitleright 
+            align=middle>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+                    <TD align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD>
+                  </TR>
+                </TBODY>
+            </TABLE></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right width=120 height=10></TD>
+            <TD align=left width=215></TD>
+            <TD class=form_label width=93></TD>
+            <TD align=left width=272></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right height=30>批次名称：</TD>
+            <TD align=left colSpan=3 height=30><INPUT class=input_right 
+      style="IME-MODE: disabled" onfocus=this.select() value=2010-09 name=batch>
+              *
+              <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:change() type=button value=读取记录 name=save>
+            <INPUT type=radio value=1 name=lastmonth>
+              记录为空时读取上月记录
+              <INPUT type=radio 
+      value=2 name=lastmonth>
+              读取上月记录并覆盖全部 </TD>
+          </TR>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <BR>
+      <TABLE cellSpacing=0 width="100%" border=0>
+        <TBODY>
+          <TR>
+            <TD borderColor=#ffffff align=left width="3%" bgColor=#ffffff><INPUT 
+      onclick=CheckAll(this.form) type=checkbox value=on name=chkall></TD>
+            <TD borderColor=#ffffff align=left width="7%" bgColor=#ffffff><SPAN 
+      class=STYLE3>全选/反选</SPAN></TD>
+            <TD borderColor=#ffffff align=left width="90%" bgColor=#ffffff><FONT 
+      style="FONT-SIZE: 12px" 
+color=#ff0000>说明：请在要发放工资的员工前打勾</FONT></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <TABLE class=tableframe style="WORD-BREAK: break-all" width="98%" 
+  align=center>
+        <TBODY>
+          <TR class=listtitle>
+            <TD class=listcelltitle noWrap align=middle height=25>员工编号</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>员工姓名</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>职级</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>计划出勤</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>实际出勤</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>加班(h)</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>请假(h)</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>基本工资</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>手工提成</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>销售提成</TD>
+			<TD class=listcelltitle noWrap align=middle height=25>岗位工资</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>全勤奖</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>生活补贴</TD>
+			 <TD class=listcelltitle noWrap align=middle height=25>实发工资</TD>
+          </TR>
+		    <!-- BEGIN mainlist -->
+          <TR class=listrow1 onMouseOver="this.style.backgroundColor='#DAE2ED';" 
+  onmouseout="this.style.backgroundColor='#FFFFFF'" bgColor=#ffffff>
+            <TD class=listcelltitle noWrap align=left height=25><INPUT type=checkbox 
+      value=[#employeeid#] name=checkstaid[]>
+              [#employee_no#]</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;[#employee_name#]</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;[#employeelevel_name#]</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+            <input 
+      class=input_right id=saletc[#employeeid#] onKeyUp="countwage('[#employeeid#]')" 
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#planattendance#]'
+      name=saletc[#employeeid#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+                <INPUT 
+      class=input_right id=sertc[#employeeid#] onKeyUp="countwage('[#employeeid#]')" 
+      style="IME-MODE: disabled" onfocus=this.select() size=3 value='[#actualattendance#]' 
+      name=sertc[#employeeid#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+                <INPUT 
+      class=input_right id=jiangjin[#employeeid#] onKeyUp="countwage('[#employeeid#]')" 
+      style="IME-MODE: disabled" onfocus=this.select() size=3 value='[#othours#]' 
+      name=jiangjin[#employeeid#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+                <INPUT  
+      class=input_right id=item@1@2 onKeyUp="countwage('1')" 
+      style="IME-MODE: disabled" onfocus=this.select() size=3 value='[#leavehours#]'
+      name=item@1@2></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;&nbsp;<SPAN 
+      id=yf1>0</SPAN></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;<SPAN 
+      id=yf1>0</SPAN></TD>
+            <INPUT id=xj1 type=hidden value=0 name=xj1>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;0</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;<SPAN 
+      id=kc1>0</SPAN></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;<SPAN 
+      id=kc1>0</SPAN></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;<SPAN 
+      id=sf1>0</SPAN></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;<SPAN 
+      id=sf1>0</SPAN></TD>	  
+          </TR>
+ <!-- END mainlist --> 
+          </TR>
+        </TBODY>
+      </TABLE>
+      <BR>
+    </FORM>
+    <div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display:none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>ڱݣԺ...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingdel" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display:none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>ɾݣԺ...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display:none"> 
+</div>
+<div id="helpid" STYLE="left: 1%; WIDTH: 450px; POSITION: absolute; TOP: 86px; HEIGHT: 0; display:none;"> 
+ <div  align="left"   STYLE="position:absolute;left: 15px; top:15px;right:15px" >
+ 
+ ĳʵнʽηţϵͳԶʹʺ͸ۼӵԱʻͬʱõĸ˰˰ΧԶ˰<br>
+ͿɹʷŵĹˡ<br>
+ע⣺ʷǷεʹʲְԱʣһοԷʹͬһʵԱʣһνзţεĸҲԶۼӵԱʻˣڡ롰ʾˡ
+      һֻҪӦһʣһζӦʡ<br>
+
+
+
+ 
+ <br><br>
+  нʹ���нʷţ<br><br>
+  (Alt+s)㹤ʣ<br><br>
+  (Alt+z)нϢӵ<br><br>
+  (Alt+q)عϢб���<br><br>
+  (Alt+h)ʾϢ
+</div>
+</div>
+</center>
+</body>
+</html>
+

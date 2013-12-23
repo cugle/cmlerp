@@ -1,0 +1,77 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+
+<body>
+<h3>{actionName}<span class="left_title_1">联系人
+</span></h3>
+<FORM id=formadd style="DISPLAY: inline" name="form1" method="post"  action="contact.php" >
+ <table cellSpacing=0 cellPadding=0 width="99%" align=center border=0>
+  <TBODY>
+  <TR>
+    <TD class=left_title_1 align=middle><input name='action' type="hidden" value="{action}">
+      <input name='updid' type='hidden' value='{updid}'><input name='agentid' id="agentid" type='hidden' value='{agentid}'>
+      <input name='shopid' id="shopid" type='hidden' value='{shopid}'></TD>
+  </TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=0 width="99%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4 >联系人信息 </TD>
+        </TR>
+        <TR>
+          <TD align=right width="10%" height=30>客户名称：</TD>
+          <TD align=left width="40%"><INPUT  type="hidden" class=INPUT id=contactid 
+            maxLength=100 size=40 value="{contactid}" name=contactid>
+            <input name="contactname" type="text" maxLength=100 size=40 value='{contactname}'>
+            <FONT color=red>*</FONT> &nbsp;</TD>
+          <TD align=right width="10%" height=30>性别：</TD>
+          <TD align=left width="40%"><select  name="gender" id="gender">
+            <!-- BEGIN gender -->
+            <!-- END gender -->
+          </select>
+            &nbsp;</TD>
+        </TR>
+        <TR>
+          <TD align=right width="10%" height=30>客户电话：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=tel maxLength=100 
+            size=40 name=tel value="{tel}"></TD>
+          <TD align=right width="10%" height=30>通讯地址：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=address maxLength=100 
+            size=40 name=address value="{address}"></TD></TR><!-- 20090323 -->
+        <TR>
+          <TD align=right width="10%" height=30>手机：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=handphone maxLength=100 
+            size=40 name=handphone value="{handphone}"></TD>
+          <TD align=right width="10%" height=30>QQ：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=idnumber maxLength=100 
+            size=40 name=qq value="{qq}"></TD></TR>
+        <TR>
+          <TD align=right width="10%" height=30>电子邮件：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=email maxLength=100 
+            size=40 name=email value="{email}"></TD>
+          <TD align=right width="10%" height=30>邮政编码：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=zipcode maxLength=100 
+            size=40 name=zipcode value="{zipcode}"></TD></TR>
+        
+        <TR>
+          <TD align=right width="10%" height=30>备注信息：</TD>
+          <TD align=left colSpan=3><TEXTAREA name=describes rows=3 cols=90></TEXTAREA></TD></TR><!-- 20090323 -->
+        <TR>
+          <TD align=middle colSpan=4><input type="submit" name="Submit2" value=" 提 交 ">
+            &nbsp; 
+<INPUT class=button id=re type=reset value=" 重 置 " name=re> &nbsp;
+<INPUT name="button" type=button class=button id=re2 onclick="history.go(-1);" value=" 返回 "></TD>
+        </TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+</FORM>
+
+
+</body>
+</html>

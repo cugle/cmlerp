@@ -1,0 +1,59 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="{path}js/calendar.js" type=text/javascript></SCRIPT>
+</head>
+
+<body>
+<form action="statistics.php" method="post">
+<div align="center">从{datebg}到{dateend}拜访完成率统计</div>
+<table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+   <tr  class="tabTh">
+     <td align="right">&nbsp;</td>
+     <td align="left">计划数</td>
+     <td align="left">访问次数</td>
+     <td align="left">完成计划数</td>
+     <td align="left">需跟进</td>
+     <td align="left">未完成计划数</td>
+     <td align="left">完成率</td>
+   </tr>
+<!-- BEGIN user -->
+   <tr class="tdBgColor">
+     <td align="right">	
+	{username}
+</td>
+     <td>
+	 <!-- BEGIN plann -->
+	{plannumber}
+	<!-- END plan --></td>
+     <td>
+	
+	{visitenumber}
+	 </td>
+     <td>{plancomplete}</td>
+     <td>{planvisiteagain}</td>
+     <td>{planuncomplete}</td>
+     <td>{completerate}%</td>
+   </tr>
+<!-- END user -->
+ <!-- BEGIN total -->
+   <tr  class="tabTh">
+     <td width="10%" align="right">总计</td>
+     <td width="15%" align="left">{totalplannumber}</td>
+     <td width="15%" align="left">{totalvisitenumber}</td>
+     <td width="15%" align="left">{totalplancomplete}</td>
+     <td width="15%" align="left">{totalplanvisiteagain}</td>
+     <td width="15%" align="left">{totalplanuncomplete}</td>
+     <td width="15%" align="left">{totalcompleterate}%</td>
+   </tr>
+<!-- END total -->
+</table>
+</form>
+</body>
+</html>

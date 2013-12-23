@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>会员信息</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META http-equiv=empiresoft content=no-cache><LINK 
+href="[#path#]css/button_css.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/page_title.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/browse.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/css.css" type=text/css rel=stylesheet>
+ 
+<script type="text/javascript" src="../common/js/jquery-1.2.1.pack.js"></script>
+<STYLE type=text/css>.STYLE2 {
+	FONT-SIZE: 12px
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+ 
+
+function submit_save(){
+	 
+	 if(form1.dingjin.value==""){
+	 	  alert("填写赠送金额！");
+	 	  form1.dingjin.focus();
+	 	  return;
+	  } 
+	 
+	 if(form1.employee_id.value==""){
+	 	  alert("请选择开卡人！");
+	 	  form1.employee_name.focus();
+	 	  return;
+	  }
+ 
+	form1.submit();
+}
+
+ 
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   if(!strItem){return}
+  arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+}
+
+
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getcustomer.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.customer_id.value    = arrItems[0];     
+     form1.membername.value  = arrItems[1];
+
+}
+
+ 
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.6003" name=GENERATOR></HEAD>
+<BODY leftMargin=2 topMargin=0   width="100%">
+<TABLE height=30 cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=pagetitle vAlign=center width="100%" height=30>&nbsp;&nbsp;<IMG 
+      src="[#path#]img/nowspace.jpg" align=absMiddle>下定金：</TD>
+  <TR>
+    <TD align=left>
+      <DIV style="MARGIN: 0px 0px 0px 12px"><IMG 
+    src="[#path#]img/line.jpg"></DIV></TD></TR></TBODY></TABLE>
+<CENTER>
+<FORM name=form1 action="deposit.php" method=post>
+  <input name='action' type="hidden" value="[#action#]">
+  <input name='updid' type='hidden' value='[#updid#]'>
+  <INPUT type=hidden 
+name=picpath >
+  <TABLE class=InputFrameMain cellSpacing=0 cellPadding=0 width=649 border=0>
+  <TBODY>
+  <TR>
+    <TD align=left colSpan=5 height=13>
+      <TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>资料输入</TD>
+          <TD class=inputtitleright align=middle 
+            width=42>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+          <TD align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD colSpan=4 height=10></TD></TR>
+  <TR>
+    <TD class=form_label align=right width=89 height=30>会员卡号：</TD>
+    <TD align=left width=227 height=30><INPUT name=membercard_no type="text" class=inputright_disabled 
+      value="[#membercard_no#]" size="12" maxLength=35 onKeyUp="changeno(this.value)" readonly/> 
+    <SPAN class=form_label>*</SPAN><span class="suggestionsBox" id="suggestions" style="display: none;">&nbsp;</span>
+	 <INPUT name=membercard_id type="hidden" class=inputright_disabled 
+      value="[#membercard_id#]" size="12" maxLength=35 onKeyUp="changeno(this.value)" readonly/></TD>
+    <TD class=form_label align=right width=110 height=30>卡内码：</TD>
+    <TD align=left width=223 height=30><INPUT name=code type="text" class=inputright_disabled 
+      value="[#code#]" size="20" maxLength=35 onFocus=this.select() readonly/></TD>
+  </TR>
+  <TR>
+    <TD class=form_label align=right height=30>会员卡组：</TD>
+    <TD align=left height=30><SELECT name=cardlevel_id  disabled="disabled"><OPTION value=2 
+        selected>-请选择-</OPTION>[#memcardlevellist#] </SELECT> <SPAN class=form_label>*</SPAN></TD>
+    <TD class=form_label align=right height=30>所属会员：</TD>
+    <TD align=left height=30><INPUT type=hidden name=customer_id value="[#customer_id#]"> <INPUT 
+      class=input_disabled readOnly maxLength=35 size=10 name=membername value="[#customer_name#]">
+      <SPAN class=form_label>*</SPAN></TD></TR>
+  <TR>
+    <TD class=form_label align=right height=30>定金账户余额：</TD>
+    <TD align=left height=30><INPUT class=inputright_disabled 
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+      readOnly name=deposit value='[#deposit#]'></TD>
+    <td height="30" align="right" class=form_label>经手人：</td>
+    <td height="30" class="InputFrameLine" ><INPUT type=hidden name=employee_id value="[#employee_id#]">
+        <input class=input_disabled type="text" name="employee_name" size="10" maxlength="20" value="[#employee_name#]" readonly="1">
+        <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putsta() type="button" value=查找 name=xuan>
+        <span class=form_label>*</span> </td>
+  </TR>
+  <TR>
+    <TD class=form_label align=right height=30>定金金额：</TD>
+    <TD height=30 align=left><INPUT class=inputright   onClick="this.select()"
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+        name=dingjin value=[#dingjin#]>
+      元</TD>
+    <TD class=form_label align=right height=30>定金方式：</TD>
+    <TD height=30 align=left><SELECT name=acounttypeid >
+      <OPTION value='' selected>-请选择-</OPTION>
+      <OPTION value=1 selected>现金</OPTION>
+      <OPTION value=2 >银行卡</OPTION>
+    </SELECT></TD>
+    </TR>
+  <TR>
+    <TD height=15 align="right" class=form_label> 定金账户备注：</TD>
+    <TD height=15 align="left" class=form_label>&nbsp;</TD>
+    <TD height=15 align="left" class=form_label>&nbsp;</TD>
+    <TD height=15 align="left" class=form_label>&nbsp;</TD>
+  </TR>
+  <TR>
+    <TD height=15 colspan="4" align=left class=form_label><textarea class=inputarea name="depositmemo"   wrap="virtual"  rows="4">[#depositmemo#]</textarea></TD>
+  </TR>
+	  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><span style="MARGIN: 0px">
+      <INPUT class=buttonsmall   type=button value="保存"  accessKey=s onclick=submit_save() name=save>
+    </span> <span style="MARGIN: 0px">
+     
+    </span><span style="MARGIN: 0px">
+    <INPUT class=buttonsmall   accessKey=q onClick="window.close()"   type=button value="关闭" name=rst>
+    </span></td>
+  </tr>
+   </TBODY></TABLE>
+</FORM>
+<SCRIPT language=javascript>
+
+form1.dingjin.select();
+form1.dingjin.focus();
+</SCRIPT>
+	 
+
+
+</CENTER></BODY></HTML>

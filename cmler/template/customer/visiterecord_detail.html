@@ -1,0 +1,346 @@
+<HTML><HEAD>
+<TITLE> 帐户基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="../common/css/button_css.css" rel="stylesheet" type="text/css">
+<link href="../common/css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="../common/css/browse.css" type=text/css rel=stylesheet>
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<LINK href="../common/css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="../common/js/datepicker.js"></SCRIPT>
+<SCRIPT language=javascript src="../common/js/editlib.js"></SCRIPT>
+<SCRIPT language=javascript src="../common/js/dateobject.js"></SCRIPT>
+<STYLE type=text/css>.sec1 {
+	BACKGROUND-IMAGE: url(../skin/skin0/s2.jpg); CURSOR: hand
+}
+.sec2 {
+	BACKGROUND-IMAGE: url(../skin/skin0/s1.jpg); CURSOR: hand
+}
+.main_tab {
+	BORDER-RIGHT: #9f9e9e 1px solid; BORDER-LEFT: #9f9e9e 1px solid; BORDER-BOTTOM: #9f9e9e 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.inputarea1 {
+	BORDER-RIGHT: #b4c7d6 1px solid; BORDER-TOP: #607499 1px solid; BACKGROUND: url([#path#]img/inputarea_bg.gif); WORD-SPACING: normal; VERTICAL-ALIGN: middle; BORDER-LEFT: #607499 1px solid; WIDTH: 600px; BORDER-BOTTOM: #b4c7d6 1px solid; WHITE-SPACE: normal; LETTER-SPACING: normal; HEIGHT: 60px; TEXT-ALIGN: left
+}
+</STYLE>
+</HEAD>
+<script language=javascript>
+<!-- 
+
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;     
+   form1.man.value = arrItems[1] ;    
+}
+
+function getmt(){
+   var arrItems=new Array();
+   var strItem ;
+
+   var szRef = "../getdata/getvisiterecordtemplate.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   
+   form1.messagetemplate_id.value = arrItems[0] ;  
+   //form1.no.value = arrItems[1] ;
+   form1.title.value = arrItems[1] ;
+   var reg=new RegExp("<br>","g"); //创建正则RegExp对象    
+   form1.content.value = arrItems[2].replace(reg,"\r\n");  
+}
+
+
+
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getcustomer.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.customer_id.value    = arrItems[0];     
+     form1.customer_name.value  = arrItems[1];
+
+}
+var requestSubmitted = false;
+function submit_save(){
+
+	 if(form1.customer_name.value==""){
+	 	  alert("请选择顾客");
+	 	  form1.customer_name.focus();
+	 	  return;
+	 }
+	 	 if(form1.title.value==""){
+	 	  alert("请填写标题");
+	 	  form1.title.focus();
+	 	  return;
+	 }
+	 	 	 if(form1.satisfactionid.value==""){
+	 	  alert("请选择满意度");
+	 	  form1.satisfactionid.focus();
+	 	  return;
+	 } 
+	 	 if(form1.visitetypeid.value==""){
+	 	  alert("请通话类型");
+	 	  form1.visitetypeid.focus();
+	 	  return;
+	 }
+	 	 if(form1.man.value==""){
+	 	  alert("经手人");
+	 	  form1.man.focus();
+	 	  return;
+	 } 	  	 	 	 
+	if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+   form1.submit();
+}
+
+function upmorefile(){
+   var arrItems=new Array();
+   var strItem ;
+   var url;
+   var szRef = "../basic/upmorefile_cstpic.php" ;
+   strItem=window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=500px;dialogHeight=200px;scroll=yes;");
+   if(strItem!="flage"){
+     form1.picpath.value=strItem;
+	 var show = document.getElementById("showpic"); 
+
+	 if(typeof(strItem) == 'undefined'){
+	   show.innerHTML = "暂时没有照片";
+	 }else{ 
+　　   show.innerHTML = "<img src="+strItem+" width=120 height=150 />"; 
+     //getpicpath(strItem);
+     }
+   }
+   
+}
+function submit_del(){
+    if (confirm("是否删除该记录？")) {
+        getNews(form1.id.value);
+    }
+} 
+
+function InitAjax()
+{
+　var ajax=false; 
+　try { 
+　　ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+　} catch (e) { 
+　　try { 
+　　　ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+　　} catch (E) { 
+　　　ajax = false; 
+　　} 
+　} 
+　if (!ajax && typeof XMLHttpRequest!='undefined') { 
+　　ajax = new XMLHttpRequest(); 
+　} 
+　return ajax;
+}
+
+function getNews(newsID)
+{
+　//如果没有把参数newsID传进来
+　if (typeof(newsID) == 'undefined')
+　{
+　　return false;
+　}
+  var postStr = "id="+ newsID;
+
+　//需要进行Ajax的URL地址
+　var url = "../ajaxread/readdelaccount.php";
+　//实例化Ajax对象
+　var ajax = InitAjax();
+　//使用POST方式进行请求
+　ajax.open("POST", url, true); 
+  //定义传输的文件HTTP头信息
+　ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+　//发送POST数据
+　ajax.send(postStr);
+　//获取执行状态
+　ajax.onreadystatechange = function() { 
+　　//如果执行是状态正常，那么就把返回的内容赋值给上面指定的层
+　　if (ajax.readyState == 4 && ajax.status == 200) {  
+       if(ajax.responseText=='0'){
+          form1.action.value = "delete";
+          sendingbg.style.display ="";
+          sendingdel.style.display ="";
+	        form1.submit();
+       }else{
+          alert("该帐户已经有历史记录，不能删除");
+       }
+　　}
+　}
+  //发送空
+　ajax.send(null); 
+}
+
+function help(){  
+   if(document.getElementById("helpid").style.pixelHeight == 0 &&  document.getElementById("helpid").style.display == "none"){      
+     document.getElementById("helpid").style.display ="";
+	   ChS();
+   }else{   
+	   HhS();    	  
+   }
+}
+
+function ChS(){
+  if(helpid.style.pixelHeight<230){
+     helpid.style.pixelHeight+=10;setTimeout("ChS()",0.5);
+  } 
+}
+
+function HhS(){
+  if(helpid.style.pixelHeight > 0){
+    helpid.style.pixelHeight-=10;setTimeout("HhS()",0.5);
+  }
+  if(helpid.style.pixelHeight == 0){
+    document.getElementById("helpid").style.display ="none";
+  }
+}
+// -->
+</script>
+<BODY onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">通话记录</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="visiterecord.php" method="post" name="form1">
+            <input name='action' type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+      <table width="98%" border="0" cellspacing="0" cellpadding="0"  class="table_bgcolor">
+        <tr>
+        <td class=button_labelleft></td>
+        <td class=button_label><div align="left">
+          <input type=button name=save32 class=button_new value="     帮助" AccessKey=h  onClick="javascript:help()" style="font-size:9pt"  onMouseOver="this.style.backgroundImage='url([#path#]img/new_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/new.jpg)'">
+          <input type=button name=save3 class=button_save value="     保存" AccessKey=s  onClick="submit_save()" style="font-size:9pt" {dissave} onMouseOver="this.style.backgroundImage='url([#path#]img/save_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/save.jpg)'">
+          <INPUT class=button_reset name=qqq type=reset value="     撤销" AccessKey=z style="font-size:9pt" onMouseOver="this.style.backgroundImage='url([#path#]img/reset_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/reset.jpg)'">
+          <input type=button name=rst class=button_recovery value="     返回" AccessKey=q style="font-size:9pt" onClick="javascript:location='visiterecord.php'" onMouseOver="this.style.backgroundImage='url([#path#]img/recovery_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/recovery.jpg)'">
+        </div></td>
+        <td class=button_labelright></td>
+      </tr>
+    </table> 
+      <TABLE class=InputFrameMain cellSpacing=0 cellPadding=0 width=750 border=0>
+        <TBODY>
+          <TR>
+            <TD align=left colSpan=5 height=13><TABLE cellSpacing=0 cellPadding=0 border=0>
+                <TBODY>
+                  <TR>
+                    <TD class=inputtitle align=middle width=150>资料输入</TD>
+                    <TD class=inputtitleright align=middle 
+            width=42>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+                    <TD align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD>
+                  </TR>
+                </TBODY>
+            </TABLE></TD>
+          </TR>
+          <TR>
+            <TD colSpan=4 height=10></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right width=94 height=30>顾客：</TD>
+            <TD align=left width=233 height=30><INPUT type=hidden name=customer_id value="[#customer_id#]">
+              <INPUT 
+      class=input_disabled readOnly maxLength=35 size=10 name=customer_name value="[#customer_name#]">
+              <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:promem() type=button value=查找 name=save2 [#findcustomer#]>
+              <SPAN class=form_label>*</SPAN></TD>
+            <TD width="117" height=30 align=right class=form_label>通话日期：</TD>
+            <TD height=30 align=left><INPUT class=INPUT id=visitedate maxLength=30 
+            size=20 name=visitedate value="[#visitedate#]" onFocus="calendar(EventUtil.getEvent().target)"></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right height=30>通话类别：</TD>
+            <TD align=left height=30><SELECT name=visitetypeid>
+              <OPTION value=2 
+        selected>-请选择-</OPTION>
+              [#vistietypelist#]
+            </SELECT>
+                <SPAN class=form_label>*</SPAN></TD>
+            <TD class=form_label align=right height=30>经手人：</TD>
+            <TD height=30 align=left><INPUT type=hidden name=employee_id value="[#employee_id#]"><INPUT class=input_disabled readOnly maxLength=35 value="[#man#]"
+      size=10 name=man >
+                <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putsta() type=button value=查找 name=xuan>
+                <SPAN 
+      class=form_label>*</SPAN></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right height=30>标题：</TD>
+            <TD height=30 align=left><INPUT name=title class=input 
+      value="[#title#]" size="10" maxLength=35>
+                <SPAN class=form_label>*</SPAN><span class="form_label">
+                <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:getmt() type=button value=选择模版 name=xuan2>
+                <INPUT type=hidden name=messagetemplate_id value="[#visiterecordtemplate_id#]">
+                <INPUT type=hidden class=input_disabled readOnly maxLength=35 value="[#visiterecordtemplate_name#]"
+      size=10 name=messagetemplate_name>
+                </span></TD>
+            <TD class=form_label align=right height=30>满意度：</TD>
+            <TD height=30 align=left><SELECT name=satisfactionid>
+                <OPTION value=2 
+        selected>-请选择-</OPTION>
+              
+              [#satisfactionlist#]
+            
+            </SELECT>
+                <SPAN class=form_label>*</SPAN></TD>
+          </TR>
+
+          <TR>
+            <TD width=94 height="71" align=right class=form_label >通话内容：</TD>
+            <TD  colspan="3" align=left>
+              <textarea class=inputarea1 name="content"  style="WIDTH: 90%" wrap="virtual"  rows="6">[#content#]</textarea>
+            </TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right width=94 height=30>备注：</TD>
+            <TD height=30 colspan="3" align=left><textarea class=inputarea1 name="memo"  style="WIDTH: 90%" wrap="virtual"  rows="6">[#memo#]</textarea>
+              <br>
+            <br></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingdel" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在删除数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"></div>
+<div id="helpid" STYLE="right: 1%; WIDTH: 450px; POSITION: absolute; TOP: 86px; HEIGHT: 0; display: none"> 
+ <div  align="left"   STYLE="position:absolute;left: 15px; top:15px;right:15px" >
+  操作：基本信息－帐户信息；<br><br>
+  保存(Alt+s)：添加新帐户信息和修改帐户信息；<br><br>
+  删除(Alt+d)：即删除不再使用的帐户信息；<br><br>
+  撤销(Alt+z)：撤销回去帐户没有修改的状态；<br><br>
+  返回(Alt+q)：返回帐户信息列表；<br><br>
+  帮助(Alt+h)：显示帮助信息；</div>
+</div>
+[#showeditdiv#]
+</center>
+</BODY>
+</HTML>
+

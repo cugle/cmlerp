@@ -1,0 +1,149 @@
+<HTML><HEAD><TITLE>销售分析</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+
+<style type="text/css">
+.NOPRINT {
+ font-family: "宋体";
+ font-size: 9pt;
+}
+
+-->
+</style>
+<style media=print>
+.Noprint{
+display:none;
+}
+</style>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+}
+.page_titlebar_bg {
+	font-size: 16px;
+	font-weight: bold;
+}
+-->
+</style></HEAD>
+<BODY>
+<center>
+<div class="Noprint" >
+  <p>
+  <OBJECT  id=WebBrowser  classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2  height=0  width=0>
+  </OBJECT>
+  <input  type=button  value=打印          onclick=document.all.WebBrowser.ExecWB(6,1)>
+  <input  type=button  value=直接打印  onclick=document.all.WebBrowser.ExecWB(6,6)>
+  <input  type=button  value=页面设置  onclick=document.all.WebBrowser.ExecWB(8,1)>
+  <input name=button  type=button  onclick=document.all.WebBrowser.ExecWB(7,1)  value=打印预览 />
+  <input name=button  type=button      onclick=javascript:window.close()  value=返回>
+  <span class="onlyShow">&nbsp;</span><br/>
+  </p>
+
+</div>
+<form action="" method="post" name="form1">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+    
+  </table>
+<span class="page_titlebar_bg">转账凭证</span>
+<table width="250" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td   height=1></td>
+      </tr>
+    <tr>
+      <td height=2></td>
+      </tr>
+    <tr>
+      <td  height=1></td>
+      </tr>
+ 
+      <tr>
+      <td align="center" height=10></td>
+      </tr>
+</table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="101%" align="left"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+        <!--DWLayoutTable-->
+        <tbody class="table_bgcolor">
+          <tr >
+            <td height="20" align="left" class="table_bgcolor"  >传票日期：[#date#]</td>
+            <td align="left" class="table_bgcolor"  ><!--DWLayoutEmptyCell-->&nbsp;</td>
+            <td width="52" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-top: rgb(0,0,0) 1px groove;">总号</td>
+            <td width="133" align="center" class="table_bgcolor" style="white-space:nowrap; BORDER-right: rgb(0,0,0) 1px groove;BORDER-top: rgb(0,0,0) 1px groove">&nbsp;</td>
+            </tr>
+          <tr>
+            <td height="28"  class="table_bgcolor" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+            <td height="28"  class="table_bgcolor" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+            <td  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-top: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">传票号码</td>
+            <td height="28" align="left" class="table_bgcolor" style="white-space:nowrap;BORDER-top: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#transfervoucher_no#]&nbsp;</td>
+            </tr>
+          </tbody>
+      </table></td>
+      </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="12">
+    <tr> 
+      <td  class="table_bgcolor" align="left"></td>
+      <!--<td align=right style="font-size:12px"><a href="#" onClick="doexport()" ><b>[导出]</b></a></td>-->
+    </tr>
+  </table>
+ 
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="195" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="white_word">科目代码</span></td>
+
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">科目名称</span></td>
+          <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove; BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">对象类别</span></td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">对象名称</span></td>
+
+<td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove; BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">借方</span>金额&nbsp;</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">贷方</span>金额</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">备注</span></td>
+                 
+        </tr>
+<!-- BEGIN mainlist -->
+      <tr >
+        <td height="20" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">&nbsp;<span style="white-space:nowrap">[#accounttitle_no#]</span></td>
+
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#accounttitle_name#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#objecttype_name#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span style="white-space:nowrap">[#object_name#]</span><span style="white-space:nowrap">&nbsp;</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#lend#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right">[#loan#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left"><span style="white-space:nowrap">[#memo#]&nbsp;</span></td>
+        </tr>
+	   <!-- END mainlist --> 
+      <tr>
+        <td height="28"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">附单据</td>
+
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >张</td>
+        <td align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >合</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totallend#]&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalloan#]&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        </tr>
+    </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr> 
+      <td width="20%" align="left" class="table_bgcolor">会计主管：</td>
+      <td width="20%" align="left" class="table_bgcolor">审核：</td>
+      <td width="20%" align="left" class="table_bgcolor" >出纳：</td>
+      <td width="20%" align="left" class="table_bgcolor" >制票：[#man#]</td>
+      <td width="20%" align="left" class="table_bgcolor" >记账：</td>
+    </tr>
+  </table>
+  </form>
+</center>
+</BODY>
+<script>
+//setTimeout("window.close();",5000) 
+ //document.all.WebBrowser.ExecWB(7,1);
+
+
+</script>
+
+</HTML>

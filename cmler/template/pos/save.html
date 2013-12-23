@@ -1,0 +1,661 @@
+<html xmlns:ntb><head>
+<title>top</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" type=text/css rel=stylesheet>
+<LINK media=screen 
+href="[#path#]css/flexselect.css" type=text/css 
+rel=stylesheet>
+<script type="text/javascript" src="../common/js/jquery-1.2.1.pack.js"></script>
+
+<SCRIPT src="[#path#]js/jquery.min.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="[#path#]js/liquidmetal.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="[#path#]js/jquery.flexselect.js" 
+type=text/javascript></SCRIPT>
+
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("select[class*=flexselect]").flexselect();
+       // $("input:text:enabled:first").focus();
+        $("form").submit(function() {
+          alert($(this).serialize());
+          return false;
+        });
+      });
+ 
+var requestSubmitted = false;
+function confirmselect(){
+document.getElementById('selectczkdiv').style.display='none';
+form1.czkno.value=document.getElementById('selectczkno').value;
+
+
+}
+function showselcetczk(){
+	document.getElementById('selectczkdiv').style.display='';
+}
+function closewindow(){
+	window.returnValue="2";
+	window.parent.close();
+	}
+function setczkno(thisvalue){
+document.getElementById('czkno').value=thisvalue;
+}
+function addczk(){
+	
+	        inputString=document.getElementById('czkno').value;
+			czkpsw=document.getElementById('czkpsw').value;
+			$.post("../ajax/readdata.php?action=czk", {value: ""+inputString+"",table: "storedvaluedcard",column: "storedvaluedcard_no",psw: ""+czkpsw+""}, function(data){	 
+
+				if(data.length >0) { 	 
+				
+				var data=data.split('@@@');
+				
+				if(data[0]==0){
+				alert('帐号或密码错误。');
+				return;
+				}else{
+				$('#czkvalue').html(data[2]);
+				 howtopay=document.getElementById('howtopay').value
+				 howtopay=howtopay.split(";");
+				 for(var i=0;i<howtopay.length;i++){
+				 howtopay[i]=howtopay[i].split(",");
+				 }
+				  isstop=0;
+				 if(howtopay[5][3]!=0){
+				  
+				 chuzhikanoadded=howtopay[5][3].split("||");
+				 for(var i=0;i<chuzhikanoadded.length;i++){
+					 
+				 if( document.getElementById('czkno').value==chuzhikanoadded[i]){
+				 isstop=1;
+				 if(isstop==1){
+				 alert('该储值卡已添加');
+				 }
+
+				 
+				 }
+
+				 }
+				 }
+				 if(isstop==0){	
+				 
+				  if(data[2]<=0){
+				  alert('该储值卡余额为零，请充值');
+				  
+				 }	else{			
+					if(parseFloat(document.getElementById('qianzhang').innerHTML)>data[2])
+					{alert("储值卡余额为："+data[2]+"元，不足以全额支付，不足部分请使用其他方式支付");
+					//document.getElementById('input_jine').value=data[2];
+					//document.getElementById('czkyuevalue').value=0;
+					$('#czvalue').html(parseFloat(document.getElementById('czvalue').innerHTML)+parseFloat(data[2]));
+					document.getElementById('input_jine').value=parseFloat(document.getElementById('czvalue').innerHTML);
+					$('#czkyue').html('0');
+					 
+					}else{
+						//document.getElementById('input_jine').value=parseFloat(document.getElementById('qianzhang').innerHTML);
+						
+						document.getElementById('czkyuevalue').value=data[2]-parseFloat(document.getElementById('qianzhang').innerHTML);
+					$('#czvalue').html(parseFloat(document.getElementById('czvalue').innerHTML)+parseFloat(document.getElementById('qianzhang').innerHTML));
+					document.getElementById('input_jine').value=parseFloat(document.getElementById('czvalue').innerHTML);
+						
+						$('#czkyue').html(document.getElementById('czkyuevalue').value);
+					}
+					closeDiv('czkdiv')
+					countxj();
+					}
+				}
+				}
+				} 
+			});	
+	}
+function addxjq(inputString){
+	
+			$.post("../ajax/readdata.php?action=xjq", {value: ""+inputString+"",table: "cashcoupon",column: "cashcoupon_no"}, function(data){	  
+				if(data.length >0) { 	 
+				
+				var data=data.split('@@@');
+				 
+				if(data[0]==0){alert('编号有误或已过有效期');return;}else{
+				 howtopay=document.getElementById('howtopay').value
+				 howtopay=howtopay.split(";");
+				 for(var i=0;i<howtopay.length;i++){
+				 howtopay[i]=howtopay[i].split(",");
+				 }
+				 
+				  isstop=0;
+				
+				 if(howtopay[6][3]!=0){
+				  
+				 xianjinquannoadded=howtopay[6][3].split("||");
+				 for(var i=0;i<xianjinquannoadded.length;i++){
+				 if( document.getElementById('xjqno').value==xianjinquannoadded[i]){
+				  if(isstop==1){
+				 alert('该编号已添加');
+				 }
+				 isstop=1;
+				 }
+				 }
+				 }
+				 
+				 if(isstop==0){
+				if(parseFloat(document.getElementById('qianzhang').innerHTML)>data[2]){
+					
+					$('#xjqvalue').html(parseFloat(document.getElementById('xjqvalue').innerHTML)+parseFloat(data[2]));
+					document.getElementById('input_jine').value=parseFloat(document.getElementById('xjqvalue').innerHTML);
+				}else {
+ 
+					$('#xjqvalue').html(parseFloat(document.getElementById('xjqvalue').innerHTML)+parseFloat(document.getElementById('qianzhang').innerHTML));
+					document.getElementById('input_jine').value=parseFloat(document.getElementById('xjqvalue').innerHTML);
+				}
+				closeDiv('czkdiv')
+					countxj();
+				}
+				}
+				}
+			});
+	}
+function closeDiv(divname){
+	document.getElementById(divname).style.display='none';
+	}
+function charge(){
+	xianjinpayvalue=form1.xianjinpayvalue.value;
+	yinkapayvalue=form1.yinkapayvalue.value;
+	djpayvalue=form1.djpayvalue.value;
+	produceaccount=form1.produceaccount.value;
+	serviceaccount=form1.serviceaccount.value;
+	cardaccount=form1.cardaccount.value;
+	otheraccount=form1.otheraccount.value;
+	checktype=0;
+	if(cardaccount>0){checktype=checktype+1;}
+	if(serviceaccount>0){checktype=checktype+1;}
+	if(produceaccount>0){checktype=checktype+1;}
+	if(otheraccount>0) {checktype=checktype+1;}
+	
+if(document.getElementById('qianzhang').innerHTML>0){
+	question1 = confirm("付款金额不足，存在欠账，是否继续");
+	if (question1 == "0"){
+		return;
+		}else if(document.getElementById('membercardno').value==''){
+		alert("该顾客不是会员，不允许欠费！");
+		return;
+		}else if(checktype>1){
+			alert('存在欠款的单据请进行拆单处理！欠款的单据只允许包含一种消费类型');
+			return;
+		}
+	} 
+	
+	if(document.getElementById('czkyue').innerHTML<0  || document.getElementById('freecostyue').innerHTML<0 || document.getElementById('deposityue').innerHTML<0 || document.getElementById('yufukuanyue').innerHTML<0 ){
+		alert('付款金额错误，帐户余额不允许出现负数');
+	return;
+	}
+ 	
+	
+ 	
+	if(document.getElementById('xianjinpayvalue').value-parseFloat(document.getElementById('zhaoling').innerHTML)>=0){//默认现金才能找零。故找零金额不大于现金金额。否则返回
+	document.getElementById('xianjinpayvalue').value=document.getElementById('xianjinpayvalue').value-parseFloat(document.getElementById('zhaoling').innerHTML);
+
+	howtopay=document.getElementById('howtopay').value
+	howtopay=howtopay.split(";");
+	for(var i=0;i<howtopay.length;i++){
+	howtopay[i]=howtopay[i].split(",");
+	}
+	var temp='';
+	howtopay[1][2]=document.getElementById('xianjinpayvalue').value;
+	for(var i=0;i<howtopay.length;i++){
+	if(i!=0){temp=temp+';';}
+	temp=temp+howtopay[i][0]+","+howtopay[i][1]+","+howtopay[i][2]+","+howtopay[i][3];
+	}
+		
+	howtopay=temp;
+	document.getElementById('howtopay').value=howtopay;	 
+
+	
+	}else{
+		alert("付款方式有误。除现金外的其他付款方式不能找零，故找零金额必须小于现金支付金额！");
+		return;
+	}
+	
+
+	yfppayvalue=form1.yfppayvalue.value;//预付产品款
+	zsppayvalue=form1.zsppayvalue.value;//赠送产品款
+	zscpayvalue=form1.zscpayvalue.value;//赠送购卡款
+	
+	
+	if(document.getElementById('counttotal').value>0){
+/*if(document.getElementById('qianzhang').innerHTML==0){	//新方案中储值卡可以当现金使用。取消此限制。 
+if(parseFloat(produceaccount)-parseFloat(xianjinpayvalue)-parseFloat(yinkapayvalue)-parseFloat(yfppayvalue)-parseFloat(zsppayvalue)>0){
+	alert("付款方式不正确！产品须付现金或刷卡");
+	return;}
+if(parseFloat(cardaccount)-parseFloat(xianjinpayvalue)-parseFloat(yinkapayvalue)-parseFloat(djpayvalue)-parseFloat(zscpayvalue)>0){
+	alert("付款方式不正确！卡项须只可使用定金，现金或刷卡");
+	return;	
+	
+	}
+	
+if(parseFloat(otheraccount)-parseFloat(xianjinpayvalue)-parseFloat(yinkapayvalue)>0){
+	alert("付款方式不正确！款项只可使用现金或刷卡");
+	return;		
+	}
+	
+}*/
+}
+
+	if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+requestSubmitted = true;  
+
+
+
+	
+question = confirm("是否打印小票");
+         
+		if (question != "0")
+		{document.getElementById('printticket').value='1';
+		form1.submit();
+		}
+		form1.submit();
+
+}
+function howtopay(){
+type_name="0,0,0,0;1,现金,0,0;2,银行卡,0,0;3,赠送帐户,0,0;4,订金,0,0;5,储值卡,0,0;6,现金券,0,0;7,预收款,0,0;8,预收产品款,0,0;9,赠送产品款,0,0;10,赠送购卡款,0,0";
+document.getElementById('howtopay').value=type_name;
+
+}
+function count(inputString){	
+          
+			$.post("../ajax/readsellcount.php?action=sellcount", {value: ""+inputString+"",table: "",column: "sell_no"}, function(data){	  
+				if(data.length >0) { 
+				 
+					$('#ysmoney').html(data);
+					document.getElementById('counttotal').value=data;
+					 $('#qianzhang').html(data);
+					 document.getElementById('input_jine').focus();
+				}
+			});
+ 
+	}
+ 
+function paycase(typeid){
+	$type_name=['','现金','银行卡','赠送帐户','订金','储值卡','现金券','预收款','预收产品款','赠送产品款','赠送购卡款'];
+    $('#showpayment').html($type_name[typeid]);
+	document.getElementById('paytype').value=typeid;
+	document.getElementById('input_jine').value='';
+	if(typeid==6){
+		document.getElementById('xjqdiv').style.display='';
+		document.getElementById('czkdiv').style.display='none';
+	    document.getElementById('xjqno').focus();
+	}else if(typeid==5){
+		document.getElementById('czkdiv').style.display='';
+		document.getElementById('xjqdiv').style.display='none';
+	    document.getElementById('czkno').focus();
+	//var czno=prompt("请输入储值卡卡号","");
+	}
+	}	
+	function reflash(){
+	  var temp;
+	 temp=document.getElementById('counttotal').value-document.getElementById('qtpayshowvalue').value-document.getElementById('yinkapayvalue').value-document.getElementById('xianjinpayvalue').value;
+	 	input_jine=document.getElementById('input_jine').value;
+		input_jine= input_jine==''?0:input_jine;
+	 if(temp>0){
+		 
+		 document.getElementById('qianzhang').innerHTML=temp;
+		  document.getElementById('zhaoling').innerHTML=0;
+		 }else{
+		 document.getElementById('zhaoling').innerHTML=-temp;
+		 document.getElementById('qianzhang').innerHTML=0;}
+
+		 paytype=document.getElementById('paytype').value;
+		 howtopay=document.getElementById('howtopay').value
+		 howtopay=howtopay.split(";");
+		 for(var i=0;i<howtopay.length;i++){
+			 howtopay[i]=howtopay[i].split(",");
+		 }
+		  if(paytype!=5){
+		 howtopay[paytype][2]=""+input_jine+"";
+		  }
+
+
+ 
+		 if(paytype==5){
+			  czkisadd=0;
+			
+			 chuzhikanoadded=howtopay[5][3].split("||");
+			 for(var i=0;i<chuzhikanoadded.length;i++){
+			 if( document.getElementById('czkno').value==chuzhikanoadded[i]){
+			 czkisadd=1;
+			 }
+			
+			 } 
+			 
+			 if(czkisadd==0){
+			 howtopay[paytype][2]=howtopay[paytype][2]==0?""+input_jine+"":howtopay[paytype][2]+"||"+parseFloat(parseFloat(input_jine)-parseFloat(howtopay[paytype][2]))+"";
+			 howtopay[5][3]=howtopay[5][3]==0?document.getElementById('czkno').value:howtopay[5][3]+"||"+document.getElementById('czkno').value;
+			 }
+		}
+		 if(paytype==6){
+			  xjqisadd=0;
+			 
+			 chuzhikanoadded=howtopay[5][3].split("||");
+			 for(var i=0;i<chuzhikanoadded.length;i++){
+			 if( document.getElementById('czkno').value==chuzhikanoadded[i]){
+			 xjqisadd=1;
+			 }
+			
+			 } 
+			 
+			 if(xjqisadd==0){
+			 howtopay[6][3]=howtopay[6][3]==0?document.getElementById('xjqno').value:howtopay[6][3]+"||"+document.getElementById('xjqno').value;
+			 }
+		}			 
+		 var temp='';
+		
+		 for(var i=0;i<howtopay.length;i++){
+			 if(i!=0){temp=temp+';';}
+			 
+			  temp=temp+howtopay[i][0]+","+howtopay[i][1]+","+howtopay[i][2]+","+howtopay[i][3];
+			  
+		}
+		
+		 howtopay=temp;
+		 document.getElementById('howtopay').value=howtopay;
+		payname= ['','xjvalue','ykvalue','zsvalue','djvalue','czvalue','xjqvalue','yfkvalue','yfpvalue','zsppvalue','zscpvalue'];
+		document.getElementById(payname[paytype]).innerHTML=input_jine;
+		 
+	}
+	function countxj(){
+
+		input_jine=document.getElementById('input_jine').value;
+		input_jine= input_jine==''?0:input_jine;	
+		 
+		if(document.getElementById('paytype').value==1){
+		document.getElementById('xianjinpay').innerHTML=document.getElementById('input_jine').value;
+		document.getElementById('xianjinpayvalue').value=document.getElementById('input_jine').value;
+		reflash();
+		}else if(document.getElementById('paytype').value==2){
+
+		document.getElementById('yinkapay').innerHTML=input_jine;
+		document.getElementById('yinkapayvalue').value=input_jine;
+		reflash();			
+		}else{
+			reflash();
+			payname= ['','xjvalue','ykvalue','zsvalue','djvalue','czvalue','xjqvalue','yfkvalue','yfpvalue','zsppvalue','zscpvalue'];
+		document.getElementById('qtpayshowvalue').value=	parseFloat(document.getElementById(payname[3]).innerHTML)+parseFloat(document.getElementById(payname[4]).innerHTML)+parseFloat(document.getElementById(payname[5]).innerHTML)+parseFloat(document.getElementById(payname[6]).innerHTML)+parseFloat(document.getElementById(payname[7]).innerHTML)+parseFloat(document.getElementById(payname[8]).innerHTML)+parseFloat(document.getElementById(payname[9]).innerHTML)+parseFloat(document.getElementById(payname[10]).innerHTML);
+		document.getElementById('qtpayshow').innerHTML=document.getElementById('qtpayshowvalue').value;	
+		//document.getElementById('qtpayshowvalue').value=parseFloat(document.getElementById('qtpayshowvalue').value)+parseFloat(document.getElementById('input_jine').value);	
+		if(document.getElementById('paytype').value==3){
+		document.getElementById('zspayvalue').value=parseFloat(input_jine); 
+		document.getElementById('freecostyue').innerHTML=parseFloat(document.getElementById('freecost').value)-parseFloat(input_jine);
+		}
+		if(document.getElementById('paytype').value==4){
+		document.getElementById('djpayvalue').value=parseFloat(input_jine);
+		document.getElementById('deposityue').innerHTML=parseFloat(document.getElementById('deposit').value)-parseFloat(input_jine);
+		}
+		if(document.getElementById('paytype').value==7){
+		document.getElementById('yfkpayvalue').value=parseFloat(input_jine);
+		//document.getElementById('yufukuan').value=parseFloat(document.getElementById('yufukuan').value)-parseFloat(input_jine);
+		document.getElementById('yufukuanyue').innerHTML=parseFloat(document.getElementById('yufukuan').value)-parseFloat(input_jine);
+		}
+		if(document.getElementById('paytype').value==8){
+		
+		document.getElementById('yfppayvalue').value=parseFloat(input_jine);
+		//document.getElementById('yufukuan').value=parseFloat(document.getElementById('yufukuan').value)-parseFloat(input_jine);
+		document.getElementById('yufuproduceyue').innerHTML=parseFloat(document.getElementById('yufuproduce').value)-parseFloat(input_jine);
+		}
+		if(document.getElementById('paytype').value==10){
+		
+		document.getElementById('zscpayvalue').value=parseFloat(input_jine);
+		//document.getElementById('yufukuan').value=parseFloat(document.getElementById('yufukuan').value)-parseFloat(input_jine);
+		document.getElementById('zengsongcardyue').innerHTML=parseFloat(document.getElementById('zengsongcard').value)-parseFloat(input_jine);
+		}
+		
+		
+		reflash();		
+		}
+
+		 //document.getElementById('qianzhang').innerHTML=document.getElementById('counttotal').value-document.getElementById('input_jine').value;
+		 //alert('123');
+		 
+		//document.getElementsById('xianjinpay').value=test;
+		
+	//$('xianjinpay').html(document.getElementByName('input_jine').value);
+	}
+</SCRIPT>
+<STYLE type=text/css>
+body {
+	margin-left: 20px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-size: 24px;
+}
+.form {
+	margin: 0px;
+	padding: 0px;
+}
+.end_save {
+	margin: 0px;
+	padding: 0px;
+}
+.STYLE25 {
+	font-weight: 200;
+	font-size: 24px;
+}
+</STYLE>
+</head>
+<body  >
+<form  action="save.php?action=charge" method="post" name="form1"><br>
+  <TABLE width=100%
+height=380 border=0 align="left" cellPadding=0 cellSpacing=0 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid; font-weight: bold;">
+    <TBODY>
+      <TR>
+        <TD class=STYLE18 vAlign=top align=left width=294 height=177>
+          <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+            <TBODY>
+              <TR>
+                <TD class=STYLE25 vAlign=center align=right width="49%" 
+            height=51><span class="white_word">
+                <input type="hidden" id='sellid' name='sellid' value="[#sellid#]"/>
+                <input type="hidden" id='customerid' name='customerid' value="0"/>
+                <input type="hidden" id='membercardno' name='membercardno' value="[#membercardno#]"/>
+                <input type="hidden" id='howtopay' name='howtopay' value="0"/>
+                <SCRIPT language=JavaScript>
+				 howtopay();
+				</SCRIPT>
+                <input type="hidden" id='printticket' name='printticket' value="0"/>
+                </span>应收金额：</TD>
+                <TD class=STYLE25 vAlign=center align=left width="51%"><SPAN 
+            id=ysmoney> 
+                 </SPAN><input type="hidden" id='counttotal' name='counttotal' value="0"/>
+                  <SCRIPT language=JavaScript>
+				 count('');
+				</SCRIPT></TD></TR>
+              <TR>
+                <TD class=STYLE25 align=right height=50>其他支付：</TD>
+                <TD class=STYLE25 height=50><SPAN id=qtpayshow>0.00</SPAN>
+                  <input type="hidden" id='qtpayshowvalue' name='qtpayshowvalue' value="0"/>
+                </TD></TR>
+              <TR>
+                <TD class=STYLE25 align=right height=50>现金支付：</TD>
+                <TD class=STYLE25 height=50><SPAN id='xianjinpay'>0.00</SPAN>  
+                <input type="hidden" id='xianjinpayvalue' name='xianjinpayvalue' value="0"/></TD></TR>
+              <TR>
+                <TD class=STYLE25 align=right height=50>刷卡支付：</TD>
+                <TD class=STYLE25 height=50><SPAN id=yinkapay>0.00</SPAN>
+                  <input type="hidden" id='yinkapayvalue' name='yinkapayvalue' value="0"/>
+                </TD></TR>
+              <TR>
+                <TD class=STYLE25 align=right height=50>找零：</TD>
+                <TD class=STYLE25 height=50><SPAN id=zhaoling>0.00
+                   
+                    
+              </SPAN></TD></TR>
+              <TR>
+                <TD class=STYLE25 align=right height=50>                  欠帐：</TD>
+                <TD class=STYLE25 height=50><SPAN 
+      id=qianzhang>   </SPAN> 
+</TD></TR></TBODY></TABLE></TD>
+        <TD class=STYLE18 vAlign=top align=middle width=366><BR>
+          <TABLE class=tableborder1 cellSpacing=1 width="98%" height="30%" border=0>
+            <TBODY>
+              <TR class=listtitle>
+                <TD class=white_word align=middle width="36%" height=25>支付方式</TD>
+                <TD class=white_word align=middle width="14%" height=25>类型</TD>
+                <TD class=white_word align=middle width="19%" height=25>支付金额</TD>
+                <TD class=white_word align=middle width="31%" height=25>备注</TD></TR>
+              <TR style="CURSOR: hand" onclick=paycase(1) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>现金</TD>
+                <TD align=middle width="14%" height=25>公司</TD>
+                <TD align=middle width="19%" height=25><SPAN id=xjvalue>0</SPAN></TD>
+                <TD align=middle width="31%" height=25></TD></TR>
+              <TR style="CURSOR: hand" onclick=paycase(2) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>银行卡</TD>
+                <TD align=middle width="14%" height=25>公司</TD>
+                <TD align=middle width="19%" height=25><SPAN id=ykvalue>0</SPAN></TD>
+                <TD align=middle width="31%" height=25>&nbsp;</TD></TR>                
+
+              <TR id=showcarddiv4 style="  CURSOR: hand" 
+        onclick=paycase(3) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>赠送账户</TD>
+                <TD align=middle width="14%" height=25>会员卡</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='zspayvalue' value="0"/><SPAN id=zsvalue>0    
+                </SPAN></TD>
+                <TD align=left width="31%" height=25> 余额<SPAN id=freecostyue>：[#freecostyue#]</SPAN>
+                <input name="freecost" type="hidden" id='freecost' value="[#freecostyue#]"/></TD>
+              </TR>
+              <TR style="CURSOR: hand" onclick=paycase(4) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>订金</TD>
+                <TD align=middle width="14%" height=25>其他</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='djpayvalue' value="0"/><SPAN id=djvalue>0</SPAN></TD>
+                <TD align=left width="31%" height=25>余额<SPAN id=deposityue>：[#deposityue#]</SPAN>
+                  <input name="deposit" type="hidden" id='deposit' value="[#deposityue#]"/></TD></TR>
+              <TR id=showcarddiv1 style="  CURSOR: hand" 
+        onclick=paycase(5) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>储值卡</TD>
+                <TD align=middle width="14%" height=25>会员卡</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='czpayvalue' value="0"/><SPAN id=czvalue>0</SPAN></TD>
+                <TD align=left  width="31%" height=25> 
+                  <input type="hidden" id='czkyuevalue' value="0"/>
+               余额：<SPAN   id=czkyue>0</SPAN></TD></TR>                
+              <TR style="CURSOR: hand" onclick=paycase(6) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>现金券</TD>
+                <TD align=middle width="14%" height=25>其他</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='xjqpayvalue' value="0"/><SPAN id=xjqvalue>0</SPAN></TD>
+                <TD align=middle width="31%" height=25>&nbsp;</TD></TR>
+                 <TR style="CURSOR: hand" onclick=paycase(7) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>预收款</TD>
+                <TD align=middle width="14%" height=25>其他</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='yfkpayvalue' value="0"/><SPAN id=yfkvalue>0</SPAN></TD>
+                <TD align=left width="31%" height=25>余额<SPAN id=yufukuanyue>：[#yufukuanyue#]</SPAN><input name="yufukuan" type="hidden" id='yufukuan' value="[#yufukuanyue#]"/></TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase(8) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25>预收产品款</TD>
+                <TD align=middle width="14%" height=25>其他</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='yfppayvalue' value="0"/><SPAN id=yfpvalue>0</SPAN></TD>
+                <TD align=left width="31%" height=25>余额<SPAN id=yufuproduceyue>：[#yufuproduceyue#]</SPAN>
+                <input name="yufuproduce" type="hidden" id='yufuproduce' value="[#yufuproduceyue#]"/></TD></TR>
+				 <TR style="CURSOR: hand; " onclick=paycase(9) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25> 赠送产品款 </TD>
+                <TD align=middle width="14%" height=25>其他</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='zsppayvalue' value="0"/><SPAN id=zsppvalue>0</SPAN></TD>
+                <TD align=left width="31%" height=25>余额<SPAN id=zengsongproduceyue>：[#zengsongproduceyue#]</SPAN>
+                <input name="zengsongproduce" type="hidden" id='zengsongproduce' value="[#zengsongproduceyue#]"/></TD></TR>
+              <TR style="CURSOR: hand ;" onclick=paycase(10) bgColor=#ffffff>
+                <TD align=middle width="36%" height=25> 赠送购卡款 </TD>
+                <TD align=middle width="14%" height=25>其他</TD>
+                <TD align=middle width="19%" height=25><input type="hidden" id='zscpayvalue' value="0"/><SPAN id=zscpvalue>0</SPAN></TD>
+                <TD align=left width="31%" height=25>余额<SPAN id=zengsongcardyue>：[#zengsongcardyue#]</SPAN>
+              <input name="zengsongcard" type="hidden" id='zscard' value="[#zengsongcardyue#]"/></TD></TR>
+
+</TBODY></TABLE></TD>
+      <TR>
+          <TD vAlign=top align=left colSpan=2 height=38>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+                <TR>
+                  <TD class=STYLE25 align=right width="12%" height=40>实收： </TD>
+                  <TD width="23%" height=40><INPUT class=input  [#readonly#] onKeyPress="if ((event.keyCode < 45) || event.keyCode > 57 || event.keyCode == 47 ) event.returnValue = false;" 
+            onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {charge()}" 
+            onkeyup=countxj() id='input_jine'></TD>
+                  <TD height=40 colspan="2" class=STYLE25>支付方式：<SPAN 
+            id=showpayment>现金  </SPAN>
+                  <input type="hidden" id='paytype' value="1"/></TD>
+                </TR>
+                <TR>
+                  <TD class="STYLE27 STYLE28" align=right height=20>&nbsp;</TD>
+                  <TD height=20 align="right">&nbsp;</TD>
+                  <TD width="31%" height=20 align="right"><span class="STYLE25">
+                    <input type="hidden" id='produceaccount' name="produceaccount" value="[#produceaccount#]"/>
+                  </span><span class="STYLE25">
+                  <input type="hidden" id='cardaccount'  name="cardaccount" value="[#cardaccount#]"/>
+                  </span><span class="STYLE25">
+                  <input type="hidden" id='serviceaccount' name="serviceaccount" value="[#serviceaccount#]"/>
+                  <input type="hidden" id='otheraccount' name="otheraccount" value="[#otheraccount#]"/>
+                  </span></TD>
+                  <TD width="34%" height=20 align="center">　<span class="STYLE25">
+                    <input name="button" type=button class=buttonsmall onClick=charge() [#disabled#] value=" 过 账 ">
+                  &nbsp;&nbsp;
+                   <input class=buttonsmall onClick="closewindow();" type=button value=" 关 闭 ">
+                  </span></TD>
+                </TR>
+              </TBODY></TABLE></TD></TR></TBODY></TABLE>
+              
+<div id="xjqdiv" STYLE="LEFT: 320px; WIDTH: 312px; POSITION: absolute; display:none; TOP: 250px; z-index:12; height: 51px;"> 
+<table width=313 height=51 border=0 cellspacing=0 cellpadding=0 style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid;BORDER-BOTTOM: #808080 1px solid;BORDER-LEFT: #808080 1px solid; background:#D9F9F8;">
+<tr>
+<td width="311" align="center" class="STYLE18" >请输入现金券编号</td><td height="25" align=right style="padding-right:5px"><a href="#" style="font-weight:bold" onClick="closeDiv('xjqdiv')">X</a></td>
+<tr>
+  <td height="30" align="center"><input name="xjqno" type="text" size="15" class="input" onKeyDown="if (event.keyCode == 10 || event.keyCode == 13 ) {addxjq(this.value)}">
+    <span class="STYLE20">说明：输入完按回车确认</span></td>
+</table>		  
+</div>
+
+<div id="czkdiv" STYLE="LEFT: 320px; WIDTH: 312px; POSITION: absolute; display:none;    TOP: 250px; z-index:12; height: 58px;"> 
+<table width=313 height=93 border=0 cellspacing=0 cellpadding=0 style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid;BORDER-BOTTOM: #808080 1px solid;BORDER-LEFT: #808080 1px solid; background:#D9F9F8;">
+<tr>
+<td width="98" height="25" align="left" class="STYLE18" > &nbsp;请输入储值卡号
+</td>
+<td width="197" align="left" class="STYLE18" ><input name="czkno" id="czkno" type="text" size="15" class="input" value="" onKeyDown="if (event.keyCode == 10 || event.keyCode == 13 )      {document.getElementById('czkpsw').focus()}">
+  <a href="#" onClick="showselcetczk();">选择&gt;&gt;</a></td>
+<td width="16" height="25"  rowspan="3" align=right valign="top" style="padding-right:5px"><a href="#" style="font-weight:bold" onClick="closeDiv('czkdiv')">X</a></td>
+<tr>
+  <td height="25" align="left"><span class="STYLE20"><span class="STYLE18"> &nbsp;请&nbsp;输入 密&nbsp;码: </span></span></td>
+  <td height="25" align="left"><span class="STYLE20">
+    <input name="czkpsw" id="czkpsw" type="password" size="16" class="input" onKeyDown="if (event.keyCode == 10 || event.keyCode == 13 )      {addczk()}">
+  </span></td>
+<tr>
+  <td height="18" colspan="2" align="center"><span class="STYLE20">说明：输入完按回车确认</span></td>
+</table>		  
+</div>
+<div id="selectczkdiv" STYLE="LEFT:440px; WIDTH: 163px; POSITION: absolute; display:none; TOP: 280px; z-index:12; height: 58px;">
+<table width=160 height=53 border=0 cellspacing=0 cellpadding=0 style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid;BORDER-BOTTOM: #808080 1px solid;BORDER-LEFT: #808080 1px solid; background:#D0e0e0;">
+<tr>
+  <td height="21" align="center" class="STYLE18" >选择该顾客已购买</td>
+  <td align="center" class="STYLE18" ><a href="#" style="font-weight:bold" onClick="closeDiv('selectczkdiv')">X</a>&nbsp;</td>
+</tr>
+<tr>
+  <td height="21" colspan="2" align="center" class="STYLE18" ><select class="flexselect" id=selectczkno  tabindex="2"   style="FONT-SIZE: 10px" name=selectczkno>
+    
+     [#chuzhikanostr#]  
+     <option value="" selected></option>
+  </select></td>
+</tr>
+<tr>
+<td width="90%" height="25" colspan="2" align="right"   > 
+  <input class=buttonsmall onClick="confirmselect();" type=button value=" 确 定 ">&nbsp;&nbsp;&nbsp;
+ </td>
+</tr>
+</table>
+</div>
+</form>
+
+</body>
+
+</html>

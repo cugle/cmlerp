@@ -1,0 +1,66 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<script language=javascript> 
+function tourl(url)
+{
+	window.location.href=url;
+}
+	function CloseSelf(){
+	window.returnValue='[#customer_id#]@@@[#membercard_no#]';
+    window.parent.close();
+	}
+ 
+</script>
+<BODY   topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">购买商品</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="buyproduce.php" method="post" name="form1">
+            <input name='action' type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+    <table width="610" border="0" cellspacing="0" ID=servicetable class=InputFrameMain style="display:[#servicetabledisplay#]">
+ 
+  <tr>
+    <td   height="30"  align="left">操作成功， 请选择去向 ：</td>
+    </tr>
+  <tr>
+    <td height="30"  align="center">
+       
+    
+  &nbsp;&nbsp;&nbsp;
+        <input type=button name=save4 style="CURSOR: hand"  class=buttonsmall value="消费卡项" AccessKey=t  onClick="submit_save()"  {buttondisabled} >
+       
+        &nbsp;&nbsp;&nbsp; <input type=button name=save2 style="CURSOR: hand"  class=buttonsmall value="购买服务" AccessKey=t  onClick="submit_save()"  {buttondisabled} >&nbsp;&nbsp;&nbsp;
+         
+            <input type=button name=save3 style="CURSOR: hand"  class=buttonsmall value="购买卡项" AccessKey=t  onClick="submit_save()"  {buttondisabled} > &nbsp;&nbsp;&nbsp;
+         <input type=button name=save5 style="CURSOR: hand"  class=buttonsmall value=" 关 闭 " AccessKey=t  onClick="CloseSelf()"  {buttondisabled} ></td>
+    </tr>
+  
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" >&nbsp;</td>
+  </tr>
+</table>
+</form>
+
+
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

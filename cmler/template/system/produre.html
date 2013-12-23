@@ -1,0 +1,537 @@
+<HTML><HEAD><TITLE>商品资料</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="{skin}button_css.css" rel="stylesheet" type="text/css">
+<link href="{skin}page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{skin}browse.css" type=text/css rel=stylesheet>
+<LINK href="../include/DatePicker.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="../include/editlib.js"></SCRIPT>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF0000;
+	font-size: 12px;
+}
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+
+function upmorefile(){
+   var arrItems=new Array();
+   var strItem ;
+   var url;
+   var szRef = "upmorefile.php" ;
+   strItem=window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=500px;dialogHeight=200px;scroll=yes;");
+   if(strItem!="flage"){
+     form1.picpath.value=strItem;
+	 var show = document.getElementById("showpic"); 
+     var temp=show.innerHTML;
+
+	 if(temp.substring(0,3)=="<img" || typeof(strItem) != 'undefined'){
+	 if(typeof(strItem) == 'undefined'){
+	   show.innerHTML = "暂时没有图片";
+	 }else{
+　　   show.innerHTML = "<img src="+strItem+" width=120 heigh=180>"; 
+     //getpicpath(strItem);
+     }
+	 }
+   }
+   
+}
+
+function abc(a){
+form1.unitname.value =a;
+alert(form1.unitname.value);
+}
+
+function input_focus(){
+var gg = 1;
+
+if (gg == 1){
+form1.no.focus();
+ }
+}
+
+var requestSubmitted = false;
+
+function submit_save(iframe){
+	if(form1.serial.value==""){
+	 	  alert("请输入存货编码");
+	 	  form1.serial.focus();
+	 	  return;
+	 }
+	 if(form1.no.value==""){
+	 	  alert("请输入代码");
+	 	  form1.no.focus();
+	 	  return;
+	 }
+	 if(form1.name.value==""){
+	 	  alert("请输入名称");
+	 	  form1.name.focus();
+	 	  return;
+	 }
+     if(form1.catalog.value==""){
+	 	  alert("请选择类别");
+	 	  form1.catalog.focus();
+	 	  return;
+	 } 
+	 if(form1.unit.value==""){
+	 	  alert("请选择单位");
+	 	  form1.unit.focus();
+	 	  return;
+	 } 
+	 if(form1.capacity.value==""){
+	 	  alert("请输入容量");
+	 	  form1.capacity.focus();
+	 	  return;
+	 }	
+	 if(form1.capunitid.value==""){
+	 	  alert("请选择容量单位");
+	 	  form1.capunitid.focus();
+	 	  return;
+	 }		  
+	
+	 if(form1.upperlimit.value==""){
+	 	  alert("请输入库存上限");
+	 	  form1.upperlimit.focus();
+	 	  return;
+	 } 
+	 if(form1.lowerlimit.value==""){
+	 	  alert("请输入库存下限");
+	 	  form1.lowerlimit.focus();
+	 	  return;
+	 } 
+	 if(parseFloat(form1.lowerlimit.value) > parseFloat(form1.upperlimit.value)){	 
+	     alert("库存上限不能少于库存下限");
+	 	  form1.upperlimit.focus();
+	 	  return;
+	 } 
+	 	 
+	 if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+   
+  
+   form1.submit();
+   
+   	 if(iframe == "disabled"){	 
+	   parent.addnewconcent.style.display = "none";
+       parent.addnewconcentbg.style.display = "none";
+	   parent.proadd();
+	 }
+   
+ }
+
+function changeno(){
+	form1.ischangeno.value="1";
+}
+
+function submit_del(){
+    if (confirm("是否删除该记录？")) {
+        getNews(form1.id.value);
+    }
+}
+
+function InitAjax()
+{
+　var ajax=false; 
+　try { 
+　　ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+　} catch (e) { 
+　　try { 
+　　　ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+　　} catch (E) { 
+　　　ajax = false; 
+　　} 
+　} 
+　if (!ajax && typeof XMLHttpRequest!='undefined') { 
+　　ajax = new XMLHttpRequest(); 
+　} 
+　return ajax;
+}
+
+function getNews(newsID)
+{
+　//如果没有把参数newsID传进来
+　if (typeof(newsID) == 'undefined')
+　{
+　　return false;
+　}
+  var postStr = "id="+ newsID;
+　//需要进行Ajax的URL地址
+　var url = "../ajaxread/readdelprodure.php";
+　//实例化Ajax对象
+　var ajax = InitAjax();
+　//使用POST方式进行请求
+　ajax.open("POST", url, true); 
+  //定义传输的文件HTTP头信息
+　ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+　//发送POST数据
+　ajax.send(postStr);
+　//获取执行状态
+　ajax.onreadystatechange = function() { 
+　　//如果执行是状态正常，那么就把返回的内容赋值给上面指定的层
+　　if (ajax.readyState == 4 && ajax.status == 200) {   
+       if(ajax.responseText==0){
+          form1.action.value = "delete";        
+          sendingdel.style.display ="";
+	        form1.submit();
+       }else{
+          alert("该产品已经过帐了，不能删除");
+       }
+　　} 
+　}
+  //发送空
+　ajax.send(null); 
+}
+
+
+function addvalueptype(news)
+{
+　//如果没有把参数newsID传进来
+　if (news == "ns"){
+　document.getElementById("shangpin").innerHTML = "<input class=input type='text' name=addptype size='10' maxlength='20'>"+ "&nbsp;<input  type=button name=save2 class=buttonsmall value='保存'  onClick='javascript:saveptype()' style='font-size:9pt' >";
+ document.form1.save3.disabled = "true";
+ document.form1.bs.value = parseInt(document.form1.bs.value) + 1;
+ //alert(document.form1.bs.value)
+}
+}
+
+function addvalueunit(news)
+{
+　//如果没有把参数newsID传进来
+　if (news == "ns"){
+　document.getElementById("unitid").innerHTML = "<input class=input type='text' name=addunit size='10' maxlength='20'>"+ "&nbsp;<input  type=button name=save2 class=buttonsmall value='保存'  onClick='javascript:saveunit()' style='font-size:9pt' >";
+  document.form1.save3.disabled = "true";
+  document.form1.bs.value = parseInt(document.form1.bs.value) + 1;
+  //alert(document.form1.bs.value)
+}
+}
+
+function saveunit(value){
+　//如果没有把参数newsID传进来
+  var postStr = "name="+ form1.addunit.value;
+　//需要进行Ajax的URL地址
+　var url = "../ajaxread/readaddunit.php";
+　//实例化Ajax对象
+　var ajax = InitAjax();
+　//使用POST方式进行请求
+　ajax.open("POST", url, true); 
+  //定义传输的文件HTTP头信息
+　ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+　//发送POST数据
+　ajax.send(postStr);
+　//获取执行状态
+　ajax.onreadystatechange = function() { 
+　　//如果执行是状态正常，那么就把返回的内容赋值给上面指定的层
+　　if (ajax.readyState == 4 && ajax.status == 200) {   
+	        var arr    =   ajax.responseText.split("@@@");
+	        if(arr[0]== ""){
+	        
+	        }else{
+	          alert(arr[0]);
+	        }
+	        if(arr[2]==1){
+	          addvalueunit('ns'); 
+	        }
+	        else{
+          document.getElementById("unitid").innerHTML = "<select name='unit' onChange='addvalueunit(form1.unit.value)'>"+arr[1]+"</select>";
+		  
+　        }
+          document.form1.bs.value = parseInt(document.form1.bs.value) - 1;
+		  //alert(document.form1.bs.value)
+          if(document.form1.bs.value=="0"){
+           document.form1.save3.disabled = false;
+		  }
+       }
+  }
+　//ajax.send(null); 
+
+}
+
+
+function saveptype(value){
+　//如果没有把参数newsID传进来
+  var postStr = "name="+ form1.addptype.value;
+　//需要进行Ajax的URL地址
+　var url = "../ajaxread/readaddptype.php";
+　//实例化Ajax对象
+　var ajax = InitAjax();
+　//使用POST方式进行请求
+　ajax.open("POST", url, true); 
+  //定义传输的文件HTTP头信息
+　ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+　//发送POST数据
+　ajax.send(postStr);
+　//获取执行状态
+　ajax.onreadystatechange = function() { 
+　　//如果执行是状态正常，那么就把返回的内容赋值给上面指定的层
+　　if (ajax.readyState == 4 && ajax.status == 200) {   
+	        var arr    =   ajax.responseText.split("@@@");
+	        if(arr[0]== ""){
+	        
+	        }else{
+	          alert(arr[0]);
+	        }
+	        if(arr[2]==1){
+	          addvalueptype('ns'); 
+	        }
+	        else{
+          document.getElementById("shangpin").innerHTML = "<select name='catalog' onChange='addvalueptype(form1.catalog.value)'>"+arr[1]+"</select>";
+　        }
+          document.form1.bs.value = parseInt(document.form1.bs.value) - 1;
+		  //alert(document.form1.bs.value)
+          if(document.form1.bs.value=="0"){
+           document.form1.save3.disabled = false;
+		  }
+       }
+  }
+　//ajax.send(null); 
+
+}
+
+function   roundAmount(n)   {   
+      var   s   =   ""   +   Math.round(n   *   100)   /   100   
+      var   i   =   s.indexOf('.')   
+      if   (i   <   0)   return   s   +   ".00"   
+      var   t   =   s.substring(0,   i   +   1)   +     
+              s.substring(i   +   1,   i   +   3)   
+      if   (i   +   2   ==   s.length)   t   +=   "0"   
+        
+      return   t   
+  }
+
+function help(){  
+   if(document.getElementById("helpid").style.pixelHeight == 0 &&  document.getElementById("helpid").style.display == "none"){      
+       document.getElementById("helpid").style.display ="";
+	     ChS();
+	     document.getElementById("catalog").style.display = "none";
+		 document.getElementById("capunitid").style.display = "none";
+   }else{   
+	     HhS();    	 
+	     
+   }
+}
+
+function ChS(){
+if(helpid.style.pixelHeight<500){helpid.style.pixelHeight+=10;setTimeout("ChS()",0.5);
+} 
+}
+function HhS(){
+if(helpid.style.pixelHeight > 0){helpid.style.pixelHeight-=10;setTimeout("HhS()",0.5);
+}
+if(helpid.style.pixelHeight == 0){
+ document.getElementById("catalog").style.display = ""; 
+ document.getElementById("capunitid").style.display = "";
+ 
+ document.getElementById("helpid").style.display ="none";
+ }
+}
+
+function back(iframe)
+{
+  if(iframe == "disabled"){
+          parent.addnewconcent.style.display = "none";
+          parent.addnewconcentbg.style.display = "none";
+		  parent.proadd();
+  }else{
+  location='{gotourl}'
+  }
+}
+// -->
+</script>
+<BODY onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                 <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="{skin}nowspace.jpg" align="absmiddle">
+        	商品资料</td>
+			 <tr>
+           <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="{skin}line.jpg" ></div></td>
+          </tr>	
+  </table>
+  <center>
+<form action="" method="post" name="form1">
+    <input type=hidden name=action value="{action}"> 
+    <input type=hidden name=id value="{id}">
+	<input type=hidden name=unitname value="">
+	 <input type=hidden name=bs value="0">
+	 <input type=hidden name=picpath value="{picpath}">
+	 <input type=hidden name=ischangeno value=""> 
+	 <input type=hidden name=sysis value="{sysis}"> 
+<table width="98%" border="0" cellspacing="0" cellpadding="0" height="31">
+      <tr>
+        <td class=button_labelleft></td>
+        <td class=button_label><div align="left">
+          <input type=button name=save32 class=button_new value="     帮助" AccessKey=h  onClick="javascript:help()" style="font-size:9pt"  onMouseOver="this.style.backgroundImage='url({skin}new_sel.jpg)'"  onmouseout="this.style.backgroundImage='url({skin}new.jpg)'">
+          <input type=button name=save3 class=button_save value="     保存" AccessKey=s  onClick="javascript:submit_save('{iframe}')" style="font-size:9pt" {dissave} onMouseOver="this.style.backgroundImage='url({skin}save_sel.jpg)'"  onmouseout="this.style.backgroundImage='url({skin}save.jpg)'">
+          <input class=button_delete name=end type=button value="     删除" AccessKey=d  onClick="javascript:submit_del()" style="font-size:9pt" {disdel} {iframe} onMouseOver="this.style.backgroundImage='url({skin}delete_sel.jpg)'"  onmouseout="this.style.backgroundImage='url({skin}delete.jpg)'">
+		    <INPUT class=button_reset name=qqq type=reset value="     撤销" AccessKey=z style="font-size:9pt" onMouseOver="this.style.backgroundImage='url({skin}reset_sel.jpg)'"  onmouseout="this.style.backgroundImage='url({skin}reset.jpg)'">
+          <input type=button name=rst class=button_recovery value="     返回" AccessKey=q style="font-size:9pt" onClick="back('{iframe}')" onMouseOver="this.style.backgroundImage='url({skin}recovery_sel.jpg)'"  onmouseout="this.style.backgroundImage='url({skin}recovery.jpg)'">
+        </div></td>
+        <td class=button_labelright></td>
+      </tr>
+  </table>  
+    <table width="700" class=InputFrameMain cellspacing="0" cellpadding="0" border="0" height="100">
+      <tbody>
+        <tr>
+          <td align="left" colspan="4"><table width="700" cellspacing="0" cellpadding="0" border="0" >
+              <tr >
+                <td align="center" class=inputtitle width="150">资料输入</td>
+                <td align="center" class=inputtitleright >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td align="center" ><font color="#FF0000" ><b>{error}</b></font></td>
+              </tr>
+          </table></td>
+        </tr>
+        <tr>
+          <td colspan="4" height="10"></td>
+        </tr>
+        <tr>
+          <td colspan=2><table width="700" cellspacing="0" cellpadding="0" border="0" >
+          	  <tr class=InputFrameLine>
+                <td width=93 height="30" align=right class=form_label>存货编码：</td>
+                <td height="30" ><input class=input type="text"  name="serial" size="20"  value="{serial}"  {disabled}><span class=form_label>*</span></td>
+                 <td width=78 height="30" align="right" class=form_label>状态：</td>
+                <td width="169" height="30" ><span id=shangpin>
+                  {state}
+              </tr>		
+              <tr class=InputFrameLine>
+                <td width=93 height="30" align=right class=form_label>存货代码：</td>
+                <td width="218" height="30" ><input class=input style="ime-mode:disabled" type="text" name="no" size="20" maxlength="20" value="{no}" onChange="changeno()"  {disabled}>
+                    <span class=form_label>*</span></td>
+                <td width=78 height="30" align="right" class=form_label>类别：</td>
+                <td width="169" height="30" ><span id=shangpin>
+                  <select name=catalog onChange='addvalueptype(form1.catalog.value)' {disabled}>
+                    
+		    {catalog}
+          
+                  </select>
+                </span> <span class=form_label>*</span></td>
+                <td  width="142" rowspan="7" align="center" valign="middle"><div id="showpic"> {pic} </div>
+                    <br />
+                    <br />
+                <input type="button" class="buttonsmall" name="upmorefiles" value="上传图片" onClick="upmorefile()"  {disabled}/></td>
+              </tr>
+              <tr class=InputFrameLine>
+                <td width=93 height="30" align=right class=form_label>名称：</td>
+                <td height="30" ><input class=input type="text" name="name" size="20" maxlength="100" value="{name}"  {disabled}>
+                    <span class=form_label>*</span> </td>
+                <td height="30" align="right" class=form_label>型号：</td>
+                <td height="30" ><input class=input type="text" name="model" size="20" maxlength="100" value="{model}"  {disabled}>                </td>
+              </tr>
+              <tr class=InputFrameLine>
+				<td height="30" align="right" class=form_label>商品品牌：</td>
+				<td  height="30" ><span>				  
+				  <select name="brandid"  {disabled}>
+				  <option value="">-请选择-</option>					
+			        {brandid}	  
+				  </select>
+				</span></td>
+                <td height="30" align="right" class=form_label>销售提成：</td>
+                <td height="30" >
+                <input class=inputright type="text" name="saletichpcent" size="5"  value="{saletichpcent}" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;"  style="ime-mode:disabled" onFocus="this.select()"  maxlength="4" >
+                <span class="form_label">%</span>  </td>
+              </tr>
+              <tr class=InputFrameLine>
+                <td  width=93 height="30" align="right" class=form_label>标准单位：</td>
+                <td width="218" height="30" ><span id=unitid>
+                  <select name=unit onChange='addvalueunit(form1.unit.value)'  {disabled}>                   
+		           {unit}
+                  </select>
+                </span> <span class=form_label>*</span> </td>
+                <td width=78 height="30" align="right" class=form_label>容量：</td>
+                <td width="169" height="30" ><input class=inputright style="ime-mode:disabled" type="text" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" name="capacity" size="10" maxlength="10" value="{capacity}" onFocus="this.select()"  {disabled}>
+                    <span>
+                    <select name=capunitid  {disabled}>
+		                 {capunitid}
+                    </select>
+                    </span> <span class=form_label>*</span> </td>
+              </tr>
+              <tr class=InputFrameLine>
+                <td width=93 height="30" align="right" class=form_label><nobr>库存上限：</nobr></td>
+                <td width="218" height="30" ><input class=inputright type="text" style="ime-mode:disabled" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" name="upperlimit" size="10" maxlength="10" value="{upperlimit}" onFocus="this.select()">
+                    <span class=form_label>*</span> </td>
+                <td width=78 height="30" align="right" class=form_label><nobr>库存下限：</nobr></td>
+                <td width="169" height="30" ><input class=inputright type="text" style="ime-mode:disabled" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" name="lowerlimit" size="10" maxlength="10" value="{lowerlimit}" onFocus="this.select()">
+                    <span class=form_label>*</span> </td>
+              </tr>
+              <tr class=InputFrameLine>
+                <td width=93 height="30" align="right" class=form_label><nobr>价格：</nobr></td>
+                <td width="218" height="30" ><input name="price" type="text" class=inputright id="price" style="ime-mode:disabled" onFocus="this.select()" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" value="{price}" size="10" maxlength="10"></td>
+                <td width=78 height="30" align="right" class=form_label>&nbsp;</td>
+                <td width="169" height="30" >&nbsp;</td>
+              </tr>
+              <tr class=InputFrameLine>
+                <td width=93 height="30" align=right class=form_label>产地：</td>
+                <td height="30" colspan="3" ><input class=input type="text"  name="address" size="60" maxlength="100" value="{address}"  {disabled}></td>
+              </tr>			  
+          </table></td>
+        </tr>
+		<tr><td><table width="700" cellspacing="0" cellpadding="0" border="0" >
+        <tr class=InputFrameLine>
+          <td width=94 height="45" align="right" valign="middle" class=form_label >商品功效：</td>
+          <td width="606" height="45" colspan="3" ><textarea class=inputarea name="efficacy"   wrap="virtual"  rows="4"  {disabled}>{efficacy}</textarea>
+          </td>
+        </tr>
+        <tr class=InputFrameLine>
+          <td width=94 height="45" align="right" valign="middle" class=form_label>使用方法：</td>
+          <td height="45" colspan="3" ><textarea class=inputarea name="useway"   wrap="virtual"  rows="4"  {disabled}>{useway}</textarea>
+          </td>
+        </tr>
+        <tr class=InputFrameLine>
+          <td width=94 height="45" align="right" valign="middle" class=form_label>主要成分：</td>
+          <td height="45" colspan="3" ><textarea class=inputarea name="basis"   wrap="virtual"  rows="4"  {disabled}>{basis}</textarea>
+          </td>
+        </tr>
+        <tr class=InputFrameLine>
+          <td width=94 height="45" align="right" valign="middle" class=form_label>备注：</td>
+          <td height="45" colspan="3" ><textarea class=inputarea name="memo"   wrap="virtual"  rows="4"  {disabled}>{memo}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" class=InputLabelCell height="10"></td>
+        </tr></table></td></tr>
+      </tbody>
+    </table>
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingdel" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在删除数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"> 
+</div>
+
+<div id="helpid" STYLE="left: 1%; WIDTH: 450px; POSITION: absolute; TOP: 86px; HEIGHT: 0; display: none"> 
+ <div  align="left"   STYLE="position:absolute;left: 15px; top:15px;right:15px" >
+  1.操作：基本信息－产品信息；<br><br>
+  保存(Alt+s)：添加新产品信息和修改产品信息；<br><br>
+  删除(Alt+d)：即删除不再使用的产品信息；<br><br>
+  撤销(Alt+z)：撤销回去产品没有修改的状态；<br><br>
+  返回(Alt+q)：返回产品信息列表；<br><br>
+  帮助(Alt+h)：显示帮助信息；<br><br>
+  2.基本信息：<br><br>
+  编号：为了录入快捷和便于查询，您可为产品定义编号，可以是数字，也可以是拼音；<br><br>
+  类别：为了录入快捷和便于查询，您可为产品选择产品类别；<br><br>
+  销售单价：定义销售单价之后，做销售单时，选择了该产品，就会自动带出销售单价；<br><br>
+  库存上限：定义库存上限之后，如果该产品的库存大于库存上限，在仓库管理中的库存上限就会自动显示出该产品；<br><br>
+  库存下限：定义库存下限之后，如果该产品的库存小于库存下限，在仓库管理中的库存下限就会自动显示出该产品；<br><br>
+</div>
+</div>
+{showeditdiv}
+</center>
+</BODY>
+</HTML>

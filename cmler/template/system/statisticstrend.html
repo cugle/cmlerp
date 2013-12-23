@@ -1,0 +1,94 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="{path}js/calendar.js" type=text/javascript></SCRIPT>
+</head>
+
+<body>
+<form action="statisticstrend.php?Action=statistics&type=visiterate" method="post">
+<div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+</div>
+<table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+   <tr class="tdBgColor">
+     <td colspan="2" align="right"><div align="center">客户发展趋势分析&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+    </tr>
+   <tr class="tdBgColor">
+     <td width="45%" align="right">开始年月</td>
+     <td width="55%"><select name="bgyear">
+	    <option value='2010'>2010</option>
+		<option value='2011'>2011</option>
+		<option value='2012'>2012</option>
+		<option value='2013'>2013</option>
+		<option value='2014'>2014</option>
+		<option value='2015'>2015</option>
+		<option value='2016'>2016</option>
+     </select>
+       年 
+       <select name="bgmonth">
+         <option value='01'>01</option>
+         <option value='02'>02</option>
+         <option value='03'>03</option>
+         <option value='04'>04</option>
+         <option value='05'>05</option>
+         <option value='06'>06</option>
+         <option value='07'>07</option>
+         <option value='08'>08</option>
+         <option value='09'>09</option>
+         <option value='10'>10</option>
+         <option value='11'>11</option>
+         <option value='12'>12</option>
+       </select>
+       月</td>
+  </tr>
+    <tr class="tdBgColor">
+     <td width="45%" align="right">结束年月</td>
+     <td width="55%"><select name="endyear">
+       <option value='2010'>2010</option>
+       <option value='2011'>2011</option>
+       <option value='2012'>2012</option>
+       <option value='2013'>2013</option>
+       <option value='2014'>2014</option>
+       <option value='2015'>2015</option>
+       <option value='2016'>2016</option>
+     </select>
+年
+<select name="endmonth">
+         <option value='01'>01</option>
+         <option value='02'>02</option>
+         <option value='03'>03</option>
+         <option value='04'>04</option>
+         <option value='05'>05</option>
+         <option value='06'>06</option>
+         <option value='07'>07</option>
+         <option value='08'>08</option>
+         <option value='09'>09</option>
+         <option value='10'>10</option>
+         <option value='11'>11</option>
+         <option value='12'>12</option>
+</select>
+月</td>
+  </tr>
+<tr class="tdBgColor">
+     <td width="45%" align="right">负责人</td>
+     <td width="55%"><select name='userid'><option value='0' selected>全部</option>{userlist}</select></td>
+  </tr>
+<tr class="tdBgColor">
+     <td width="45%" align="right">地区</td>
+     <td width="55%"><select name='areaid'><option value='0' selected>全部</option>{arealist}</select></td>
+  </tr>
+   <tr >
+     <td  align="right">&nbsp;</td>
+     <td  align="left">
+       <input type="submit" name="Submit" value="统计">&nbsp;
+       <input type="reset" name="reset" value="重置">     </td>
+   </tr>
+</table>
+</form>
+</body>
+</html>

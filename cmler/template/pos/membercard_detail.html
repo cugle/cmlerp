@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>会员信息</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META http-equiv=empiresoft content=no-cache><LINK 
+href="[#path#]css/button_css.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/page_title.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/browse.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/css.css" type=text/css rel=stylesheet>
+ <SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<script type="text/javascript" src="../common/js/jquery-1.2.1.pack.js"></script>
+<SCRIPT language=javascript>
+var requestSubmitted = false;
+
+	function InitAjax()
+   {
+　var ajax=false; 
+　try { 
+　　ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+　} catch (e) { 
+　　try { 
+　　　ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+　　} catch (E) { 
+　　　ajax = false; 
+　　} 
+　} 
+　if (!ajax && typeof XMLHttpRequest!='undefined'){ 
+　　ajax = new XMLHttpRequest(); 
+　} 
+　return ajax;
+}
+
+	function verifypsw(){
+	if(document.getElementById('password').value!=document.getElementById('password1').value){
+	document.getElementById('tips').innerHTML='两次输入密码不一致';
+	}else{
+	document.getElementById('tips').innerHTML='';
+	}
+	}
+function submit_save(){
+	 	 if(form1.password.value!=form1.password1.value){
+	 	  alert("两次输入密码不一致");
+	 	  form1.password.select();
+	 	  return;
+	 }  
+	  if(form1.membercard_no.value==""){
+	 	  alert("请输入会员卡号！");
+	 	  form1.membercard_no.focus();
+	 	  return;
+	  }
+   
+   	  if(form1.cardlevel_id.value=="0"){
+	 	  alert("请选择会员卡组");
+	 	  form1.cardlevel_id.focus();
+	 	  return;
+	  }
+    	   if(form1.customer_id.value==""){
+	 	  alert("请选择会员！");
+	 	  form1.membername.focus();
+	 	  return;
+	  }
+	  
+	 	 if(form1.cardlevel_id.value==""){
+	 	  alert("请选择卡组！");
+	 	  form1.cardlevel_id.focus();
+	 	  return;
+	  }
+	 	 	 if(form1.man.value==""){
+	 	  alert("请选择开卡人！");
+	 	  form1.man.focus();
+	 	  return;
+	  }
+  //  requestSubmitted = true;
+   //sending.style.visibility="visible";
+	// sendingbg.style.visibility="visible";  
+	form1.submit();
+}
+
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+  if(!strItem){return}
+  arrItems = strItem.split("@@@");
+   form1.man.value = arrItems[1] ;    
+}
+
+function getcard(){
+   var arrItems=new Array();
+   var strItem ;
+
+   var szRef = "../getdata/getcustomer.php" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   
+   form1.oldcardid.value = arrItems[0] ;  
+   //form1.no.value = arrItems[1] ;
+   form1.cardlevel_id.value = arrItems[2] ;
+   form1.membername.value = arrItems[3] ;
+   form1.customer_id.value = arrItems[4] ;  
+   form1.score.value = arrItems[5] ;
+   form1.maincost.value = arrItems[6] ;
+   form1.freecost.value = arrItems[7] ;
+   form1.sercost.value = arrItems[8] ;
+   form1.commcost.value = arrItems[9] ;
+}
+
+
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getcustomer.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   if(!strItem){return}
+     arrItems = strItem.split("@@@");
+     form1.customer_id.value    = arrItems[0];     
+     form1.membername.value  = arrItems[1];
+
+}
+
+function submit_del(){
+    if (confirm("是否删除该记录？")) {
+      getNews(form1.id.value);
+    }
+} 
+
+ 
+function changelistno(){
+	form1.ischangelistno.value="1";
+}
+
+ 
+  
+
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.6003" name=GENERATOR></HEAD>
+<BODY leftMargin=2 topMargin=0   width="100%">
+<TABLE height=30 cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD width="100%" height=30 vAlign=center class=pagetitle><strong>&nbsp;&nbsp;<IMG 
+      src="[#path#]img/nowspace.jpg" align=absMiddle>会员卡开卡</strong></TD>
+  <TR>
+    <TD align=left>
+      <DIV style="MARGIN: 0px 0px 0px 12px"><IMG 
+    src="[#path#]img/line.jpg"></DIV></TD></TR></TBODY></TABLE>
+<CENTER>
+<FORM name=form1 action="creatmember.php?action=step2_save" method=post>
+  <input name='action' type="hidden" value="[#action#]">
+  <input name='updid' type='hidden' value='[#updid#]'>
+  <INPUT type=hidden 
+name=picpath >
+  <TABLE class=InputFrameMain cellSpacing=0 cellPadding=0 width=658 border=0>
+  <TBODY>
+  <TR>
+    <TD align=left colSpan=5 height=13>
+      <TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>资料输入</TD>
+          <TD class=inputtitleright align=middle 
+            width=42>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+          <TD align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD colSpan=4 height=10></TD></TR>
+  <TR>
+    <TD class=form_label align=right width=124 height=30>会员卡号：</TD>
+    <TD align=left width=206 height=30><INPUT name=membercard_no type="text" class=input 
+      value="[#membercard_no#]" size="10" maxLength=35  /> 
+    <SPAN class=form_label>*</SPAN><span class="suggestionsBox" id="suggestions" style="display: none;">&nbsp;</span> (请输卡面编码)</TD>
+    <TD class=form_label align=right width=78 height=30>卡内码：</TD>
+    <TD align=left width=250 height=30><INPUT name=code type="text" class=input 
+      value="[#code#]" size="10" maxLength=35 onFocus=this.select() />
+      <SPAN class=form_label>*</SPAN><span class="suggestionsBox" id="suggestions2" style="display: none;">&nbsp;</span>（请在此滴卡）</TD>
+  </TR>
+  <TR>
+    <TD class=form_label align=right height=30>会员卡组：</TD>
+    <TD align=left height=30><SELECT name=cardlevel_id><OPTION value=0 
+        selected>-请选择-</OPTION>[#memcardlevellist#]</SELECT> <SPAN class=form_label>*</SPAN></TD>
+    <TD class=form_label align=right height=30>所属会员：</TD>
+    <TD align=left height=30><INPUT type=hidden name=customer_id value="[#customer_id#]"> <INPUT 
+      class=input_disabled readOnly maxLength=35 size=10 name=membername value="[#customer_name#]"> <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:promem() type=button value=选择顾客 name=save2> 
+      <SPAN class=form_label>*</SPAN></TD></TR>
+  <TR>
+    <TD class=form_label align=right width=124 height=30>开卡日期：</TD>
+    <TD align=left height=30>
+      <INPUT class=INPUT id=startdate maxLength=30 
+            size=20 name=startdate value="[#startdate#]" onFocus="calendar(EventUtil.getEvent().target)"></TD>
+    <TD class=form_label align=right width=78 height=30>有效日期：</TD>
+    <TD align=left height=30>
+
+      <INPUT class=INPUT id=overdate maxLength=30 
+            size=20 name=overdate value="[#overdate#]" onFocus="calendar(EventUtil.getEvent().target)">
+      <INPUT type="hidden" class=inputright value="0" 
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+      size=10 name=score ></TD></TR>
+  <TR>
+    <TD class=form_label align=right height=30>输入密码：</TD>
+    <TD align=left height=30><INPUT type="password"  class=INPUT id=password maxLength=30 
+            size=10 name=password value=""  onKeyUp="verifypsw();"></TD>
+    <TD class=form_label align=right height=30>开卡人：</TD>
+    <TD height=30 align=left><INPUT class=input_disabled readOnly maxLength=35 value="[#man#]"
+      size=10 name=man >
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putsta() type=button value=查找 name=xuan>
+      <SPAN 
+      class=form_label>*</SPAN></TD>
+    </TR>
+  <TR>
+    <TD class=form_label align=right width=124 height=30>重复密码：</TD>
+    <TD align=left height=30><INPUT type="password"  class=INPUT id=password1 maxLength=30 
+            size=10 name=password1 value=""  onKeyUp="verifypsw();" >
+      <span id="tips"> [#tips#] </span></TD>
+    <TD height=30 align=right ><input type="checkbox" name="sendmsg" id="sendmsg"></TD>
+    <TD height=30 align=left><label> 发送密码到手机</label></TD>
+    </TR>
+ <tr>
+    <td colspan="5" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" AccessKey=t  onClick="submit_save()"  {buttondisabled} >
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq2 type=reset value="撤销" AccessKey=z > <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq22 type=button value="上一步" AccessKey=z onClick="location.href='creatmember.php';">
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq type=button value="跳过" AccessKey=z onClick="location.href='creatmember.php?action=step3';"></td>
+  </tr></TBODY></TABLE>
+</FORM>
+
+
+
+</CENTER></BODY></HTML>

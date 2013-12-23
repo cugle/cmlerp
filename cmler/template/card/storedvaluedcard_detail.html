@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>会员信息</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META http-equiv=empiresoft content=no-cache><LINK 
+href="[#path#]css/button_css.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/page_title.css" type=text/css rel=stylesheet><LINK 
+href="[#path#]css/browse.css" type=text/css rel=stylesheet> 
+ 
+<script type="text/javascript" src="../common/js/jquery-1.2.1.pack.js"></script>
+<STYLE type=text/css>.STYLE2 {
+	FONT-SIZE: 12px
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+ 
+function readcarddata(inputString){
+$.post("../ajax/readdata.php?action=chargeczk", {value: ""+inputString+"",table:"",column: ""}, function(data){
+			
+			if(data.length >0) {	
+			
+				var data=data.split('@@@');					
+					form1.storedvaluedcard_id.value=data[0];				
+					form1.value.value=data[2];
+					form1.customer_id.value=data[3];
+					form1.customer_name.value=data[4];
+					form1.marketingcard_name.value=data[5];	
+					 
+				}
+			 });
+}
+function getcard(marketingcardtype_id){
+    var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+
+   var szRef = "../getdata/getstoredvaluedcard.html?marketingcardtype_id="+marketingcardtype_id;
+  
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.marketingcard_id.value    = arrItems[0];     
+     form1.marketingcard_name.value  = arrItems[1];
+	 form1.timelimit.value  = arrItems[3];
+	 form1.totaltimes.value  = arrItems[2];
+	 form1.price.value  = arrItems[4];
+	 
+	  form1.value1.value  = arrItems[5];
+	  
+	// if(form1.action.value=='add'){
+	// tourl('?action=addcard&marketingcard_id='+arrItems[0]+'&storedvaluedcard_no='+form1.storedvaluedcard_no.value);
+	// }else{
+	//tourl('?action=editcard&marketingcard_id='+arrItems[0]+'&storedvaluedcard_no='+form1.storedvaluedcard_no.value+'&updid='+form1.updid.value); 
+	//}
+	}
+
+function submit_save(){
+	 
+	 if(form1.value.value==""){
+	 	  alert("请填写储值卡余额！");
+	 	  form1.value.focus();
+	 	  return;
+	  } 
+	 
+	 
+ 
+	form1.submit();
+}
+
+ 
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+}
+
+
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getcustomer.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.customer_id.value    = arrItems[0];     
+     form1.customer_name.value  = arrItems[1];
+
+}
+
+ 
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.6003" name=GENERATOR></HEAD>
+<BODY leftMargin=2 topMargin=0   width="100%">
+<TABLE height=30 cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=pagetitle vAlign=center width="100%" height=30>&nbsp;&nbsp;<IMG 
+      src="[#path#]img/nowspace.jpg" align=absMiddle>储值卡充值：</TD>
+  <TR>
+    <TD align=left>
+      <DIV style="MARGIN: 0px 0px 0px 12px"><IMG 
+    src="[#path#]img/line.jpg"></DIV></TD></TR></TBODY></TABLE>
+<CENTER>
+<FORM name=form1 action="storedvaluedcard.php" method=post>
+  <input name='action' type="hidden" value="[#action#]">
+  <input name='updid' type='hidden' value='[#updid#]'>
+  <TABLE class=InputFrameMain cellSpacing=0 cellPadding=0 width=649 border=0>
+    <TBODY>
+  <TR>
+    <TD align=left colSpan=5 height=13>
+      <TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>资料输入</TD>
+          <TD class=inputtitleright align=middle 
+            width=42>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+          <TD align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD colSpan=4 height=10></TD></TR>
+  <TR>
+    <TD class=form_label align=right width=89 height=30>储值卡号：</TD>
+    <TD align=left width=227 height=30><INPUT name=storedvaluedcard_no type="text" class=inputright_disabled 
+      value="[#storedvaluedcard_no#]" size="12" maxLength=35  onKeyPress="if (event.keyCode == 10 ||event.keyCode == 13 ) readcarddata(this.value);"/> 
+      <SPAN class=form_label>*</SPAN><span class="suggestionsBox" id="suggestions" style="display: none;">&nbsp;</span>
+      <INPUT name=storedvaluedcard_id type="hidden" class=inputright_disabled 
+      value="[#storedvaluedcard_id#]" size="12" maxLength=35 onKeyUp="changeno(this.value)" readonly/></TD>
+    <TD class=form_label align=right height=30>储值卡名：</TD>
+    <TD height=30 align=left><input class=input_disabled type="text" name="marketingcard_name" size="15" maxlength="20" value="[#marketingcard_name#]" readonly>
+      <span class=form_label>
+      <input class=input type="hidden" name="marketingcard_id" size="20" maxlength="20" value="[#marketingcard_id#]">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:getcard('1') type=button value=查找 name=save5 [#findcustomer#]>
+*</span></TD>
+    </TR>
+  <TR>
+    <TD class=form_label align=right height=30>价格：</TD>
+    <TD height=30 align=left><SPAN id=value><span class="STYLE2">
+      <input class=input_disabled type="text" name="price" size="10"  value="[#price#]" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>
+      </span></SPAN></TD>
+    <TD class=form_label align=right height=30>顾客：</TD>
+    <TD align=left height=30><INPUT type=hidden name=customer_id value="[#customer_id#]"> <INPUT 
+      class=input_disabled readOnly maxLength=35 size=10 name=customer_name value="[#customer_name#]">
+      <span class="InputFrameLine">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:promem() type="button" value=查找 name=xuan2>
+      </span></TD></TR>
+  <TR>
+    <td height="30" align=right class=form_label>余额：</td>
+    <td height="30" ><input class=input_disabled type="text" name="value" size="15" maxlength="20" value="[#value#]" ></td>
+    <td height="30" align=right class=form_label>购买时间：</td>
+    <td height="30" ><input class=inputright type="text" name="buydate" size="10"  value="[#buydate#]" onFocus="calendar(EventUtil.getEvent().target)"></td>
+  </TR>
+  <TR>
+    <td height="30" align=right class=form_label>使用状态：</td>
+    <td height="30" ><SELECT name=status>
+      
+	      
+	      
+
+              [#statusnamelist#]
+            
+	      
+	      
+    </SELECT>
+      *</td>
+    <td height="30" align=right class=form_label>时限：</td>
+    <td height="30" ><span class="STYLE2">
+      <input class=input_disabled type="text" name="timelimit" size="10"  value="[#timelimit#]" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>
+个月*
+      <input class=input  type="hidden" name="coderule" size="20" maxlength="20" value="0" >
+      <input class=inputright type="hidden" name="pricepertime" size="10"  value="0" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);">
+      <input class=input_disabled type="hidden" name="totaltimes" size="15"  value="1" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>
+      <input class=input_disabled type="hidden" name="activedate" size="10"  value="[#activedate#]" onFocus="calendar(EventUtil.getEvent().target)" readonly>
+      <input class=input_disabled type="hidden" name="number" size="10"  value="1" readonly>
+    </span></td>
+    </TR>
+    
+	  <tr>
+	    <td height="30" align=right class=form_label>&nbsp;</td>
+	    <td height="30" >&nbsp;</td>
+		   <td height="30" align=right class=form_label>结束时间：</td>
+          <td height="30" ><input class=input_disabled type="text" name="overdate" size="10"  value="[#overdate#]" onFocus="calendar(EventUtil.getEvent().target)"  >
+          <span class="form_label">*</span>          </td>
+	  </tr>	       
+  <TR>
+    <TD height=15 align="right" class=form_label> 备注：</TD>
+    <TD height=15 align="left" class=form_label>&nbsp;</TD>
+    <TD height=15 align="left" class=form_label>&nbsp;</TD>
+    <TD height=15 align="left" class=form_label>&nbsp;</TD>
+  </TR>
+  <TR>
+    <TD height=15 colspan="4" align=left class=form_label><textarea class=inputarea name="memo"   wrap="virtual"  rows="4">[#memo#]</textarea></TD>
+  </TR>
+	  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><span style="MARGIN: 0px">
+      <INPUT class=buttonsmall   type=button value="保存"  accessKey=s onclick=submit_save() name=save>
+    </span> <span style="MARGIN: 0px">
+     
+    </span><span style="MARGIN: 0px">
+    <INPUT class=buttonsmall   accessKey=q onClick="window.close()"   type=button value="关闭" name=rst>
+    </span></td>
+  </tr>
+   </TBODY></TABLE>
+</FORM>
+<SCRIPT language=javascript>
+
+form1.storedvaluedcard_no.select();
+form1.storedvaluedcard_no.focus();
+</SCRIPT>
+	 
+
+
+</CENTER></BODY></HTML>

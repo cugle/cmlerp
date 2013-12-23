@@ -1,0 +1,338 @@
+<HTML><HEAD><TITLE>销售分析</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<script>
+function viewbill(sellid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../analysis/viewbill.php?sellid="+sellid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+</script>
+
+<style type="text/css">
+.NOPRINT {
+ font-family: "宋体";
+ font-size: 9pt;
+}
+
+-->
+</style>
+<style media=print>
+.Noprint{
+display:none;
+}
+</style>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+}
+.page_titlebar_bg {
+	font-size: 16px;
+	font-weight: bold;
+}
+-->
+</style></HEAD>
+<BODY>
+<center>
+
+
+  <form action="" method="post" name="form1">
+ 
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+    
+  </table>
+  <span class="page_titlebar_bg"><span class="page_titlebar_bg">[#currentorganname#]日报表</span></span>
+  <table width="250" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td bgcolor="#666666" height=1></td>
+      </tr>
+    <tr>
+      <td height=2></td>
+      </tr>
+    <tr>
+      <td bgcolor="#666666" height=1></td>
+      </tr>
+    <tr>
+      <td align="center" height=30>时间：[#enddate#]<a href="?action=monthfinish&bgdate=[#bgdate#]&enddate=[#lastdate#]">上一天 </a><a href="?action=monthfinish&bgdate=[#bgdate#]&enddate=[#nextdate#]">下一天</a></td>
+      </tr>
+      <tr>
+      <td align="center" height=10></td>
+      </tr>
+</table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="12">
+    <tr> 
+      <td  class="table_bgcolor" align="left"></td>
+      <!--<td align=right style="font-size:12px"><a href="#" onClick="doexport()" ><b>[导出]</b></a></td>-->
+    </tr>
+  </table>
+ 
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="77" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="white_word">编号</span></td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">试做散客&nbsp;</td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="table_browse_titlebar_font">会员</span></td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">应收</td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="table_browse_titlebar_font"><span class="white_word">现金</span></span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font"><span class="white_word">刷卡</span></span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">其他付款方式</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">美容师</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">手工费</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">消费项次</td>
+                 <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">开卡</td>
+                 <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">购买产品</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">消费卡项</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">单项服务</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">券类</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">预收产品款</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">预收</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">定金</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">其他款项&nbsp;</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">欠款</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">备注</span></td>
+        </tr>
+    <!-- BEGIN todayitems -->
+      <tr >
+        <td height="20" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">&nbsp;<span style="white-space:nowrap"><a href="#" onClick="viewbill([#sell_id#])">[#sell_no#]</a></span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#notmember#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#ismember#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#payable1#]&nbsp;</td>
+
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#xianjinvalue#]</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span style="white-space:nowrap">[#yinkavalue#]</span><span style="white-space:nowrap">&nbsp;</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#otherpay#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!-- BEGIN beautylisttoday -->[#beautylist#]&nbsp;<!-- END beautylisttoday --></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#beautymanual#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#customerconsumeitems#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#buycard#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#customerproduceamount#]&nbsp; </td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#cardconsume#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#buyservicestoday#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left">[#coupon#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#yufup#]</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#yufu#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#dingjin#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#kuanxiang#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#own#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left"><span style="white-space:nowrap">&nbsp;</span></td>
+        </tr>
+ <!-- END todayitems --> 
+      <tr>
+        <td height="28"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">&nbsp;小计：</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="onlyShow">[#newnumbertoday#]</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="onlyShow">[#membernumbetodayr#]</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#xianjintoday#]元</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#yinkatoday#]元</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#beautytotaltime#]项次</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#todaybeautymanual#]元</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautyconsumenumbertoday#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="tdcolor">[#totalcustomerproduceamount#]&nbsp;</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalyufup#]</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalyufu#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totaldingjin#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#owntoday#]</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="28"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">&nbsp;本月累计：</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="onlyShow">[#totalnewnumber#]</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="onlyShow">[#totalmembernumber#]</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalxianjin#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalyinka#] &nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totolconsumenumber#]项次</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautymanual#]元</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totolconsumenumber#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totaladdupconsultantproduce#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totaladdupyufup#]</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totaladdupyufu#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totaladdupdingjin#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalown#]</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        </tr>
+    </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr>
+      <td align="left" class="table_bgcolor"><span class="onlyShow">&nbsp;本日人数 ： [#totalnumbertoday#]人</span></td>
+      <td align="left" class="table_bgcolor"><span class="onlyShow"> 新客：本日到店[#newnumbertoday#]人 付订：[#newyufu#]人 成交[#todaydeal#]；  本月累计到店:：[#totalnewnumber#]人  付订：[#totalnewyufu#]人 成交：[#totaldeal#]；</span></td>
+      <td align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+    <tr> 
+      <td width="12%" align="left" class="table_bgcolor"><span class="onlyShow">&nbsp;本月累计人数 ： [#totalnumber#]</span></td>
+      <td width="59%" align="left" class="table_bgcolor"><span class="onlyShow"> 会员：本日到店[#membernumbetodayr#]人 付订：[#memyufu#]人；本月累计到店：[#totalmembernumber#]人  付订：[#totalmemyufu#]人</span></td>
+      <td width="29%" align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+  </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr>
+      <td align="left" class="table_bgcolor"><span class="onlyShow">&nbsp;</span></td>
+      <td align="left" class="table_bgcolor">&nbsp;</td>
+      <td align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="12%" align="left" class="table_bgcolor">美容师业绩：</td>
+      <td width="44%" align="left" class="table_bgcolor">&nbsp;</td>
+      <td width="44%" align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+  </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="77" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="white_word">编号</span></td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="table_browse_titlebar_font">姓名</span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">当日项次</span></td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">累计项次</td>
+        <td width="120" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="table_browse_titlebar_font"><span class="white_word">销售</span></span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font"><span class="white_word">累计销售</span></span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">疗程</td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">累计疗程</span></td>
+        <!-- BEGIN membercarlist --> <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="120" class="table_browse_titlebar_bg" align="center">[#membercarname#]</td>
+        <!-- END membercarlist -->
+        
+        </tr>
+      <!-- BEGIN beauty -->
+      <tr >
+        <td height="20" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">&nbsp;<span style="white-space:nowrap">[#beautylpf_no#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#beauty_name#]</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#beautyconsumenumbertoday#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">[#consumenumber#] &nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#beautyproducetoday#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#beautyproduce#]&nbsp;<span style="white-space:nowrap"><!--[#beautymanual#]--></span><span style="white-space:nowrap">&nbsp;</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--[#notmember#]-->&nbsp;[#beautyitemtoday#]</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#beautyitem#]&nbsp;</td>
+       <!-- BEGIN beautymemberlist --> <td style="white-space:nowrap;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">
+         <!--[#beautymember#]-->[#beautymembernumber#] &nbsp;            </td><!-- END beautymemberlist -->
+        
+        </tr>
+      <!-- END beauty -->
+      <tr>
+        <td height="28"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">小计：</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautyconsumenumbertoday#]</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totolconsumenumber#] &nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautyproducetoday#]</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautyproduce#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautyitemtoday#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalbeautyitem#]&nbsp;</td>
+         <!-- BEGIN totalbeautymemberlist -->
+         <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--[#totalbeautymember#]-->[#totalbeautymembernumber#]&nbsp;</td>
+         <!-- END totalbeautymemberlist -->
+        
+        </tr>
+    </table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr>
+      <td align="left" class="table_bgcolor"><span class="onlyShow">&nbsp;</span></td>
+      <td align="left" class="table_bgcolor">&nbsp;</td>
+      <td align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="12%" align="left" class="table_bgcolor">顾问业绩：</td>
+      <td width="44%" align="left" class="table_bgcolor">&nbsp;</td>
+      <td width="44%" align="center" class="table_bgcolor" >&nbsp;</td>
+    </tr>
+  </table>
+  
+   
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="106" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="white_word">编号</span></td>
+        <td width="103" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="table_browse_titlebar_font">姓名</span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="182" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">当日业绩</span></td>
+        <td width="135" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="table_browse_titlebar_font"><span class="white_word">累计业绩</span></span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="142" class="table_browse_titlebar_bg" align="center">销售</td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="133" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font"><span class="white_word">累计销售</span></span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="146" class="table_browse_titlebar_bg" align="center">疗程</td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="118" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">累计疗程</span></td>
+        <!-- BEGIN membercarlist --> <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="168" class="table_browse_titlebar_bg" align="center">[#membercarname#]</td>
+        <!-- END membercarlist -->
+        
+        </tr>
+ <!-- BEGIN consultant --> 
+      <tr >
+        <td height="20" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">&nbsp;<span style="white-space:nowrap">[#consultantlpf_no#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#consultant_name#]</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#consultantperformancetoday#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#consultantperformance#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#consultantproducetoday#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span style="white-space:nowrap">[#consultantproduce#]&nbsp;</span><span style="white-space:nowrap">&nbsp;</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#consultantitemtoday#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#consultantitem#]&nbsp;</td>
+       <!-- BEGIN consultantmemberlist --> <td style="white-space:nowrap;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">
+         <!--[#consultantmember#]--> [#consultantmembernumber#]&nbsp;            </td><!-- END consultantmemberlist -->
+        
+        </tr>
+ <!-- END consultant -->  
+      <tr>
+        <td height="28"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">小计：</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#consultantperformancetodaytotal#]</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totolconsultant#]</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalcproducet#]</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totaladdupconsultantproduce#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalconsultantitemtoday#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalconsultantitem#] </td>
+          <!-- BEGIN totalconsultantmemberlist -->
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--[#totalconsultantmember#]-->[#totalconsultantmembernumber#]&nbsp;</td>
+        <!-- END totalconsultantmemberlist -->
+        
+        </tr>
+    </table><br>
+<br>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="106" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="onlyShow">项目</span></td>
+        <td width="103" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="onlyShow">今日金额</span></td>
+        <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="182" class="table_browse_titlebar_bg" align="center">本月累计金额</td>
+        <td width="135" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr >
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">现金</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#xianjintoday#] &nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#totalxianjin#]</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="28" align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="onlyShow">刷卡</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#yinkatoday#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalyinka#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="28" align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><span class="onlyShow">总计</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totalrealpay#]</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#totojine#]</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+    </table>
+  </form>
+  
+
+</center>
+</BODY>
+</HTML>

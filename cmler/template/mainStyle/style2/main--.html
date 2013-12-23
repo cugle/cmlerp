@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html style="overflow-x:hidden;overflow-y:hidden">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{title}</title>
+<link href="{path}css.css" rel="stylesheet" type="text/css">
+<link href="css.css" rel="stylesheet" type="text/css">
+{ajaxstr}
+<script language="javascript" src="{path}js.js"></script>
+</head>
+<body onLoad="$m = new MenuClass(); $m.init('{initurl}',{leftWidth},{currentPageId});" onresize="$m.resizeinwin();" onselectstart="return false;">
+
+<!-- 头部菜单栏 -->
+<div id="head">
+  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><table border="0" cellpadding="0" cellspacing="0" id="menuitem">
+        <tr>
+<!-- BEGIN menu -->
+          <td width="3"></td>
+          <td id="{ruleid}" title="{url}">&nbsp;{img}{rulename}&nbsp;</td>
+<!-- END menu -->
+        </tr>
+      </table>
+      </td>
+    <td width="250" align="right">&nbsp;<img src="{path}img/close.gif" onClick="location.href='?logout';"></td>
+    </tr>
+  </table>
+</div>
+
+<!-- 控制柄 -->
+<div id="hand-obj">
+	<div id="hand-in" onClick="$m.handDown();"></div>
+</div>
+
+<!-- 左边栏 -->
+<div class="leftMain" id="leftMain">
+	<div class="leftButton" id="leftButton">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="20" valign="bottom">
+<!-- BEGIN leftButton -->
+	<span onClick='$m.openLeft(event);' ruleid='left{ruleid}' ruleurl='{ruleurl}'>
+	{leftImg}{rulename}
+	</span>
+<!-- END leftButton -->
+	</td>
+  </tr>
+</table>
+	</div>
+	<div id="leftItems" class="leftItems"></div>
+</div>
+
+<!-- 右边栏 -->
+<div id="rightMain">
+	<div id="rightButton">
+		<div id="left">
+			<img src="{path}img/back.gif" align="absmiddle" onClick="history.back()">
+			<img src="{path}img/forward.gif" align="absmiddle" onClick="history.forward()">	|
+<!-- BEGIN rightButton -->
+			<span onclick="$m.openRight(event);" ruleid='right{ruleid}' ruleurl='{ruleurl}'>
+			{rightImg}{rulename}
+			</span>
+<!-- END rightButton -->
+		</div>
+		<div id="right"></div>
+	</div>
+	<div id="rightTitle">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="25" valign="bottom" id="rightWins">
+		<div class='subWinSelect' ruleurl="{initurl}" ruleid='main' onclick="$m.openRight(event);">初始页</div>
+	</td>
+    <td width="100" align="right">
+		<img src="{path}img/page-config.gif" align="absmiddle" alt="当前页配置" id="openConfigObj" openid='{currentPageId}' onclick="openConfig(this);">
+		<img src="{path}img/refresh.gif" align="absmiddle" alt="刷新当前页" onclick="$m.currentWin.src = $m.currentWin.src;">
+		<img src="{path}img/right-close.gif" align="absmiddle" alt="关闭当前页" onclick="$m.rightClose();">&nbsp;
+	</td>
+  </tr>
+</table>
+	</div>
+	<div id="rightCenter">
+		<iframe frameborder="0" name="inwin"></iframe>
+	</div>
+</div>
+
+<!-- 底部状态栏 -->
+<div id="foot">
+	<div id="left"></div>
+<form action='relogin.php' method='post' onSubmit="return checklogin();">
+	<div id="right">您好:{username}&nbsp;
+<span style="display:{dispgo}">
+跳转至
+<select name="subname" id="subname">
+<option value=''>请选择</option>
+<!-- BEGIN subUser -->
+  <{optname} {attrib}='{subusername}'>{subusername}</{optname}>
+<!-- END subUser -->
+</select>
+<input name="msg" type="text" value="test" size="15">
+<input type="submit" value="GO">&nbsp;
+</span>
+	</div>
+</form>
+<script language="javascript">
+function checklogin(){
+	if(document.forms[0].subname.value == ''){
+		alert('请需要跳转的用户');
+		return false;
+	}
+	var msg = document.forms[0].msg;
+	if(msg.value==''){
+		alert('请输入登录理由');
+		msg.focus();
+		return false;
+	}
+	return true;
+}
+</script>
+</div>
+
+</body>
+</html>

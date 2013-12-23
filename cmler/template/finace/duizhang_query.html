@@ -1,0 +1,155 @@
+<HTML>
+<HEAD>
+<TITLE>往来对帐单</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=UFT-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" type=text/css rel=stylesheet>
+<link rel="stylesheet" href="[#path#]css/table_css.css" type="text/css">
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT> 
+</HEAD>
+<script language=javascript>
+<!-- 
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getobject.php?template=getobject&&id="+form1.object_type.value;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.object_id.value    = arrItems[0];     
+     form1.object_name.value  = arrItems[1];
+	  
+} 
+function selcus(){
+   var arrItems=new Array();
+   var strItem ;
+
+   if(form1.clienttype.value==1){
+      var szRef = "../getdata/getallnomember.html";
+   }else{
+      var szRef = "../getdata/getsupp.html";
+   }
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.cusid.value       = arrItems[0];   
+   form1.cusname.value     = arrItems[2]; 
+
+}
+
+function selectquery(){
+
+  if(form1.object_id.value=="" || form1.object_name.value==""){
+     alert("请选择往来单位");
+     return;
+  }
+  sending.style.display ="";
+sendingbg.style.display ="";
+  form1.submit();
+}
+
+
+// -->
+</script>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" height="50">
+    <tr> 
+      <td colspan="2" >&nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">往来对帐单</td>
+    </tr>
+	<tr>
+	 <td height="10" align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+	</tr>
+</table>
+<center>
+   <form action="currentaccount.php" method="post" name="form1">
+
+  <table width="700" class=InputFrameMain cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+     <tr>
+          <td align="left" colspan="5">
+          <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+          <td align="center" class=inputtitle width="150">往来对帐单</td>
+          <td align="center" class=inputtitleright >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td align="center" ><font color="#FF0000" ><b>{error}</b></font></td>
+          </tr>
+          </table>          </td>
+        </tr>
+       <tr>
+          <td width="39" height="23"  align="left" class = titlefont >&nbsp;</td>
+          <td height="13" colspan="3"  align="left" class = titlefont >按供应商/顾客</td>
+          <td width="466" align="left"><input name='action' type="hidden" value="show"></td>
+        </tr>
+        <tr>
+          <td colspan="5" height="5" align="left" valign="top"><img src="[#path#]img/shortline.jpg" ></td>
+        </tr>
+        <tr>
+          <td height="19" colspan="2" align="right"  class="form_label">单位类型：</td>
+           <td width="38" height="19" align="right"  class="form_label"><select name="object_type">
+             
+
+            [#objecttypelist#]
+			
+          </select></td>
+           <td width="46" align="right"  class="form_label">名称：</td>
+           <td width="466"><INPUT type=hidden name=object_id  value="[#object_id#]">
+             <input class="input_disabled" readonly type="text" name="object_name" size="20" maxlength="20" value="[#object_name#]" onKeyPress="keypresssupp()">
+             <input  type=button name=save2 class=buttonsmall value="选择"  onClick="javascript:promem()" style="font-size:9pt" >
+           <span class="form_label">*</span></td>
+     </tr>	
+     <tr>
+          <td width="39" height="23"  align="left" class = titlefont >&nbsp;</td>
+          <td height="13" colspan="3"  align="left" class = titlefont >按显示类型</td>
+          <td width="466" align="left">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="5" height="5" align="left" valign="top"><img src="[#path#]img/shortline.jpg" ></td>
+        </tr>
+        <tr>
+          <td height="19" colspan="4" align="right"  class="form_label">显示反冲单据：</td>
+           <td width="466"> 
+           <input type="checkbox" name="isshowkickback" value="1" checked>          </td>
+     </tr>	     		
+		<tr>
+		  <td height="23"  align="right"  class = titlefont>&nbsp;</td>
+		  <td width="111" align="left"  class = titlefont>按时间</td>
+		  <td height="13" colspan="2" align="right">&nbsp;</td>
+		  <td align="left">&nbsp;</td>
+	    </tr>
+		<tr>
+		  <td height="5" colspan="5" valign="top"><img src="[#path#]img/shortline.jpg" ></td>
+	    </tr>
+		<tr>
+		  <td height="19" colspan="4" align="right"  class="form_label">开始日期：</td>
+		   
+              <td width="466"><input class=input_disabled  name=bgdate size="20" value="[#bgdate#]"  onFocus="calendar(EventUtil.getEvent().target)"> 
+           </td>
+	    </tr>
+		<tr>
+          <td height="19" colspan="4" align="right" class="form_label">结束日期：</td>
+          <td align="left"><input class=input_disabled  name=enddate size="20" value="[#enddate#]"  onFocus="calendar(EventUtil.getEvent().target)"></td>
+        </tr>
+		<tr>
+		  <td  height="13" colspan="5" >&nbsp;</td>
+	    <tr>
+          <td  height="20" colspan="5" class=bottombotton><div align="center" >
+            <input type="button" name=save onClick="selectquery()"   class=buttonsmall style="font-size:9pt" value="查询">
+
+          </div></td>
+    </table> 
+  </form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在处理数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"> 
+</div>
+</center>
+</BODY>
+</HTML>

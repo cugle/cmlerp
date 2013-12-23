@@ -1,0 +1,40 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>工作组管理</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div align="right">{add}</div>
+ <table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+   <tr class="tabTh">
+     <td>工作组</td>
+	 <td>所属角色</td>
+     <td>组管理员</td>
+     <td align="center" width="50">修改</td>
+     <td align="center" width="50">删除</td>
+   </tr>
+<!-- BEGIN row -->
+   <tr class="tdBgColor">
+     <td>{groupname}</td>
+	 <td>
+	<!-- BEGIN role -->
+	 {rolename}<br>
+	<!-- END role -->
+	 </td>
+     <td>
+    <!-- BEGIN user -->
+     {username}<br>
+    <!-- END user --> 
+     </td>
+     <td align="center" width="50">{upd}</td>
+     <td align="center" width="50">{del}</td>
+   </tr>
+<!-- END row -->
+ </table>
+</body>
+</html>

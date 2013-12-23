@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>更改操作机构</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<link href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+
+</HEAD>
+<script type="text/javascript" src="[#path#]js/jquery-1.2.1.pack.js"></script>
+<script language=javascript>
+<!-- 
+function submit_save() {
+     if(form1.organid.value==""){
+       alert("请选择机构");
+       return;
+     }
+	 sending.style.display ="";
+	 sendingbg.style.display ="";
+	 form1.submit();
+}
+
+	function lookup(inputString) {
+
+			$.post("ajax.php", {queryString: ""+inputString+""}, function(data){
+				if(data.length >0) {
+			     $('#span_organid').html('<select name="organid" id="organid">'+data+'</select>');
+				// document.getElementById("organid").innerHTML='<select name="organid" id="organid">'+data+'</select>';	
+				}
+			});
+
+	} // lookup
+
+
+// -->
+</script>
+
+<BODY>
+
+<center>
+  <form action="" method="post" name="form1">
+
+  <table width="592" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+   <tr align="left" class="tabTh">
+  <td width="580"><span style="float:left">更改操作机构</span><input name='action' type="hidden" value="upd"></td>
+   </tr>
+
+   <tr class="tdBgColor">
+          <td align="center" class="span_label"><p><span class="form_label">机构类型：</span>
+              <select name="organtypeid" onChange="lookup(this.value);">
+                  <option  value='1'>总部</option>
+                  <option selected value='4'>直营店</option>
+                  </select>
+&nbsp;&nbsp;&nbsp;机构：<span id="span_organid" >
+          <select name="organid" id="organid"> 
+		  <option selected value=''>请选择机构</option>
+		 <!-- BEGIN agencylist -->
+            <option value='[#agency_id#]'>[#agency_easyname#]</option>
+		 <!-- END agencylist -->	
+          </select>
+          </span> 
+
+   	    </span> <span align="center" >&nbsp;</span><span align="center" >
+        <input type=button name=save class=buttonsmall value="更   改" style="font-size:9pt" onClick="javascript:submit_save()">
+        </span></p></td>
+      </tr>
+   <tr class="tdBgColor">
+     <td align="right" class="span_label">            <p><span align="center" >&nbsp;</span></p></td>
+   </tr>
+</table>
+  </form>
+ <div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在处理数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"> 
+</div>
+</center>
+</BODY>
+</HTML>

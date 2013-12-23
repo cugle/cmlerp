@@ -1,0 +1,603 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/editlib.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<style type="text/css">
+<!--
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}	
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	var url = "?action=del&consumables_id="+id;
+	if(qgtype == "delete")
+	{
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{alert(url);
+			tourl(url);
+		}
+	}
+	else if(qgtype=="Move")
+	{v=document.getElementById("Sale_ID").value;
+	 url="Acion=Move&id="+id+"Sale_id="+v;
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else
+	{
+		tourl(url);
+	}
+}
+function tourl(url)
+{
+	window.location.href=url;
+}
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#F3F3F3'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function changetich(o){
+comsavet
+document.getElementById("commission").value = document.getElementById("price").value*o.value/100;
+
+}
+function changetich(o){
+document.getElementById("commission").value = document.getElementById("price").value*o.value/100;
+
+}
+function changetichu(o){
+document.getElementById("ucommission").value = document.getElementById("price").value*o.value/100;
+
+}
+function changep(o){
+document.getElementById("compcent").value = 100*o.value/document.getElementById("price").value;
+
+}
+function changeup(o){
+document.getElementById("ucompcent").value = 100*o.value/document.getElementById("price").value;
+}
+function changepc(o){
+document.getElementById("commission").value = document.getElementById("compcent").value*o.value/100;
+document.getElementById("ucommission").value = document.getElementById("ucompcent").value*o.value/100;
+}
+  function search_customer(){ 
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getservices.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.cservices_id.value = arrItems[0] ;  
+   form1.cservices_no.value = arrItems[1] ;  
+   form1.cservices_name.value = arrItems[2] ; 
+   //form1.ccode.value = arrItems[3] ;  
+   form1.cprice.value = arrItems[4] ;  
+  // form1.cstandardunit.value = arrItems[5] ;    
+  
+  
+
+  }
+  
+function input_focus(){
+var gg = 1;
+if (gg == 1){
+form1.no.focus();
+ }
+}
+
+var requestSubmitted = false;
+
+function submit_save(){
+
+	 if(form1.feelingcard_no.value==""){
+	 	  alert("请填卡编号");
+	 	  form1.feelingcard_no.focus();
+	 	  return;
+	 }
+	 	 if(form1.marketingcard_id.value==""){
+	 	  alert("请选择卡项");
+	 	  form1.marketingcard_id.focus();
+	 	  return;
+	 }
+	 	 	 if(form1.customer_id.value==""){
+	 	  alert("请选择持卡人");
+	 	  form1.customer_name.focus();
+	 	  return;
+	 }
+	 	 	
+	 
+	 	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+   form1.submit();
+}
+
+
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getcustomer.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.customer_id.value    = arrItems[0];     
+     form1.customer_name.value  = arrItems[1];
+	 form1.handphone.value  = arrItems[2];
+}
+function getcard(marketingcardtype_id){
+    var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+
+   var szRef = "../getdata/getfeelingcard.html?marketingcardtype_id="+marketingcardtype_id;
+  
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.marketingcard_id.value    = arrItems[0];     
+     form1.marketingcard_name.value  = arrItems[1];
+	 form1.timelimit.value  = arrItems[3];
+	 form1.totaltimes.value  = arrItems[2];
+	 form1.price.value  = arrItems[4];
+	 
+	// if(form1.action.value=='add'){
+	// tourl('?action=addcard&marketingcard_id='+arrItems[0]+'&feelingcard_no='+form1.feelingcard_no.value);
+	// }else{
+	//tourl('?action=editcard&marketingcard_id='+arrItems[0]+'&feelingcard_no='+form1.feelingcard_no.value+'&updid='+form1.updid.value); 
+	//}
+	}
+function submit_comsave(){
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("The_ID[]");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+
+				idarray[m] = cv[i].value;
+				if(form1.con_act.value=='add'){
+				if(form1.cservices_id.value==cv[i].value)
+				{
+				alert('已添加该商品1');
+				return
+				}
+
+				}
+				else if(form1.con_act.value=='upd'&&form1.cupdid.value!=form1.cservices_id.value){
+				if(form1.cservices_id.value==cv[i].value)
+				{
+				alert('已添加该商品2');
+				return
+				}
+				}
+				m++;
+				
+		}
+	}
+	 if(form1.cservices_name.value==""){
+	 	  alert("请填服务名称");
+	 	  form1.cservices_name.focus();
+	 	  return;
+	 }
+
+	  if(form1.cservices_no.value==""){
+	 	  alert("请填写服务代码");
+	 	  form1.cservices_no.focus();
+	 	  return;
+	 }
+	 if(form1.price.value==""){
+	 	  alert("请填写价格");
+	 	  form1.price.focus();
+	 	  return;
+	 }
+
+	 if(form1.cservices_id.value==""){
+	 	  alert("请选择商品");
+	 	  form1.cservices_id.focus();
+	 	  return;
+	 }	
+	if(form1.cpricepertime.value==""){
+	 	  alert("每次补交费用");
+	 	  form1.cpricepertime.focus();
+	 	  return;
+	 }	
+	if(form1.cservices_times.value==""){
+	 	  alert("请填写服务次数");
+	 	  form1.cservices_times.focus();
+	 	  return;
+	 }	
+	 
+	 
+	  	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+   	//window.location.href='services.php?action=add&produce_id='+produce_id+'&std_consumption'+std_consumption+'&memo'+memo;
+	   form1.submit();
+}
+function submit_del(){
+    if (confirm("是否删除该记录？")) {
+        getNews(form1.id.value);
+    }
+} 
+
+function InitAjax()
+{
+　var ajax=false; 
+　try { 
+　　ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+　} catch (e) { 
+　　try { 
+　　　ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+　　} catch (E) { 
+　　　ajax = false; 
+　　} 
+　} 
+　if (!ajax && typeof XMLHttpRequest!='undefined') { 
+　　ajax = new XMLHttpRequest(); 
+　} 
+　return ajax;
+}
+
+function getNews(newsID)
+{
+　//如果没有把参数newsID传进来
+　if (typeof(newsID) == 'undefined')
+　{
+　　return false;
+　}
+  var postStr = "id="+ newsID;
+
+　//需要进行Ajax的URL地址
+　var url = "../ajaxread/readdelaccount.php";
+　//实例化Ajax对象
+　var ajax = InitAjax();
+　//使用POST方式进行请求
+　ajax.open("POST", url, true); 
+  //定义传输的文件HTTP头信息
+　ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+　//发送POST数据
+　ajax.send(postStr);
+　//获取执行状态
+　ajax.onreadystatechange = function() { 
+　　//如果执行是状态正常，那么就把返回的内容赋值给上面指定的层
+　　if (ajax.readyState == 4 && ajax.status == 200) {  
+       if(ajax.responseText=='0'){
+          form1.action.value = "delete";
+          sendingbg.style.display ="";
+          sendingdel.style.display ="";
+	        form1.submit();
+       }else{
+          alert("该帐户已经有历史记录，不能删除");
+       }
+　　}
+　}
+  //发送空
+　ajax.send(null); 
+}
+
+function help(){  
+   if(document.getElementById("helpid").style.pixelHeight == 0 &&  document.getElementById("helpid").style.display == "none"){      
+     document.getElementById("helpid").style.display ="";
+	   ChS();
+   }else{   
+	   HhS();    	  
+   }
+}
+
+function ChS(){
+  if(helpid.style.pixelHeight<230){
+     helpid.style.pixelHeight+=10;setTimeout("ChS()",0.5);
+  } 
+}
+
+function HhS(){
+  if(helpid.style.pixelHeight > 0){
+    helpid.style.pixelHeight-=10;setTimeout("HhS()",0.5);
+  }
+  if(helpid.style.pixelHeight == 0){
+    document.getElementById("helpid").style.display ="none";
+  }
+}
+// -->
+</script>
+<BODY onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">感受卡资料</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="feelingcard.php" method="post" name="form1">
+            <input name='action' type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+    <table width="98%" border="0" cellspacing="0" cellpadding="0"  class="table_bgcolor">
+        <tr>
+        <td class=button_labelleft></td>
+        <td class=button_label><div align="left">
+          <input type=button name=save32 class=button_new value="     帮助" AccessKey=h  onClick="javascript:help()" style="font-size:9pt"  onMouseOver="this.style.backgroundImage='url([#path#]img/new_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/new.jpg)'">
+          <input type=button name=save3 class=button_save value="     保存" AccessKey=s  onClick="submit_save()" style="font-size:9pt" {dissave} onMouseOver="this.style.backgroundImage='url([#path#]img/save_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/save.jpg)'">
+          <INPUT class=button_reset name=qqq type=reset value="     撤销" AccessKey=z style="font-size:9pt" onMouseOver="this.style.backgroundImage='url([#path#]img/reset_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/reset.jpg)'">
+          <input type=button name=rst class=button_recovery value="     返回" AccessKey=q style="font-size:9pt" onClick="javascript:location='?'" onMouseOver="this.style.backgroundImage='url([#path#]img/recovery_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/recovery.jpg)'">
+        </div></td>
+        <td class=button_labelright></td>
+      </tr>
+    </table> 
+    <table width="750" class=InputFrameMain cellspacing="0" cellpadding="0" border="0" height="100">
+      <TBODY> 
+        <tr>
+          <td align="left" colspan="4"><table cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td align="center" class=inputtitle width="106">资料输入</td>
+                <td  align="center" class=inputtitleright >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td  align="center" ><b><font color="#FF0000" class="error">[#error#]</font></b></td>
+              </tr>
+          </table></td>
+        </tr>
+       <tr> 
+           <td colspan="4" height="10"></td>
+      </tr>
+	   <tr>
+	     <td  align="right" class=form_label>卡编号：</td>
+	     <td  align="left"><span class="STYLE2">
+	       <input class=input_disabled  type="text" name="feelingcard_no" size="15" maxlength="15" value="[#feelingcard_no#]" style="ime-mode:disabled" onChange="changeno()">
+	     </span></td>
+	     <td align="right" class=form_label>&nbsp;</td>
+	     <td  align="left">&nbsp;</td>
+        </tr>
+	   <tr>
+	    <td  align="right" class=form_label> 卡项名称：</td>
+	    <td  align="left"><input class=input_disabled type="text" name="marketingcard_name" size="15" maxlength="20" value="[#marketingcard_name#]" readonly>
+	      <span class=form_label>
+	      <input class=input type="hidden" name="marketingcard_id" size="20" maxlength="20" value="[#marketingcard_id#]">
+	      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:getcard('1') type=button value=查找 name=save5 [#findcustomer#]>
+	      *</span></td>
+	    <td align="right" class=form_label>期限：</td>
+	    <td  align="left"><label></label>
+	      <span class="STYLE2">
+	        <input class=input_disabled type="text" name="timelimit" size="10"  value="[#timelimit#]" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>
+	        个月*
+  <label>
+    <input class=inputright  type="hidden" name="value" size="10"  value="0"  >
+  </label>
+  <input class=input  type="hidden" name="coderule" size="20" maxlength="20" value="0" >
+  <input class=inputright type="hidden" name="pricepertime" size="10"  value="0" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);">
+	        </span></td> 
+	  	</tr> 
+	  <tr>
+	    <td height="30" align=right class=form_label>总次数：</td>
+	    <td height="30" ><input class=input_disabled type="text" name="totaltimes" size="15"  value="[#totaltimes#]" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>	      
+	      次*</td>
+		   <td height="30" align=right class=form_label>开卡费：</td>
+          <td height="30" ><input class=input_disabled type="text" name="price" size="10"  value="[#price#]" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>
+          <span class="form_label">元*</span>          </td>
+	  </tr>	
+	  <tr>
+	    <td height="30" align=right class=form_label>持卡人：</td>
+	    <td height="30" ><input class=input_disabled type="text" name="customer_name" size="15"  value="[#customer_name#]" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" style="ime-mode:disabled" onFocus="this.select()" onKeyUp="changepc(this);" readonly>
+	      <input class=inputright type="hidden" name="customer_id" size="10"  value="[#customer_id#]" >
+          <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:promem() type=button value=查找 name=save4 [#findcustomer#]>
+          *</td>
+		   <td height="30" align=right class=form_label>购买时间：</td>
+          <td height="30" ><input class=inputright type="text" name="buydate" size="10"  value="[#buydate#]" onFocus="calendar(EventUtil.getEvent().target)">
+          <span class="form_label">元*</span>          </td>
+	  </tr>	
+	  <tr>
+	    <td height="30" align=right class=form_label>使用状态：</td>
+	    <td height="30" ><SELECT name=status>
+
+              [#statusnamelist#]
+            </SELECT>
+	      *</td>
+		   <td height="30" align=right class=form_label>激活时间：</td>
+          <td height="30" ><input class=input_disabled type="text" name="activedate" size="10"  value="[#activedate#]" onFocus="calendar(EventUtil.getEvent().target)" readonly>
+          <span class="form_label">元*</span>          </td>
+	  </tr>	
+	  <tr>
+	    <td height="30" align=right class=form_label>&nbsp;</td>
+	    <td height="30" >&nbsp;</td>
+		   <td height="30" align=right class=form_label>结束时间：</td>
+          <td height="30" ><input class=input_disabled type="text" name="overdate" size="10"  value="[#overdate#]" onFocus="calendar(EventUtil.getEvent().target)"  >
+          <span class="form_label">*</span>          </td>
+	  </tr>	               	  
+	  <tr> 
+	    <td width="129" height="45" align="right" class=form_label>备注：</td>
+	    <td height="45" colspan="3" align="left"><textarea class=inputarea name="memo"   wrap="virtual"  rows="6">[#memo#]</textarea></td>
+	    </tr>
+      </TBODY> 
+    </table>
+<table width="750" border="0" cellspacing="1"  style="display:{datashow}" class=tableborder>
+	  <tr class=listtitle>
+        <td width="22" align="center" >
+		<a style="CURSOR: hand" onClick="viewall({count})"> 
+		<img src="[#path#]img/closeb.gif" width="16" height="16" id=imgb></a>		</td>
+        <td align="center" ><input name="checkbox" type="checkbox" onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+        <td align="center" class="white_word">服务代码</td>
+        <td align="center" class="white_word">服务类别</td>
+        <td align="center" class="white_word">服务名称</td>
+        <td align="center" class="white_word">总次数</td>
+		<td align="center" class="white_word">剩余次数</td>
+        <td align="center" class="white_word">操作</td>
+	  </tr>
+      <!-- BEGIN mainlist -->
+	  <tr onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgcolor="#DAE2ED">
+        <td align="center" ><a style="CURSOR: hand" onClick="bb({trid},{imgid})"><img id={imgid} src="[#path#]img/menu_close.gif" width="16" height="16" ></a></td>
+	  	  <td width="20" align="center" >
+	     <input name="The_ID[]" type="checkbox"  value="[#services_id#]" style="display:none" />
+     <input name="TheID[]" type="checkbox" value="[#marketingcarddetail_id#]" />	    </td>
+        <td align="center" >[#services_no#]</td>
+        <td align="center" >[#category_name#]&nbsp;</td>
+        <td align="center" >[#services_name#]&nbsp;</td>
+        <td align="center" >[#services_times#]&nbsp;</td>
+		<td align="center" >[#remaintimes#]&nbsp;</td>
+        <td align="center" ><a href="marketingcard.php?action=upd&updid=[#updid#]&consumables_id=[#marketingcarddetail_id#]" onClick="edit_p('[#services_id#]')">编辑</a>&nbsp;<a href="#" onClick="tourl('marketingcard.php?action=del&consumables_id=[#marketingcarddetail_id#]')">删除</a></td>
+	  </tr>
+	   <tr id={trid} style="display:none">
+        <td align="center" class=tdcolor></td>
+        <td colspan="2" align="center" class=tdcolor>备注</td>
+        <td colspan="5" align="left" class=tdcolor>{vmemo}&nbsp;</td>
+      </tr>
+    
+	<!-- END mainlist -->
+    <tr>
+        <td align="center" class=tdcolor>
+		<a style="CURSOR: hand" onClick="viewall({count})"> 
+		<img src="[#path#]img/closeb.gif" width="16" height="16" id=imgb1>		</a>		</td>
+        <td colspan="2" align="left" class=tdcolor>&nbsp;</td>
+        <td align="left" class=tdcolor>共&nbsp;[#recordcount#]</font>&nbsp;条&nbsp;</td>
+        <td align="center" class=tdcolor></td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+    </tr>
+    </table>
+<table width="750" border="0" cellspacing="0" class=InputFrameMain  style="display:none">
+  <tr> <a name="inputpro">
+    <td align="center" class=inputtitle>消耗产品信息</td>
+    </a>
+    <td width="221" align="center" class=inputtitleright><input name='con_act'  type="hidden" id="con_act" value="[#caction#]">
+      <input name='cupdid' type="hidden"  value='[#cupdid#]'>
+      <input name='conupdid'  type="hidden" value='[#conupdid#]'></td>
+    <td width="94" align="center">&nbsp;</td>
+    <td width="281" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="4" height="10"></td>
+  </tr>
+  <tr>
+    <td width="146" height="30" align="right" class=form_label>类别：</td>
+    <td height="30" align="left">服务
+      <input name="assignservice"  type="hidden" id="assignservice"  value=1 checked ></td>
+    <td height="30" align="left" class=form_label></td>
+    <td height="30" align="left"></td>
+  </tr>
+  <tr>
+    <td width="146" height="30" align="right" class=form_label>服务代码：</td>
+    <td height="30" align="left"><input  type="hidden" name="cservices_id" value="[#cservices_id#]">
+      <input class=input style="ime-mode:disabled"  name="cservices_no" type="text" value="[#cservices_no#]" size="20" onKeyPress="keypresscomm()">
+      <input  type=button name=save2 class=buttonsmall value="查找" onClick="search_customer()" style="font-size:9pt" ></td>
+    <td height="30" align="left" class=form_label></td>
+    <td height="30" align="left"></td>
+  </tr>
+  <tr>
+    <td height="30" align="right"><span class="form_label">服务名称：</td>
+    <td width="221" height="30"><input class=input_disabled  name="cservices_name" type="text" value="[#cservices_name#]" size="30" readonly ></td>
+    <td width="94" height="30" align="right"><span class="form_label">牌价：</span></td>
+    <td height="30" colspan="2"><input class=input_disabled name="cprice" type="text" value="[#cprice#]" size="10" readonly="1">
+元 </td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">每次补交：</td>
+    <td height="30"><input class=input name="cpricepertime" type="text" value="[#cpricepertime#]" size="10" ></td>
+    <td height="30" align="right" class="form_label">服务次数：</td>
+    <td height="30" colspan="2"><input class=input name="cservices_times" type="text" value="[#cservices_times#]" size="10" ></td>
+  </tr>
+  <tr>
+    <td height="45" align="right" class=form_label>备注：</td>
+    <td height="45" colspan="3"><textarea class=inputarea name="cmemo"  wrap="virtual" rows="6">[#cmemo#]</textarea></td>
+  </tr>
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" AccessKey=t  onClick="submit_comsave()"  {buttondisabled} >
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq2 type=button value="撤销" AccessKey=z  onClick="submit_reset()"></td>
+  </tr>
+</table>
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingdel" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在删除数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"></div>
+<div id="helpid" STYLE="right: 1%; WIDTH: 450px; POSITION: absolute; TOP: 86px; HEIGHT: 0; display: none"> 
+ <div  align="left"   STYLE="position:absolute;left: 15px; top:15px;right:15px" >
+  操作：基本信息－帐户信息；<br><br>
+  保存(Alt+s)：添加新帐户信息和修改帐户信息；<br><br>
+  删除(Alt+d)：即删除不再使用的帐户信息；<br><br>
+  撤销(Alt+z)：撤销回去帐户没有修改的状态；<br><br>
+  返回(Alt+q)：返回帐户信息列表；<br><br>
+  帮助(Alt+h)：显示帮助信息；</div>
+</div>
+[#showeditdiv#]
+</center>
+</BODY>
+</HTML>
+
