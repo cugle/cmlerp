@@ -1,0 +1,113 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/editlib.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<style type="text/css">
+<!--
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+
+function tourl(url)
+{
+
+	window.location.href=url;
+}
+
+function submit_save(){
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	form1.typelist.value=id;
+	form1.submit();
+
+}
+ 
+
+// -->
+</script>
+<BODY onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">导出销售单</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="serviceconsumeexport.php" method="post" name="form1">
+  <table width="730" class=InputFrameMain cellspacing="0" cellpadding="0" border="0" height="104">
+      <tbody>
+	     <tr>
+          <td colspan="3" align="left"><TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>选择时间段</TD>
+          <TD class=inputtitleright align=middle 
+            width=60>&nbsp;</TD>
+          <TD width="305" align=middle><FONT 
+      color=#ff0000><B>
+            <input class=inputright type="hidden" name="agencyid" size="10"  value="[#agencyid#]" >
+            <input class=inputright type="hidden" name="typelist" size="10"  value="" >
+          </B></FONT></TD>
+        </TR></TBODY></TABLE></td>
+        </tr>
+      <tr> 
+        <td colspan="3" height="10"></td>
+      </tr>
+        <tr class=InputFrameLine>
+          <td height="46" align=center class=form_label><div align="center">
+            从
+            <input class=inputright type="text" name="bgdate" size="10"  value="[#bgdate#]" onFocus="calendar(EventUtil.getEvent().target)">            
+            <span class=form_label>*</span> 到          
+            <input class=inputright type="text" name="enddate" size="10"  value="[#enddate#]" onFocus="calendar(EventUtil.getEvent().target)">
+            <label>导出类型:
+              <input type="checkbox" name="TheID[]" value="0" checked>
+              未完成</label>
+            <label>
+              <input type="checkbox" name="TheID[]" value="1" checked> 已完成</label>
+            <label>
+              <input type="checkbox" name="TheID[]" value="4" checked>已提交</label>
+            <label>
+              <input type="checkbox" name="TheID[]" value="5" checked>已审核</label>
+            <label>
+              <input type="checkbox"name="TheID[]" value="2,3" checked>已冲销</label>
+          </div>            <div align="center"></div></td>
+        </tr>
+  <tr>
+    <td  align="center" class=bottombotton ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" AccessKey=t  onClick="submit_save()"   >
+  &nbsp;&nbsp;<input type=button name=save2 style="CURSOR: hand"  class=buttonsmall value="返回" accesskey=t  onClick="history.go(-1)"   ></td>
+    </tr>
+      </tbody>
+    </table>
+</form>
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

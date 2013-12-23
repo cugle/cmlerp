@@ -1,0 +1,291 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<script language=javascript> 
+function tourl(url)
+{
+	window.location.href=url;
+}
+	function CloseSelf(){
+	//window.returnValue=customer_id+"@@@"+customer_name+"@@@"+handphone;
+    window.close();
+	}
+var requestSubmitted = false;
+
+function submit_save(){
+
+	 if(form1.order_no.value==""){
+	 	  alert("请填单据编号");
+	 	  form1.order_no.focus();
+	 	  return;
+	 }
+	 	 if(form1.suppliers_id.value==""){
+	 	  alert("请选择供应商");
+	 	  form1.suppliers_id.focus();
+	 	  return;
+	 }
+	 	  if(form1.employee_id.value==""){
+	 	  alert("请选择经手人");
+	 	  form1.employee_id.focus();
+	 	  return;
+	 }
+	 	 	 if(form1.warehouse_id.value==""){
+	 	  alert("请选择仓库");
+	 	  form1.warehouse_id.focus();
+	 	  return;
+	 }
+	 	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+  form1.issave.value=1;
+  form1.submit();
+}
+
+
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+} 
+</script>
+<style type="text/css">
+<!--
+.form {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.end_save {
+	margin: 0px;
+	padding: 0px;
+}
+-->
+</style>
+</HEAD><BODY width="100%">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=361 cellSpacing=0 cellPadding=0 width=663 border=0>
+      <TBODY>
+        <TR>
+          <TD class="STYLE18 STYLE21" vAlign=absmiddle align=middle width="95%" 
+    bgColor=#666666 colSpan=2 height=30>收银
+            <DIV style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('end_save')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#"><FONT 
+      color=#ffffff>X</FONT></A></DIV></TD>
+        <TR>
+            <TD class=STYLE18 vAlign=top align=left width=287 height=177>
+              <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                <TBODY>
+                  <TR>
+                    <TD class=STYLE25 vAlign=center align=right width="49%" 
+            height=51>应收金额：</TD>
+                    <TD class=STYLE25 vAlign=center align=left width="51%"><SPAN 
+            id=ysmoney>0</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>其他支付：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=qtpayshow>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>现金支付：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=xianjinpay>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>刷卡支付：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=yinkapay>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>找零：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=zhaoling>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>欠帐：</TD>
+                    <TD class=STYLE25 height=50><SPAN 
+      id=qianzhang>0</SPAN></TD></TR></TBODY></TABLE></TD>
+            <TD class=STYLE18 vAlign=top align=middle width=374><BR>
+              <TABLE class=tableborder cellSpacing=1 width="98%" border=0>
+                <TBODY>
+                  <TR class=listtitle>
+                    <TD class=white_word align=middle width="36%" height=25>支付方式</TD>
+                    <TD class=white_word align=middle width="14%" height=25>类型</TD>
+                    <TD class=white_word align=middle width="19%" height=25>支付金额</TD>
+                    <TD class=white_word align=middle width="31%" height=25>备注</TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase1() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>现金</TD>
+                    <TD align=middle width="14%" height=25>公司</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=xjvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25></TD></TR>
+                  <TR id=showcarddiv1 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase2() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>储蓄卡</TD>
+                    <TD align=middle width="14%" height=25>会员卡</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=cxvalue>0</SPAN></TD>
+                    <TD align=left width="31%" height=25><SPAN 
+        id=cardcxyeshow></SPAN></TD></TR>
+                  <TR id=showcarddiv4 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase5() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>赠送帐户</TD>
+                    <TD align=middle width="14%" height=25>会员卡</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=zsvalue>0</SPAN></TD>
+                    <TD align=left width="31%" height=25><SPAN 
+        id=cardzsyeshow></SPAN></TD></TR>
+                  <TR bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>订金</TD>
+                    <TD align=middle width="14%" height=25>其他</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=djvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25></TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase7() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>现金券</TD>
+                    <TD align=middle width="14%" height=25>其他</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=xjqvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25>&nbsp;</TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase8() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>刷卡</TD>
+                    <TD align=middle width="14%" height=25>公司</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=xjqvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25>&nbsp;</TD></TR></TBODY></TABLE></TD>
+        <TR>
+              <TD vAlign=top align=left colSpan=2 height=38>
+                <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                  <TBODY>
+                    <TR>
+                      <TD class=STYLE25 align=right width="12%" height=40>命令： </TD>
+                      <TD width="23%" height=40><INPUT class=input 
+            onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {end_save(this.value)}" 
+            onkeyup=countxj() name=input_jine></TD>
+                      <TD class=STYLE25 width="65%" height=40>支付方式：<SPAN 
+            id=showpayment>现金</SPAN></TD></TR>
+                    <TR>
+                      <TD class="STYLE27 STYLE28" align=right height=20>说明：</TD>
+                      <TD colSpan=2 height=20><SPAN class="STYLE27 STYLE28">ALT+X 现金,ALT+H 
+                        会员卡，ALT+W 现金券,ALT+S（服务帐户支付）,ALT+V（储蓄帐户支付），</SPAN></TD></TR>
+                    <TR>
+                      <TD class="STYLE27 STYLE28" align=right height=20>&nbsp;</TD>
+                      <TD colSpan=2 height=20><SPAN class="STYLE27 STYLE28">ALT+K 
+刷卡,ALT+P（商品帐户支付）,ALT+Z（赠送帐户支付）,ALT+L（取消现金券）,ALT+O过帐</SPAN>　<INPUT class=buttonsmall onclick=charge() type=button value=" 过 账 "></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<center>
+  <form action="buyproduce.php" method="post" name="form1">
+    <DIV id=end_save >
+      <TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=361 cellSpacing=0 cellPadding=0 width=663 border=0>
+      <TBODY>
+        <TR>
+          <TD class="STYLE18 STYLE21" vAlign=absmiddle align=middle width="95%" 
+    bgColor=#666666 colSpan=2 height=30>收银
+            <DIV style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('end_save')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#"><FONT 
+      color=#ffffff>X</FONT></A></DIV></TD>
+          <TR>
+            <TD class=STYLE18 vAlign=top align=left width=287 height=177>
+              <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                <TBODY>
+                  <TR>
+                    <TD class=STYLE25 vAlign=center align=right width="49%" 
+            height=51>应收金额：</TD>
+                    <TD class=STYLE25 vAlign=center align=left width="51%"><SPAN 
+            id=ysmoney>0</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>其他支付：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=qtpayshow>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>现金支付：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=xianjinpay>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>刷卡支付：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=yinkapay>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>找零：</TD>
+                    <TD class=STYLE25 height=50><SPAN id=zhaoling>0.00</SPAN></TD></TR>
+                  <TR>
+                    <TD class=STYLE25 align=right height=50>欠帐：</TD>
+                    <TD class=STYLE25 height=50><SPAN 
+      id=qianzhang>0</SPAN></TD></TR></TBODY></TABLE></TD>
+            <TD class=STYLE18 vAlign=top align=middle width=374><BR>
+              <TABLE class=tableborder cellSpacing=1 width="98%" border=0>
+                <TBODY>
+                  <TR class=listtitle>
+                    <TD class=white_word align=middle width="36%" height=25>支付方式</TD>
+                    <TD class=white_word align=middle width="14%" height=25>类型</TD>
+                    <TD class=white_word align=middle width="19%" height=25>支付金额</TD>
+                    <TD class=white_word align=middle width="31%" height=25>备注</TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase1() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>现金</TD>
+                    <TD align=middle width="14%" height=25>公司</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=xjvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25></TD></TR>
+                  <TR id=showcarddiv1 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase2() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>储蓄卡</TD>
+                    <TD align=middle width="14%" height=25>会员卡</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=cxvalue>0</SPAN></TD>
+                    <TD align=left width="31%" height=25><SPAN 
+        id=cardcxyeshow></SPAN></TD></TR>
+                  <TR id=showcarddiv4 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase5() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>赠送帐户</TD>
+                    <TD align=middle width="14%" height=25>会员卡</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=zsvalue>0</SPAN></TD>
+                    <TD align=left width="31%" height=25><SPAN 
+        id=cardzsyeshow></SPAN></TD></TR>
+                  <TR bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>订金</TD>
+                    <TD align=middle width="14%" height=25>其他</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=djvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25></TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase7() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>现金券</TD>
+                    <TD align=middle width="14%" height=25>其他</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=xjqvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25>&nbsp;</TD></TR>
+                  <TR style="CURSOR: hand" onclick=paycase8() bgColor=#ffffff>
+                    <TD align=middle width="36%" height=25>刷卡</TD>
+                    <TD align=middle width="14%" height=25>公司</TD>
+                    <TD align=middle width="19%" height=25><SPAN id=xjqvalue>0</SPAN></TD>
+                    <TD align=middle width="31%" height=25>&nbsp;</TD></TR></TBODY></TABLE></TD>
+          <TR>
+              <TD vAlign=top align=left colSpan=2 height=38>
+                <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                  <TBODY>
+                    <TR>
+                      <TD class=STYLE25 align=right width="12%" height=40>命令： </TD>
+                      <TD width="23%" height=40><INPUT class=input 
+            onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {end_save(this.value)}" 
+            onkeyup=countxj() name=input_jine></TD>
+                      <TD class=STYLE25 width="65%" height=40>支付方式：<SPAN 
+            id=showpayment>现金</SPAN></TD></TR>
+                    <TR>
+                      <TD class="STYLE27 STYLE28" align=right height=20>说明：</TD>
+                      <TD colSpan=2 height=20><SPAN class="STYLE27 STYLE28">ALT+X 现金,ALT+H 
+                        会员卡，ALT+W 现金券,ALT+S（服务帐户支付）,ALT+V（储蓄帐户支付），</SPAN></TD></TR>
+                    <TR>
+                      <TD class="STYLE27 STYLE28" align=right height=20>&nbsp;</TD>
+                      <TD colSpan=2 height=20><SPAN class="STYLE27 STYLE28">ALT+K 
+      刷卡,ALT+P（商品帐户支付）,ALT+Z（赠送帐户支付）,ALT+L（取消现金券）,ALT+O过帐</SPAN>　<INPUT class=buttonsmall onclick=charge() type=button value=" 过 账 "></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV>
+  </form>
+
+
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

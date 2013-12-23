@@ -1,0 +1,504 @@
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/DatePicker.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/dateobject.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/datepicker.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/editlib.js"></SCRIPT>
+<style type="text/css">
+<!--
+.STYLE3 {font-size: 12px}
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+var requestSubmitted = false;
+
+function tourl(url)
+{
+	window.location.href=url;
+}
+function savetohistory(){
+		if(form1.batch.value == ""){
+           alert("请输入批次名称");
+		   return;
+		}
+		tourl('?action=savetohistory&batch='+form1.batch.value)  
+
+}
+function CheckAll(form){
+     for (var i=0;i<form.elements.length;i++){ 
+         var strelement = form.elements[i];
+         if (strelement.name != 'chkall' && !strelement.disabled){
+             strelement.checked = form.chkall.checked;
+         }
+      }
+}
+
+function submit_save(){
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("checkstaid[]");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	} 
+	form1.id.value = id;
+	     
+	if(form1.batch.value == ""){
+           alert("请输入批次名称");
+		   return;
+		}
+	if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   
+   
+  requestSubmitted = true; 	
+		
+    form1.action.value = "upd";
+	
+	form1.submit();
+	  
+}
+
+function change(){
+      
+	form1.submit();
+	  
+}
+
+function InitAjax()
+{
+var ajax=false; 
+try { 
+ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+} catch (e) { 
+try { 
+ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+} catch (E) { 
+ajax = false; 
+} 
+} 
+if (!ajax && typeof XMLHttpRequest!='undefined') { 
+ajax = new XMLHttpRequest(); 
+} 
+return ajax;
+}
+
+
+function ForDight(Dight,How) 
+{ 
+Dight = Math.round (Dight*Math.pow(10,How))/Math.pow(10,How); 
+return Dight; 
+} 
+
+
+
+
+
+
+function help(){  
+   if(document.getElementById("helpid").style.pixelHeight == 0 &&  document.getElementById("helpid").style.display == "none"){      
+       document.getElementById("helpid").style.display = "";
+	  ChS();
+   }else{   
+	   HhS();    	  
+   }
+}
+
+function ChS(){
+if(helpid.style.pixelHeight<450){helpid.style.pixelHeight+=10;setTimeout("ChS()",0.5);
+} 
+}
+function HhS(){
+if(helpid.style.pixelHeight > 0){helpid.style.pixelHeight-=10;setTimeout("HhS()",0.5);
+}
+if(helpid.style.pixelHeight == 0){
+ document.getElementById("helpid").style.display = "none";
+ }
+}
+
+function CheckAll(form){
+     for (var i=0;i<form.elements.length;i++){ 
+         var strelement = form.elements[i];
+         if (strelement.name != 'chkall' && !strelement.disabled){
+             strelement.checked = form.chkall.checked;
+         }
+      }
+   }
+
+function counttotal(){
+
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("checkstaid[]");
+	var m = 0;
+	var total_yf_wage=0;
+    //total_yf_wage =0;
+	total_basic =0;
+	total_otpay =0;
+	total_leavepay =0;
+	total_ser_royalties =0;
+	total_sel_royalties =0;
+	total_postwage=0;
+	total_fullattendance =0;
+	total_livingallowance =0;
+	total_fine =0;
+	total_bonus =0;
+	var wagespayable;
+ 	var basic;
+ 	var otpay;
+	var leavepay;
+	 var ser_royalties;
+ 	var sel_royalties;
+	var postwage;
+ 	var fullattendance;
+ 	var livingallowance;
+	 var fine;
+	 var bonus;	
+	for(var i=0; i<cv.length; i++)
+	{ 
+	
+ 	 basic = "basic"+cv[i].value;
+ 	 otpay = "otpay"+cv[i].value;
+	 leavepay = "leavepay"+cv[i].value;
+ 	 ser_royalties = "ser_royalties"+cv[i].value;
+ 	 sel_royalties = "sel_royalties"+cv[i].value;
+	 postwage= "postwage"+cv[i].value;
+ 	 fullattendance = "fullattendance"+cv[i].value;
+ 	 livingallowance = "livingallowance"+cv[i].value;
+	 fine = "fine"+cv[i].value;
+ 	 bonus = "bonus"+cv[i].value;	
+	 wagespayable='wagespayable'+cv[i].value;
+  
+                total_yf_wage =total_yf_wage+ parseFloat(document.getElementById(wagespayable).value);
+				total_basic =total_basic+ parseFloat(document.getElementById(basic).value);
+				total_otpay =total_otpay+ parseFloat(document.getElementById(otpay).value);
+				total_leavepay =total_leavepay+ parseFloat(document.getElementById(leavepay).value);
+				total_ser_royalties =total_ser_royalties+ parseFloat(document.getElementById(ser_royalties).value);
+				total_sel_royalties =total_sel_royalties+ parseFloat(document.getElementById(sel_royalties).value);
+				
+				total_postwage =total_postwage+ parseFloat(document.getElementById(postwage).value);
+				total_fullattendance =total_fullattendance+ parseFloat(document.getElementById(fullattendance).value);
+				total_livingallowance =total_livingallowance+ parseFloat(document.getElementById(livingallowance).value);
+				total_fine =total_fine+ parseFloat(document.getElementById(fine).value);
+				total_bonus =total_bonus+ parseFloat(document.getElementById(bonus).value);
+				
+				
+				
+
+	}
+	
+    document.getElementById('totalbasic').value = total_basic;
+	document.getElementById('totalwagespayable').value = total_yf_wage;
+	document.getElementById('totalotpay').value = total_otpay;
+	document.getElementById('totalleavepay').value = total_leavepay;
+	document.getElementById('totalser_royalties').value = total_ser_royalties;
+	document.getElementById('totalsel_royalties').value = total_sel_royalties;
+	
+	document.getElementById('totalpostwage').value = total_postwage;
+	document.getElementById('totalfullattendance').value = total_fullattendance;
+	document.getElementById('totallivingallowance').value = total_livingallowance;
+	document.getElementById('totalfine').value = total_fine;
+	document.getElementById('totalbonus').value = total_bonus;
+
+	
+}
+function countwage(staid){ 
+
+ var basic = "basic"+staid;
+ var otpay = "otpay"+staid;
+  var leavepay = "leavepay"+staid;
+ var ser_royalties = "ser_royalties"+staid;
+ var sel_royalties = "sel_royalties"+staid;
+ var fullattendance = "fullattendance"+staid;
+ var livingallowance = "livingallowance"+staid;
+ var fine = "fine"+staid;
+ var bonus = "bonus"+staid;
+ var wagespayable='wagespayable'+staid;
+	  //var itemid      = "item@"+staid+"@"+leimid
+  
+	  var yf_wage = parseFloat(document.getElementById(basic).value)+parseFloat(document.getElementById(otpay).value)-parseFloat(document.getElementById(leavepay).value)+parseFloat(document.getElementById(ser_royalties).value)+parseFloat(document.getElementById(sel_royalties).value)+parseFloat(document.getElementById(fullattendance).value)+parseFloat(document.getElementById(livingallowance).value)-parseFloat(document.getElementById(fine).value)+parseFloat(document.getElementById(bonus).value);
+	  
+	  var kc_wage=0;
+	  var sf_wage=0;
+	  var postStr =""
+	  document.getElementById(wagespayable).value = yf_wage;
+
+      counttotal(); 	  	  	  	   
+	 
+}
+// -->
+</script>
+<BODY  onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                           <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">薪资管理</td>
+			<tr>
+           <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+          </tr>	
+  </table>
+  <center>
+    <FORM name=form1 action="" method=post>
+      <INPUT type=hidden name=action>
+      <INPUT 
+type=hidden  name=id>
+      <TABLE height=31 cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+          <TR>
+            <TD class=button_labelleft></TD>
+            <TD class=button_label><DIV style="MARGIN: 0px" align=left>
+              <INPUT class=button_new onMouseOver="this.style.backgroundImage='url([#path#]img//new_sel.jpg)'" style="FONT-SIZE: 9pt" accessKey=h onclick=javascript:help() onMouseOut="this.style.backgroundImage='url([#path#]img/new.jpg)'" type=button value="     帮助" name=save32>
+              <input style="display:[#canadd#]"  class=button_new onMouseOver="this.style.backgroundImage='url([#path#]img/new_sel.jpg)'" accesskey=n onClick="location.href='?action=add'"  onMouseOut="this.style.backgroundImage='url([#path#]img/new.jpg)'" type=button value="  新增" name=thenew>
+              <input class=button_save onMouseOver="this.style.backgroundImage='url([#path#]img/save_sel.jpg)'" style="FONT-SIZE: 9pt" accesskey=s onClick=javascript:submit_save() onMouseOut="this.style.backgroundImage='url([#path#]img/save.jpg)'" type=button value="     保存" name=save3>
+              <INPUT class=button_reset onMouseOver="this.style.backgroundImage='url([#path#]img/reset_sel.jpg)'" style="FONT-SIZE: 9pt" accessKey=z onMouseOut="this.style.backgroundImage='url([#path#]img/reset.jpg)'" type=reset value="     撤销" name=qqq>
+                <input  style="display:[#canimport#]" class=button_infile onMouseOver="this.style.backgroundImage='url([#path#]img/infile_sel.jpg)'" accesskey=i onClick="javascript:tourl('attendanceimport.php?agencyid=[#agencyid#]&pre=[#pre#]')" onMouseOut="this.style.backgroundImage='url([#path#]img/infile.jpg)'" type=button value="  提交审核" name=theinputfile>
+            </DIV></TD>
+            <TD class=button_labelright></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <BR>
+      <TABLE class=InputFrameMain cellSpacing=0 cellPadding=0 width=758 border=0>
+        <TBODY>
+          <TR>
+            <TD align=left colSpan=4><TABLE cellSpacing=0 cellPadding=0 border=0>
+                <TBODY>
+                  <TR>
+                    <TD class=inputtitle align=middle width=150>资料输入</TD>
+                    <TD class=inputtitleright 
+            align=middle>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+                    <TD align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD>
+                  </TR>
+                </TBODY>
+            </TABLE></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right width=120 height=10></TD>
+            <TD align=left width=215></TD>
+            <TD class=form_label width=93></TD>
+            <TD align=left width=272></TD>
+          </TR>
+          <TR>
+            <TD class=form_label align=right height=30>批次名称：</TD>
+            <TD align=left colSpan=3 height=30><INPUT class=input_right 
+      style="IME-MODE: disabled" onfocus=this.select() value=[#batch#] name=batch>
+              *
+                <INPUT class=buttonsmall style="FONT-SIZE: 9pt;" onclick=javascript:savetohistory() type=button value=归档到历史 name=save> 
+              查看历史记录：
+              <SELECT name=select   onChange="tourl('?action=viewhistorty&batch='+this.value)">
+                <OPTION value='[#batch#]'  selected>-选择月份-</OPTION>
+                
+                   [#historylist#]    
+              
+              </SELECT>
+              <INPUT class=buttonsmall  style="FONT-SIZE: 9pt" onclick=javascript:tourl('?') type=button value=返回本月 name=save2></TD>
+          </TR>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <BR>
+      <TABLE cellSpacing=0 width="100%" border=0>
+        <TBODY>
+          <TR>
+            <TD borderColor=#ffffff align=left width="3%" bgColor=#ffffff><INPUT 
+      onclick=CheckAll(this.form) type=checkbox value=on name=chkall></TD>
+            <TD borderColor=#ffffff align=left width="7%" bgColor=#ffffff><SPAN 
+      class=STYLE3>全选/反选</SPAN></TD>
+            <TD borderColor=#ffffff align=left width="90%" bgColor=#ffffff>&nbsp;</TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <TABLE class=tableframe style="WORD-BREAK: break-all" width="98%" 
+  align=center>
+        <TBODY>
+          <TR class=listtitle>
+            <TD class=listcelltitle noWrap align=middle height=25>员工编号</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>员工姓名</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>职级</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>基本工资</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>加班费</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>应扣休假</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>手工提成</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>销售提成</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>岗位工资</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>全勤奖</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>生活补贴</TD>
+			<TD class=listcelltitle noWrap align=middle height=25>宝贝</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>奖金</TD>
+			 <TD class=listcelltitle noWrap align=middle height=25>应发工资</TD>
+          </TR>
+		    <!-- BEGIN mainlist -->
+          <TR class=listrow1 onMouseOver="this.style.backgroundColor='#DAE2ED';" 
+  onmouseout="this.style.backgroundColor='#FFFFFF'" bgColor=#ffffff>
+            <TD class=listcelltitle noWrap align=left height=25><INPUT type=checkbox 
+      value=[#salary_id#] name=checkstaid[]>
+              [#employee_no#]</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;[#employee_name#]</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;[#employeelevel_name#]</TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+            <input 
+      class=input_right id=basic[#salary_id#] onKeyUp="countwage('[#salary_id#]')"  onkeypress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#basic#]'
+      name=basic[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+            <input 
+      class=input_disabled  id=otpay[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#otpay#]'
+      name=otpay[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+            <input 
+      class=input_disabled  id=leavepay[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#leavepay#]'
+      name=leavepay[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+            <input 
+      class=input_disabled  id=ser_royalties[#salary_id#] onKeyUp="countwage('[#salary_id#]')" 
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#ser_royalties#]'
+      name=ser_royalties[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+            <input 
+      class=input_disabled  id=sel_royalties[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#sel_royalties#]'
+      name=sel_royalties[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;&nbsp;
+            <input 
+      class=input_right id=postwage[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#postwage#]'
+      name=postwage[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+              <input 
+      class=input_right id=fullattendance[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#fullattendance#]'
+      name=fullattendance[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+              <input 
+      class=input_right id=livingallowance[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#livingallowance#]'
+      name=livingallowance[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+              <input 
+      class=input_right id=fine[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#fine#]'
+      name=fine[#salary_id#]></TD>
+            <TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+              <input 
+      class=input_right id=bonus[#salary_id#] onKeyUp="countwage('[#salary_id#]')" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;"
+      style="IME-MODE: disabled" onFocus=this.select() size=3 value='[#bonus#]'
+      name=bonus[#salary_id#]></TD><TD class=listcelltitle noWrap align=middle height=25>&nbsp;
+		    <input  class=input_disabled   id=wagespayable[#salary_id#]  size=4 value='[#wagespayable#]' name=wagespayable[#salary_id#]><SCRIPT language=javascript >countwage([#salary_id#]);</SCRIPT></TD>  
+          </TR>
+ <!-- END mainlist --> 
+          </TR>
+		  
+<TR class=listtitle>
+            <TD class=listtail noWrap align=middle height=25>总计</TD>
+            <TD class=listtail noWrap align=middle height=25>&nbsp;</TD>
+            <TD class=listtail noWrap align=middle height=25>&nbsp;</TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalbasic  size=3 value='[#totalbasic#]' name=totalbasic >
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalotpay  size=3 value='[#totalotpay#]' name=totalotpay >
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalleavepay  size=3 value='[#totalleavepay#]' name=totalleavepay >
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalser_royalties  size=3 value='[#totalser_royalties#]' name=totalser_royalties>
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalsel_royalties  size=3 value='[#totalsel_royalties#]' name=totalsel_royalties >
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalpostwage  size=3 value='[#totalpostwage#]' name=totalpostwage>
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalfullattendance size=3 value='[#totalfullattendance#]' name=totalfullattendance>
+            </span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totallivingallowance  size=3 value='[#totallivingallowance#]' name=totallivingallowance>
+            </span></TD>
+			<TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+			  &nbsp;
+			  <input class=input_disabled readOnly  id=totalfine  size=3 value='[#totalfine#]' name=totalfine >
+			</span></TD>
+            <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+              &nbsp;
+              <input class=input_disabled readOnly  id=totalbonus  size=3 value='[#totalbonus#]' name=totalbonus>
+            </span></TD>
+			 <TD class=listtail noWrap align=middle height=25><span class="listcelltitle">
+			   &nbsp;
+			   <input class=input_disabled  readOnly id=totalwagespayable  size=3 value='[#totalwagespayable#]' name=totalwagespayable>
+			 </span></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+<SCRIPT language=javascript >counttotal();</SCRIPT>
+    </FORM>
+    <div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display:none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>ڱݣԺ...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingdel" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display:none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>ɾݣԺ...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display:none"> 
+</div>
+<div id="helpid" STYLE="left: 1%; WIDTH: 450px; POSITION: absolute; TOP: 86px; HEIGHT: 0; display:none;"> 
+ <div  align="left"   STYLE="position:absolute;left: 15px; top:15px;right:15px" >
+ 
+ ĳʵнʽηţϵͳԶʹʺ͸ۼӵԱʻͬʱõĸ˰˰ΧԶ˰<br>
+ͿɹʷŵĹˡ<br>
+ע⣺ʷǷεʹʲְԱʣһοԷʹͬһʵԱʣһνзţεĸҲԶۼӵԱʻˣڡ롰ʾˡ
+      һֻҪӦһʣһζӦʡ<br>
+
+
+
+ 
+ <br><br>
+  нʹ���нʷţ<br><br>
+  (Alt+s)㹤ʣ<br><br>
+  (Alt+z)нϢӵ<br><br>
+  (Alt+q)عϢб���<br><br>
+  (Alt+h)ʾϢ
+</div>
+</div>
+</center>
+</body>
+</html>
+

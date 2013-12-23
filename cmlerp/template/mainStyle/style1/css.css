@@ -1,0 +1,87 @@
+@import url('../../../common/css/css.css');
+body,td,th {
+	font-size: 9pt;
+}
+#subSubMenu {
+	overflow:hidden;
+	width: 100%;
+	white-space:nowrap;
+}
+#mdivl,#mdivr {
+	margin: 0px 5px;
+}
+.subSubMenuSel {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.subSubMenu {
+	color: #FFFFFF;
+	cursor: pointer;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+#loading {
+	right: 0px;
+	width: 200px;
+	position: absolute;
+	filter: Alpha(Opacity=70, FinishOpacity=70, Style=1, StartX=0, StartY=0, FinishX=100, FinishY=100);
+	top: 53px;
+	text-align: center;
+	visibility: hidden;
+}
+.topMenuItemOver {
+	cursor: pointer;
+	background-color: #E3E7EA;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.topMenuItem {
+	background-color: #A0AAB4;
+	color: #FFFFFF;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.subMenu {
+	background-color: #7B869A;
+	color: #FFFFFF;
+}
+.subMenu a:link ,.subMenu a:visited{
+	color: #FFFFFF;
+}
+.topInfo {
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+.topMenuItemSel {
+	background-color: #7B869A;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+#foot {
+	background-color: #EDEFF1;
+	color: #000000;
+	bottom: 0px;
+	position: absolute;
+	font-size: 9pt;
+	width: 100%;
+	height: 20px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #7B869A;
+}
+.style3 {
+	font-size: 18pt;
+	font-weight: bold;
+	color: #5E687B;
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+}
+.handStyle {
+	cursor:pointer;
+}

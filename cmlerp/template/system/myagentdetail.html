@@ -1,0 +1,222 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="{path}js/calendar.js" 
+type=text/javascript></SCRIPT>
+<SCRIPT language=javascript> 
+  function select_customer(){   
+    window.open("select_customer.php","mywin", "resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50");   
+  } 
+ 
+ function disp(){
+  var divdisp=document.getElementById("disp");
+  if (divdisp.style.display=="none"){
+  divdisp.style.display="";
+  }else
+  {divdisp.style.display="none";
+  }
+ }
+</SCRIPT>
+</head>
+<body>
+<h3>{actionName}代理商信息</h3>
+<FORM id=form style="DISPLAY: inline" name="form" method="post"  action="myagent.php" >
+<TABLE cellSpacing=0 cellPadding=0 width="99%" align=center border=0>
+        <TBODY><TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>代理商信息 {agentid}
+            <input name='action' type="hidden" value="{action}">
+      <input name='updid' type='hidden' value='{agentid}'></TD></TR>
+        <TR>
+          <TD align=right width="11%" height=30>代理商名称：</TD>
+          <TD align=left width="39%"><input class=INPUT id='agentname'
+            maxlength=100 size=40 value='{agentname}' name='agentname'>
+          *</TD>
+          <TD align=right width="10%" height=30>管理 人 </TD>
+		  	
+          <TD align=left width="40%"><input  type="hidden"  class=INPUT id=userid maxlength=7 
+            size=3 name=userid value="{userid}">
+              <INPUT class=INPUT id=username maxLength=100  readonly="readonly"
+            size=40 name=username value=" <!-- BEGIN user -->{username} <!-- END user -->">
+              <span class="crm_tdright">
+              *</span></TD>
+        </TR>
+        <TR>
+          <TD align=right height=30>代理商地址</TD>
+          <TD align=left><input class=INPUT id=address
+            maxlength=100 size=40 value="{address}" name=address></TD>
+
+          <TD align=right height=30>邮编：</TD>
+          <TD align=left><input class=INPUT id='zipcode'
+            maxlength=100 size=40 value='{zipcode}' name='zipcode'></TD>
+        </TR>
+        <TR>
+          <TD align=right width="11%" height=30>传真：</TD>
+          <TD align=left width="39%">
+			<input class=INPUT id='fax'
+            maxlength=100 size=40 value='{fax}' name='fax'>
+			</TD>
+          <TD align=right width="10%" height=30>电话1：</TD>
+          <TD align=left width="40%"><input class=INPUT id='tel'
+            maxlength=100 size=40 value='{tel}' name='tel'></TD>	
+        </TR>
+        <TR>
+          <TD align=right width="11%" height=30>电话2：</TD>
+          <TD align=left width="39%">
+		  <input class=INPUT id='tel1'
+            maxlength=100 size=40 value='{tel1}' name='tel1'>
+		  </TD>
+          <TD align=right width="10%" height=30>E-mail：</TD>
+          <TD align=left width="40%"><input class=INPUT id='email'
+            maxlength=100 size=40 value='{email}' name='email'></TD>	
+        </TR>
+
+        <TR>
+          <TD align=right width="11%" height=30>QQ：</TD>
+          <TD align=left width="39%">
+			<input class=INPUT id='qq' maxlength=100 size=40 value='{qq}' name='qq'>
+		</TD>
+          <TD align=right width="10%" height=30>地区：</TD>
+          <TD align=left width="40%"><select id='areaid'  name='areaid'>
+              <option value='0' selected>按区域查看</option>
+              <!-- BEGIN diqu -->
+              <!-- END diqu -->
+            </select>
+          *</TD>	
+        </TR>
+
+        <TR>
+          <TD align=right width="11%" height=30>公司主页：</TD>
+          <TD align=left width="39%">
+          	<input class=INPUT id='url' maxlength=100 size=40 value='{url}' name='url'>
+		  </TD>
+          <TD align=right width="10%" height=30>手机：</TD>
+          <TD align=left width="40%"><input class=INPUT id='handphone'
+            maxlength=100 size=40 value='{handphone}' name='handphone'></TD>	
+        </TR>
+
+        <TR>
+          <TD align=right width="11%" height=30>营业执照：</TD>
+          <TD align=left width="39%">
+		
+						<input class=INPUT id='license'
+            maxlength=100 size=40 value='{license}' name='license'>
+			</TD>
+          <TD align=right width="10%" height=30>所属行业：</TD>
+          <TD align=left width="40%"><input class=INPUT id='industry'
+            maxlength=100 size=40 value='{industry}' name='industry'></TD>	
+        </TR><TR>
+          <TD align=right height=30>员工人数：</TD>
+          <TD align=left><input class=INPUT id=employeesnumber 
+            maxlength=100 size=40 value="{employeesnumber}" name=employeesnumber>
+          *</TD>
+          <TD align=right height=30>成立日期：</TD>
+          <TD align=left>
+		    <input class=INPUT id='establishmentday'
+            maxlength=100 size=40 value='{establishmentday}' name='establishmentday' onfocus="calendar(EventUtil.getEvent().target)">
+		    *			</TD>
+        </TR>
+
+         <TR>
+          <TD align=right height=30>代理品牌：</TD>
+          <TD align=left><input class=INPUT id=brand maxlength=100 size=40 value="{brand}" name=brand></TD>
+          <TD align=right height=30>&nbsp;</TD>
+          <TD align=left>&nbsp;</TD>
+        </TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>&nbsp;</TD></TR>
+        <TR>
+          <TD align=right width="11%" height=80>公司简介：</TD>
+          <TD align=left colSpan=3><TEXTAREA id=profile name=profile rows=3 cols=90>{profile}</TEXTAREA></TD></TR>
+        <TR>
+          <TD align=middle colSpan=4><input type="submit" name="Submit2" value=" 提 交 ">
+            &nbsp; 
+            <INPUT class=button id=re type=reset value=" 重 置 " name=re></TD></TR></TABLE>
+        </TD></TR></FORM>
+		
+<table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+<tr class="tdBgColor">
+    <td colspan="11">联系人管理<SPAN id=PPClass_Container85_Sale_ID>&nbsp;</SPAN></td>
+  </tr>
+  <tr align="center" class="tabTh">
+    <td width="5%">ID: </td>
+    <td width="12%">联系人姓名</td>
+    <td width="14%">手机</td>
+    <td width="16%">电话</td>
+    <td width="16%">地址</td>
+    <td width="13%">Email</td>
+    <td width="13%">qq</td>
+    <td width="5%">编辑</td>
+    <td width="6%">删除</td>
+  </tr>
+  <!-- BEGIN contact -->
+  <!-- END contact -->
+  
+</table>
+<div id="disp" style="display:none">
+<FORM id=formadd style="DISPLAY: inline" name="form1" method="post"  action="contact.php" >
+  <TBODY>
+  <TR>
+    <TD class=left_title_1 align=middle><input name='action' type="hidden" value="{action}">
+      <input name='updid' type='hidden' value='{updid}'><input name='agentid' id="agentid" type='hidden' value='{agentid}'></TD>
+  </TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=0 width="99%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>联系人信息
+            <input name='action' type="hidden" value="add">
+            <input name='agentid2'  value="{agentid}"></TD>
+        </TR>
+        <TR>
+          <TD align=right width="10%" height=30>客户名称：</TD>
+          <TD align=left width="40%"><INPUT  type="hidden" class=INPUT id=contactid 
+            maxLength=100 size=40 value="{contactid}" name=contactid>
+            <input name="contactname" type="text" maxLength=100 size=40 value='{contactname}'>
+            <FONT color=red>*</FONT> &nbsp;</TD>
+          <TD align=right width="10%" height=30>性别：</TD>
+          <TD align=left width="40%"><select  name="gender" id="gender">
+            <!-- BEGIN gender -->
+            <!-- END gender -->
+          </select>
+            &nbsp;</TD>
+        </TR>
+        <TR>
+          <TD align=right width="10%" height=30>客户电话：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=tel maxLength=100 
+            size=40 name=tel value="{tel}"></TD>
+          <TD align=right width="10%" height=30>通讯地址：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=address maxLength=100 
+            size=40 name=address value="{address}"></TD></TR><!-- 20090323 -->
+        <TR>
+          <TD align=right width="10%" height=30>手机：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=handphone maxLength=100 
+            size=40 name=handphone value="{handphone}"></TD>
+          <TD align=right width="10%" height=30>QQ：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=idnumber maxLength=100 
+            size=40 name=qq value="{qq}"></TD></TR>
+        <TR>
+          <TD align=right width="10%" height=30>电子邮件：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=email maxLength=100 
+            size=40 name=email value="{email}"></TD>
+          <TD align=right width="10%" height=30>邮政编码：</TD>
+          <TD align=left width="40%"><INPUT class=INPUT id=zipcode maxLength=100 
+            size=40 name=zipcode value="{zipcode}"></TD></TR>
+        <TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>备注信息</TD>
+        </TR>
+        <TR>
+          <TD align=right width="10%" height=30>备注信息：</TD>
+          <TD align=left colSpan=3><TEXTAREA name=describes rows=3 cols=90></TEXTAREA></TD></TR><!-- 20090323 -->
+        <TR>
+          <TD align=middle colSpan=4><input type="submit" name="Submit2" value=" 保 存 ">
+            &nbsp; 
+<INPUT class=button id=re type=reset value=" 重 置 " name=re></TD></TR></TBODY></TABLE></TD></TR></FORM>
+</div>
+</body>
+</html>

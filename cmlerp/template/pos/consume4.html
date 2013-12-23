@@ -1,0 +1,111 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<script language=javascript> 
+function tourl(url)
+{
+	window.location.href=url;
+}
+	function CloseSelf(){
+	//window.returnValue=customer_id+"@@@"+customer_name+"@@@"+handphone;
+     window.parent.close();
+	}
+var requestSubmitted = false;
+
+function submit_save(){
+
+	 if(form1.order_no.value==""){
+	 	  alert("请填单据编号");
+	 	  form1.order_no.focus();
+	 	  return;
+	 }
+	 	 if(form1.suppliers_id.value==""){
+	 	  alert("请选择供应商");
+	 	  form1.suppliers_id.focus();
+	 	  return;
+	 }
+	 	  if(form1.employee_id.value==""){
+	 	  alert("请选择经手人");
+	 	  form1.employee_id.focus();
+	 	  return;
+	 }
+	 	 	 if(form1.warehouse_id.value==""){
+	 	  alert("请选择仓库");
+	 	  form1.warehouse_id.focus();
+	 	  return;
+	 }
+	 	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+  form1.issave.value=1;
+  form1.submit();
+}
+
+
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+} 
+</script>
+<BODY   topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">购买商品</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="buyproduce.php" method="post" name="form1">
+            <input name='action' type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+    <table width="610" border="0" cellspacing="0" ID=servicetable class=InputFrameMain style="display:[#servicetabledisplay#]">
+ 
+  <tr>
+    <td   height="30"  align="left">添加成功， 请选择去向 ：</td>
+    </tr>
+  <tr>
+    <td height="30"  align="center">
+      <input type=button name=save style="CURSOR: hand"  class=buttonsmall value="继续添加" AccessKey=t  onClick="tourl('?')"  {buttondisabled} >
+    
+  &nbsp;&nbsp;&nbsp;
+  <input type=button name=save4 style="CURSOR: hand"  class=buttonsmall value="消费卡项" AccessKey=t  onClick="tourl('consume.php')"  {buttondisabled} >
+&nbsp;&nbsp;&nbsp;
+<input type=button name=save2 style="CURSOR: hand"  class=buttonsmall value="购买服务" AccessKey=t  onClick="tourl('buyservices.php')"  {buttondisabled} >
+&nbsp;&nbsp;&nbsp;
+<input type=button name=save3 style="CURSOR: hand"  class=buttonsmall value="购买卡项" AccessKey=t  onClick="tourl('buycard.php')"  {buttondisabled} >&nbsp;&nbsp;
+        <input type=button name=save5 style="CURSOR: hand"  class=buttonsmall value=" 关  闭 " AccessKey=t  onClick="CloseSelf()"  {buttondisabled} ></td>
+    </tr>
+  
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" >&nbsp;</td>
+  </tr>
+</table>
+</form>
+
+
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

@@ -1,0 +1,114 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="{path}js/calendar.js" 
+type=text/javascript></SCRIPT>
+<SCRIPT language=javascript> 
+
+function checkform()
+{
+
+	var customername = document.getElementById("customername").value;
+	var plantitle = document.getElementById("plantitle").value;
+	var plantime = document.getElementById("plantime").value;
+	var userid= document.getElementById("userid").value;
+	if(customername==null||customername=="")
+	{
+		alert("姓名不能为空!");
+		return false;
+	}
+	if(plantitle==null||plantitle=="")
+	{
+		alert("计划标题不能为空!");
+		return false;
+	}
+	if(plantime==null||plantime=="")
+	{
+		alert("请选择计划执行时间!");
+		return false;
+	}
+	if(userid==null||userid=="-1")
+	{
+		alert("执行人不能为空!");
+		return false;
+	}
+	document.form1.submit();
+}
+  function select_customer(){   
+    window.open("select_customer.php","mywin", "resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50");   
+  } 
+</SCRIPT>
+</head>
+<body>
+<h3>{actionName}<span class="left_title_1">拜访计划</span></h3>
+<FORM id=form1 style="DISPLAY: inline" name="form" method="post"  action="visiteplan.php" >
+<TABLE cellSpacing=0 cellPadding=0 width="99%" align=center border=0>
+        <TBODY><TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>客户信息 {planid}<input name='action' type="hidden" value="{action}">
+      <input name='updid' type='hidden' value='{updid}'></TD></TR>
+        <TR>
+          <TD align=right width="10%" height=30>客户名称：</TD>
+          <TD align=left width="40%"><input type="hidden" class=INPUT id=customerid 
+            maxlength=100 size=40 value="{customerid}" name=customerid>
+            <span class="crm_tdright">
+            <input name="customername" type="text" maxLength=100 size=40 value=' <!-- BEGIN customer -->{customername} <!-- END customer -->' readonly="readonly">
+            <INPUT class=submit id=select_customer title=选择客户时客户编号和名称会自动填写！ onClick="window.open('select_customer.php','','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50')" type=button value=选择客户 name=select_customer>
+            <input name="hidden" type="hidden" class=INPUT id=address  value="{address}">
+            <input name="hidden" type="hidden" class=INPUT id=tel  value="{tel}">
+            <input name="hidden" type="hidden" class=INPUT id=handphone  value="{handphone}">
+            </span></TD>
+          <TD align=right width="10%" height=30>&nbsp;</TD>
+		  	
+          <TD align=left width="40%">&nbsp;</TD>
+        </TR>
+
+        <TR>
+          <TD align=right width="10%" height=30>计划标题：</TD>
+          <TD align=left width="40%"><input class=INPUT id=plantitle  
+            maxlength=100 size=40 value="{plantitle}" name=plantitle ></TD>
+          <TD align=right width="10%" height=30>执行人：</TD>
+          <TD align=left width="40%"><input type="hidden" class=INPUT id=userid maxlength=7 
+            size=3 name=userid value="{userid}">
+            <INPUT class=INPUT id=username maxLength=100 
+            size=40 name=username value=" <!-- BEGIN user -->{username} <!-- END user -->" readonly="readonly">
+            <span class="crm_tdright">
+            <INPUT class=submit id=select_customer2 title=选择执行员工！ onClick="window.open('select_user.php','','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50')" type=button value=选择 name=select_customer2>
+            </span></TD>	
+        </TR>
+        <TR>
+        <TR>
+          <TD align=right height=30>计划执行时间：</TD>
+          <TD align=left><input class=INPUT id=plantime  
+            maxlength=100 size=40 value="{plantime}" name=plantime onfocus="calendar(EventUtil.getEvent().target)"></TD>
+          <TD align=right height=30>计划创建时间：</TD>
+          <TD align=left><input class=INPUT id=creattime 
+            maxlength=100 size=40 value="{creattime}" name=creattime></TD>
+        </TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>描述信息</TD></TR>
+        <TR>
+          <TD align=right width="10%" height=80>内容：</TD>
+          <TD align=left colSpan=3><TEXTAREA id=plan_content name=plan_content rows=3 cols=90>{plan_content}</TEXTAREA></TD></TR>
+        <TR>
+		  <TR>
+          <TD align=right width="10%" height=30>备注：</TD>
+          <TD align=left colSpan=3><TEXTAREA id=planmemo name=planmemo rows=3 cols=90>{planmemo}</TEXTAREA></TD></TR>
+        <TR>
+		  <TR>
+          <TD align=right width="10%" height=30>重要程度：</TD>
+          <TD align=left colSpan=3><select id="planimportance" name="planimportance">
+            <!-- BEGIN importancere -->
+            <!-- END importancere -->
+          </select></TD>
+		  </TR>
+        <TR>
+          <TD align=middle colSpan=4><input type="button" name="Submit2" value=" 提 交 " onclick="return checkform();">
+            &nbsp; 
+<INPUT class=button id=re type=reset value=" 重 置 " name=re></TD></TR></TABLE></TD></TR></FORM>
+</body>
+</html>

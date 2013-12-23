@@ -1,0 +1,50 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>工作组明细</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h3>{actionName}工作组</h3>
+<form name="form1" method="post" action="group.php">
+<input name='action' type="hidden" value="{action}">
+<input name='updid' type='hidden' value='{updid}'> 
+组名：
+<input type="text" name="groupname" value="{groupname}">
+<input type="submit" name="Submit" value="提交">
+  <table width="100%" border="0" cellpadding="2" cellspacing="1" class="borderStyle">
+    <tr class='tabTh'>
+      <td width="50%">角色名称</td>
+    </tr>
+    <tr class="tdBgColor">
+      <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<!-- BEGIN row --><tr>
+<!-- BEGIN irow --><td width="20%"><input type="checkbox" name="roleids[]" value="{roleid}"{gchecked}>{rolename}</td><!-- END irow -->
+</tr><!-- END row --></table>
+	  </td>
+    </tr>
+  </table>
+  <br>
+  可选项
+  <table width="100%"  border="0" cellspacing="1" cellpadding="2" class="borderStyle">
+    <tr class="tabTh">
+      <td>增加组管理员</td>
+    </tr>
+    <tr class="tdBgColor">
+      <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<!-- BEGIN urow --><tr>
+<!-- BEGIN uinrow --><td width="20%"><input name="manages[]" type="checkbox" id="manages" value="{userid}"{uchecked}>{username}</td><!-- END uinrow -->
+</tr><!-- END urow -->
+      </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<p><a href="role.php?action=add">新建角色</a></p>
+</body>
+</html>

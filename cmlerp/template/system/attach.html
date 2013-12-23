@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK href="{path}/css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}/css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}/css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}/css/css.css" rel="stylesheet" type="text/css">
+<title>无标题文档</title>
+</head>
+
+<body>
+<p>作用域：
+<select name="fieldname" id="fieldname" onChange="location.href='attach.php?fieldname='+this.value;">
+  <option value="">全部</option>
+  <option value="0">属性(用户可以自行设置)</option>
+  <option value="1">权限(系统分析的值)</option>
+</select>
+<script language="javascript">
+document.getElementById('fieldname').value = '{fieldname}';
+</script>
+{add}
+</p>
+<table width="100%"  border="0" cellspacing="1" cellpadding="3" class="borderStyle">
+  <tr class="tabTh">
+    <td height="20">菜单页面</td>
+    <td width="50">类型</td>
+    <td width="50">范围</td>
+    <td>变量名</td>
+    <td>预览</td>
+    <td width="50">修改</td>
+    <td width="50">删除</td>
+  </tr>
+<!-- BEGIN row -->
+  <tr class="tdBgColor" align="center">
+    <td>{rulename}</td>
+    <td>{type}</td>
+    <td>{field}</td>
+    <td>{configvarname}</td>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="50%" align="right">{name}</td>
+        <td><table width="100%">
+		     <tr><td width="50%">{value}</td>
+	      </tr></table></td>
+      </tr>
+    </table>
+    </td>
+    <td>{edit}</td>
+    <td>{del}</td>
+  </tr>
+<!-- END row -->
+</table>
+</body>
+</html>

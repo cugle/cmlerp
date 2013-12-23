@@ -1,0 +1,100 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+ <LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<style type="text/css">
+<!--
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+
+function tourl(url)
+{
+	window.location.href=url;
+}
+function changecard(){
+ tourl('changecard.php');
+}
+function submit_save(){
+
+	 if(form1.cardtype_id.value==""){
+	 	  alert("请选择卡项");
+	 	  form1.cardtype_id.focus();
+	 	  return;
+	 }
+	 url='?action=step1&cardtypeid='+form1.cardtype_id.value;
+	 tourl(url);
+     // form1.submit();
+
+}
+
+
+// -->
+</script>
+<BODY topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">购买卡项</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="?action=step1" method="post" name="form1">
+  <table width="576" class=InputFrameMain cellspacing="0" cellpadding="0" border="0" height="103">
+      <tbody>
+	     <tr>
+          <td colspan="5" align="left"><TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>选择类别</TD>
+          <TD class=inputtitleright align=middle 
+            width=60>&nbsp;</TD>
+          <TD width="305" align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD>
+        </TR></TBODY></TABLE></td>
+        </tr>
+      <tr> 
+        <td colspan="5" height="10"></td>
+      </tr>
+        <tr class=InputFrameLine>
+          <td width=196 height="46" align=right class=form_label>选择要购买的卡项类别：</td>
+          <td width="116" height="46" >
+              <select name="cardtype_id">
+               <option value="5"  selected>会籍卡</option>
+              <option value="1">项目卡</option>
+              <option value="2">疗程卡</option>
+              <option value="3">行权体验卡</option>
+              <option value="4">免费卡</option>
+ 			  <option value="6">现金券</option>
+              <option value="7">储值卡</option>
+              <option value="8">其他</option>
+                 
+              [#warehouselist#]
+			      </select><span class=form_label>*</span>          </td>
+          <td width="264" > 
+            <input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" accesskey=t  onClick="submit_save()"   > <input type=button name=save2 style="CURSOR: hand"  class=buttonsmall value="转卡" accesskey=t  onClick="changecard()"   >           </td>
+
+        </tr>
+  <tr>
+    <td colspan="3" class=bottombotton  align="center" >&nbsp;</td>
+    </tr>
+      </tbody>
+    </table>
+</form>
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

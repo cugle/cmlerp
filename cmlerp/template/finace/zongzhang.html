@@ -1,0 +1,373 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>帐户基本资料 </TITLE>
+<LINK href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<LINK media=screen 
+href="[#path#]css/flexselect.css" type=text/css 
+rel=stylesheet>
+<SCRIPT language="javascript" src="[#path#]js/browse.js" type="text/javascript"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<SCRIPT src="[#path#]js/jquery.min.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="[#path#]js/liquidmetal.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="[#path#]js/jquery.flexselect.js" 
+type=text/javascript></SCRIPT>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("select[class*=flexselect]").flexselect();
+       // $("input:text:enabled:first").focus();
+        $("form").submit(function() {
+          alert($(this).serialize());
+          return false;
+        });
+      });
+ 
+   function init(){
+		return selectit();		
+   }
+   function loader(url) {
+      parent.parent.frames[2].location.href = url;	
+    clearsessionselect(url);
+
+}
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#F3F3F3'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function printbill(){
+	
+	url='?action=printbill&bgaccounttitle_no=[#bgaccounttitle_no#]&endaccounttitle_no=[#endaccounttitle_no#]&bgdate=[#bgdate#]&enddate=[#enddate#]'
+	//url='?action=printbill&accounttitle_id='+form1.accounttitle_id.value+'&bgdate='+form1.bgdate.value+'&enddate='+form1.enddate.value+'&accounttitle_name='+encodeURI(form1.accounttitle_name.value);
+	//url="zongzhang.php?action=printbill&accounttitle_id="+GetUrlParameter('accounttitle_id')+"&bgdate="+GetUrlParameter('bgdate')+"&enddate="+GetUrlParameter('enddate')+"&accounttitle_name="+GetUrlParameter('accounttitle_name'); 
+	 //tourl(url);
+	
+	 window.open(url);
+	// form1.submit();
+}
+/*function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getobject.php?template=getobject&&id="+form1.objecttype_id.value;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.objectid.value    = arrItems[0];     
+     form1.object_name.value  = arrItems[1];
+	  
+}
+*/
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getaccounttitle.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.accounttitle_id.value    = arrItems[0];     
+     form1.accounttitle_name.value  = arrItems[1];
+	  
+}
+function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}
+
+function tourl(url)
+{
+	window.location.href=url;
+}
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	var url = "?action=del&delid="+id+"&qgtype="+qgtype;
+	if(qgtype == "delete")
+	{
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else if(qgtype=="Move")
+	{v=document.getElementById("Sale_ID").value;
+	 url="Acion=Move&id="+id+"Sale_id="+v;
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}else if(qgtype=="edit"){
+	//v=document.getElementById("TheID").value;
+	 url='?action=upd&updid='+id;
+	tourl(url);
+
+	}
+	else
+	{
+		tourl(url);
+	}
+}
+function cannotfind()
+{
+endaccounttitle_no=form1.endaccounttitle_no.value;
+bgaccounttitle_no=form1.bgaccounttitle_no.value;
+bgdate=form1.bgdate.value;
+enddate=form1.enddate.value;
+var ftable='';
+url='?action=zongzhang&bgaccounttitle_no='+bgaccounttitle_no+'&endaccounttitle_no='+endaccounttitle_no+'&bgdate='+bgdate+'&enddate='+enddate;
+ 
+	tourl(url);
+}
+
+</SCRIPT>
+<style type="text/css">
+<!--
+BODY {
+BACKGROUND-POSITION: right bottom;BACKGROUND-ATTACHMENT: fixed;BACKGROUND-IMAGE: url([#path#]img/dianduopic.jpg);BACKGROUND-REPEAT: no-repeat;margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;
+}
+.flat_input {
+	BORDER-RIGHT: #546485 1px solid; BORDER-TOP: #546485 1px solid; BORDER-LEFT: #546485 1px solid; BORDER-BOTTOM: #546485 1px solid
+}
+findbox_close {
+	BACKGROUND-IMAGE: url([#path#]img/browse_findbox_close.gif); WIDTH: 30px; HEIGHT: 30px
+}
+.findbox_close {
+	BORDER-RIGHT: #546485 0px; PADDING-RIGHT: 0px; BORDER-TOP: #546485 0px; PADDING-LEFT: 0px; BACKGROUND-IMAGE: url([#path#]img/guanbi.gif); PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: #546485 0px; WIDTH: 30px; PADDING-TOP: 0px; BORDER-BOTTOM: #546485 0px; HEIGHT: 30px
+}
+#form1 {
+	margin: 0px;
+	padding: 0px;
+	}
+-->
+</STYLE>
+</head>
+<body  text="#000000" topmargin="0" leftMargin="2" width="100%" onLoad="init()">
+<FORM id="form1" name="form1" action="?action=printbill" target="_blank" method="post">
+<DIV>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=pagetitle vAlign=center colSpan=2 height=30>&nbsp;&nbsp;<IMG 
+      src="[#path#]img/nowspace.jpg" align=absMiddle> 
+      <SPAN>&nbsp;财务管理&nbsp;--&gt;&nbsp;总账 </SPAN></TD>
+  </TR>
+  <TR>
+    <TD align=left colSpan=2>
+      <DIV style="MARGIN: 0px 0px 0px 12px"><IMG 
+      src="[#path#]img/line.jpg"></DIV></TD></TR>
+  <TR>
+    <TD align=left colSpan=2 height=3></TD></TR>
+  <TR>
+    <TD height=34>&nbsp;</TD>
+    <TD align=right height=34>
+      <TABLE class=tabletoolbar cellSpacing=0 cellPadding=0 width="100%" 
+      align=center border=0>
+        <TBODY>
+        <TR vAlign=center>
+          <TD vAlign=bottom align=left>
+            <TABLE height=31 cellSpacing=0 cellPadding=0 width="100%" 
+              border=0><TBODY>
+              <TR>
+                <TD class=button_labelleft></TD>
+                <TD class=button_label><span 
+                  onMouseOver="ddrivetip('显示帮助',100)" onMouseOut=hideddrivetip() 
+                  ;>
+                  <input class=button_help onMouseOver="this.style.backgroundImage='url([#path#]img/help_sel.jpg)'" accesskey=h onClick=javascript:help() onMouseOut="this.style.backgroundImage='url([#path#]img/help.jpg)'" type=button value="  帮助" name=save32>
+                </span><SPAN><SPAN 
+                  onmouseover="ddrivetip('批量导入数据，可以导入文本文档和excel文件',100)" 
+                  onmouseout=hideddrivetip() ;><INPUT  style="display:none"  class=button_infile onMouseOver="this.style.backgroundImage='url([#path#]img/infile_sel.jpg)'" accessKey=i onClick="javascript:inputfiledata('input_account.php')" onMouseOut="this.style.backgroundImage='url([#path#]img/infile.jpg)'" type=button value="  导入文件" name=theinputfile></SPAN></SPAN><SPAN 
+                  style="DISPLAY: none"><SPAN 
+                  onmouseover="ddrivetip('把数据导出到excel表格里',100)" 
+                  onmouseout=hideddrivetip() ;> <INPUT class=button_outexcel onMouseOver="this.style.backgroundImage='url([#path#]img/outexcel_sel.jpg)'" accessKey=o onclick=javascript:openexcledata() onMouseOut="this.style.backgroundImage='url([#path#]img/outexcel.jpg)'" type=button value="  导出excel" name=theouttoexcle> 
+                  </SPAN></SPAN><SPAN style="DISPLAY: none"><SPAN 
+                  onmouseover="ddrivetip('自定义功能1',100)" 
+                  onmouseout=hideddrivetip() ;><INPUT class=button_outexcel onMouseOver="this.style.backgroundImage='url([#path#]img/outexcel_sel.jpg)'" onClick="javascript:editdata('')" onMouseOut="this.style.backgroundImage='url([#path#]img/outexcel.jpg)'" type=button value="  " name=thediy1> 
+                  </SPAN></SPAN><SPAN style="DISPLAY: none"><SPAN 
+                  onmouseover="ddrivetip('自定义功能2',100)" 
+                  onmouseout=hideddrivetip() ;><INPUT class=button_outexcel onMouseOver="this.style.backgroundImage='url([#path#]img/outexcel_sel.jpg)'" onClick="javascript:editdata('')" onMouseOut="this.style.backgroundImage='url([#path#]img/outexcel.jpg)'" type=button value="  " name=thediy2></SPAN></SPAN>
+                  <input type=button name=rst class=button_recovery value="    返回" AccessKey=q style="font-size:9pt" onClick="javascript:location='?'" onMouseOver="this.style.backgroundImage='url([#path#]img/recovery_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/recovery.jpg)'">
+                  <input type=button name=rst2 class=button_recovery value="    打印" AccessKey=q style="font-size:9pt" onClick="printbill()" onMouseOver="this.style.backgroundImage='url([#path#]img/recovery_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/recovery.jpg)'"></TD>
+                <TD class=button_label>&nbsp;&nbsp;&nbsp; <SPAN 
+                  style="DISPLAY: none"><SELECT style="DISPLAY: none" 
+                  onchange=selecl_file() name=seldofile> <OPTION value="" 
+                    selected></OPTION></SELECT> </SPAN></TD>
+                <TD class=button_labelright></TD></TR></TBODY></TABLE></TD></TR>
+        <TR vAlign=center>
+          <TD vAlign=center align=left colSpan=2 height=5></TD></TR>
+        <TR vAlign=center>
+          <TD vAlign=center align=right colSpan=2>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%">
+              <TBODY>
+              <TR>
+                <TD width="92%" align=left><FONT color=#ff0000><B>! 
+                  </B></FONT>
+                  
+                  起始编号
+                  <select class="flexselect" id=bgaccounttitle_no  tabindex="2"  
+                  style="FONT-SIZE: 12px" name=bgaccounttitle_no >
+                    <option value="" selected></option>
+                    
+                     [#bgaccounttitlelist#]    
+
+                  
+                  </select>—
+<select class="flexselect" id=endaccounttitle_no  tabindex="2"  
+                  style="FONT-SIZE: 12px" name=endaccounttitle_no>
+  <option value="" selected></option>
+  
+  
+                     [#endaccounttitlelist#]    
+
+                  
+
+</select>
+&nbsp;&nbsp;
+                  &nbsp;&nbsp;选择时间段
+                  <input   type="text" name="bgdate" size="6"  value="[#bgdate#]" onFocus="calendar(EventUtil.getEvent().target)">
+                  <span  l>-</span>
+                  <input  type="text" name="enddate" size="6"  value="[#enddate#]" onFocus="calendar(EventUtil.getEvent().target)">
+<INPUT name="button" type=button class=buttonsmall id=button accessKey=s onclick=javascript:cannotfind(); value=确定></TD>
+                <TD width="8%" align=right>&nbsp;&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV>
+<TABLE class=tableframe id=contenttableid style="WORD-BREAK: break-all" 
+width="99%" align=center>
+  <TBODY>
+  <TR class=listtitle>
+    <TD class=listcelltitle align=middle><input name="checkbox" type="checkbox" onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;><A class=title 
+      href="javascript:submit_order('fd_account_no')">科目代码</A></DIV></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;><A class=title 
+      href="javascript:submit_order('fd_account_name')">会计科目</A></DIV></TD>
+    <TD class=listcelltitle align=middle><DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;><A class=title 
+      href="javascript:submit_order('fd_account_principal')">借方</A></DIV></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;><A class=title 
+      href="javascript:submit_order('fd_account_principal')">贷方</A></DIV></TD>
+    <TD class=listcelltitle align=middle><DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;><A class=title 
+      href="javascript:submit_order('fd_account_principal')">借/贷</A></DIV></TD>
+    <TD class=listcelltitle align=middle><DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;><A class=title 
+      href="javascript:submit_order('fd_account_principal')">余额</A></DIV></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV onMouseOver="ddrivetip('点击标题可以对列表进行升序，降序，重新排序',100)" 
+      onmouseout=hideddrivetip() ;>备注</DIV></TD></TR>
+  <!-- BEGIN mainlist -->
+  <TR class=listrow1  onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgColor=#ffffff>
+    <TD class=listcellrow style="WIDTH: 10px"><span class="listcellrow" style="WIDTH: 10px">
+      <input name="The_ID[]" type="hidden" value="[#transfervoucher_id#]" />
+      <input name="TheID[]" type="checkbox" value="[#transfervoucher_id#]" />
+    </span></TD>
+    <TD height=23 align=left noWrap class=listcellrow>[#accounttitle_no#]</TD>
+    <TD height=23 align=left noWrap class=listcellrow>[#accounttitle_name#]</TD>
+    <TD align=center noWrap class=listcellrow>[#bglend#]</TD>
+    <TD height=23 align=center noWrap class=listcellrow>[#bgloan#]</TD>
+    <TD align=center noWrap class=listcellrow>[#bglendloan#]</TD>
+    <TD align=center noWrap class=listcellrow>[#bgbalance#]</TD>
+    <TD align=center noWrap class=listcellrow>上期余额</TD>
+  </TR>
+
+
+  <TR class=listrow1 onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgColor=#ffffff>
+    <TD class=listcellrow style="WIDTH: 10px"></TD>
+    <TD height=23 align=left noWrap class=listcellrow>&nbsp;</TD>
+    <TD height=23 align=left noWrap class=listcellrow>&nbsp;</TD>
+    <TD align=center noWrap class=listcellrow>[#lend#]</TD>
+    <TD height=23 align=center noWrap class=listcellrow>[#loan#]</TD>
+    <TD align=center noWrap class=listcellrow>[#lendloan#]</TD>
+    <TD align=center noWrap class=listcellrow>[#balance#]</TD>
+    <TD align=center noWrap class=listcellrow>[#bgdate#]至[#enddate#]凭证总金额&nbsp;</TD>
+  </TR>
+
+  <TR class=listrow1 onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgColor=#ffffff> 
+    <TD class=listcellrow style="WIDTH: 10px">&nbsp;</TD>
+    <TD class=listcellrow noWrap align=left height=23>&nbsp;</TD>
+    <TD class=listcellrow noWrap align=left height=23>&nbsp;</TD>
+    <TD class=listcellrow noWrap align=center>[#endlend#]</TD>
+    <TD class=listcellrow noWrap align=center height=23>[#endloan#]</TD>
+    <TD class=listcellrow noWrap align=center>[#endlendloan#]</TD>
+    <TD class=listcellrow noWrap align=center>[#endbalance#]</TD>
+    <TD class=listcellrow noWrap align=center>累计</TD>
+ </TR> 
+<!-- END mainlist --> 
+
+<TR class=listrow1 onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgColor=#ffffff> 
+    <TD class=listcellrow style="WIDTH: 10px">&nbsp;</TD>
+    <TD class=listcellrow noWrap align=left height=23>合计：</TD>
+    <TD class=listcellrow noWrap align=left height=23>&nbsp;</TD>
+    <TD class=listcellrow noWrap align=center>[#alllend#]</TD>
+    <TD class=listcellrow noWrap align=center height=23>[#allloan#]</TD>
+    <TD class=listcellrow noWrap align=center>[#alllendloan#]</TD>
+    <TD class=listcellrow noWrap align=center>[#allbalance#]</TD>
+    <TD class=listcellrow noWrap align=center><span class="listcellrow" style="WIDTH: 10px">合计 </span></TD>
+ </TR>
+  </TBODY></TABLE>
+<TABLE class=tableend height=26 cellSpacing=0 cellPadding=0 width="99%" 
+align=center border=0>
+  <TBODY>
+  <TR vAlign=center>
+    <TD class=listtail align=left>&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+    <TD class=listtail align=right>&nbsp;</TD>
+  </TR></TBODY></TABLE>
+
+
+</FORM>
+</body></HTML>

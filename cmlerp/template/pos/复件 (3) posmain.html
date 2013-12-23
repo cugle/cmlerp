@@ -1,0 +1,1126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>前台</title>
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="../common/js/jquery-1.2.1.pack.js"></script>
+<SCRIPT language=JavaScript>  
+function init(){
+
+	document.getElementById('membercard_no').focus();
+	 
+	readsell('[#sell_no#]');
+	 
+	notmember();
+	//customerlogin();
+	startcheck();	
+	}
+function repayment(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/repayment.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+  
+   // arrItems = strItem.split("@@@");
+  readsellotheritem(form1.sell_no.value,'sellotherdetail','sell_no','plist_qt'); 
+ count('');  
+ change_n=4;
+ secBoard(change_n);
+  changecustomerno(form1.membercard_no.value);
+}
+function editbill(sellid){
+	
+	$.post("../ajax/readdata.php?action=editbill", {value: ""+sellid+"",table:"",column: ""}, function(data){
+
+			 																					   
+				if(data.length >0) {	
+				var data=data.split('@@@');
+		question = confirm('你确认编辑单号为：'+data[1]+'的未完成销售单吗');
+		if (question != "0")
+		{				
+				$('#sellid').html(data[0]);
+				$('#sellno').html(data[1]);
+				$('#customer_id').html(data[2]);
+				document.getElementById('sell_no').value=data[1];
+				//$('#membercard_no').html(data[3]);
+				document.getElementById('membercard_no').value=data[3];
+				changecustomerno(data[3]);
+					readconsumeitem(data[1],'sellconsumedetail','sell_no','consumelist');
+					readsellcarditem(data[1],'sellcarddetail','sell_no','cardlist');
+					readsellitem(data[1],'selldetail','sell_no','producelist');
+					readsellservicesitem(data[1],'sellservicesdetail','sell_no','serviceslist');
+					readsellotheritem(data[1],'sellotherdetail','sell_no','plist_qt'); 
+					count(''); 
+
+					}
+			
+					
+			}
+	});
+	}
+	function viewsell(sell_id){
+	readconsumeitem(sell_id,'sellconsumedetail','sell_id','consumelist'); 
+	readsellitem(sell_id,'selldetail','sell_id','producelist');
+	readsellservicesitem(sell_id,'sellservicesdetail','sell_id','serviceslist');
+	readsellcarditem(sell_id,'s_sellcarddetail','sell_id','cardlist');
+	
+ 
+	}
+function notmember(){
+$('#customer_name').show();
+form1.membercard_no.value='';
+$.post("../ajax/readdata.php?action=notmember", {value: "notmember",table:"",column: ""}, function(data){
+				
+				if(data.length >0) {	
+				var data=data.split('@@@');	
+					 
+					if(data[0]!="0"){				
+					$('#error').html('');				
+					$('#customer_name').html('散客');
+					$('#memcardlevel').html('');
+					form1.customer_id.value='';
+					$('#agency_name').html('');
+					$('#deposit').html('');
+					$('#salesowe').html('');	
+					$('#showcardno').html('');
+					$('#customer_no').html('');
+					$('#customer_id').html('');
+					}else{
+					alert('设置失败');
+					$('#error').html('散客设置失败');	
+					document.getElementById('ismember').checked=true;
+					}
+					
+				}
+			});	
+	}	
+	
+function viewbill(sellid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../analysis/viewbill.php?sellid="+sellid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+ 	
+function customerlogin(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/customerlogin.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=500px;dialogHeight=120px;scroll=yes;");
+   	 if (strItem){
+				var data=strItem.split('@@@');
+					
+					$('#error').html(data[0]);				
+					$('#customer_name').html(data[1]);
+					$('#memcardlevel').html(data[2]);
+					form1.customer_id.value=data[3];
+					$('#agency_name').html(data[4]);
+					$('#deposit').html(data[5]);
+					//$('#salesowe').html(data[6]);
+					
+					document.getElementById('salesowe').innerHTML=data[6];
+					document.getElementById('ismember').checked=true;
+				}
+				 
+ }
+ function deletesellitem(tabletype,selldetail_id){
+	table='sellconsumedetail';
+	question = confirm('你确认编删除该项目吗');
+		if (question != "0")
+		{	
+	 var tablename=Array("","selldetail","sellservicesdetail","sellcarddetail","sellconsumedetail","sellotherdetail");
+	$.post("../ajax/deletesellitem.php", {value: ""+selldetail_id+"",table:""+tablename[tabletype]+"",column: "selldetail_id"}, function(data){
+				
+				if(data.length >0) {	
+				var data=data.split('@@@');
+				 
+					if(data[0]){
+					 
+					readconsumeitem('[#sell_no#]','sellconsumedetail','sell_no','consumelist');
+					readsellcarditem('[#sell_no#]','sellcarddetail','sell_no','cardlist');
+					readsellitem('[#sell_no#]','selldetail','sell_no','producelist');
+					readsellservicesitem('[#sell_no#]','sellservicesdetail','sell_no','serviceslist');	
+					readsellotheritem('[#sell_no#]','sellotherdetail','sell_no','plist_qt');
+					count(''); 
+					alert('删除成功');	
+					}else{
+					 
+					alert('删除失败');	
+					}
+					
+				}
+			});
+		}
+	 }
+	function save(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/save.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 	 
+	 arrItems = strItem.split("@@@");
+    
+	if(arrItems[0]==1){
+	 
+	window.open('save.php?action=printticket&sellid='+arrItems[1]);	
+	window.location.reload();
+	}else if(arrItems[0]==0){	
+		 window.location.reload();
+	}else{
+	}	
+		
+	}
+function count(inputString){		 
+			$.post("../ajax/readsellcount.php?action=sellcount", {value: ""+inputString+"",table: "",column: "sell_no"}, function(data){	  
+				if(data.length >0) { 
+					$('#count_total').html(data);
+					form1.counttotal.value=data;
+				}
+			});
+ 
+	}
+function others(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/others.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   readsellotheritem('[#sell_no#]','sellotherdetail','sell_no','plist_qt');
+   count(''); 
+  change_n=4;
+ secBoard(change_n);
+}	
+function givingproceduce(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/givingproduce.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ readsellitem('[#sell_no#]','selldetail','sell_no','producelist');
+  count(''); 
+  change_n=3;
+ secBoard(change_n);
+}	
+function putpro(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/buyproduce.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ readsellitem('[#sell_no#]','selldetail','sell_no','producelist');
+  count(''); 
+  change_n=3;
+ secBoard(change_n);
+  
+ 
+} 
+function putstoredvaluedcard(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/storedvaluedcard.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+   arrItems = strItem.split("@@@");
+   if(arrItems[0]==1){
+	 if(form1.customer_id.value==''){
+	 form1.membercard_no.value = arrItems[1] ;  
+	 changecustomerno(arrItems[1]);
+	 }
+		readsellcarditem('[#sell_no#]','sellcarddetail','sell_no','cardlist');
+ count('');  
+ change_n=1;
+ secBoard(change_n); 
+	}else if(arrItems[0]==2){
+	 if(form1.customer_id.value==''){
+	 form1.membercard_no.value = arrItems[1] ;  
+	 changecustomerno(arrItems[1]);
+	 readsellotheritem(arrItems[2],'sellotherdetail','sell_no','plist_qt'); 
+	 }
+	 readsellotheritem(arrItems[2],'sellotherdetail','sell_no','plist_qt'); 
+ count('');  
+ change_n=4;
+ secBoard(change_n);
+	}
+
+}
+function putcouponconsume(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/consumecoupon.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+	readconsumeitem('[#sell_no#]','sellconsumedetail','sell_no','consumelist');
+ count('');  
+ change_n=2;
+ secBoard(change_n);	
+}
+function creatmember(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/creatmember.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.membercard_no.value = arrItems[1] ;  
+   changecustomerno(arrItems[1]) ;
+ readsellcarditem('[#sell_no#]','sellcarddetail','sell_no','cardlist');
+  count(''); 
+ change_n=1;
+ secBoard(change_n);
+}
+function putser(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/buyservices.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ readsellservicesitem('[#sell_no#]','sellservicesdetail','sell_no','serviceslist');
+  count(''); 
+ change_n=0;
+ secBoard(change_n);
+ 
+} 
+
+function putcard(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/buycard.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ readsellcarditem('[#sell_no#]','sellcarddetail','sell_no','cardlist');
+  count(''); 
+ change_n=1;
+ secBoard(change_n);
+
+}
+function putconsume(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/consume.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+	readconsumeitem('[#sell_no#]','sellconsumedetail','sell_no','consumelist');
+ count('');  
+ change_n=2;
+ secBoard(change_n);	
+
+	}
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#DAE2ED'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function secBoard(n){ 
+
+	form1.selecttype.value = n;//改变选择状态,0为单项服务项目，1为项目卡，2为疗程卡，3为产品 ,4其他
+	 
+    for(i=0;i<5;i++){ 
+      secTabletr.cells[i].className="sec1";
+	}
+	 
+    secTabletr.cells[n].className="sec2";
+    for(i=0;i<mainTable.tBodies.length;i++){
+	 
+      mainTable.tBodies[i].style.display="none";
+	}
+      mainTable.tBodies[n].style.display="";  
+	 
+
+}
+var n_selboxindex=0;
+var boxListArr=Array("plist_ser","plist_sc","plist_lch","plist_pro","plist_qt");
+function chkselindex(selindex)
+{
+	if(selindex>=boxListArr.length) return "no";
+	if(document.getElementById(boxListArr[selindex]).style.display=="none"){
+		selindex++;
+		chkselindex(selindex);
+	}else{
+		n_selboxindex=selindex;
+		return selindex;
+	}
+}
+function startcheck(){ 
+	chkselindex(0);
+   var n_selboxindex='yes';
+	if(n_selboxindex=="no") return;
+	//secBoard(n_selboxindex);
+	var startcheck = "3";
+	secBoard(startcheck);
+	/*var c = document.getElementsByName(boxListArr[selindex]);
+	if(c.length > 0){		  
+	  c[0].focus();	
+	}*/
+	document.getElementById('plist2').style.height = window.screen.Height-680; 
+	
+}
+	function changecustomerno(inputString) {
+		
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#customer_name').hide();
+		} else {
+			$('#customer_name').show();
+			$.post("../ajax/readmember.php", {value: ""+inputString+"",table: "s_customer",column: "code"}, function(data){
+				
+				if(data.length >0) {	
+				var data=data.split('@@@');
+				alert(data[0].length);
+				if(parseInt(data[0])==0){
+				 
+					$('#error').html('');				
+					$('#customer_name').html(data[1]);
+					$('#memcardlevel').html(data[2]);
+					form1.customer_id.value=data[3];
+					$('#agency_name').html(data[4]);
+					$('#deposit').html(data[5]);
+					//$('#salesowe').html(data[6]);
+					
+					document.getElementById('salesowe').innerHTML=data[6];
+					$('#customer_no').html(data[8]);
+					$('#showcardno').html(data[9]);
+					 
+					$('#yufukuan').html(data[10]);	
+					if(data[2]!=''){			
+					document.getElementById('ismember').checked=true;
+					}
+				}else if(data[0]==3){
+					//alert('请注意：你是'+data[4]+'顾客');
+					$('#error').html('请注意：你是 '+data[4]+' 顾客');				
+					$('#customer_name').html(data[1]);
+					$('#memcardlevel').html(data[2]);
+					form1.customer_id.value=data[3];
+					$('#agency_name').html(data[4]);
+					$('#deposit').html(data[5]);
+					//$('#salesowe').html(data[6]);
+					document.getElementById('salesowe').innerHTML=data[6];
+					$('#customer_no').html(data[8]);
+					$('#showcardno').html(data[9]);	
+					$('#yufukuan').html(data[10]);	
+					 
+					
+					if(data[2]!=''){
+					document.getElementById('ismember').checked=true;
+					}					
+					}
+					
+			
+		 
+		if(data[3]){
+		 
+				$.post("../ajax/readsell.php", {value: ""+document.getElementById('customer_id').value+"",table: "sell",column: "customer_id"}, function(data){
+				 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="100%" align=center><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					if(itemdetaildata[1]){
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=2% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=5% height=25>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[0]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[8]+' </TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[9]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[10]+'</TD><TD class=listcellrow align=middle width=5%> '+itemdetaildata[11]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[12]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[13]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[2]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[14]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[15]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[16]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[17]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD>  <TD class=listcellrow align=middle width=5%><A onclick=viewbill('+itemdetaildata[7]+'); href=#>查看</A></TD></tr>';		
+					}else{
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=2% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=10%></TD><TD class=listcellrow align=middle width=8%> </TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=4%></TD> <TD class=listcellrow align=middle width=10%><A onclick=viewbill(); href=#>删除</A></TD></tr>';	
+					
+					}
+	
+				}
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#selllist').html(temp);
+				
+				document.getElementById('selllist').innerHTML=temp; 
+				}
+			});
+		
+		}
+					
+					
+					
+				} 
+			});
+			
+		}
+
+		
+	} // lookup
+		function readsellservicesitem(inputString,table,column,listid) {
+		if(!arguments[1]) table = "selldetail";
+  		if(!arguments[2]) column = "sell_no";
+		if(!arguments[3]) listid = "producelist";
+		 if(arguments[0]!=document.getElementById('sell_no').value){inputString=document.getElementById('sell_no').value;}
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#itemlist').hide();
+		} else {
+
+			$.post("../ajax/readsellitem.php", {value: ""+inputString+"",table: ""+table+"",column: ""+column+""}, function(data){
+				 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" align=left><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=3% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=9%>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=27%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=6%></TD><TD class=listcellrow align=middle width=8%>'+itemdetaildata[7]+'</TD><TD class=listcellrow align=middle width=6%></TD> <TD class=listcellrow align=middle width=7%><A onclick="deletesellitem(2,'+itemdetaildata[0]+');" href=#>删除</A></TD></tr>';		
+	
+				}
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#serviceslist').html(temp);
+				document.getElementById('serviceslist').innerHTML=temp;
+				}
+			});
+			
+		}
+	} // 更新服务销售列表
+	
+	
+		function readsellotheritem(inputString,table,column,listid) {
+		if(!arguments[1]) table = "sellotherdetail";
+  		if(!arguments[2]) column = "sell_no";
+		if(!arguments[3]) listid = "plist_qt";
+		 if(arguments[0]!=document.getElementById('sell_no').value){inputString=document.getElementById('sell_no').value;}
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#itemlist').hide();
+		} else {
+
+			$.post("../ajax/readsellitem.php", {value: ""+inputString+"",table: ""+table+"",column: ""+column+""}, function(data){
+				
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" align=left><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=3% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=9%>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=27%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=6%></TD><TD class=listcellrow align=middle width=8%>'+itemdetaildata[7]+'</TD><TD class=listcellrow align=middle width=6%></TD> <TD class=listcellrow align=middle width=7%><A onclick="deletesellitem(5,'+itemdetaildata[0]+');" href=#>删除</A></TD></tr>';		
+	
+				}
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#serviceslist').html(temp);
+				document.getElementById('otherlist').innerHTML=temp;
+				}
+			});
+			
+		}
+	} // 更新其他项目列表	
+	
+	function readsellitem(inputString,table,column,listid) {
+	 
+		if(!arguments[1]) table = "selldetail";
+  		if(!arguments[2]) column = "sell_no";
+		if(!arguments[3]) listid = "producelist";
+		 
+		if(arguments[0]!=document.getElementById('sell_no').value){inputString=document.getElementById('sell_no').value;}
+		 
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#itemlist').hide();
+		} else {
+ 
+			$.post("../ajax/readsellitem.php", {value: ""+inputString+"",table: ""+table+"",column: ""+column+""}, function(data){
+			 	 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" align=left><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+				 	
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=3% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=9%>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=27%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=6%></TD><TD class=listcellrow align=middle width=8%>'+itemdetaildata[7]+'</TD><TD class=listcellrow align=middle width=6%></TD> <TD class=listcellrow align=middle width=7%><A onclick="deletesellitem(1,'+itemdetaildata[0]+');" href=#>删除</A></TD></tr>';		
+	
+				}
+				 
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#producelist').html(temp);
+				document.getElementById('producelist').innerHTML=temp;
+				}
+			});
+			
+		}
+	} // 更新销售列表
+		function readsell(inputString,table,column,listid) {
+		
+		if(!arguments[1]) table = "sell";
+  		if(!arguments[2]) column = "sell_no";
+		if(!arguments[3]) listid = "selllist";
+		
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#itemlist').hide();
+		} else {
+		
+			$.post("../ajax/readsell.php", {value: ""+inputString+"",table: ""+table+"",column: ""+column+""}, function(data){
+				 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="100%" align=center><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					if(itemdetaildata[1]){
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=1% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=7% height=25>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=6%>'+itemdetaildata[0]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[8]+' </TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[9]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[10]+'</TD><TD class=listcellrow align=middle width=5%> '+itemdetaildata[11]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[12]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[13]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[2]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[14]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[15]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[16]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[17]+'</TD> <TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD> <TD class=listcellrow align=middle width=5%><A onclick=viewbill('+itemdetaildata[7]+'); href=#>查看</A></TD></tr>';	
+					}else{
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=2% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=10%></TD><TD class=listcellrow align=middle width=8%> </TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=8%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=5%></TD><TD class=listcellrow align=middle width=4%></TD> <TD class=listcellrow align=middle width=10%><A onclick=viewbill(); href=#>删除</A></TD></tr>';	
+					
+					}	
+	
+				}
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#selllist').html(temp);
+				document.getElementById('selllist').innerHTML=temp;
+				}
+			});
+			
+		}
+		
+		
+	} // 更新销售单列表	
+			function readsellcarditem(inputString,table,column,listid) {
+		
+		if(!arguments[1]) table = "sell";
+  		if(!arguments[2]) column = "sell_id";
+		if(!arguments[3]) listid = "cardlist";
+	 if(arguments[0]!=document.getElementById('sell_no').value){inputString=document.getElementById('sell_no').value;}
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#cardlist').hide();
+		} else {
+		
+			$.post("../ajax/readsellitem.php", {value: ""+inputString+"",table: ""+table+"",column: ""+column+""}, function(data){
+				 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" align=left><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=3% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=9%>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=27%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=6%></TD><TD class=listcellrow align=middle width=8%>'+itemdetaildata[7]+'</TD><TD class=listcellrow align=middle width=6%></TD> <TD class=listcellrow align=middle width=7%><A onclick="deletesellitem(3,'+itemdetaildata[0]+');" href=#>删除</A></TD></tr>';		
+	
+				}
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#cardlist').html(temp);
+				document.getElementById('cardlist').innerHTML=temp;
+				}
+			});
+			
+		}
+	} // 更新卡项销售列表	
+			function readconsumeitem(inputString,table,column,listid) {
+		
+		if(!arguments[1]) table = "sell";
+  		if(!arguments[2]) column = "sell_id";
+		if(!arguments[3]) listid = "consumelist";
+		 if(arguments[0]!=document.getElementById('sell_no').value){inputString=document.getElementById('sell_no').value;}
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#cardlist').hide();
+		} else {
+		
+			$.post("../ajax/readsellitem.php", {value: ""+inputString+"",table: ""+table+"",column: ""+column+""}, function(data){
+				 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" align=left><TBODY>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#consumelist').show();
+					 
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=3% height=25><INPUT    onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist();}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail();}"  onblur="document.getElementById().style.backgroundColor=#ffffff"  onfocus="document.getElementById().style.backgroundColor=#FFEA96"    type=radio value="" name=sale_list></TD><TD class=listcellrow align=middle width=8% height=25>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=15%>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=21%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=6%></TD><TD class=listcellrow align=middle width=8%>'+itemdetaildata[7]+'</TD><TD class=listcellrow align=middle width=6%></TD> <TD class=listcellrow align=middle width=7%><A onclick="deletesellitem(4,'+itemdetaildata[0]+');" href=#>删除</A></TD></tr>';		
+					 
+				}
+				temp=temp+'</TBODY></TABLE>';
+				//$('#'+listid).html(temp);
+				//$('#consumelist').html(temp);
+				document.getElementById('consumelist').innerHTML=temp;
+				}
+			});
+			
+		}
+	} // 更新卡消费列表		
+</SCRIPT>
+<style type=text/css>
+body {margin:0;}
+.main_tab {border-right:#9f9e9e 1px solid; border-left:#9f9e9e 1px solid; border-bottom:#9f9e9e 1px solid;}
+.sec1 {background-image:url([#path#]img/s2.jpg); cursor:pointer;}
+.sec2 {background-image:url([#path#]img/s1.jpg); cursor:pointer;}
+.flat_input {border-right:#546485 1px solid; border-top:#546485 1px solid; border-left:#546485 1px solid; border-bottom:#546485 1px solid;}
+findbox_close {background-image:url([#path#]img/images/browse_findbox_close.gif); width:30px; height:30px;}
+.findbox_close {margin:0; padding:0; border-right:#546485 0px; border-top:#546485 0px; border-left:#546485 0px; border-bottom:#546485 0px;
+background-image:url([#path#]img/guanbi.gif); width:30px; height:30px;}
+.style17 {font-size: 12px; color:#ff0000;}
+.style18 { font-weight: bold; font-size: 12px; color:#0000ff;}
+.style19 { font-weight: bold; color: #0000ff;}
+.style20 {font-size: 12px;}
+.style21 {font-size:16px; color: #ffffff;}
+.style25 {font-size:24px;}
+.style27 {font-size:14px; color: #ff0000;}
+.style28 {font-size: 12px;}
+</style></head>
+<body onload='init()'>
+<FORM name="form1" id="form1" action="" method="post">
+  <input type="hidden" name="action2" />
+  <input type="hidden" name="listid" />
+  <input type="hidden" value="qtxsd0022010-0109" name="listno" />
+  <input type="hidden" value="0" name="selecttype" />
+  <input type="hidden" name="memid" />
+  <input type="hidden" name="cardid" />
+  <input type="hidden" name="cardno" />
+  <input type="hidden" name="select_serid" />
+  <input type="hidden" name="select_scid" />
+  <input type="hidden" name="select_lchid" />
+  <input type="hidden" name="select_proid" />
+  <input type="hidden" name="check_serstaid" />
+  <input type="hidden" name="send_serstaid" />
+  <input type="hidden" name="send_prostaid" />
+  <input type="hidden" name="scstaid" />
+  <input type="hidden" name="lchstaid" />
+  <input type="hidden" name="prostaid" />
+  <input type="hidden" name="scquantity" />
+  <input type="hidden" name="lchquantity" />
+  <input type="hidden" name="proquantity" />
+  <input type="hidden" name="del_salelistid" />
+  <input type="hidden" name="lvid" />
+  <input type="hidden" value="1" name="payment" />
+  <input type="hidden" name="cardtype" />
+  <input type="hidden" value="0" name="ysmoney" />
+  <input type="hidden" value="0" name="allprice" />
+  <input type="hidden" value="0" name="qtpay" />
+  <input type="hidden" value="0" name="xjpay" />
+  <input type="hidden" value="0" name="djpay" />
+  <input type="hidden" value="0" name="xjqpay" />
+  <input type="hidden" value="0" name="cardserpay" />
+  <input type="hidden" value="0" name="cardcxpay" />
+  <input type="hidden" value="0" name="cardzspay" />
+  <input type="hidden" value="0" name="cardcppay" />
+  <input type="hidden" name="deposit" />
+  <input type="hidden" value="0" name="alljf" />
+  <input type="hidden" value="0" name="cardserye" />
+  <input type="hidden" value="0" name="cardcxye" />
+  <input type="hidden" value="0" name="cardzsye" />
+  <input type="hidden" value="0" name="cardcpye" />
+  <input type="hidden" name="end_action" />
+<BR>
+<table cellspacing="0" cellPadding="0" width="100%" border="0">
+    <tr>
+      <td valign="middle" width="5%" height="30">&nbsp;</td>
+      <td class="tableleft"  valign="middle" width="33%" height="30"> <a href="#" style=" color:red" onclick="location.reload();">新建销售单</a> 单据编号：<span id=sellno>[#sell_no#]</span>
+        <input type="hidden" name="sell_id">
+        <input type="hidden" name="sell_no" id="sell_no" value="[#sell_no#]">
+      <input type="hidden" name="action" ></td>
+      <td class="tableleft"  valign="middle" width="28%" height="30">收银员:[#user_name#]</td>
+      <td class="tableleft"  valign="middle" width="20%"><span class="style17">&nbsp;</span></td>
+      <td class="tableleft"  valign="middle" width="14%">前台销售单</td>
+    </tr>
+  </table>
+
+<div style="position:relative; margin-left:auto; margin-right:auto; margin-top:0; width:90%;">
+<table id="secTable" name="secTable" cellSpacing="0" cellPadding="0" width="100%"  border="0"  align=center>
+    <tr  height="20" id="secTabletr">
+      <td class="sec2" onClick="change_n=0;secBoard(change_n)" width="187" align="center">购买服务</td>
+      <td class="sec1" onClick="change_n=1;secBoard(change_n)" width="187" align="center"><span class="sec2"></span>购买卡项</td>
+      <td class="sec1" onClick="change_n=2;secBoard(change_n)" width="187" align="center"><span class=sec2></span>消费卡项</td>
+      <td class="sec1" onClick="change_n=3;secBoard(change_n)" width="187" align="center"><span class="sec2"></span>购买产品</td>
+      <td class="sec1" onClick="change_n=4;secBoard(change_n)" width="187" align="center"><span class="sec2"></span>其他</td>
+      <td style="border-bottom:#999999 1px solid;" align="center">&nbsp;</td>
+    </tr>
+  </table>
+    <table class="main_tab" id="mainTable" height="200" cellSpacing="0" cellPadding="0" width="100%"  border="0"  align="center" >
+      <!--服务项目-->
+      <tbody style="display:none;">
+        <tr>
+          <td valign="top" align="left"><div id="plist_ser">
+              <table style="word-break:break-all;" height="25px" cellSpacing="0" cellPadding="0" width="98%" >
+                <tr>
+                  <td class="Listtitle2" align="center" width="3%">&nbsp;</td>
+                  <td  width="8%" align="center" class="Listtitle2">编号</td>
+                  <td  width="9%" align="center" class="Listtitle2">类型</td>
+                  <td  width="27%" align="center" class="Listtitle2">名称</td>
+                  <td  width="5%" align="center" class="Listtitle2">单价</td>
+                  <td  width="5%" align="center" class="Listtitle2">数量</td>
+                  <td  width="6%" align="center" class="Listtitle2">单位</td>
+                  <td  width="8%" align="center" class="Listtitle2">总价</td>
+                  <td  width="6%" align="center" class="Listtitle2">是否赠送</td>
+                  <td  width="7%" align="center" class="Listtitle2">操作</td>
+                </tr>
+              </table>
+            </div>
+            <div id="plist_ser2" class="overfY"> <span id="serviceslist" >
+              <table class="tableframe2" style="WORD-BREAK: break-all" width="98%" >
+                <tr class="listrow1" id="" onDblClick="editdetail('','','','','','');"  onmouseover="this.style.backgroundColor='#DAE2ED';" 
+  onmouseout="this.style.backgroundColor='#ffffff'" bgColor="#ffffff">
+                  <td class="listcellrow"  width="3%" height="25px"><input onKeyDown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}"  onblur="document.getElementById('').style.backgroundColor='#ffffff'"  onfocus="document.getElementById('').style.backgroundColor='#FFEA96'"   type="radio" value="" name="sale_list"></td>
+                  <td class="listcellrow"  width="10%" height="25px"></td>
+                  <td class="listcellrow"  width="15%"></td>
+                  <td class="listcellrow"  width="31%"></td>
+                  <td class="listcellrow"  width="8%"></td>
+                  <td class="listcellrow"  width="6%"></td>
+                  <td class="listcellrow"  width="6%"></td>
+                  <td class="listcellrow"  width="8%"></td>
+                  <td class="listcellrow"  width="6%"></td>
+                  <td class="listcellrow"  width="7%"><a onClick="del_salelist('');" href="#">删除</a></td>
+                </tr>
+              </table>
+          </span> </div></td>
+        </tr>
+      </tbody>
+      <!--项目卡-->
+      <tbody style="display: none;" >
+        <tr>
+          <td valign="top" >
+          	<div id="plist_sc">
+              <table style="WORD-BREAK: break-all" height="25px" cellSpacing="0" cellPadding="0" width="98%">
+                <tbody>
+                  <tr>
+                    <td class="Listtitle2" align="center" width="3%">&nbsp;</td>
+                  <td  width="8%" align="center" class="Listtitle2">编号</td>
+                  <td  width="9%" align="center" class="Listtitle2">类型</td>
+                  <td  width="27%" align="center" class="Listtitle2">名称</td>
+                  <td  width="5%" align="center" class="Listtitle2">单价</td>
+                  <td  width="5%" align="center" class="Listtitle2">数量</td>
+                  <td  width="6%" align="center" class="Listtitle2">单位</td>
+                  <td  width="8%" align="center" class="Listtitle2">总价</td>
+                  <td  width="6%" align="center" class="Listtitle2">是否赠送</td>
+                  <td  width="7%" align="center" class="Listtitle2">操作</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="plist_sc2" class="overfY">
+             <span id="cardlist" >
+              <table class="tableframe2" style="WORD-BREAK: break-all" width="98%" >
+                <tbody>
+                  <tr class="listrow1" id="" onDblClick="editdetail('','','','','','');"  onmouseover="this.style.backgroundColor='#DAE2ED';"  onmouseout="this.style.backgroundColor='#ffffff'" bgColor="#ffffff">
+                    <td class=listcellrow  width="3%" height="25px"><input onKeyDown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}"  onblur="document.getElementById('').style.backgroundColor='#ffffff'"  onfocus="document.getElementById('').style.backgroundColor='#FFEA96'"  type="radio" value="" name="sale_list"></td>
+                    <td class="listcellrow"  width="10%" height="25px"></td>
+                    <td class="listcellrow"  width="15%"></td>
+                    <td class="listcellrow"  width="31%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="7%"><a onClick="del_salelist('');" href="#">删除</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              </span></div></td>
+        </tr>
+      </tbody>
+      <!--疗程卡-->
+      <tbody style="display: none">
+        <tr>
+          <td vAlign="top" >
+          	<div id="plist_lch" >
+              <table style="WORD-BREAK: break-all" height="25px" cellSpacing="0" cellPadding="0" width="98%">
+                <tbody>
+                  <tr>
+                    <td class="Listtitle2" align="center" width="3%">&nbsp;</td>
+                  <td  width="8%" align="center" class="Listtitle2">编号</td>
+                  <td  width="9%" align="center" class="Listtitle2">类型</td>
+                  <td  width="27%" align="center" class="Listtitle2">名称</td>
+                  <td  width="5%" align="center" class="Listtitle2">单价</td>
+                  <td  width="5%" align="center" class="Listtitle2">数量</td>
+                  <td  width="6%" align="center" class="Listtitle2">单位</td>
+                  <td  width="8%" align="center" class="Listtitle2">总价</td>
+                  <td  width="6%" align="center" class="Listtitle2">是否赠送</td>
+                  <td  width="7%" align="center" class="Listtitle2">操作</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="plist_lch2" class="overfY">
+             <span id="consumelist" >
+              <table class="tableframe2" style="WORD-BREAK: break-all" width="98%">
+                <tbody>
+                  <tr class="listrow1" id="" onDblClick="editdetail('','','','','','');"  onmouseover="this.style.backgroundColor='#DAE2ED'; "onmouseout="this.style.backgroundColor='#ffffff'" bgColor="#ffffff">
+                    <td class="listcellrow"  width="3%" height="25px"><input onKeyDown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}"  onblur="document.getElementById('').style.backgroundColor='#ffffff'"  onfocus="document.getElementById('').style.backgroundColor='#FFEA96'" type="radio" value="" name="sale_list"></td>
+                    <td class="listcellrow"  width="10%" height="25px"></td>
+                    <td class="listcellrow"  width="15%"></td>
+                    <td class="listcellrow"  width="31%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="7%"><a onClick="del_salelist('');" href="#">删除</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              </span></div></td>
+        </tr>
+      </tbody>
+      <!--产品-->
+      <tbody style="display: none">
+        <tr>
+          <td vAlign="top" >
+          	<div id="plist_pro">
+              <table style="WORD-BREAK: break-all" height="25px" cellSpacing=0 cellPadding=0 width="98%" >
+                <tbody>
+                  <tr>
+                    <td class="Listtitle2" align="center" width="3%">&nbsp;</td>
+                  <td  width="8%" align="center" class="Listtitle2">编号</td>
+                  <td  width="9%" align="center" class="Listtitle2">类型</td>
+                  <td  width="27%" align="center" class="Listtitle2">名称</td>
+                  <td  width="5%" align="center" class="Listtitle2">单价</td>
+                  <td  width="5%" align="center" class="Listtitle2">数量</td>
+                  <td  width="6%" align="center" class="Listtitle2">单位</td>
+                  <td  width="8%" align="center" class="Listtitle2">总价</td>
+                  <td  width="6%" align="center" class="Listtitle2">是否赠送</td>
+                  <td  width="7%" align="center" class="Listtitle2">操作</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="plist_pro2" class="overfY">
+             <span id="producelist" >
+              <table class="tableframe2" style="WORD-BREAK: break-all" width="98%">
+                <tbody>
+                  <tr class="listrow1" id="" onDblClick="editdetail('','','','','','');"  onmouseover="this.style.backgroundColor='#DAE2ED';"   onmouseout="this.style.backgroundColor='#ffffff'" bgColor="#ffffff">
+                    <td class="listcellrow"  width="3%" height="25px"><input  onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}"   onblur="document.getElementById('').style.backgroundColor='#ffffff'"   onfocus="document.getElementById('').style.backgroundColor='#FFEA96'"  type="radio" value="" name="sale_list"></td>
+                    <td class="listcellrow"  width="10%" height="25px"></td>
+                    <td class="listcellrow"  width="15%"></td>
+                    <td class="listcellrow"  width="31%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="7%"><a onClick="del_salelist('');" href="#">删除</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              </span> </div></td>
+        </tr>
+      </tbody>
+      <!--其他-->
+      <tbody style="display: none;">
+        <tr>
+          <td vAlign="top" >
+          	<div id="plist_qt">
+              <table style="WORD-BREAK: break-all" height="25px" cellSpacing="0" cellPadding="0"  width="98%" >
+                <tbody>
+                  <tr>
+                    <td class="Listtitle2" align="center" width="3%">&nbsp;</td>
+                  <td  width="8%" align="center" class="Listtitle2">编号</td>
+                  <td  width="9%" align="center" class="Listtitle2">类型</td>
+                  <td  width="27%" align="center" class="Listtitle2">名称</td>
+                  <td  width="5%" align="center" class="Listtitle2">单价</td>
+                  <td  width="5%" align="center" class="Listtitle2">数量</td>
+                  <td  width="6%" align="center" class="Listtitle2">单位</td>
+                  <td  width="8%" align="center" class="Listtitle2">总价</td>
+                  <td  width="6%" align="center" class="Listtitle2">是否赠送</td>
+                  <td  width="7%" align="center" class="Listtitle2">操作</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="plist_qt2" class="overfY">
+             <span id="otherlist" >
+              <table class="tableframe2" style="WORD-BREAK: break-all" width="98%">
+                <tbody>
+                  <tr class="listrow1" id="" onDblClick="editdetail('','','','','','');"  onmouseover="this.style.backgroundColor='#DAE2ED';"
+onmouseout="this.style.backgroundColor='#ffffff'" bgColor=#ffffff>
+                    <td class="listcellrow"  width="3%" height="25px"><input  onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}"  onblur="document.getElementById('').style.backgroundColor='#ffffff'"  onfocus="document.getElementById('').style.backgroundColor='#FFEA96'"  type="radio" value="" name="sale_list"></td>
+                    <td class="listcellrow"  width="10%" height="25px"></td>
+                    <td class="listcellrow"  width="15%"></td>
+                    <td class="listcellrow"  width="31%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="8%"></td>
+                    <td class="listcellrow"  width="6%"></td>
+                    <td class="listcellrow"  width="7%"><a onClick="del_salelist('');" href="#">删除</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              </span> </div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="height:40px; padding-top:5px; margin-left:auto; margin-right:auto; font-size:12px;"> 
+      <table style="WORD-BREAK: break-all" height=""30px"" cellSpacing="0" cellPadding="0" width="100%" align="center">
+        <tbody>
+          <tr>
+            <td class="tableleft" width="94%" align="left" >请刷会员卡号：
+              <input name="membercard_no" id="membercard_no"  class="input"  onKeyPress="if (event.keyCode == 10 ||event.keyCode == 13 ) {changecustomerno(this.value);return false;}" size="12">
+              <input name="radio" type="radio" id="ismember" value="1"  onClick="changecustomerno(form1.membercard_no.value)">
+              会员
+              <label>
+                <input type="radio" name="radio" id="ismember" onClick="notmember()" value="0" checked>
+              </label>
+              散客
+              <input  type="button" name=save5 class="buttonsmall" value="购买商品" onClick="putpro()"  style="font-size:9pt" >
+              <input  type="button" name=save9 class="buttonsmall" value="购买服务" onClick="putser()" style="font-size:9pt" >
+              <input  type="button" name=save6 class="buttonsmall" value="购买卡项" onClick="putcard()" style="font-size:9pt" >
+              <input  type="button" name=save7 class="buttonsmall" value="消费卡项" onClick="putconsume()" style="font-size:9pt" >
+              <input  type="button" name=save8 class="buttonsmall" value="赠送产品" onClick="givingproceduce()" style="font-size:9pt" >
+              <input  type="button" name=save82 class="buttonsmall" value="会员事务" onClick="others()" style="font-size:9pt" >
+              <input  type="button" name=save822 class="buttonsmall" value="开卡"  onClick="creatmember()" style="font-size:9pt" >
+              <input  type="button" name=save8222 class="buttonsmall" value="消费券类"  onClick="putcouponconsume()" style="font-size:9pt" >
+            <input  type="button" name=storedvaluedcard1 class="buttonsmall" value="储值卡"  onClick="putstoredvaluedcard()" style="font-size:9pt" >
+            <strong>合计:<span  id="count_total">&nbsp;</span></strong><span  id="count_total"></span>
+            <input name="hidden" type="hidden" id='counttotal'/></td>
+            <td class="tableleft" width="6%" align="left" ><input class="buttonsmall" onclick=save() type=button value=" 收 银 "></td>
+		  </tr>
+			<tr>
+            <td height="20" align="left">&nbsp;&nbsp;<span class="style17" id="error" >&nbsp;</span></td>
+            <td  align="left">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="plist1" style=" margin-left:auto; margin-right:auto;   TOP: 265px">
+      <TABLE style="WORD-BREAK: break-all" align="center" height=25 cellSpacing=0 cellPadding=0 
+width="100%"  >
+  <TBODY>
+  <TR>
+    <TD class=Listtitle2 noWrap align=left width="2%">&nbsp;</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">单据编号</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">时间</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">顾客姓名</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">顾客级别</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">会籍卡剩余</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">预收款余额</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">定金余额</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">储值卡余额</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">项目卡剩余</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">收银员</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">应收</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">总收</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">现金</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">刷卡</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">其他</TD>    
+    <TD class=Listtitle2 noWrap align=middle width="5%">实收</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">状态</TD>
+    <TD class=Listtitle2 noWrap align=middle 
+width="5%">操作</TD></TR></TBODY></TABLE>
+    </div>
+   <DIV id=plist2 style=" margin-left:0px; margin-right:0px; height:220px; TOP: 290px ;">
+ <span id="selllist" style="OVERFLOW-Y: scroll; position:absolute; margin-top:8px; margin-left:0px; margin-right:0px; height:220px; TOP: 293px; width: 100%;">
+
+      <TABLE class="tableframe2" style="WORD-BREAK: break-all" width="98%" 
+  align="center"><TBODY>
+  <TR class="listrow1" id="" onDblClick="editdetail('','','','','','');" 
+  onmouseover="this.style.backgroundColor='#DAE2ED';" style="CURSOR: hand" 
+  onmouseout="this.style.backgroundColor='#ffffff'" bgColor=#ffffff>
+    <TD class=listcellrow align=middle width="2%" height=25>      <span class="listcellrow">
+      <input 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}" 
+      onblur="document.getElementById('').style.backgroundColor='#ffffff'" 
+      onfocus="document.getElementById('').style.backgroundColor='#FFEA96'" 
+      type=radio value="" name=sale_list />
+      </span></TD>
+    <TD class="listcellrow" align=middle width="7%" height=25></TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" noWrap align=middle width="7%">&nbsp;</TD>
+    <TD class="listcellrow" align=middle width="7%"><A 
+      onclick="del_salelist('');" 
+      href="#">删除</A></TD></TR></TBODY></TABLE>
+    </span></div></div>
+  </div>
+
+<DIV style="WIDTH: 100%; height:52px; BOTTOM:  0px; POSITION: absolute; left: 0px;TOP: 575px">
+<TABLE cellSpacing="1" cellPadding="0" width="100%" align="center" bgColor="#d4d4d4"
+border="0">
+  <TBODY>
+  <TR>
+    <TD align="left" bgColor="#f4f4f4" colSpan="4" height=52px>
+      <table cellSpacing="0" cellPadding="0" width="100%" border="0">
+              <tbody>
+                <tr>
+                  <td align="right" width="7%" height="26">顾客编号： </td>
+                  <td width="9%"><span id=customer_no> </span>
+                    <input class="inputright" type="hidden" name="customer_id" size="10"  value="[#customer_id#]" ></td>
+                  <td align="right" width="7%">顾客名称：</td>
+                  <td width="9%"><span id="customer_name"  >&nbsp;</span></td>
+                  <td align="right" height="26">预收款：</td>
+                  <td align="left" height="26"><span id="yufukuan">&nbsp;</span></td>
+                  <td align="right" width="5%">&nbsp;</td>
+                  <td align="right" width="12%">现金</td>
+                  <td align="right" width="11%">刷卡</td>
+                  <td align="right" width="11%">合计</td>
+                  <td align="right" width="9%">欠款</td>
+                  <td align="right" width="6%">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right" height="26">会员卡号： </td>
+                  <td height="26"><span id=showcardno></span></td>
+                  <td align="right">会员级别：</td>
+                  <td align="left"><span id="memcardlevel" >&nbsp;</span></td>
+                  <td align="right" width="5%">订金：</td>
+                  <td align="left" width="9%"><span id="deposit">&nbsp;</span></td>
+                  <td align="right" width="5%">当日：</td>
+                  <td align="right" width="12%">[#todayxianjinvalue#]</td>
+                  <td align="right" width="11%">[#todayyinkavalue#]</td>
+                  <td align="right" width="11%">[#todayincome#]</td>
+                  <td align="right" width="9%">[#todayown#]</td>
+                  <td align="right" width="6%">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right" height="26">所属门店：</td>
+                  <td align="left"><span id="agency_name" >&nbsp;</span></td>
+                  <td align="right">&nbsp;</td>
+                  <td align="left">&nbsp;</td>
+                  <td align="right"><span id="showdeposit">欠款：</span></td>
+                  <td align="left"><span id="salesowe">&nbsp;</span></td>
+                 <td align="right" width="5%">当月：</td>
+                 <td align="right" width="12%">[#thismonthxianjinvalue#]</td>
+                 <td align="right" width="11%">[#thismonthyinkavalue#]</td>
+                 <td align="right" width="11%"><span id="salesowe">&nbsp;[#thismonthincome#]</span></td>
+                 <td align="right" width="9%">[#thismonthown#]</td>
+                 <td align="right" width="6%">&nbsp;</td>
+                </tr>
+              </tbody>
+        </table></TD></TR></TBODY></TABLE></DIV>
+</FORM>
+</body>
+</html>
+ 

@@ -1,0 +1,89 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/editlib.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<style type="text/css">
+<!--
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!-- 
+
+function tourl(url)
+{
+	window.location.href=url;
+}
+
+function submit_save(){
+
+	 if(form1.warehouse_id.value==""){
+	 	  alert("请选择仓库");
+	 	  form1.warehouse_id.focus();
+	 	  return;
+	 }
+	 url='?action=add&warehouse_id='+form1.warehouse_id.value;
+	 tourl(url);
+     // form1.submit();
+
+}
+
+
+// -->
+</script>
+<BODY onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">库存盘点</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="?action=selectwarehouse" method="post" name="form1">
+  <table width="730" class=InputFrameMain cellspacing="0" cellpadding="0" border="0" height="104">
+      <tbody>
+	     <tr>
+          <td colspan="4" align="left"><TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>资料输入</TD>
+          <TD class=inputtitleright align=middle 
+            width=60>&nbsp;</TD>
+          <TD width="305" align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD>
+        </TR></TBODY></TABLE></td>
+        </tr>
+      <tr> 
+        <td colspan="4" height="10"></td>
+      </tr>
+        <tr class=InputFrameLine>
+          <td width=237 height="46" align=right class=form_label>选择要盘点的仓库：</td>
+          <td width="512" height="46" >
+            <select name="warehouse_id">     
+              [#warehouselist#]
+			      </select><span class=form_label>*</span>          </td>
+
+        </tr>
+  <tr>
+    <td colspan="2" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="进入" AccessKey=t  onClick="submit_save()"   ></td>
+    </tr>
+      </tbody>
+    </table>
+</form>
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

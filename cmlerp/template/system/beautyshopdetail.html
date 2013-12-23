@@ -1,0 +1,221 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="{path}js/calendar.js" 
+type=text/javascript></SCRIPT>
+<SCRIPT language=javascript> 
+function checkform()
+{
+	var employeesnumber = document.getElementById("employeesnumber").value;
+	var establishmentday = document.getElementById("establishmentday").value;
+	var areaid = document.getElementById("areaid").value;
+	var userid = document.getElementById("userid").value;
+    var shopname = document.getElementById("shopname").value;
+
+
+	if(shopname==null||shopname=="")
+	{
+		alert("美容院名称不能为空!");
+		return false;
+	}
+	if(userid==null||userid=="")
+	{
+		alert("管理人不能为空!");
+		return false;
+	}
+	if(areaid==null||areaid=="-1")
+	{
+		alert("请选择区域!");
+		return false;
+	}	
+
+	if(establishmentday==null||establishmentday=="")
+	{
+		alert("成立日期不能为空!");
+		return false;
+	}
+	if(employeesnumber==null||employeesnumber=="")
+	{
+		alert("员工人数不能为空!");
+		return false;
+	}
+
+	document.form1.submit();
+}
+  function select_customer(){   
+    window.open("select_customer.php","mywin", "resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50");   
+  } 
+</SCRIPT>
+</head>
+<body>
+<h3>{actionName}美容院信息</h3>
+<FORM id=form1 style="DISPLAY: inline" name="form" method="post"  action="beautyshop.php" >
+<TABLE cellSpacing=0 cellPadding=0 width="99%" align=center border=0>
+        <TBODY>
+<TR> <TD align=left bgColor=lightsteelblue colSpan=4>美院院信息：</TD>
+</TR>
+         <TR>
+          <TD align=right height=30>店名： </TD>
+          <TD align=left><input class=INPUT id=shopname maxlength=100 size=40 value="{shopname}" name=shopname>
+          *</TD>
+          <TD align=right height=30>特色项目：</TD>
+          <TD align=left><input class=INPUT id='uniqueitems'
+            maxlength=100 size=40 value='{uniqueitems}' name='uniqueitems'></TD>
+        </TR>
+         <TR>
+          <TD align=right height=30>店址 ：</TD>
+          <TD align=left><input class=INPUT id=address maxlength=100 size=40 value="{address}" name=address></TD>
+          <TD align=right height=30>从业年数：</TD>
+          <TD align=left><input class=INPUT id='years'
+            maxlength=100 size=40 value='{years}' name='years'></TD>
+        </TR>
+        <TR>
+          <TD align=right height=30>E-mail：</TD>
+          <TD align=left><input class=INPUT id='email'
+            maxlength=100 size=40 value='{email}' name='email'></TD>
+          <TD align=right width="10%" height=30>电话：</TD>
+          <TD align=left width="40%"><input class=INPUT id='tel'
+            maxlength=100 size=40 value='{tel}' name='tel'></TD>	
+        </TR>
+         <TR>
+          <TD align=right height=30>地区：</TD>
+          <TD align=left><select id='areaid'  name='areaid'>
+            <option value='0' selected>按区域查看</option>
+            <!-- BEGIN diqu -->
+            <!-- END diqu -->
+          </select>
+*</TD>
+          <TD align=right height=30>员工人数： </TD>
+          <TD align=left><input class=INPUT id=employeesnumber 
+            maxlength=100 size=40 value="{employeesnumber}" name=employeesnumber> 
+           *</TD>
+        </TR>
+         <TR>
+          <TD align=right height=30>电脑熟练程度 ：</TD>
+          <TD align=left><input class=INPUT id=proficientofpc maxlength=100 size=40 value="{proficientofpc}" name=proficientofpc></TD>
+          <TD align=right height=30>电脑台数： </TD>
+          <TD align=left><input class=INPUT id=computernumber 
+            maxlength=100 size=40 value="{computernumber}" name=computernumber></TD>
+        </TR>
+         <TR>
+          <TD align=right height=30>上网环境 ： </TD>
+          <TD align=left><input class=INPUT id=internetenvironment maxlength=100 size=40 value="{internetenvironment}" name=internetenvironment></TD>
+          <TD align=right height=30>开店时间：</TD>
+          <TD align=left><input class=INPUT id='establishmentday'
+            maxlength=100 size=40 value='{establishmentday}' name='establishmentday' onfocus="calendar(EventUtil.getEvent().target)">
+* </TD>
+        </TR>
+         <TR>
+          <TD align=right height=30>店面管理方式<strong> </strong>：</TD>
+          <TD align=left><input class=INPUT id=modeofadmini maxlength=100 size=40 value="{modeofadmini}" name=modeofadmini></TD>
+          <TD align=right height=30>管理员：</TD>
+          <TD align=left><input type="hidden" class=INPUT id=userid maxlength=7 
+            size=3 name=userid value="{userid}">
+			<!-- BEGIN user -->
+            <INPUT class=INPUT id=username maxLength=100 
+            size=40 name=username value=" {username} ">
+            <!-- END user -->
+            <span class="crm_tdright">
+            <INPUT class=submit id=select_customer2 title=选择执行员工！ onClick="window.open('select_user.php','','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50')" type=button value=选择 name=select_customer2>
+*</span></TD>
+         </TR>
+		          <TR>
+          <TD align=right height=30>经营面积 ： </TD>
+          <TD align=left><input class=INPUT id=operatingarea  maxlength=100 size=40 value="{operatingarea}" name=operatingarea></TD>
+          <TD align=right height=30>床位数：</TD>
+          <TD align=left><input class=INPUT id='bedsnumber'
+            maxlength=100 size=40 value='{bedsnumber}' name='bedsnumber'>
+ </TD>
+        </TR>
+		         <TR>
+          <TD align=right height=30>负责人： </TD>
+          <TD align=left><input class=INPUT id=chargeman maxlength=100 size=40 value="{chargeman}" name=chargeman></TD>
+          <TD align=right height=30>&nbsp;</TD>
+          <TD align=left>&nbsp;</TD>
+        </TR>
+		<TR>
+          <TD align=left bgColor=lightsteelblue colSpan=4>店主信息： {agentid}
+            <input name='action' type="hidden" value="{action}">
+      <input name='updid' type='hidden' value='{updid}'></TD></TR>
+        <TR>
+          <TD align=right width="13%" height=30>店主姓名</TD>
+          <TD align=left width="37%"><input class=INPUT id=shopkeeper
+            maxlength=100 size=40 value="{shopkeeper}" name=shopkeeper></TD>
+          <TD align=right width="10%" height=30>&nbsp;</TD>
+		  	
+          <TD align=left width="40%">&nbsp;</TD>
+        </TR>
+		        <TR>
+          <TD align=right height=30>出生年月</TD>
+          <TD align=left><input class=INPUT id=birthday
+            maxlength=100 size=40 value="{birthday}" name=birthday onfocus="calendar(EventUtil.getEvent().target)">
+          *</TD>
+
+          <TD align=right height=30>性别： </TD>
+          <TD align=left><select name="select">
+            <option value="女">女</option>
+            <option value="男">男</option>
+          </select></TD>
+        </TR>
+        <TR>
+          <TD align=right height=30>地址： </TD>
+          <TD align=left><input class=INPUT id=nativeplace
+            maxlength=100 size=40 value="{nativeplace}" name=nativeplace></TD>
+
+          <TD align=right height=30>邮编：</TD>
+          <TD align=left><input class=INPUT id='zipcode'
+            maxlength=100 size=40 value='{zipcode}' name='zipcode'></TD>
+        </TR>
+
+
+        <TR>
+          <TD align=right width="13%" height=30>QQ：</TD>
+          <TD align=left width="37%">
+			<input class=INPUT id='qq' maxlength=100 size=40 value='{qq}' name='qq'>		</TD>
+          <TD align=right height=30>手机：</TD>
+          <TD align=left><input class=INPUT id='handphone'
+            maxlength=100 size=40 value='{handphone}' name='handphone'></TD>
+        </TR>
+         <TR> <TD align=left bgColor=lightsteelblue colSpan=4>&nbsp;</TD></TR>
+        <TR>
+          <TD align=right width="13%" height=80>美容院简介：</TD>
+          <TD align=left colSpan=3><p>
+            <TEXTAREA id=profile name=profile rows=10 cols=90>{profile}</TEXTAREA>
+          </p>
+            <p>&nbsp; </p></TD></TR><TR>
+          <TD align=right width="13%" height=80>主要服务项目及收费：</TD>
+          <TD align=left colSpan=3><TEXTAREA id=memo name=memo rows=15 cols=90>{memo}</TEXTAREA></TD></TR>
+        <TR>
+          <TD align=middle colSpan=4><input type="button" name="Submit2" value=" 提 交 " onclick="return checkform();">
+            &nbsp; 
+            <INPUT class=button id=re type=reset value=" 重 置 " name=re>
+            &nbsp;
+            <INPUT name="button" type=button class=button id=re2 onclick="window.location ='beautyshop.php'" value=" 返回 "></TD></TR></TABLE>
+        </TD></TR></FORM>
+<table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+<tr class="tdBgColor">
+    <td colspan="11">联系人管理<SPAN id=PPClass_Container85_Sale_ID>&nbsp;</SPAN></td>
+  </tr>
+  <tr align="center" class="tabTh">
+    <td width="5%">ID: </td>
+    <td width="12%">联系人姓名</td>
+    <td width="14%">手机</td>
+    <td width="16%">电话</td>
+    <td width="16%">地址</td>
+    <td width="13%">Email</td>
+    <td width="13%">qq</td>
+    <td width="5%">编辑</td>
+    <td width="6%">删除</td>
+  </tr>
+  <!-- BEGIN contact -->
+  <!-- END contact -->
+  
+</table>
+</body>
+</html>

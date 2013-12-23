@@ -1,0 +1,301 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<link href="[path]css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=javascript src="[path]js/calendar.js" 
+type=text/javascript></SCRIPT>
+<script type="text/javascript">
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#F3F3F3'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function datesearch()
+{ 
+    var datebg=document.getElementById("datebg").value;
+	var dateend=document.getElementById("dateend").value;
+	window.location.href="?datebg="+datebg+"&dateend="+dateend;
+	
+}
+function tourl(url)
+{
+	window.location.href=url;
+}
+
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}	
+
+
+		function PPClass_IsNextClass_85(ClassID){
+			for(var i=0;i<PPClass_Array_85.length;i++){
+				if(PPClass_Array_85[i][0]==ClassID){return true;}
+			}
+			return false;
+		}
+		
+		function PPClass_GetParentID_85(ClassID){
+			for(var i=0;i<PPClass_Array_85.length;i++){
+				if(PPClass_Array_85[i][1]==ClassID){return PPClass_Array_85[i][0];}
+			}
+			return -1;
+		}
+		
+		function PPClass_DrawLists_85(SelectName,ClassID,Mode,Html,TheOption){
+			var ParentID=PPClass_GetParentID_85(ClassID);
+			var TheSelected="";
+			var HtmlCode="";
+			PPClass_AllID_85+="," + ClassID;
+			ParentID=(ParentID==0) ? -1:ParentID;
+			HtmlCode="<select name=\""+SelectName+"_PPST_85\" id=\""+SelectName+"_PPST_85\"  onChange={javascript:PPClass_DrawLists_85(\""+SelectName+"\",this.value.split(\"|\")[0],"+Mode+",\"\",\""+TheOption+"\")}>\n";
+			HtmlCode+="<option value=\""+ParentID+"\">"+PPClass_Tips_85+"</option>\n";
+			ParentID=(ParentID==-1) ? 0:ParentID;
+			for(var i=0;i<PPClass_Array_85.length;i++){
+				if(PPClass_Array_85[i][1]==ClassID){
+					TheSelected=" selected";
+					switch(Mode){
+					case 0:
+						PPClass_Value_85+="," + PPClass_Array_85[i][1];
+						break;
+					case 1:
+						PPClass_Value_85+="," + PPClass_Array_85[i][2];
+						break;
+					case 2:
+						PPClass_Value_85+="," + PPClass_Array_85[i][1] + "|" + PPClass_Array_85[i][2];
+					break;
+					}
+				}else{
+					TheSelected="";
+				}
+				if(PPClass_Array_85[i][0]==ParentID){HtmlCode+="<option value=\""+PPClass_Array_85[i][1]+"|"+PPClass_Array_85[i][2]+"\""+TheSelected+">"+PPClass_Array_85[i][2]+"</option>\n";}
+			}
+			HtmlCode+="</select>\n"+Html
+			if(ParentID==0){
+				if(PPClass_IsNextClass_85(PPClass_AllID_85.split(",")[1])){
+					HtmlCode+="<select name=\""+SelectName+"_PPST_85\"  id=\""+SelectName+"_PPST_85\" onChange={javascript:PPClass_DrawLists_85(\""+SelectName+"\",this.value.split(\"|\")[0],"+Mode+",\"\",\""+TheOption+"\")}>\n"
+					HtmlCode+="<option value=\""+ParentID+"\">"+PPClass_Tips_85+"</option>\n";
+					for(var i=0;i<PPClass_Array_85.length;i++){
+						if(PPClass_Array_85[i][0]==PPClass_AllID_85.split(",")[1]){HtmlCode+="<option value=\""+PPClass_Array_85[i][1]+"|"+PPClass_Array_85[i][2]+"\">"+PPClass_Array_85[i][2]+"</option>\n";}
+					}
+					HtmlCode+="</select>\n"
+				}
+				PPClass_AllID_85="";
+				var Value=PPClass_Value_85.split(",")[1];
+				if(Value==null) Value="";
+				HtmlCode+="<input type=\"hidden\" name=\""+SelectName+"\" id=\""+SelectName+"\" value=\""+Value+"\" />"
+				PPClass_Value_85="";
+				document.getElementById("PPClass_Container85_"+SelectName).innerHTML=HtmlCode;
+			}else{
+				PPClass_DrawLists_85(SelectName,ParentID,Mode,HtmlCode,TheOption);
+			}
+		}
+		function ListInClass(o){
+		var v=document.getElementById("Sale_ID").value;
+		if (v==""){
+			alert("你还没有选择分类");
+			return false;
+		}else if(o=="listclass"){
+			window.location.href="?qgtype="+o+"&Sale_ID="+v;
+		}else{
+			return true;
+		}
+	   } 
+	function CheckSubmitOne(o){
+		var checkBox = document.getElementsByName("TheID[]");
+		var temp = false;
+		for (var i = 0; i < checkBox.length; i++){
+			if (checkBox[i].checked){temp=true;}
+		}
+		if (temp==false){alert("你需要至少选择一条信息..");return false;
+		}else{return confirm("你确认你要执行该操作吗？");	}
+	}
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByTagName("input");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	var url = "?action=del&delid="+id+"&qgtype="+qgtype;
+	if(qgtype == "delete")
+	{
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else if(qgtype=="Move")
+	{v=document.getElementById("Sale_ID").value;
+	 url="Acion=Move&id="+id+"Sale_id="+v;
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else
+	{
+		tourl(url);
+	}
+}
+</script>
+<style type="text/css">
+<!--
+body {
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 20px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+}
+form {
+	margin: 0px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+-->
+</style>
+</head>
+<body>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="94%"><form  name="search" method="POST" action="agent.php">
+ 搜索：
+   <select name="cateid" id="cateid">
+     <option value=""> 请选择分类</option>
+     <option value="agentid" >ID</option>
+     <option value="agentname">代理商名字</option>
+     <option value="brand">代理品牌</option>
+     <option value="userid">管理人ID</option>
+   </select>	
+  <input type="text" name="keywords" id="keywords" value="">
+	  <input type="submit" value="搜索">
+<input type=button onclick=window.location.href('agent.php') value='显示全部'>
+    按时间搜索：从
+      <input name="datebg" type="text" id="datebg" onfocus="calendar(EventUtil.getEvent().target)" size="15" value="[datebg]">
+      到
+      <input name="dateend" type="text" id="dateend" onfocus="calendar(EventUtil.getEvent().target)" size="15" value="[dateend]">
+    <input name="button" type="button" value="搜索" onClick="datesearch()">
+    </form></td>
+    <td width="0%">&nbsp;</td>
+    <td width="6%"><div align="right">[add]</div></td>
+  </tr>
+</table>
+<form action="?Action=DoAllNews" method="post" onsubmit="return CheckSubmitOne()">
+<table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+   <tr align="center" class="tabTh">
+     <td width="5%">ID:
+     <input name="checkbox" type="checkbox" onclick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+     <td width="7%">客户名称</td>
+     <td width="10%">
+
+	 <select name="classid" onChange="tourl('?cateid=areaid&keywords='+this.value)">
+	   <option value='0' selected>按区域查看</option><!-- BEGIN diqu --><!-- END diqu --></select>
+	 </td>
+     <td width="42%">地址</td>
+    
+     <td width="10%">创建时间</td>
+     <td width="10%">员工人数</td>
+     <td width="6%">管理人</td>
+    
+     <td width="5%">修改</td>
+     <td width="5%">删除</td>
+   </tr>
+<!-- BEGIN agent -->
+   <tr class="tdBgColor"  onMouseOver="TrOver(this)" onMouseOut="TrOut(this)">
+     <td>[agentid]
+       <input name="The_ID[]" type="hidden" value="[agentid]" />
+     <input name="TheID[]" type="checkbox" value="[agentid]" /></td>
+     <td>[agentname]</td>
+     <td>	
+	 <!-- BEGIN area -->
+		[area_name]
+	 <!-- END area --></td>
+
+     <td>[address]</td>
+
+	     <td>[establishmentday]</td>
+         <td align="center">[employeesnumber]</td>
+         <td align="center"> 
+		 <!-- BEGIN user -->
+		[username]
+	     <!-- END user --></td>
+         
+         <td align="center">[upd]</td>
+         <td align="center">[del]</td>
+  </tr>
+<!-- END agent -->
+
+<tr class="tdBgColor">
+     <td width="5%">ID:<input type="checkbox" onclick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+     <td colspan="11">
+
+
+		<select name="Sale_ID" >
+          <option value='0' selected>按处理人查看</option>
+          <!-- BEGIN sale -->  [arr] <!-- END sale -->
+        </select>
+		<input name="button" type="button" onclick="return ListInClass('listclass')" value="查看该分类">
+		&nbsp;
+       <input type="submit" name="submit" class="InputSubmit"  onclick="return ListInClass('Move')" value="移至该员工"> 
+	     &nbsp;
+        <input type=button onclick=window.location.href('agent.php') value=' 显示全部 '>
+        &nbsp;&nbsp;
+      <input name="button" type="button" onclick="qg_pl('delete')" value="批量删除">      </td>
+    </tr>
+</table>
+</form>
+<div align="right">[pagelist]</div>
+</body>
+</html>

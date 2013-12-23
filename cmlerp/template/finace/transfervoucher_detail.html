@@ -1,0 +1,735 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<LINK media=screen 
+href="[#path#]css/flexselect.css" type=text/css 
+rel=stylesheet>
+<SCRIPT language=javascript src="[#path#]js/editlib.js"></SCRIPT>
+<SCRIPT language=javascript src="[#path#]js/calendar.js" type=text/javascript></SCRIPT>
+<SCRIPT src="[#path#]js/jquery.min.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="[#path#]js/liquidmetal.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="[#path#]js/jquery.flexselect.js" 
+type=text/javascript></SCRIPT>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("select[class*=flexselect]").flexselect();
+        $("input:text:enabled:first").focus();
+        $("form").submit(function() {
+          alert($(this).serialize());
+          return false;
+        });
+      });
+	  
+	  
+function viewbill(sellid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../analysis/viewbill.php?sellid="+sellid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+function viewpurchreturnbill(purchid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../procurement/purchreturnhistory.php?action=viewbill&updid="+purchid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+function viewpurchbill(purchid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../procurement/viewpurchbill.php?purchid="+purchid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+ function viewcheckstockbill(purchid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../stock/checkstockhistory.php?action=viewbill&updid="+purchid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ }
+   function viewlossregisterbill(purchid){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../stock/lossregisterhistory.php?action=viewbill&updid="+purchid ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ 
+				 
+ } 
+    </script>
+
+<style type="text/css">
+<!--
+
+-->
+</style>
+</HEAD>
+<script language=javascript>
+<!--
+function bb(obj1,obj2)
+{
+	 
+		if(obj1.style.display == "none"){
+			obj1.style.display = "";
+			obj2.src = "[#path#]img/menu_open.gif";
+		}else{
+			obj1.style.display="none";
+			obj2.src = "[#path#]img/menu_close.gif";
+		}
+}
+var kk=0;
+
+function viewall(count)
+{
+	
+	if(kk == 0){
+		for (i=1;i<=count;i++){
+			temptr = "tr" + i;
+			tempimg = "img" + i;
+			 
+				document.getElementById(temptr).style.display = "";
+				document.getElementById(tempimg).src = "[#path#]img/menu_open.gif";
+				
+		}
+		imgb = "imgb";
+		imgb1 = "imgb1";
+		document.getElementById(imgb).src = "[#path#]img/openb.gif";
+		document.getElementById(imgb1).src = "[#path#]img/openb.gif";
+		kk = 1;
+	}else{
+		for (i=1;i<=count;i++){
+			temptr = "tr" + i;
+			tempimg = "img" + i;
+				document.getElementById(temptr).style.display = "none";
+				document.getElementById(tempimg).src = "[#path#]img/menu_close.gif";
+		}
+		imgb = "imgb";
+		imgb1 = "imgb1";
+		document.getElementById(imgb).src = "[#path#]img/closeb.gif";
+		document.getElementById(imgb1).src = "[#path#]img/closeb.gif";
+	    kk = 0;
+	}
+}
+
+function promem(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getobject.php?template=getobject&&id="+form1.cobjecttype_id.value;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.cobjectid.value    = arrItems[0];     
+     form1.cobject_name.value  = arrItems[1];
+	  
+}
+function audit(){
+	 // url="?action=audit&id="+form1.updid.value;
+		question = confirm("确认审核该凭证吗？");
+		if (question != "0")
+		{
+			 
+			form1.action.value='audit';
+			
+			form1.submit();
+			//tourl(url);
+		}		
+	}
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}	
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	var url = "?action=del&transfervoucherdetail_id="+id;
+	if(qgtype == "delete")
+	{
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{ 
+			tourl(url);
+		}
+	}
+	else if(qgtype=="Move")
+	{v=document.getElementById("Sale_ID").value;
+	 url="Acion=Move&id="+id+"Sale_id="+v;
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else
+	{
+		tourl(url);
+	}
+}
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+} 
+function putsupp(){
+   var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+   var szRef = "../getdata/getsuppliers.html";
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   
+     arrItems = strItem.split("@@@");
+     form1.suppliers_id.value    = arrItems[0];    
+	 form1.suppliers_no.value  = arrItems[1];
+     form1.suppliers_name.value  = arrItems[2];
+
+}
+function putpro(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getproduce.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   arrItems = strItem.split("@@@");
+   form1.cproduce_id.value = arrItems[0] ;  
+   form1.cproduce_no.value = arrItems[1] ;  
+   form1.cproduce_name.value = arrItems[2] ; 
+      form1.ccode.value = arrItems[3] ;  
+   form1.cprice.value = arrItems[4] ;  
+   form1.cstandardunit.value = arrItems[5] ;   
+} 
+
+function tourl(url)
+{
+	window.location.href=url;
+}
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#DAE2ED'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function changetich(o){
+comsavet
+document.getElementById("commission").value = document.getElementById("price").value*o.value/100;
+
+}
+function changetich(o){
+document.getElementById("commission").value = document.getElementById("price").value*o.value/100;
+
+}
+function changetichu(o){
+document.getElementById("ucommission").value = document.getElementById("price").value*o.value/100;
+
+}
+function changep(o){
+document.getElementById("compcent").value = 100*o.value/document.getElementById("price").value;
+
+}
+function changeup(o){
+document.getElementById("ucompcent").value = 100*o.value/document.getElementById("price").value;
+}
+function changepc(o){
+document.getElementById("commission").value = document.getElementById("compcent").value*o.value/100;
+document.getElementById("ucommission").value = document.getElementById("ucompcent").value*o.value/100;
+}
+  function search_customer(){ 
+   var produce_id=document.getElementById("cproduce_id").value;  
+   var produce_no=document.getElementById("cproduce_no").value;  
+   if(produce_id!=""){
+
+   window.open('select_produce.php?produce_id='+produce_id+'&keywords='+encodeURI(produce_id),'','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50');
+  }
+  else{
+     window.open('select_produce.php','','resizable=1,scrollbars=1,status=no,toolbar=no,menu=no,width=500,height=400,left=150,top=50');
+
+  }
+  }
+function input_focus(){
+var gg = 1;
+if (gg == 1){
+form1.no.focus();
+ }
+}
+
+var requestSubmitted = false;
+function importexcel(){
+	 if(form1.suppliers_id.value==""){
+	 	  alert("请选择供应商");
+	 	  form1.suppliers_id.focus();
+	 	  return;
+	 }
+	 if(form1.warehouse_id.value==""){
+	 	  alert("请选择仓库");
+	 	  form1.warehouse_id.focus();
+	 	  return;
+	 }	 
+/*	if(form1.employee_id.value==""){
+	 	  alert("请选择经手人");
+	 	  form1.employee_id.focus();
+	 	  return;
+	 }*/
+	tourl('produceimport.php?suppliers_id='+form1.suppliers_id.value+'&warehouse_id='+form1.warehouse_id.value+'&employee_id='+form1.employee_id.value+'&date='+form1.date.value);
+}
+function submit_save(){
+
+	 if(form1.transfervoucher_no.value==""){
+	 	  alert("请填单据编号");
+	 	  form1.transfervoucher_no.focus();
+	 	  return;
+	 }
+ 
+ 
+	 	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   form1.subtype.value=1;
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+  form1.issave.value=1;
+  form1.submit();
+}
+
+
+function submit_comsave(){
+	var idarray = new Array();//定义一个数组
+	//var cv = document.getElementsByName("The_ID[]");
+	var m = 0;
+/*	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+
+				idarray[m] = cv[i].value;
+				if(form1.con_act.value=='add'){
+				if(form1.cproduce_id.value==cv[i].value)
+				{
+				alert('已添加该商1品');
+				return
+				}
+
+				}
+				else if(form1.con_act.value=='upd'&&form1.cupdid.value!=form1.cproduce_id.value){
+				if(form1.cproduce_id.value==cv[i].value)
+				{
+				alert('已添加该商品2');
+				return
+				}
+				}
+				m++;
+				
+		}
+	}*/
+	
+	
+	 if(form1.transfervoucher_no.value==""){
+	 	  alert("请填单据编号");
+	 	  form1.transfervoucher_no.focus();
+	 	  return;
+	 }
+ 	 if(form1.caccounttitle_id.value==""){
+	 	  alert("请选择会计科目");
+	 	  form1.caccounttitle_id.focus();
+	 	  return;
+	 }
+/*	 	  if(form1.employee_id.value==""){
+	 	  alert("请选择经手人");
+	 	  form1.employee_id.focus();
+	 	  return;
+	 }*/
+ 
+
+	form1.subtype.value=2;
+ 
+	  	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+   	//window.location.href='services.php?action=add&produce_id='+produce_id+'&std_consumption'+std_consumption+'&memo'+memo;
+	   form1.submit();
+}
+function submit_del(){
+    if (confirm("是否删除该记录？")) {
+        getNews(form1.id.value);
+    }
+} 
+
+function InitAjax()
+{
+　var ajax=false; 
+　try { 
+　　ajax = new ActiveXObject("Msxml2.XMLHTTP"); 
+　} catch (e) { 
+　　try { 
+　　　ajax = new ActiveXObject("Microsoft.XMLHTTP"); 
+　　} catch (E) { 
+　　　ajax = false; 
+　　} 
+　} 
+　if (!ajax && typeof XMLHttpRequest!='undefined') { 
+　　ajax = new XMLHttpRequest(); 
+　} 
+　return ajax;
+}
+
+function getNews(newsID)
+{
+　//如果没有把参数newsID传进来
+　if (typeof(newsID) == 'undefined')
+　{
+　　return false;
+　}
+  var postStr = "id="+ newsID;
+
+　//需要进行Ajax的URL地址
+　var url = "../ajaxread/readdelaccount.php";
+　//实例化Ajax对象
+　var ajax = InitAjax();
+　//使用POST方式进行请求
+　ajax.open("POST", url, true); 
+  //定义传输的文件HTTP头信息
+　ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+　//发送POST数据
+　ajax.send(postStr);
+　//获取执行状态
+　ajax.onreadystatechange = function() { 
+　　//如果执行是状态正常，那么就把返回的内容赋值给上面指定的层
+　　if (ajax.readyState == 4 && ajax.status == 200) {  
+       if(ajax.responseText=='0'){
+          form1.action.value = "delete";
+          sendingbg.style.display ="";
+          sendingdel.style.display ="";
+	        form1.submit();
+       }else{
+          alert("该帐户已经有历史记录，不能删除");
+       }
+　　}
+　}
+  //发送空
+　ajax.send(null); 
+}
+
+function help(){  
+   if(document.getElementById("helpid").style.pixelHeight == 0 &&  document.getElementById("helpid").style.display == "none"){      
+     document.getElementById("helpid").style.display ="";
+	   ChS();
+   }else{   
+	   HhS();    	  
+   }
+}
+
+function ChS(){
+  if(helpid.style.pixelHeight<230){
+     helpid.style.pixelHeight+=10;setTimeout("ChS()",0.5);
+  } 
+}
+
+function HhS(){
+  if(helpid.style.pixelHeight > 0){
+    helpid.style.pixelHeight-=10;setTimeout("HhS()",0.5);
+  }
+  if(helpid.style.pixelHeight == 0){
+    document.getElementById("helpid").style.display ="none";
+  }
+}
+function counttotal(){
+if(document.getElementById('cprice').value!=''){
+ document.getElementById('corderprice').value = parseFloat(document.getElementById('cprice').value)*parseFloat(document.getElementById('cdiscount').value)/10;
+ }	
+	 if(document.getElementById('corderprice').value!=''&&document.getElementById('cnumber').value!=''){
+	 document.getElementById('ctotalacount').value = parseFloat(document.getElementById('corderprice').value)*parseFloat(document.getElementById('cnumber').value);
+	 }
+	}
+// -->
+</script>
+<BODY onload=input_focus() topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">转账凭证</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="transfervoucher.php" method="post" name="form1">
+            <input name='action' id='action' type="hidden" value="[#action#]">
+    <input name='updid' type='hidden' value='[#updid#]'>
+    <input name='issave' type='hidden' value='0'>
+    <span class="inputtitleright">
+    <input name='subtype'  type="hidden" id="subtype" value="1">
+    </span>
+    <table width="98%" border="0" cellspacing="0" cellpadding="0"  class="table_bgcolor">
+        <tr>
+        <td class=button_labelleft></td>
+        <td class=button_label><div align="left">
+          <input type=button name=save32 class=button_new value="     帮助"   AccessKey=h  onClick="javascript:help()" style="font-size:9pt"  onMouseOver="this.style.backgroundImage='url([#path#]img/new_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/new.jpg)'">
+          <input type=button name=save3 class=button_save value="     保存" AccessKey=s  onClick="submit_save()" style="font-size:9pt" [#savedisabled#] onMouseOver="this.style.backgroundImage='url([#path#]img/save_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/save.jpg)'">
+          <input type=button name=save5 class=button_save [#auditdisabled#] value="     审核" accesskey=s  onClick="audit()" style="font-size:9pt;display:[#canaudit#]" onMouseOver="this.style.backgroundImage='url([#path#]img/save_sel.jpg)'"  onMouseOut="this.style.backgroundImage='url([#path#]img/save.jpg)'"> 
+          <INPUT class=button_reset name=qqq type=reset value="     撤销" AccessKey=z style="font-size:9pt" onMouseOver="this.style.backgroundImage='url([#path#]img/reset_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/reset.jpg)'">
+          <input type=button name=rst class=button_recovery value="     返回" AccessKey=q style="font-size:9pt" onClick="javascript:location='?'" onMouseOver="this.style.backgroundImage='url([#path#]img/recovery_sel.jpg)'"  onmouseout="this.style.backgroundImage='url([#path#]img/recovery.jpg)'">
+        </div></td>
+        <td class=button_labelright></td>
+      </tr>
+    </table> 
+    <table width="750" class=InputFrameMain cellspacing="0" cellpadding="0" border="0" height="153">
+      <tbody>
+	     <tr>
+          <td height="23" colspan="4" align="left"><TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD class=inputtitle align=middle width=150>资料输入</TD>
+          <TD class=inputtitleright align=middle 
+            width=60><b><font color="#FF0000" class="error">[#error#]</font></b></TD>
+          <TD width="110" align=middle><FONT 
+      color=#ff0000><B></B></FONT></TD>
+        </TR></TBODY></TABLE></td>
+        </tr>
+      <tr> 
+        <td colspan="4" height="10"></td>
+      </tr>
+        <tr >
+          <td height="30" align=right class=form_label>传票号码：</td>
+          <td height="30" class="InputFrameLine" ><input class=input style="ime-mode:disabled" type="text" name="transfervoucher_no" size="20" maxlength="20" value="[#transfervoucher_no#]">
+            <span class="form_label">*</span></td>
+          <td width=87 height="30" align="right" class=form_label>录单日期：</td>
+          <td width="297" height="30" ><INPUT  class=input_disabled   name=creattime  value="[#creattime#]" size="20"  readonly="1" maxlength=30></td>
+        </tr>
+        <tr class=InputFrameLine>
+          <td height="30" align=right class=form_label>录单人：</td>
+          <td height="30"><input class=input_disabled type="text" name="man" size="10" maxlength="20" value="[#man#]" readonly="1"></td>
+          <td height="30" align="right" class=form_label>传票日期：</td>
+          <td height="30" ><input    name=date onFocus="calendar(EventUtil.getEvent().target)" value="[#date#]" size="10" maxlength=30>
+            <INPUT type=hidden name=employee_id value="[#employee_id#]">
+            <input class=input_disabled type="hidden" name="employee_name" size="10" maxlength="20" value="[#employee_name#]" readonly="1">
+            <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putsta() type="hidden" value=查找 name=xuan></td>
+        </tr>
+        <tr class=InputFrameLine>
+          <td height="30" align=right class=form_label>审核人：</td>
+          <td height="30"><input class=input_disabled type="text" name="auditor_name" size="10" maxlength="20" value="[#auditor_name#]" readonly="1"></td>
+          <td height="30" align="right" class=form_label>来源：</td>
+          <td height="30"  >[#frombill#]</td>
+        </tr>
+        <tr class=InputFrameLine>
+          <td width=115 height="30" align=right class=form_label>备注</td>
+          <td height="30" colspan="3" ><textarea class=inputarea name="abstract"  wrap="virtual" rows="6">[#abstract#]</textarea></td>
+        </tr>
+      </tbody>
+    </table>
+<table width="750" border="0" cellspacing="1"  style="display:[#datashow#]" class=tableborder>
+	  <tr class=listtitle>
+        <td width="22" align="center" >
+		<a style="CURSOR: hand" onClick="viewall([#recordcount#])"> 
+		<img src="[#path#]img/closeb.gif" width="16" height="16" id=imgb></a>		</td>
+        <td align="center" ><input name="checkbox" type="checkbox" onClick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+        <td align="center" class="white_word">科目代码</td>
+        <td align="center" class="white_word">科目名称</td>
+        <td align="center" class="white_word">对象类别</td>
+        <td align="center" class="white_word">对象名称</td>
+		<td align="center" class="white_word">借方</td>
+        <td align="center" class="white_word">贷方</td>
+          
+        <td align="center" class="white_word">操作</td>
+	  </tr>
+      <!-- BEGIN mainlist -->
+	  <tr onMouseOver="TrOver(this)" onMouseOut="TrOut(this)" bgcolor="#F3F3F3">
+        <td align="center" ><a style="CURSOR: hand" onClick="bb([#trid#],[#imgid#])"><img id=[#imgid#] src="[#path#]img/menu_close.gif" width="16" height="16" ></a></td>
+	  	  <td width="20" align="center" >
+	     <input name="The_ID[]" type="checkbox"  value="[#produce_id#]" style="display:none" />
+     <input name="TheID[]" type="checkbox" value="[#transfervoucherdetail_id#]" />	    </td>
+        <td align="center" >[#accounttitle_no#]</td>
+        <td align="center" >[#accounttitle_name#]&nbsp;</td>
+        <td align="center" >[#objecttype_name#]&nbsp;</td>       
+        <td align="center" >[#object_name#]&nbsp;</td>
+		<td align="center" >[#lend#]&nbsp;</td>
+        <td align="center" >[#loan#]&nbsp;</td>
+      
+        <td align="center" ><a href="?action=upd&updid=[#updid#]&ctransfervoucherdetail_id=[#transfervoucherdetail_id#]" onClick="edit_p('[#produce_id#]')">编辑</a>&nbsp;</td>
+	  </tr>
+	   <tr id=[#trid#] style="display:none">
+        <td align="center" class=tdcolor></td>
+        <td colspan="2" align="center" class=tdcolor>备注</td>
+        <td colspan="6" align="left" class=tdcolor>[#vmemo#]&nbsp;</td>
+      </tr>
+    
+	<!-- END mainlist -->
+    <tr>
+        <td align="center" class=tdcolor>
+		<a style="CURSOR: hand" onClick="viewall([#recordcount#])"> 
+		<img src="[#path#]img/closeb.gif" width="16" height="16" id=imgb1>		</a>		</td>
+        <td colspan="2" align="left" class=tdcolor>
+          <input class=buttonsmall name=end2 type=button value="删   除"  onClick="qg_pl('delete')" style="font-size:9pt" {discheckdel} {buttondisabled}>        </td>
+        <td align="left" class=tdcolor>共&nbsp;[#recordcount#]</font>&nbsp;条&nbsp;合计：</td>
+        <td align="center" class=tdcolor></td>
+        <td align="center" class=tdcolor>&nbsp;</td>
+        <td align="center" class=tdcolor>[#totallend#]</td>
+        <td align="center" class=tdcolor>[#totalloan#]</td>
+        
+        <td align="center" class=tdcolor><span onClick="submit_addpro()" style="CURSOR: hand"><a href="?action=upd&updid=[#updid#]"  onClick="edit_p('[#produce_id#]')">新增项目</a></span></td>
+    </tr>
+    </table>
+
+	<table width="750" border="0" cellspacing="0" class=InputFrameMain >
+      <tr>
+        <a name="inputpro">
+        <td align="center" class=inputtitle>明细信息</td></a>
+        <td width="238" align="center" class=inputtitleright><input name='con_act'  type="hidden" id="con_act" value="[#caction#]">
+      <input name='cupdid' type="hidden"  value='[#cupdid#]'><input name='proupdid'  type="hidden" value='[#proupdid#]'></td>
+        <td width="90" align="center">&nbsp;</td>
+        <td width="296" align="center">&nbsp;</td>
+      </tr>
+	  		 <tr> 
+        <td colspan="4" height="10"></td>
+      </tr>
+      <tr>
+        <td width=165 height="30" align=right class=form_label>会计科目：</td>
+        <td height="30" class="InputFrameLine" > 
+          <span class="form_label">
+          <select id="caccounttitle_id" class="flexselect" name="caccounttitle_id"  tabindex="2" style="font-size: 1.0em; 0px; margin: 0px 0 0 00px;">
+            
+   <option value=""></option>  
+     [#accounttitlelist#]
+  
+          
+          </select>
+        *</span></td>
+        <td height="30" align="right" class="InputFrameLine" >对象类别：</td>
+        <td height="30" class="InputFrameLine" ><span class="form_label">
+          <select name="cobjecttype_id">
+            <option value="0">- 请选择对象类别 -</option>
+            
+            
+          
+          
+            	
+		  [#objecttypelist#]       
+		  
+          
+        
+        
+          
+          </select>
+ （可选）        </span></td>
+      </tr>
+      <tr>
+        <td height="30" align="right" class="InputFrameLine" >&nbsp;</td>
+        <td height="30" class="InputFrameLine" >&nbsp;</td>
+        <td height="30" align="right" class="InputFrameLine" >对象<span class="form_label">：</span><span class="form_label"></td>
+        <td height="30" class="InputFrameLine" ><span class="form_label">
+          <INPUT type="hidden" name="cobjectid" value="[#cobjectid#]">
+          <input class=input_disabled type="text" name="cobject_name" size="10" maxlength="20" value="[#cobject_name#]" readonly="1">
+          <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:promem() type=button value=查找 name=save2 [#findcustomer#]>
+          （可选）
+        </span></td>
+      </tr>
+      <tr>
+        <td width=165 height="30" align=right class=form_label>借方：</td>
+        <td height="30" class="InputFrameLine" >          <input class=input type="text" name="clend" size="10" maxlength="100" value="[#clend#]"  style="ime-mode:disabled" onKeyPress="if ((event.keyCode < 48 && event.keyCode != 45 && event.keyCode != 40 && event.keyCode != 41) || event.keyCode > 57 ) event.returnValue = false;" >
+        * 元</td>
+        <td height="30" align="right" class="InputFrameLine" ><span class="InputFrameLine"><span class="form_label">贷方：</span><span class="form_label"></td>
+        <td height="30" class="InputFrameLine" ><input class=input  type="text" name="cloan" size="10" maxlength="100" value="[#cloan#]">
+        <span class="form_label">*元</span></td>
+      </tr>
+  <tr>
+    <td height="45" align="right" class=form_label>备注：</td>
+    <td height="45" colspan="3">
+      
+      <textarea class=inputarea name="cmemo"  wrap="virtual" rows="6">[#cmemo#]</textarea>    </td>
+  </tr>
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="暂存" AccessKey=t  onClick="submit_comsave()"  {buttondisabled} ><INPUT class=buttonsmall style="CURSOR: hand"  name=qqq type=button value="撤销" AccessKey=z  onClick="submit_reset()"></td>
+    </tr>
+    </table>
+
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingdel" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在删除数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"></div>
+<div id="helpid" STYLE="right: 1%; WIDTH: 450px; POSITION: absolute; TOP: 86px; HEIGHT: 0; display: none"> 
+ <div  align="left"   STYLE="position:absolute;left: 15px; top:15px;right:15px" >
+  操作：基本信息－帐户信息；<br><br>
+  保存(Alt+s)：添加新帐户信息和修改帐户信息；<br><br>
+  删除(Alt+d)：即删除不再使用的帐户信息；<br><br>
+  撤销(Alt+z)：撤销回去帐户没有修改的状态；<br><br>
+  返回(Alt+q)：返回帐户信息列表；<br><br>
+  帮助(Alt+h)：显示帮助信息；</div>
+</div>
+[#showeditdiv#]
+</center>
+</BODY>
+</HTML>
+

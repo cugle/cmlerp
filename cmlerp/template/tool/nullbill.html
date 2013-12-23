@@ -1,0 +1,217 @@
+<HTML><HEAD><TITLE>销售分析</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+<style type="text/css">
+body,input,form,tr,td,img { margin:0; padding:0;}
+.NOPRINT {
+	position:absolute;
+	top:0;
+	
+ font-family: "宋体";
+ font-size: 9pt;
+ margin:0;
+ padding:0;
+}
+.PageNext{page-break-after: always;} 
+
+-->
+</style>
+<style media=print>
+.Noprint{
+display:none;
+}
+</style>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 14px;
+	margin:0;
+	padding:0;
+}
+.page_titlebar_bg {
+	font-size: 18px;
+	font-weight: bold;
+}
+.page_titlebar_bg1 {
+	font-size: 24px;
+	font-weight: bold;
+}
+.top_left {
+	clear: left;
+	float: left;
+	padding-left: 130px;
+}
+-->
+</style>
+<SCRIPT language=JavaScript>
+function printsuccess(){
+		question = confirm("确认已经打印成功？");
+		if (question != "0")
+		{
+			document.getElementById('action').value='printsuccess';
+			form1.submit();
+		}
+
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<div class="Noprint" >
+  <OBJECT  id=WebBrowser  classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2  height=0  width=0>
+  </OBJECT>
+  <form id="form1" name="form1" method="post" action="nullbill.php" style="float:right;">
+   <input  type=button  value=打印          onclick=document.all.WebBrowser.ExecWB(6,1)>
+  <input  type=button  value=直接打印  onclick=document.all.WebBrowser.ExecWB(6,6)>
+  <input  type=button  value=页面设置  onclick=document.all.WebBrowser.ExecWB(8,1)>
+  <input name="button"  type=button  onclick=document.all.WebBrowser.ExecWB(7,1)  value=打印预览 />
+    <label>
+      <input type="button" name="Submit" value="打印成功"  onClick="printsuccess()"/>
+    </label>
+    <INPUT TYPE="hidden" NAME="nullbillno" value="[#nullbillno#]">
+    <INPUT TYPE="hidden" NAME="action" value="">
+  </form>
+</div>
+<div style=" margin:0; padding:0; margin-top:-17px;">
+  <!-- BEGIN mainlist -->
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="93" >
+    <tr>
+      <td width="33%" rowspan="4" align="center" valign="middle" >
+      <div class="top_left"><img src="[#path#]img/cmlbilllogo.gif" width="80" height="80"  /></div></td>
+      <td width="35%" align="center" valign="middle" ></td>
+      <td width="32%" rowspan="4" align="left" valign="middle" >&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle" ><span class="page_titlebar_bg1">
+  <br>
+  香蔓5.5自然美体护肤馆</span></td>
+    </tr>
+    <tr>
+      <td height="30" align="center" valign="middle" ><span class="page_titlebar_bg">[#currentorganname#]消费单</span></td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle" >年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
+    </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="25" colspan="2" align="left"><font color="#000000" class="table_bgshow">顾客：</font></td>
+    <td width="17%" align="right">顾客级别：</td>
+    <td width="14%" align="center">&nbsp;</td>
+    <td width="14%" align="right"><font color="#000000" class="table_bgshow">单号：</font></td>
+    <td width="20%" align="left"><font color="#000000" class="table_bgshow">[#sell_no#]</font></b></td>
+    
+    
+  </tr>
+    <tr>
+      <td height="25" colspan="2" align="left"><b><font color="#ff0000" class="error"></font></b> 状态：&nbsp;</td>
+      <td height="25" align="right">&nbsp;</td>
+      <td height="25" align="center">&nbsp;</td>
+      <td height="25" align="right"><font color="#000000" class="table_bgshow"><span class="table_bgcolor">店长</span>：</font></td>
+      <td height="25" align="right">&nbsp;</td>
+    </tr>
+    <tr>
+    <td width="23%" height="25" align="left">付款方式：现金：&nbsp;</td>
+    <td width="12%" align="left">刷卡：</td>
+    <td height="25" align="left">其他付款方式：</td>
+    <td height="25" align="center">欠款：</td>
+    <td height="25" align="left">&nbsp;</td>
+    <td height="25" align="left">&nbsp;</td>
+    </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" height="12">
+    <tr> 
+      <td  class="table_bgcolor" align="left"></td>
+      <!--<td align=right style="font-size:12px"><a href="#" onClick="doexport()" ><b>[导出]</b></a></td>-->
+    </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="138" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="white_word">消费类别</span></td>
+
+          <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="168" class="table_browse_titlebar_bg" align="center">项目类别</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="362" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font"><span class="white_word">项目名称</span></span></td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="78" class="table_browse_titlebar_bg" align="center">数量&nbsp;</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="67" class="table_browse_titlebar_bg" align="center">单价</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="115" class="table_browse_titlebar_bg" align="center">金额</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="228" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">备注</span></td>
+                 
+        </tr>
+ 
+      <tr >
+        <td height="30" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr >
+        <td height="30" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr >
+        <td height="30" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+      <tr >
+        <td height="30" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="right"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="left"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      </tr>
+ 
+      <tr>
+        <td height="28" align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove">&nbsp;合计：</td>
+
+        <td align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="tdcolor">元</span></td>
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        </tr>
+    </table>    
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr> 
+      <td width="20%" align="left" class="table_bgcolor">收费单位：</td>
+      <td width="20%" align="left" class="table_bgcolor">制单人：</td>
+      <td width="20%" align="left" class="table_bgcolor" >顾问：</td>
+      <td width="20%" align="left" class="table_bgcolor">美容师：</td>
+      <td width="20%" align="left" class="table_bgcolor">客户确认：</td>
+     
+    </tr>
+  </table>
+  <div style="height:20px;"></div>
+ <table width="100%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr> 
+      <td width="14%" align="left" class="table_bgcolor">&nbsp;</td>
+      <td width="22%" align="right" class="table_bgcolor">注：白色：客户资料卡</td>
+      <td width="16%" align="center" class="table_bgcolor" > 红色：顾客</td>
+      <td width="16%" align="left" class="table_bgcolor"> 黄色：财务</td>
+      <td width="16%" align="left" class="table_bgcolor">绿色：存根</td>
+     <td width="16%" align="left" class="table_bgcolor"> </td>
+    </tr>
+  </table>
+[#nextpage#]
+ <!-- END mainlist --> 
+ </div>
+</BODY>
+
+
+</HTML>

@@ -1,0 +1,907 @@
+<html xmlns:ntb><head>
+<title>top</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="../common/js/jquery-1.2.1.pack.js"></script>
+<SCRIPT language=JavaScript>
+function putpro(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../pos/buyproduce.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+ readsellitem('[#sell_no#]');
+} 
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#DAE2ED'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+function secBoard(n){
+	form1.selecttype.value = n;//改变选择状态,0为单项服务项目，1为项目卡，2为疗程卡，3为产品
+		
+    for(i=0;i<3;i++){
+      secTable.cells[i].className="sec1";
+	}
+    secTable.cells[n].className="sec2";
+    for(i=0;i<mainTable.tBodies.length;i++){
+      mainTable.tBodies[i].style.display="none";
+	}
+      mainTable.tBodies[n].style.display="block";   
+	  
+	  
+	 if(form1.selecttype.value==0){
+	     var b = document.getElementsByName("ser_list");
+		 document.getElementById("showinput").innerHTML = "请输入项目编号或者名称";
+	    }else if(form1.selecttype.value==1){
+	      var b = document.getElementsByName("sc_list");	
+		  document.getElementById("showinput").innerHTML = "请输入项目卡编号或者名称";
+	    }else if(form1.selecttype.value==2){
+	      var b = document.getElementsByName("lch_list");	
+		  document.getElementById("showinput").innerHTML = "请输入疗程卡编号或者名称";
+	    }else if(form1.selecttype.value==3){
+	      var b = document.getElementsByName("pro_list");	
+		  document.getElementById("showinput").innerHTML = "请输入商品代码或者名称";
+	    }
+	
+	    
+	   if(b.length > 0){	
+		  
+		    b[0].checked=true;
+	        //alert(b.length);
+		    b[0].focus();
+		
+	   } 
+	  
+  
+}
+var n_selboxindex=0;
+var boxListArr=Array("plist_ser","plist_sc","plist_lch","plist_pro");
+function chkselindex(selindex)
+{
+	if(selindex>=boxListArr.length) return "no";
+	if(document.getElementById(boxListArr[selindex]).style.display=="none"){
+		selindex++;
+		chkselindex(selindex);
+	}else{
+		n_selboxindex=selindex;
+		return selindex;
+	}
+}
+function startcheck(){ 
+	chkselindex(0);
+	if(n_selboxindex=="no") return;
+	//secBoard(n_selboxindex);
+	var startcheck = "3";
+	secBoard(startcheck);
+	/*var c = document.getElementsByName(boxListArr[selindex]);
+	if(c.length > 0){		  
+	  c[0].focus();	
+	}*/
+	document.getElementById('plist2').style.height = window.screen.Height-630; 
+}
+	function changecustomerno(inputString) {
+		
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#customer_name').hide();
+		} else {
+			$.post("../ajax/readmember.php", {value: ""+inputString+"",table: "s_customer",column: "customer_no"}, function(data){
+				
+				if(data.length >0) {	
+				var data=data.split('@@@');
+				
+					$('#error').html(data[0]);				
+					$('#customer_name').html(data[1]);
+					$('#memcardlevel').html(data[2]);
+					form1.customer_id.value=data[3];
+					$('#agency_name').html(data[4]);
+					$('#deposit').html(data[5]);
+					$('#salesowe').html(data[6]);					
+				}
+			});
+			
+		}
+	} // lookup
+	function readsellitem(inputString) {
+		
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+		
+			$('#itemlist').hide();
+		} else {
+
+			$.post("../ajax/readsellitem.php", {value: ""+inputString+"",table: "selldetail",column: "sellno"}, function(data){
+				 
+				if(data.length >0) {	
+				var itemdata=data.split('|||');
+				var temp='<table border=0 cellspacing=1 cellpadding=0  bgcolor=#d4d4d4 class=tableframe2   width="100%" align=center>';
+				
+				for(var i=0;i<itemdata.length;i++){
+					
+				var itemdetaildata=itemdata[i].split('@@@');
+				
+					$('#itemlist').show();
+					
+					temp=temp+'<tr onMouseOver=TrOver(this) onMouseOut=TrOut(this) bgcolor=#F3F3F3><TD class=listcellrow align=middle width=3% height=25></TD><TD class=listcellrow align=middle width=8% height=25>'+itemdetaildata[3]+'</TD><TD class=listcellrow align=middle width=9%>'+itemdetaildata[1]+'</TD><TD class=listcellrow align=middle width=27%>'+itemdetaildata[4]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[5]+'</TD><TD class=listcellrow align=middle width=5%>'+itemdetaildata[6]+'</TD><TD class=listcellrow align=middle width=6%></TD><TD class=listcellrow align=middle width=8%>'+itemdetaildata[7]+'</TD><TD class=listcellrow align=middle width=6%></TD> <TD class=listcellrow align=middle width=7%><A onclick=del_salelist(""); href=#>删除</A></TD></tr>';		
+	
+				}
+				temp=temp+'</table>';
+				$('#itemlist').html(temp);
+				}
+			});
+			
+		}
+	} // 更新销售列表
+</SCRIPT>
+<STYLE type=text/css>.main_tab {
+	BORDER-RIGHT: #9f9e9e 1px solid; BORDER-LEFT: #9f9e9e 1px solid; BORDER-BOTTOM: #9f9e9e 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.sec1 {
+	BACKGROUND-IMAGE: url([#path#]img/s2.jpg); CURSOR: hand
+}
+.sec2 {
+	BACKGROUND-IMAGE: url([#path#]img/s1.jpg); CURSOR: hand
+}
+.flat_input {
+	BORDER-RIGHT: #546485 1px solid; BORDER-TOP: #546485 1px solid; BORDER-LEFT: #546485 1px solid; BORDER-BOTTOM: #546485 1px solid
+}
+findbox_close {
+	BACKGROUND-IMAGE: url([#path#]img/images/browse_findbox_close.gif); WIDTH: 30px; HEIGHT: 30px
+}
+.findbox_close {
+	BORDER-RIGHT: #546485 0px; PADDING-RIGHT: 0px; BORDER-TOP: #546485 0px; PADDING-LEFT: 0px; BACKGROUND-IMAGE: url([#path#]img/guanbi.gif); PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: #546485 0px; WIDTH: 30px; PADDING-TOP: 0px; BORDER-BOTTOM: #546485 0px; HEIGHT: 30px
+}
+BODY {
+	MARGIN: 0px
+}
+.STYLE17 {
+	FONT-SIZE: 12px; COLOR: #ff0000
+}
+.STYLE18 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #0000ff
+}
+.STYLE19 {
+	FONT-WEIGHT: bold; COLOR: #0000ff
+}
+.STYLE20 {
+	FONT-SIZE: 12px
+}
+.STYLE21 {
+	FONT-SIZE: 16px; COLOR: #ffffff
+}
+.STYLE25 {
+	FONT-SIZE: 24px
+}
+.STYLE27 {
+	FONT-SIZE: 14px; COLOR: #ff0000
+}
+.STYLE28 {
+	FONT-SIZE: 12px
+}
+</STYLE>
+</head>
+<body onload='startcheck()'>
+<FORM name=form1 action="" method=post><INPUT type=hidden name=action> <INPUT 
+type=hidden name=listid> <INPUT type=hidden value=qtxsd0022010-0109 name=listno> 
+<INPUT type=hidden value=0 name=selecttype> <INPUT type=hidden name=memid> 
+<INPUT type=hidden name=cardid> <INPUT type=hidden name=cardno> <INPUT 
+type=hidden name=select_serid> <INPUT type=hidden name=select_scid> <INPUT 
+type=hidden name=select_lchid> <INPUT type=hidden name=select_proid> <INPUT 
+type=hidden name=check_serstaid> <INPUT type=hidden name=send_serstaid> <INPUT 
+type=hidden name=send_prostaid> <INPUT type=hidden name=scstaid> <INPUT 
+type=hidden name=lchstaid> <INPUT type=hidden name=prostaid> <INPUT type=hidden 
+name=scquantity> <INPUT type=hidden name=lchquantity> <INPUT type=hidden 
+name=proquantity> <INPUT type=hidden name=del_salelistid> <INPUT type=hidden 
+name=lvid> <INPUT type=hidden value=1 name=payment> <INPUT type=hidden 
+name=cardtype> <INPUT type=hidden value=0 name=ysmoney> <INPUT type=hidden 
+value=0 name=allprice> <INPUT type=hidden value=0 name=qtpay> <INPUT type=hidden 
+value=0 name=xjpay> <INPUT type=hidden value=0 name=djpay> <INPUT type=hidden 
+value=0 name=xjqpay> <INPUT type=hidden value=0 name=cardserpay> <INPUT 
+type=hidden value=0 name=cardcxpay> <INPUT type=hidden value=0 name=cardzspay> 
+<INPUT type=hidden value=0 name=cardcppay> <INPUT type=hidden name=deposit> 
+<INPUT type=hidden value=0 name=alljf> <INPUT type=hidden value=0 
+name=cardserye> <INPUT type=hidden value=0 name=cardcxye> <INPUT type=hidden 
+value=0 name=cardzsye> <INPUT type=hidden value=0 name=cardcpye> <INPUT 
+type=hidden name=end_action><BR>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=center width="5%" height=30>&nbsp;</TD>
+    <TD vAlign=left align=left width="26%" height=30>单据编号：[#sell_no#]
+      <INPUT type=hidden name=sell_id>
+      <INPUT type=hidden name=action ></TD>
+    <TD vAlign=right align=left width="25%" height=30>收银员:[#user_name#]</TD>
+    <TD vAlign=right align=left width="30%"><SPAN 
+      class=STYLE17>&nbsp;按键盘上下选择记录，按回车添加记录</SPAN></TD>
+    <TD vAlign=right align=left width="14%">前台销售单</TD></TR></TBODY></TABLE>
+<TABLE id=secTable cellSpacing=0 cellPadding=0 width="90%" align=center 
+border=0>
+  <TBODY>
+  <TR align=middle height=20>
+    <TD class=sec2 onclick=change_n=0;secBoard(change_n) width=187>购买服务</TD>
+    <TD class=sec1 onclick=change_n=1;secBoard(change_n) width=187><SPAN 
+      class=sec2></SPAN>购买卡项</TD>
+    <TD class=sec1  onclick=change_n=2;secBoard(change_n) 
+    width=187><SPAN class=sec2></SPAN>消费卡项</TD>
+    <TD class=sec1 onclick=change_n=3;secBoard(change_n) width=187><SPAN 
+      class=sec2></SPAN>购买产品</TD>
+    <TD style="BORDER-BOTTOM: #999999 1px solid" 
+  align=middle>&nbsp; </TD></TR></TBODY></TABLE>
+<DIV style="LEFT: 0px; POSITION: relative">
+<TABLE class=main_tab id=mainTable height=240 cellSpacing=0 cellPadding=0 
+width="90%" align=center border=0><!--服务项目-->
+  <TBODY style="DISPLAY: none">
+  <TR>
+    <TD vAlign=top align=middle>
+      <DIV id=plist_ser 
+      style="LEFT: -13px; WIDTH: 100%; POSITION: absolute; TOP: 3px">
+      <TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+      width="96%" align=center>
+        <TBODY>
+  <TR>
+    <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">类型</TD>
+    <TD class=Listtitle2 noWrap align=middle width="11%">编号</TD>
+    <TD class=Listtitle2 noWrap align=middle width="25%">名称</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">单价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">数量</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">总价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">是否自带</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">是否赠送</TD>
+    <TD class=Listtitle2 noWrap align=middle 
+width="7%">操作</TD></TR>
+</TBODY></TABLE></DIV>
+      <DIV id=plist_ser2 
+      style="OVERFLOW-Y: scroll; LEFT: -4px; WIDTH: 100%; POSITION: absolute; TOP: 28px; HEIGHT: 200px">
+      <TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" 
+      align=center></TR>
+        <TBODY>
+ <TR class=listrow1 id="" onDblClick="editdetail('','','','','','');" 
+  onmouseover="this.style.backgroundColor='#DAE2ED';" style="CURSOR: hand" 
+  onmouseout="this.style.backgroundColor='#ffffff'" bgColor=#ffffff>
+    <TD class=listcellrow align=middle width="3%" height=25><INPUT 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}" 
+      onblur="document.getElementById('').style.backgroundColor='#ffffff'" 
+      onfocus="document.getElementById('').style.backgroundColor='#FFEA96'" 
+      type=radio value="" name=sale_list></TD>
+    <TD class=listcellrow align=middle width="8%" height=25></TD>
+    <TD class=listcellrow align=middle width="9%"></TD>
+    <TD class=listcellrow align=middle width="27%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="8%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="7%"><A 
+      onclick="del_salelist('');" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">删除</A></TD></TR>
+</TBODY></TABLE></DIV></TD></TR></TBODY><!--项目卡-->
+  <TBODY style="DISPLAY: none">
+  <TR>
+    <TD vAlign=top align=middle>
+      <DIV id=plist_sc 
+      style="LEFT: -13px; WIDTH: 100%; POSITION: absolute; TOP: 3px">
+      <TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+      width="96%" align=center>
+        <TBODY>
+  <TR>
+    <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">类型</TD>
+    <TD class=Listtitle2 noWrap align=middle width="11%">编号</TD>
+    <TD class=Listtitle2 noWrap align=middle width="25%">名称</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">单价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">数量</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">总价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">是否自带</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">是否赠送</TD>
+    <TD class=Listtitle2 noWrap align=middle 
+width="7%">操作</TD></TR></TBODY></TABLE></DIV>
+      <DIV id=plist_sc2 
+      style="OVERFLOW-Y: scroll; LEFT: -4px; WIDTH: 100%; POSITION: absolute; TOP: 28px; HEIGHT: 200px">
+      <TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" 
+      align=center></TR>
+        <TBODY>
+ <TR class=listrow1 id="" onDblClick="editdetail('','','','','','');" 
+  onmouseover="this.style.backgroundColor='#DAE2ED';" style="CURSOR: hand" 
+  onmouseout="this.style.backgroundColor='#ffffff'" bgColor=#ffffff>
+    <TD class=listcellrow align=middle width="3%" height=25><INPUT 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}" 
+      onblur="document.getElementById('').style.backgroundColor='#ffffff'" 
+      onfocus="document.getElementById('').style.backgroundColor='#FFEA96'" 
+      type=radio value="" name=sale_list></TD>
+    <TD class=listcellrow align=middle width="8%" height=25></TD>
+    <TD class=listcellrow align=middle width="9%"></TD>
+    <TD class=listcellrow align=middle width="27%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="8%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="7%"><A 
+      onclick="del_salelist('');" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">删除</A></TD></TR>
+</TBODY></TABLE></DIV></TD></TR></TBODY><!--疗程卡-->
+  <TBODY style="DISPLAY: none">
+  <TR>
+    <TD vAlign=top align=middle><BR>
+      <DIV id=plist_lch 
+      style="LEFT: -13px; WIDTH: 100%; POSITION: absolute; TOP: 3px">
+      <TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+      width="96%" align=center>
+        <TBODY>
+  <TR>
+    <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">类型</TD>
+    <TD class=Listtitle2 noWrap align=middle width="11%">编号</TD>
+    <TD class=Listtitle2 noWrap align=middle width="25%">名称</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">单价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">数量</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">总价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">是否自带</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">是否赠送</TD>
+    <TD class=Listtitle2 noWrap align=middle 
+width="7%">操作</TD></TR></TBODY></TABLE></DIV>
+      <DIV id=plist_lch2 
+      style="OVERFLOW-Y: scroll; LEFT: -4px; WIDTH: 100%; POSITION: absolute; TOP: 28px; HEIGHT: 200px">
+      <TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" 
+      align=center></TR>
+        <TBODY>
+ <TR class=listrow1 id="" onDblClick="editdetail('','','','','','');" 
+  onmouseover="this.style.backgroundColor='#DAE2ED';" style="CURSOR: hand" 
+  onmouseout="this.style.backgroundColor='#ffffff'" bgColor=#ffffff>
+    <TD class=listcellrow align=middle width="3%" height=25><INPUT 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}" 
+      onblur="document.getElementById('').style.backgroundColor='#ffffff'" 
+      onfocus="document.getElementById('').style.backgroundColor='#FFEA96'" 
+      type=radio value="" name=sale_list></TD>
+    <TD class=listcellrow align=middle width="8%" height=25></TD>
+    <TD class=listcellrow align=middle width="9%"></TD>
+    <TD class=listcellrow align=middle width="27%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="8%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="7%"><A 
+      onclick="del_salelist('');" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">删除</A></TD></TR>
+        </TBODY></TABLE></DIV></TD></TR></TBODY><!--产品-->
+  <TBODY style="DISPLAY: none">
+  <TR>
+    <TD vAlign=top align=middle><BR>
+      <DIV id=plist_pro 
+      style="LEFT: -13px; WIDTH: 100%; POSITION: absolute; TOP: 3px">
+      <TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+      width="96%" align=center>
+        <TBODY>
+  <TR>
+    <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">类型</TD>
+    <TD class=Listtitle2 noWrap align=middle width="11%">编号</TD>
+    <TD class=Listtitle2 noWrap align=middle width="25%">名称</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">单价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">数量</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">总价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">是否自带</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">是否赠送</TD>
+    <TD class=Listtitle2 noWrap align=middle 
+width="7%">操作</TD></TR></TBODY></TABLE></DIV>
+      <DIV id=plist_pro2 
+      style="OVERFLOW-Y: scroll; LEFT: -4px; WIDTH: 100%; POSITION: absolute; TOP: 28px; HEIGHT: 200px">
+      <TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" 
+      align=center></TR>
+        <TBODY>
+   <TR class=listrow1 id="" onDblClick="editdetail('','','','','','');" 
+  onmouseover="this.style.backgroundColor='#DAE2ED';" style="CURSOR: hand" 
+  onmouseout="this.style.backgroundColor='#ffffff'" bgColor=#ffffff>
+    <TD class=listcellrow align=middle width="3%" height=25><INPUT 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {del_salelist('');}if((event.altKey)&amp;&amp;(event.keyCode==81)){editdetail('','','','','','');}" 
+      onblur="document.getElementById('').style.backgroundColor='#ffffff'" 
+      onfocus="document.getElementById('').style.backgroundColor='#FFEA96'" 
+      type=radio value="" name=sale_list></TD>
+    <TD class=listcellrow align=middle width="8%" height=25></TD>
+    <TD class=listcellrow align=middle width="9%"></TD>
+    <TD class=listcellrow align=middle width="27%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="5%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="8%"></TD>
+    <TD class=listcellrow align=middle width="6%"></TD>
+    <TD class=listcellrow align=middle width="7%"><A 
+      onclick="del_salelist('');" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">删除</A></TD></TR>
+  </TBODY></TABLE></DIV></TD></TR></TBODY></TABLE>
+<DIV style="LEFT: -30px; WIDTH: 95%; POSITION: absolute; TOP: 243px">
+<TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+width="96%" align=center>
+  <TBODY>
+  <TR>
+    <TD style="FONT-SIZE: 12px" noWrap 
+      align=left><input  type=button name=save5 class=buttonsmall value="购买商品" onClick="putpro()"  style="font-size:9pt" >
+  <input  type=button name=save9 class=buttonsmall value="购买服务" onClick="search_customer()" style="font-size:9pt" >
+  <input  type=button name=save6 class=buttonsmall value="购买卡项" onClick="search_customer()" style="font-size:9pt" >
+  <input  type=button name=save7 class=buttonsmall value="消费卡项" onClick="search_customer()" style="font-size:9pt" >
+  <input  type=button name=save8 class=buttonsmall value="其他" onClick="search_customer()" style="font-size:9pt" ></TD></TR></TBODY></TABLE></DIV>
+<DIV id=plist1 style="LEFT: -33px; WIDTH: 95%; POSITION: absolute; TOP: 265px">
+<TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+width="96%" align=center>
+  <TBODY>
+  <TR>
+    <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">类型</TD>
+    <TD class=Listtitle2 noWrap align=middle width="11%">编号</TD>
+    <TD class=Listtitle2 noWrap align=middle width="25%">名称</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">单价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="5%">数量</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">总价</TD>
+    <TD class=Listtitle2 noWrap align=middle width="7%">是否自带</TD>
+    <TD class=Listtitle2 noWrap align=middle width="6%">是否赠送</TD>
+    <TD class=Listtitle2 noWrap align=middle 
+width="7%">操作</TD></TR></TBODY></TABLE></DIV>
+<DIV id=plist2 
+style="OVERFLOW-Y: scroll; LEFT: -20px; WIDTH: 95%; POSITION: absolute; TOP: 296px">
+<TABLE class=tableframe2 style="WORD-BREAK: break-all" width="97%" 
+  align=center><TBODY>
+  <TR  >
+    <TD  height="20px" valign="top"><span class="suggestionsBox" id="itemlist" style="display: none;">&nbsp;</span> </TD></TR></TBODY></TABLE>
+     
+  </DIV></DIV>
+<DIV style="WIDTH: 100%; BOTTOM: 0px; POSITION: absolute">
+<TABLE cellSpacing=1 cellPadding=0 width="100%" align=center bgColor=#d4d4d4 
+border=0>
+  <TBODY>
+  <TR>
+    <TD align=left bgColor=#f4f4f4 colSpan=4 height=26>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=right width="9%" height=26>顾客编号： </TD>
+          <TD width="17%"><SPAN id=showmemno> </SPAN>
+            <input class=inputright type="hidden" name="customer_id" size="10"  value="[#customer_id#]" >
+         </TD>
+          <TD align=right width="8%">顾客名称：</TD>
+          <TD width="15%"><span  id="customer_name"  >&nbsp;</span> </TD>
+          <TD align=right width="8%">订金：</TD>
+          <TD align=left width="16%"><span   id="deposit"  >&nbsp;</span></TD>
+          <TD align=right width="9%"><SPAN id=showdeposit>欠款：</SPAN></TD>
+          <TD align=left width="18%"><span   id="salesowe"  >&nbsp;</span></TD></TR>
+        <TR>
+          <TD align=right height=26>会员卡号： </TD>
+          <TD height=26><SPAN id=showcardno></SPAN>
+            <input class=input  onkeypress="if (event.keyCode == 10 ||event.keyCode == 13 ) changecustomerno(this.value);" name=membercard_no>
+          </TD>
+          <TD align=right height=26></TD>
+          <TD align=left height=26><span id="error" >&nbsp;</span></TD>
+         <TD align=right width="8%">会员级别：</TD>
+          <TD align=left width="16%"><span id="memcardlevel" >&nbsp;</span></TD>
+          <TD align=right width="9%"><SPAN id=showdeposit>所属门店：</SPAN></TD>
+          <TD align=left width="18%"><span id="agency_name" >&nbsp;</span></TD></TR>
+        <TR>
+          <TD align=right width="9%" height=26>命令：</TD>
+          <TD colSpan=3 height=26><INPUT class=input 
+            onkeypress="if (event.keyCode == 10 || event.keyCode == 13 ) submit_add(this.value);" 
+            name=inputvalue>&nbsp;&nbsp;<SPAN class=STYLE17 
+            id=showinput>请输入项目编号或者名称</SPAN></TD>
+          <TD align=right>合计：</TD>
+          <TD align=left>0</TD>
+          <TD align=right>&nbsp;</TD>
+  <TD align=left><INPUT class=buttonsmall onclick=cashend() type=button value=" 收 银 "> 
+        <INPUT class=buttonsmall onclick=readsellitem('[#sell_no#]') type=button value=" 退出 "></TD>
+  
+  
+          
+  </TR>
+  <tr><TD colSpan=8  height="5"></TD>
+  </tr></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV>
+<DIV id=add_sersta 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 260px; WIDTH: 627px; POSITION: absolute; TOP: 239px; HEIGHT: 144px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=143 cellSpacing=0 cellPadding=0 width=628 border=0>
+  <TBODY>
+  <TR>
+    <TD width=623>
+  <TR>
+    <TD vAlign=top align=left width=590 height=35>
+      <TABLE cellSpacing=0 cellPadding=0 width="110%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=left colSpan=6 
+            height=25>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=STYLE18>请新增该项目的服务人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALT+A新增项目</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A 
+            style="FONT-WEIGHT: bold" onClick="closeDiv('add_sersta')" 
+            href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD></TR>
+        <TR>
+          <TD vAlign=center align=right width="13%" height=25><SPAN 
+            class=STYLE19>项目编号：</SPAN></TD>
+          <TD vAlign=center width="16%"><SPAN id=showserno></SPAN></TD>
+          <TD vAlign=center align=right width="13%"><SPAN 
+            class=STYLE19>项目名称：</SPAN></TD>
+          <TD vAlign=center width="22%"><SPAN id=showsername></SPAN></TD>
+          <TD vAlign=center align=right width="17%"><SPAN 
+            class=STYLE19>价格:</SPAN></TD>
+          <TD vAlign=center width="19%"><SPAN id=showserprice></SPAN></TD></TR>
+        <TR>
+          <TD vAlign=top align=middle colSpan=6 height=143>
+            <DIV style="LEFT: 8px; WIDTH: 90%; POSITION: absolute; TOP: 50px">
+            <TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 
+            cellPadding=0 width="96%" align=center>
+              <TBODY>
+              <TR>
+                <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+                <TD class=Listtitle2 noWrap align=middle width="20%">员工编号</TD>
+                <TD class=Listtitle2 noWrap align=middle width="24%">员工姓名</TD>
+                <TD class=Listtitle2 noWrap align=middle width="23%">级别</TD>
+                <TD class=Listtitle2 noWrap align=middle width="13%">是否指名</TD>
+                <TD class=Listtitle2 noWrap align=middle 
+              width="17%">提成</TD></TR></TBODY></TABLE></DIV>
+            <DIV id=show_sersta 
+            style="OVERFLOW-Y: scroll; LEFT: 15px; WIDTH: 91%; POSITION: absolute; TOP: 75px; HEIGHT: 100px"></DIV></TD></TR>
+        <TR>
+          <TD align=right colSpan=5 height=25><SPAN 
+            class=STYLE20>请输入员工编号或姓名：</SPAN><INPUT class=input 
+            onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {addser(this.value,form1.select_serid.value)}" 
+            name=input_sersta><SPAN class=STYLE17>输入完按回车新增服务人员</SPAN>　　<INPUT class=buttonsmall onclick=addsercase() type=button value=" 确　定 "></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV>
+<DIV id=add_scsta 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>请输入销售员工编号或者姓名</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_scsta')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>项目卡编号：<SPAN id=showscno></SPAN> 
+      &nbsp;&nbsp;项目卡名称：<SPAN id=showscname></SPAN></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {addscsta(this.value)}" 
+      size=15 name=input_sc> <SPAN class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_lchsta 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>请输入销售员工编号或者姓名</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_lchsta')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>疗程卡编号：<SPAN id=showlchno></SPAN> 
+      &nbsp;&nbsp;疗程卡名称：<SPAN id=showlchname></SPAN></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {addlchsta(this.value)}" 
+      size=15 name=input_lch> <SPAN class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_prosta 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>请输入销售员工编号或者姓名</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_prosta')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>商品代码：<SPAN id=showprono></SPAN> 
+      &nbsp;&nbsp;商品名称：<SPAN id=showproname></SPAN></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {addprosta(this.value)}" 
+      size=15 name=input_pro> <SPAN class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_scquantity 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>请输入购买数量</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_scquantity')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>项目卡编号：<SPAN id=showscno2></SPAN> 
+      &nbsp;&nbsp;项目卡名称：<SPAN id=showscname2></SPAN></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {add_scquantity(this.value)}" 
+      size=15 value=1 name=input_scquantity> <SPAN 
+      class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_lchquantity 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>请输入购买数量</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_lchquantity')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>疗程卡编号：<SPAN id=showlchno2></SPAN> 
+      &nbsp;&nbsp;疗程卡名称：<SPAN id=showlchname2></SPAN></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {add_lchquantity(this.value)}" 
+      size=15 value=1 name=input_lchquantity> <SPAN 
+      class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_proquantity 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>请输入购买数量</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_proquantity')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>商品代码：<SPAN id=showprono2></SPAN> 
+      &nbsp;&nbsp;产品名称：<SPAN id=showproname2></SPAN></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {add_proquantity(this.value)}" 
+      size=15 value=1 name=input_proquantity> <SPAN 
+      class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=end_save 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 231px; WIDTH: 662px; POSITION: absolute; TOP: 159px; HEIGHT: 330px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=361 cellSpacing=0 cellPadding=0 width=663 border=0>
+  <TBODY>
+  <TR>
+    <TD class="STYLE18 STYLE21" vAlign=absmiddle align=middle width="95%" 
+    bgColor=#666666 colSpan=2 height=30>收银
+      <DIV style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('end_save')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#"><FONT 
+      color=#ffffff>X</FONT></A></DIV></TD>
+  <TR>
+    <TD class=STYLE18 vAlign=top align=left width=287 height=177>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=STYLE25 vAlign=center align=right width="49%" 
+            height=51>应收金额：</TD>
+          <TD class=STYLE25 vAlign=center align=left width="51%"><SPAN 
+            id=ysmoney>0</SPAN></TD></TR>
+        <TR>
+          <TD class=STYLE25 align=right height=50>其他支付：</TD>
+          <TD class=STYLE25 height=50><SPAN id=qtpayshow>0.00</SPAN></TD></TR>
+        <TR>
+          <TD class=STYLE25 align=right height=50>现金支付：</TD>
+          <TD class=STYLE25 height=50><SPAN id=xianjinpay>0.00</SPAN></TD></TR>
+        <TR>
+          <TD class=STYLE25 align=right height=50>刷卡支付：</TD>
+          <TD class=STYLE25 height=50><SPAN id=yinkapay>0.00</SPAN></TD></TR>
+        <TR>
+          <TD class=STYLE25 align=right height=50>找零：</TD>
+          <TD class=STYLE25 height=50><SPAN id=zhaoling>0.00</SPAN></TD></TR>
+        <TR>
+          <TD class=STYLE25 align=right height=50>欠帐：</TD>
+          <TD class=STYLE25 height=50><SPAN 
+      id=qianzhang>0</SPAN></TD></TR></TBODY></TABLE></TD>
+    <TD class=STYLE18 vAlign=top align=middle width=374><BR>
+      <TABLE class=tableborder cellSpacing=1 width="98%" border=0>
+        <TBODY>
+        <TR class=listtitle>
+          <TD class=white_word align=middle width="36%" height=25>支付方式</TD>
+          <TD class=white_word align=middle width="14%" height=25>类型</TD>
+          <TD class=white_word align=middle width="19%" height=25>支付金额</TD>
+          <TD class=white_word align=middle width="31%" height=25>备注</TD></TR>
+        <TR style="CURSOR: hand" onclick=paycase1() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>现金</TD>
+          <TD align=middle width="14%" height=25>公司</TD>
+          <TD align=middle width="19%" height=25><SPAN id=xjvalue>0</SPAN></TD>
+          <TD align=middle width="31%" height=25></TD></TR>
+        <TR id=showcarddiv1 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase2() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>储蓄帐户</TD>
+          <TD align=middle width="14%" height=25>会员卡</TD>
+          <TD align=middle width="19%" height=25><SPAN id=cxvalue>0</SPAN></TD>
+          <TD align=left width="31%" height=25><SPAN 
+        id=cardcxyeshow></SPAN></TD></TR>
+        <TR id=showcarddiv2 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase3() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>商品帐户</TD>
+          <TD align=middle width="14%" height=25>会员卡</TD>
+          <TD align=middle width="19%" height=25><SPAN id=cpvalue>0</SPAN></TD>
+          <TD align=left width="31%" height=25><SPAN 
+        id=cardcpyeshow></SPAN></TD></TR>
+        <TR id=showcarddiv3 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase4() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>服务帐户</TD>
+          <TD align=middle width="14%" height=25>会员卡</TD>
+          <TD align=middle width="19%" height=25><SPAN id=servalue>0</SPAN></TD>
+          <TD align=left width="31%" height=25><SPAN 
+          id=cardseryeshow></SPAN></TD></TR>
+        <TR id=showcarddiv4 style="DISPLAY: none; CURSOR: hand" 
+        onclick=paycase5() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>赠送帐户</TD>
+          <TD align=middle width="14%" height=25>会员卡</TD>
+          <TD align=middle width="19%" height=25><SPAN id=zsvalue>0</SPAN></TD>
+          <TD align=left width="31%" height=25><SPAN 
+        id=cardzsyeshow></SPAN></TD></TR>
+        <TR bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>订金</TD>
+          <TD align=middle width="14%" height=25>其他</TD>
+          <TD align=middle width="19%" height=25><SPAN id=djvalue>0</SPAN></TD>
+          <TD align=middle width="31%" height=25></TD></TR>
+        <TR style="CURSOR: hand" onclick=paycase7() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>现金券</TD>
+          <TD align=middle width="14%" height=25>其他</TD>
+          <TD align=middle width="19%" height=25><SPAN id=xjqvalue>0</SPAN></TD>
+          <TD align=middle width="31%" height=25>&nbsp;</TD></TR>
+        <TR style="CURSOR: hand" onclick=paycase8() bgColor=#ffffff>
+          <TD align=middle width="36%" height=25>刷卡</TD>
+          <TD align=middle width="14%" height=25>公司</TD>
+          <TD align=middle width="19%" height=25><SPAN id=xjqvalue>0</SPAN></TD>
+          <TD align=middle width="31%" height=25>&nbsp;</TD></TR></TBODY></TABLE></TD>
+  <TR>
+    <TD vAlign=top align=left colSpan=2 height=38>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=STYLE25 align=right width="12%" height=40>命令： </TD>
+          <TD width="23%" height=40><INPUT class=input 
+            onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {end_save(this.value)}" 
+            onkeyup=countxj() name=input_jine></TD>
+          <TD class=STYLE25 width="65%" height=40>支付方式：<SPAN 
+            id=showpayment>现金</SPAN></TD></TR>
+        <TR>
+          <TD class="STYLE27 STYLE28" align=right height=20>说明：</TD>
+          <TD colSpan=2 height=20><SPAN class="STYLE27 STYLE28">ALT+X 现金,ALT+H 
+            会员卡，ALT+W 现金券,ALT+S（服务帐户支付）,ALT+V（储蓄帐户支付），</SPAN></TD></TR>
+        <TR>
+          <TD class="STYLE27 STYLE28" align=right height=20>&nbsp;</TD>
+          <TD colSpan=2 height=20><SPAN class="STYLE27 STYLE28">ALT+K 
+            刷卡,ALT+P（商品帐户支付）,ALT+Z（赠送帐户支付）,ALT+L（取消现金券）,ALT+O过帐</SPAN>　<INPUT class=buttonsmall onclick=charge() type=button value=" 过 账 "></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV>
+<DIV 
+onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;" 
+id=edit_detail 
+onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {edit_detail()}" 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 312px; POSITION: absolute; TOP: 368px; HEIGHT: 51px" 
+value="">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=313 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=311 height=25>说明：输入完按回车确认</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('edit_detail')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD class=STYLE18 align=middle height=25>编号：<SPAN id=showitemno></SPAN> 
+      &nbsp;&nbsp;名称：<SPAN id=showitemname></SPAN></TD>
+  <TR>
+    <TD align=middle height=30>单价：<INPUT class=input size=15 name=input_price> 
+    </TD>
+  <TR>
+  <TR>
+    <TD align=middle height=30>数量：<INPUT class=input size=15 
+      name=input_quantity> </TD>
+  <TR>
+  <TR>
+    <TD align=middle height=30>赠送：<INPUT class=input type=checkbox value=1 
+      name=input_isgift> </TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_card 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 258px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=259 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=257 height=21>请输入会员卡号</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_card')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {addcard(this.value)}" 
+      size=15 name=input_card> <SPAN class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_mem 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 355px; WIDTH: 258px; POSITION: absolute; TOP: 368px; HEIGHT: 51px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=51 cellSpacing=0 cellPadding=0 width=259 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=middle width=257 height=21>请输入顾客编号或者顾客姓名</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_mem')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD align=middle height=30><INPUT class=input 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13 ) {addmem(this.value)}" 
+      size=15 name=input_mem> <SPAN class=STYLE20>说明：输入完按回车确认</SPAN></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=add_memcard 
+style="DISPLAY: none; Z-INDEX: 12; LEFT: 322px; WIDTH: 345px; POSITION: absolute; TOP: 358px; HEIGHT: 93px">
+<TABLE 
+style="BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; BACKGROUND: #ebe9ed; BORDER-LEFT: #808080 1px solid; BORDER-BOTTOM: #808080 1px solid" 
+height=129 cellSpacing=0 cellPadding=0 width=352 border=0>
+  <TBODY>
+  <TR>
+    <TD class=STYLE18 align=left width=257 
+      height=21>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请选择会员卡</TD>
+    <TD style="PADDING-RIGHT: 5px" align=right><A style="FONT-WEIGHT: bold" 
+      onclick="closeDiv('add_memcard')" 
+      href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD>
+  <TR>
+    <TD align=middle height=108>
+      <DIV style="LEFT: 19px; WIDTH: 90%; POSITION: absolute; TOP: 26px">
+      <TABLE style="WORD-BREAK: break-all" height=25 cellSpacing=0 cellPadding=0 
+      width="96%" align=center>
+        <TBODY>
+        <TR>
+          <TD class=Listtitle2 noWrap align=left width="3%">&nbsp;</TD>
+          <TD class=Listtitle2 noWrap align=middle width="61%">会员卡编号</TD>
+          <TD class=Listtitle2 noWrap align=middle 
+      width="36%">级别</TD></TR></TBODY></TABLE></DIV>
+      <DIV id=show_memcard 
+      style="OVERFLOW-Y: scroll; LEFT: 24px; WIDTH: 91%; POSITION: absolute; TOP: 52px; HEIGHT: 73px"></DIV></TD>
+  <TR></TR></TBODY></TABLE></DIV>
+<DIV id=posticket style="DISPLAY: none">
+<TABLE style="FONT-SIZE: 11px" cellSpacing=0 cellPadding=0 width=235 border=0>
+  <TBODY>
+  <TR>
+    <TD colSpan=4>
+      <TABLE style="FONT-SIZE: 11px" height=23 cellSpacing=0 cellPadding=0 
+      width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle colSpan=3></TD>
+          <TD style="PADDING-RIGHT: 5px" align=right><A 
+            style="FONT-WEIGHT: bold" onClick="closeDiv('posticket')" 
+            href="http://dw.51beauty.com/pos/possalelist.php#">X</A></TD></TR>
+        <TR>
+          <TD width="35%" colSpan=2>收款员:sta0001-00027</TD>
+          <TD width="65%" colSpan=2>日期：2010-10-20 
+    01:59:45</TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD width=120 height=28>商品名称</TD>
+    <TD align=right width=40>单价</TD>
+    <TD align=right width=40>数量</TD>
+    <TD align=right width=50>金额&nbsp;</TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #000000 1px dotted; LINE-HEIGHT: 22px; BORDER-BOTTOM: #000000 1px dotted" 
+    colSpan=4></TD></TR>{ticketlists} 
+  <TR>
+    <TD style="BORDER-TOP: #000000 1px dotted; LINE-HEIGHT: 25px" 
+  colSpan=4></TD></TR>
+  <TR>
+    <TD align=right colSpan=4>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV></FORM>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>帐户基本资料 </TITLE>
+<LINK href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="../common/css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css">
+<SCRIPT language=JavaScript>
+function checkchoose(o){
+if(o.checked)
+{CheckAll('TheID[]');
+}else
+{CheckReverse('TheID[]');
+}
+} 
+ 	function TrOver(o)
+	{
+	o.style.backgroundColor='#F3F3F3'
+	}
+	function TrOut(o)
+	{
+	o.style.backgroundColor=''
+	}
+	function CloseSelf(customer_id,customer_name,handphone,customer_no){
+		str=customer_id+"@@@"+customer_name+"@@@"+handphone+"@@@"+customer_no;
+		window.parent.kkit(str);
+	//window.returnValue=customer_id+"@@@"+customer_name+"@@@"+handphone;
+   // window.close();
+	}
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}	
+	
+function tourl(url)
+{
+	window.location.href=url;
+}
+
+function addcustomer(){
+tourl('?action=add');	
+	}
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByName("TheID[]");
+	var m = 0;
+	cid='';
+	cname='';
+	chandphone='';
+	cno='';
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				arrItems = idarray[m].split("@@@");
+				if(cid ==""){cid=arrItems[0];
+				} else {
+				cid=cid+';'+arrItems[0];}
+				if(cname =="")
+				{cname=arrItems[1];}
+				else {
+				cname=cname+';'+arrItems[1];}
+				if(chandphone =="")
+				{chandphone=arrItems[2];}
+				else {
+				chandphone=chandphone+';'+arrItems[2];}
+				if(cno =="")
+				{cno=arrItems[3];}
+				else {
+				cno=cno+';'+arrItems[3];}
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	var url = "?action=del&delid="+id+"&qgtype="+qgtype;
+
+	if(qgtype == "delete")
+	{
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else if(qgtype=="edit"){
+	//v=document.getElementById("TheID").value;
+	 url='?action=upd&updid='+id;
+	//tourl(url);
+	
+	CloseSelf(cid,cname,chandphone,cno);
+	}
+	else
+	{
+		tourl(url);
+	}
+}
+
+function cannotfind()
+{ var ftable='';
+if(form1.howdofindq.value=="category_name"){
+ftable='servicecategory';
+ 
+}
+if(form1.howdofindq.value=="member"){
+ftable='membercard';
+ 
+}
+
+if (ftable !=""){
+url='?category='+form1.howdofindq.value+'&keywords='+encodeURI(form1.findwhatq.value)+'&ftable='+ftable;
+}else{
+url='?category='+form1.howdofindq.value+'&keywords='+encodeURI(form1.findwhatq.value);
+}
+	tourl(url);
+}	
+</script>
+<style type="text/css">
+<!--
+BODY {
+BACKGROUND-POSITION: right bottom;BACKGROUND-ATTACHMENT: fixed;BACKGROUND-IMAGE: url([#path#]img/dianduopic.jpg);BACKGROUND-REPEAT: no-repeat;margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;
+}
+.flat_input {
+	BORDER-RIGHT: #546485 1px solid; BORDER-TOP: #546485 1px solid; BORDER-LEFT: #546485 1px solid; BORDER-BOTTOM: #546485 1px solid
+}
+findbox_close {
+	BACKGROUND-IMAGE: url([#path#]img/browse_findbox_close.gif); WIDTH: 30px; HEIGHT: 30px
+}
+.findbox_close {
+	BORDER-RIGHT: #546485 0px; PADDING-RIGHT: 0px; BORDER-TOP: #546485 0px; PADDING-LEFT: 0px; BACKGROUND-IMAGE: url([#path#]img/guanbi.gif); PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: #546485 0px; WIDTH: 30px; PADDING-TOP: 0px; BORDER-BOTTOM: #546485 0px; HEIGHT: 30px
+}
+#form1 {
+	margin: 0px;
+	padding: 0px;
+	}
+-->
+</STYLE>
+</head>
+<body  text="#000000" topmargin="0" leftMargin="2" width="100%" >
+<FORM id="form1" name="form1" action="" method="post">
+<DIV>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD class=pagetitle vAlign=center colSpan=2 height=30>&nbsp;&nbsp;<IMG 
+      src="[#path#]img/nowspace.jpg" align=absMiddle> 
+      <SPAN>&nbsp;客户管理&nbsp;--&gt;客户基本资料 </SPAN></TD>
+  </TR>
+  <TR>
+    <TD align=left colSpan=2>
+      <DIV style="MARGIN: 0px 0px 0px 12px"><IMG 
+      src="[#path#]img/line.jpg"></DIV></TD></TR>
+  <TR>
+    <TD align=left colSpan=2 height=3></TD></TR>
+  <TR>
+    <TD height=34>&nbsp;</TD>
+    <TD align=right height=34>
+      <TABLE class=tabletoolbar cellSpacing=0 cellPadding=0 width="100%" 
+      align=center border=0>
+        <TBODY>
+        <TR vAlign=center>
+          <TD vAlign=center align=right>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%">
+              <TBODY>
+              <TR>
+                <TD align=left><FONT color=#ff0000><B>! 
+                  </B></FONT>快速查询：
+                  <select class=flat_input id=howdofindq 
+                  style="FONT-SIZE: 12px" name=howdofindq[]>
+                    <option value="" 
+                    selected>-- 请选择查询类型 --</option>
+                    <option 
+                    value=customer_no>顾客编号</option>
+                    <option 
+                    value=customer_name selected>顾客姓名</option>
+                    <option 
+                    value=handphone>手机</option>
+                    
+                    <option 
+                    value=member>会员</option>
+
+                  </select>
+                  &nbsp; <INPUT 
+                  onkeypress="if (event.keyCode == 10 || event.keyCode == 13 ) cannotfind();" 
+                  id=findwhatq title=输入关键字后,按ENTER或点击“确定”进行查询! 
+                  style="FONT-SIZE: 12px" name=findwhat[]>&nbsp;&nbsp;<INPUT class=buttonsmall id=buttonq accessKey=s onclick=javascript:cannotfind(); type=button value=确定></TD>
+                <TD align=right><INPUT class=buttonsmall id=buttonq2 accessKey=s onclick=javascript:addcustomer(); type=button value=新增顾客>                  &nbsp;&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></DIV>
+<TABLE class=tableframe id=contenttableid style="WORD-BREAK: break-all" 
+width="99%" align=center>
+  <TBODY>
+  <TR class=listtitle>
+    <TD class=listcelltitle align=middle><input name="checkbox" type="checkbox" onClick="checkchoose(this)" /></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV ><A class=title 
+      href="javascript:submit_order('fd_account_no')">顾客编号</A></DIV></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV ><A class=title 
+      href="javascript:submit_order('fd_account_name')">顾客姓名</A></DIV></TD>
+    <TD class=listcelltitle align=middle><span class="form_label">
+      <select name="customercatalog_id" onChange="tourl('?category=customercatalog_id&keywords='+this.value)">
+        <option value=''>请选择顾客类别</option>    
+                    [#customercataloglist#]         
+      </select>
+    </span></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV><A class=title 
+      href="javascript:submit_order('fd_account_bank')">性别</A></DIV></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV><A class=title 
+      href="javascript:submit_order('fd_account_money')">手机</A></DIV></TD>
+    <TD class=listcelltitle align=middle height=25>
+      <DIV><A class=title 
+      href="javascript:submit_order('fd_account_principal')">地址</A></DIV></TD>
+</TR>
+  <TR class=listrow1 onDblClick="javascript:editdata('account.php?id=')" 
+  onmouseover="changecolor(this,'#FFCCCC','','#FFEA96')" 
+  onclick="changecolor(this,'','','#FFEA96');" 
+  onmouseout="changecolor(this,'','','#FFEA96')"><!--<TR class=listrow1 onMouseOver="this.style.backgroundColor='#DAE2ED';" onMouseOut="this.style.backgroundColor=''" bgcolor="" onclick="this.style.backgroundColor='#99FF33';">--></TR>
+  <!-- BEGIN mainlist -->
+ <TR class=listrow1 onMouseOver="TrOver(this)" onMouseOut="TrOut(this)"  onDblClick="CloseSelf('[#customer_id#]','[#customer_name#]','[#handphone#]','[#customer_no#]');" bgColor=#ffffff><TD class=listcellrow style="WIDTH: 10px"><input name="The_ID[]" type="hidden" value="[#customer_id#]" />
+     <input name="TheID[]" type="checkbox" value="[#customer_id#]@@@[#customer_name#]@@@[#handphone#]@@@[#customer_no#]" /></TD>
+    <TD class=listcellrow noWrap align=left height=23>[#customer_no#]</TD>
+    <TD class=listcellrow noWrap align=left height=23>[#customer_name#]</TD>
+    <TD class=listcellrow noWrap align=left>[#customercatalog_name#]</TD>
+    <TD class=listcellrow noWrap align=left height=23>[#gender#]</TD>
+    <TD class=listcellrow noWrap align=left height=23>[#handphone#]</TD>
+    <TD class=listcellrow noWrap align=left height=23>[#address#]</TD>
+
+ </TR> 
+ <!-- END mainlist --> 
+  
+  </TBODY></TABLE>
+<TABLE class=tableend height=26 cellSpacing=0 cellPadding=0 width="99%" 
+align=center border=0>
+  <TBODY>
+  <TR vAlign=center>
+    <TD class=listtail align=left><span class="listcelltitle">
+      <input name="checkbox2" type="checkbox" onClick="checkchoose(this)" />
+全选</span>
+      <INPUT name="button" type=button class=buttonsmall id=button accessKey=s onClick="qg_pl('edit');"  value=确认选择>      
+       &nbsp;共[#recordcount#]条记录, 每页显示 
+       <INPUT class=input 
+      onkeypress="if ((event.keyCode < 48 &amp;&amp; event.keyCode != 46) || event.keyCode > 57 ) event.returnValue = false;if (event.keyCode == 10 || event.keyCode == 13 ) chgrows()" 
+      title=输入后直接按回车与点击“转换”同等效果! style="IME-MODE: disabled" maxLength=5 size=4 
+      value=30 name=pagerows>&nbsp;条记录&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+    <TD class=listtail align=right>[#pagelist#]</TD></TR></TBODY></TABLE>
+</FORM>
+</body></HTML>

@@ -1,0 +1,171 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>无标题文档</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function tourl(url)
+{
+	window.location.href=url;
+}
+	function CheckAll(checkBoxName){
+			var checkBox = document.getElementsByName(checkBoxName);
+			for (var i = 0; i < checkBox.length; i++){
+				var temp = checkBox[i];
+				temp.checked = true;
+			}
+	}
+	function CheckReverse(checkBoxName){
+		var checkBox = document.getElementsByName(checkBoxName);
+		for (var i = 0; i < checkBox.length; i++){
+			var temp = checkBox[i];
+			temp.checked = !temp.checked;
+		}
+	}
+function qg_pl(qgtype)
+{
+	var idarray = new Array();//定义一个数组
+	var cv = document.getElementsByTagName("input");
+	var m = 0;
+	for(var i=0; i<cv.length; i++)
+	{
+		if(cv[i].type.toLowerCase() == "checkbox")
+		{
+			if(cv[i].checked)
+			{
+				idarray[m] = cv[i].value;
+				m++;
+			}
+		}
+	}
+	var id = idarray.join(",");
+	if(!id || id == "0")
+	{
+		alert("没有勾选要操作的主题！");
+		return false;
+	}
+	
+	var url = "?action=del&delid="+id+"&qgtype="+qgtype;
+	alert(url);
+	if(qgtype == "delete")
+	{
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else if(qgtype=="Move")
+	{v=document.getElementById("Sale_ID").value;
+	 url="Acion=Move&id="+id+"Sale_id="+v;
+		question = confirm("确认删除该信息吗？特别说明，删除后无法恢复！");
+		if (question != "0")
+		{
+			tourl(url);
+		}
+	}
+	else
+	{
+		tourl(url);
+	}
+}	
+</script>
+<style type="text/css">
+<!--
+body {
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 20px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+}
+form {
+	margin: 0px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+-->
+</style>
+</head>
+<body>
+<form  name="search" method="POST" action="contact.php">
+ 搜索：
+<select name="cateid" id="cateid">		
+<option value=""> 请选择分类</option>	 
+<option value="contactid" >ID</option>
+<option value="handphone">手机</option>
+<option value="contactname">姓名</option>
+<option value="idnumber">身份证</option>
+</select>	
+	<input type="text" name="keywords" id="keywords" value="">
+	  <input type="submit" value="搜索">
+<input type=button onclick=window.location.href('contact.php') value='显示全部'>
+<div align="right">{add}</div>
+</form>
+<table width="100%" border="0" cellpadding="5" cellspacing="1" class="borderStyle">
+   <tr align="center" class="tabTh">
+   <td width="5%">ID
+     <input name="checkbox" type="checkbox" onclick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+     <td width="15%">联系人姓名</td>
+     <td width="20%">地址</td>
+     <td width="20%">手机</td>
+     <td width="20%">E_mail</td>
+     <td width="10%">修改</td>
+     <td width="10%">删除</td>
+   </tr>
+<!-- BEGIN contact -->
+   <tr class="tdBgColor">
+   <td>{contactid}
+     <input name="The_ID[]" type="hidden" value="{contactid}" />
+     <input name="TheID[]" type="checkbox" value="{contactid}" /></td>
+     <td>{contactname}</td>
+     <td>{address}</td>
+     <td>{handphone}</td>
+     <td>
+	 {email}
+	 </td>
+     <td align="center">{upd}</td>
+     <td align="center">{del}</td>
+  </tr>
+<!-- END contact -->
+<tr class="tdBgColor">
+     <td width="5%">ID:<input type="checkbox" onclick="
+	 javascript:if(this.checked)
+	 {
+	 CheckAll('TheID[]')
+	 }
+	 else
+	 {CheckReverse('TheID[]')
+	 }" /></td>
+     <td colspan="11">
+
+
+		<select name="Sale_ID" >
+          <option value='0' selected>按处理人查看</option>
+          <!-- BEGIN sale -->  {arr} <!-- END sale -->
+        </select>
+		<input name="button" type="button" onclick="return ListInClass('listclass')" value="查看该分类">
+		&nbsp;
+       <input type="submit" name="submit" class="InputSubmit"  onclick="return ListInClass('Move')" value="移至该员工"> 
+	     &nbsp;
+        <input type=button onclick=window.location.href('agent.php') value=' 显示全部 '>
+        &nbsp;&nbsp;
+      <input name="button" type="button" onclick="qg_pl('delete')" value="批量删除">      </td>
+    </tr>
+</table>
+<div align="right">{pagelist}</div>
+</body>
+</html>

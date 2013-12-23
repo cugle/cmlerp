@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<SCRIPT language=JavaScript>
+   //self.parent.location.reload();      
+   function kkit(str1){
+     window.returnValue = str1 ;
+     window.close();
+   } 
+
+        function GetUrlParameter(paramName)
+        {
+            var returnVal="";
+            try{
+                var paramUrl=window.location.search;
+                //处理长度
+                if(paramUrl.length>0){
+                    paramUrl=paramUrl.substring(1,paramUrl.length);
+                    var paramUrlArray=paramUrl.split("&");
+                    for(var i=0;i<paramUrlArray.length;i++){
+                        if(paramUrlArray[i].toLowerCase().indexOf(paramName.toLowerCase())!=-1){
+                            var temp=paramUrlArray[i].split("=");
+                            if(temp[0].toLowerCase()==paramName.toLowerCase()){
+                                returnVal=temp[1];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch(e){}
+            return returnVal;
+        }     
+</SCRIPT>
+
+<BODY>
+<IFRAME id=ifrmGetRmtData width=100% height=100% name=ifrmGetRmtData  src="">
+</IFRAME>
+</BODY>
+<SCRIPT language=JavaScript>
+ var url='getcustomer.php?action='+GetUrlParameter('action')+'&parameter='+GetUrlParameter('parameter')+'&keywords='+GetUrlParameter('keywords');
+ document.getElementById('ifrmGetRmtData').src =url;
+ </SCRIPT>
+</HTML>

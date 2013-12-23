@@ -1,0 +1,157 @@
+<HTML><HEAD><TITLE>销售分析</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+
+<style type="text/css">
+.NOPRINT {
+ font-family: "宋体";
+ font-size: 9pt;
+}
+
+-->
+</style>
+<style media=print>
+.Noprint{
+display:none;
+}
+</style>
+<style type="text/css">
+<!--
+body,td,th {
+	font-size: 12px;
+}
+.page_titlebar_bg {
+	font-size: 16px;
+	font-weight: bold;
+}
+-->
+</style></HEAD>
+<BODY>
+<div class="Noprint" >
+  <p>
+  <OBJECT  id=WebBrowser  classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2  height=0  width=0>
+  </OBJECT>
+  <input  type=button  value=打印          onclick=document.all.WebBrowser.ExecWB(6,1)>
+  <input  type=button  value=直接打印  onclick=document.all.WebBrowser.ExecWB(6,6)>
+  <input  type=button  value=页面设置  onclick=document.all.WebBrowser.ExecWB(8,1)>
+  <input name=button  type=button  onclick=document.all.WebBrowser.ExecWB(7,1)  value=打印预览 />
+  <input name=button  type=button      onclick=javascript:window.close()  value=返回>
+  <span class="onlyShow">&nbsp;</span><br/>
+  </p>
+
+</div>
+<center>
+  <form action="" method="post" name="form1">
+
+<span class="page_titlebar_bg">明细帐</span>
+<table width="250" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td   height=1></td>
+      </tr>
+    <tr>
+      <td height=2></td>
+      </tr>
+    <tr>
+      <td  height=1></td>
+      </tr>
+ 
+      <tr>
+      <td align="center" height=10></td>
+      </tr>
+</table>
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="101%" align="left"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+        <!--DWLayoutTable-->
+        <tbody class="table_bgcolor">
+          <tr >
+            <td width="50%" height="20" align="left" class="table_bgcolor"  ><!--DWLayoutEmptyCell-->&nbsp;</td>
+            <td width="31%" align="right" valign="middle" class="table_bgcolor"  >打印时间：</td>
+            <td width="19%" align="left" valign="middle" class="table_bgcolor"  >[#datetime#]</td>
+            </tr>
+          </tbody>
+      </table></td>
+      </tr>
+  </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="12">
+    <tr> 
+      <td  class="table_bgcolor" align="left"></td>
+      <!--<td align=right style="font-size:12px"><a href="#" onClick="doexport()" ><b>[导出]</b></a></td>-->
+    </tr>
+  </table>
+ 
+  <table width="98%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+    <!--DWLayoutTable-->
+    <tbody class=table_bgcolor>
+      <tr bgcolor="#E7E7E7">
+        <td width="195" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">机构</td>
+        <td width="195" height="30" align="center" class="table_browse_titlebar_bg" style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><span class="white_word">科目代码</span></td>
+
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">科目名称</span></td>
+          <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove; BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">借方</span>金额&nbsp;</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="white_word">贷方</span>金额</td>
+          <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center">借/贷</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center">余额</td>
+                 <td style="BORDER-top: rgb(0,0,0) 1px groove;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"width="260" class="table_browse_titlebar_bg" align="center"><span class="table_browse_titlebar_font">备注</span></td>
+                 
+        </tr>
+<!-- BEGIN main -->
+      <tr >
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">[#agency_name#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;">[#accounttitle_no#]&nbsp; </td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#accounttitle_name#] &nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#bglend#]  &nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span class="listcellrow">[#bgloan#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span class="listcellrow">[#bglendloan#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span class="listcellrow">[#bgbalance#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">承上期&nbsp;</td>
+      </tr>
+  <!-- BEGIN mainlist -->      
+      <tr >
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;"><!--DWLayoutEmptyCell-->&nbsp;</td>
+
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#lend#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#loan#]&nbsp;</td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span class="listcellrow">[#lendloan#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center"><span class="listcellrow">[#balance#]</span></td>
+        <td style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" class="table_bgcolor" align="center">[#memo#]<span style="white-space:nowrap">&nbsp;</span></td>
+        </tr>
+   <!-- END mainlist -->   
+      <tr>
+        <td align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><!--DWLayoutEmptyCell-->&nbsp;</td>
+
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#endlend#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#endloan#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="listcellrow">[#endlendloan#]</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="listcellrow">[#endbalance#]</span></td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >累计</td>
+        </tr>
+<!-- END main --> 
+        
+<tr>
+        <td align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center"  class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove"><!--DWLayoutEmptyCell-->&nbsp;</td>
+
+        <td height="28" align="right" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><!--DWLayoutEmptyCell-->&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#alllend#]&nbsp;</td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >[#allloan#]&nbsp;</td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="listcellrow">[#alllendloan#]</span></td>
+        <td align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" ><span class="listcellrow">[#allbalance#]</span></td>
+        <td height="28" align="center" class="table_bgcolor" style="white-space:nowrap;BORDER-left: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove;BORDER-right: rgb(0,0,0) 1px groove;BORDER-bottom: rgb(0,0,0) 1px groove" >合计&nbsp;</td>
+        </tr>        
+    </table>
+  </form>
+</center>
+</BODY>
+<script>
+//setTimeout("window.close();",5000) 
+ //document.all.WebBrowser.ExecWB(7,1);
+
+
+</script>
+
+</HTML>

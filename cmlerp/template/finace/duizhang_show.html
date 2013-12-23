@@ -1,0 +1,79 @@
+<HTML><HEAD><TITLE>往来对帐单</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="zjw" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<link rel="stylesheet" href="[#path#]css/table_css.css" type="text/css">
+<LINK href="[#path#]css/css.css" rel="stylesheet" type="text/css"> 
+</HEAD>
+<BODY>
+<center>
+  <span class="page_titlebar_bg">往来对帐单
+  <table width="250" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <td bgcolor="#666666" height=1></td>
+  </tr>
+  <tr>
+      <td height=2></td>
+  </tr>
+  <tr>
+      <td bgcolor="#666666" height=1></td>
+  </tr>
+  <tr>
+  <td align="center" height="15">
+  </td>
+  </tr>
+</table>
+
+ <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+  <tr>
+  <td align="left" height=30 class=table_bgshow>&nbsp;&nbsp;时间段:[#bgdate#]至[#enddate#]&nbsp;&nbsp;类型:[#object_type_name#]&nbsp;&nbsp;名称:[#object_name#]
+  </td>
+   <td align="right" class="table_bgcolor"><span class=onlyShow>[<a href="{gotourl}" >返回</a>]&nbsp;&nbsp;</span></td>
+  </tr>
+</table>
+
+<table width="98%" border="0" cellspacing="1" class=tableborder>
+	  <tr class=listtitle>
+        <td align="center" class="white_word">日期</td>
+        <td align="center" class="white_word">单据编号</td>
+        <td align="center" class="white_word">单据类型</td>
+        <td align="center" class="white_word">[#ysyfshow#]款增加</td>
+        <td align="center" class="white_word">[#ysyfshow#]款减少</td>
+        <td align="center" class="white_word">余额</td>
+        <td align="center" class="white_word">制单人</td>
+        <td align="center" class="white_word">摘要</td>
+	  </tr>
+	  <tr onMouseOver="this.style.backgroundColor='#DAE2ED';" onMouseOut="this.style.backgroundColor='#F1F4F9'" bgcolor="#F1F4F9">
+        <td height="16" colspan=5 align="center" >开始日期之前的余额为： </td>
+        <td align="right" >[#bgbalance#]&nbsp;</td>
+        <td align="left" >&nbsp;</td>
+        <td align="left" >&nbsp;</td>
+	  </tr>
+      <!-- BEGIN mainlist -->
+	  <tr onMouseOver="this.style.backgroundColor='#DAE2ED';" onMouseOut="this.style.backgroundColor='#ffffff'" bgcolor="#ffffff">
+        <td align="center" >[#date#]</td>
+        <td align="left" >&nbsp;[#bill_no#]</td>
+        <td align="left" >&nbsp;[#bill_type#]</td>
+        <td align="right" >[#addmoney#]&nbsp;</td>
+        <td align="right" >[#lessen#]&nbsp;</td>
+        <td align="right" >[#vbalance#]&nbsp;</td>
+        <td align="right" >[#man#]&nbsp;</td>
+        <td align="left" >&nbsp;[#memo#]</td>
+	  </tr>
+	<!-- END mainlist -->
+    <tr>
+        <td align="center" class=tdcolor>
+        共&nbsp;{count}</font>&nbsp;条&nbsp;合计：</td>
+        <td align="center" class=tdcolor colspan=7>当前应收款：[#nowysmoney#]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前应付款： [#nowyfmoney#] </td>
+    </tr>
+ </table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" height="25">
+    <tr> 
+      <td align="right" class="table_bgcolor"><span class=onlyShow>[<a href="{gotourl}" >返回</a>]&nbsp;&nbsp;</span></td>
+    </tr>
+  </table>
+</center>
+</BODY>
+</HTML>

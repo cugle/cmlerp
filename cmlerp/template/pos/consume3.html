@@ -1,0 +1,178 @@
+<HTML><HEAD>
+<TITLE> 服务项目基本资料</TITLE>
+<META HTTP-EQUIV="empiresoft" CONTENT="no-cache">
+<link href="[#path#]css/button_css.css" rel="stylesheet" type="text/css">
+<link href="[#path#]css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="[#path#]css/browse.css" type=text/css rel=stylesheet>
+<LINK href="[#path#]css/css.css" rel=stylesheet type=text/css>
+<SCRIPT language=javascript src="[#path#]js/myjs.js" type=text/javascript></SCRIPT>
+<script language=javascript> 
+
+var requestSubmitted = false;
+
+function submit_save(){
+
+	 if(form1.services_id.value==""){
+	 	  alert("请选择服务");
+	 	  form1.services_id.focus();
+	 	  return;
+	 }
+	 	 if(form1.number.value==""){
+	 	  alert("请填写数量");
+	 	  form1.number.focus();
+	 	  return;
+	 }
+	
+	 	  if(form1.employee_id.value==""){
+	 	  alert("请选择销售人员");
+	 	  form1.employee_name.focus();
+	 	  return;
+	 }
+	 	 	  if(form1.beauty_id.value==""){
+	 	  alert("请选择销售人员");
+	 	  form1.beauty_name.focus();
+	 	  return;
+	 }
+
+	 if(!towbeauty()){
+		 return false;
+		 }	 	 	 
+	  if(requestSubmitted == true){
+    alert("你已经提交，请等待一下");
+    return (false);
+   } 
+   requestSubmitted = true;  
+	 sending.style.display ="";
+	// sendingbg.style.display ="";parent.parent.frames[0].form1.loadingok.value  = "1";parent.parent.frames[1].loadingbg.style.height = //parent.parent.frames[1].document.body.scrollHeight;parent.parent.frames[1].loadingbg.style.display =""; 
+
+  form1.submit();
+}
+
+
+function putsta(){
+   var arrItems=new Array();
+   var strItem ;
+   var szRef = "../getdata/getstaff.html" ;
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+  if(!strItem){return}
+  arrItems = strItem.split("@@@");
+   form1.employee_id.value = arrItems[0] ;  
+   form1.employee_name.value = arrItems[1] ;    
+} 
+
+function getcard(marketingcardtype_id){
+    var arrItems=new Array();
+   var strItem ;
+//   var addbutton = 1;
+
+   var szRef = "../getdata/getcard.html?marketingcardtype_id="+marketingcardtype_id;
+  
+   var strItem = window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=700px;dialogHeight=500px;scroll=yes;");
+   if(!strItem){return}
+     arrItems = strItem.split("@@@");
+     form1.marketingcard_id.value    = arrItems[0];     
+     //form1.marketingcard_name.value  = arrItems[1];
+	// form1.timelimit.value  = arrItems[2];
+	// form1.totaltimes.value  = arrItems[3];
+	// form1.price.value  = arrItems[4];
+	  //form1.value1.value  = arrItems[5];
+	// if(form1.action.value=='add'){
+	// tourl('?action=addcard&marketingcard_id='+arrItems[0]+'&card_no='+form1.card_no.value);
+	// }else{
+	//tourl('?action=editcard&marketingcard_id='+arrItems[0]+'&card_no='+form1.card_no.value+'&updid='+form1.updid.value); 
+	//}
+	}
+function init(){
+	
+	}	
+</script>
+<BODY  onLoad="init()"  topmargin="0" leftMargin="2" width="100%">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+       <tr>
+         <td height="30" class="pagetitle"  width="100%" valign="middle">
+          &nbsp;&nbsp;<img src="[#path#]img/nowspace.jpg" align="absmiddle">添加消费项目</td>
+       </tr>
+       <tr>
+         <td align="left"><div style="margin:0px 0px 0px 12px;"><img src="[#path#]img/line.jpg" ></div></td>
+      </tr>
+  </table>
+  
+  <center>
+<form action="consume.php?action=step4" method="post" name="form1">
+            <input name='action'  type="hidden" value="[#action#]">
+      <input name='updid' type='hidden' value='[#updid#]'>
+    <table width="610" border="0" cellspacing="0" ID=servicetable class=InputFrameMain style="display:[#servicetabledisplay#]">
+      <tr> <a name="inputpro">
+    <td width="150" align="center" class=inputtitle>消费信息：</td>
+    </a>
+    <td width="192" align="center" class=inputtitleright><input name='marketingcardtype_id'  type="hidden"   value='[#marketingcardtype_id#]'>
+      <input name='card_id'  type="hidden" value="[#card_id#]"></td>
+    <td width="95" align="center">&nbsp;</td>
+    <td width="205" align="center"><input class=input_disabled name="standardunit" type="hidden" value="0" size="10" readonly="1"></td>
+  </tr>
+ 
+  <tr>
+    <td   height="30" align="right" class=form_label>卡项名称：</td>
+    <td height="30" align="left"><input class=input_disabled type="text" name="marketingcard_name" size="10" maxlength="20" value="[#marketingcard_name#]" readonly>
+      <span class=form_label>
+      <input class=input type="hidden" name="marketingcard_id" size="20" maxlength="20" value="[#marketingcard_id#]">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:getcard('1') type=button value=查找 name=save5 [#findcustomer#]>
+      </span></td>
+    <td height="30" align="right" class=form_label>项目代码：</td>
+    <td height="30" align="left"><input class=input style="ime-mode:disabled"  name="services_no" type="text" value="[#services_no#]" size="10" onKeyPress="keypresscomm()">
+      <input  type="hidden" name="services_id" value="[#services_id#]">
+      <input  type=hidden name=save2 class=buttonsmall value="查找" onClick="search_customer()" style="font-size:9pt" ></td>
+  </tr>
+  <tr>
+    <td height="30" align="right"><span class="form_label">项目名称：</td>
+    <td width="192" height="30"><input class=input_disabled  name="services_name" type="text" value="[#services_name#]" size="15" readonly ></td>
+    <td width="95" height="30" align="right"><span class="form_label">牌价：</span></td>
+    <td height="30" colspan="2"><input class=input_disabled name="price" type="text" value="[#price#]" size="10" readonly="1">
+元 </td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">费用：</td>
+    <td height="30"><input class=input name="value" type="text" value="[#value#]" size="10" ></td>
+    <td height="30" align="right" class="form_label">美容师：</td>
+    <td height="30" colspan="2"><input class=input_disabled type="text" name="beauty_name" size="10" maxlength="20" value="[#beauty_name#]" readonly="1">
+      <INPUT type=hidden name=beauty_id value="[#beauty_id#]">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putbeauty() type="button" value=查找 name=xuan2>
+      <span class=form_label>*</span></td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">次数：</td>
+    <td height="30"><input class=input name="number" type="text" value="[#number#]" size="10" ></td>
+    <td height="30" align="right" class="form_label"><label>
+      顾问：</label></td>
+    <td height="30" colspan="2"><input class=input_disabled type="text" name="employee_name" size="10" maxlength="20" value="[#employee_name#]" readonly="1">
+      <INPUT type=hidden name=employee_id value="[#employee_id#]">
+      <INPUT class=buttonsmall style="FONT-SIZE: 9pt" onclick=javascript:putcon() type="button" value=查找 name=xuan></td>
+    </tr>
+  <tr>
+    <td height="30" align="right" class="form_label">&nbsp;</td>
+    <td height="30">&nbsp;</td>
+    <td height="30" align="right" class="form_label"><input type="checkbox" name="givingbeauty" id="givingbeauty"></td>
+    <td height="30" colspan="2">赠送手工</td>
+    </tr>  
+  <tr>
+    <td colspan="5" class=bottombotton  align="center" ><input type=button name=save style="CURSOR: hand"  class=buttonsmall value="确定" AccessKey=t  onClick="submit_save()"  {buttondisabled} >
+      <INPUT class=buttonsmall style="CURSOR: hand"  name=qqq2 type=reset value="撤销" AccessKey=z  ></td>
+  </tr>
+</table>
+</form>
+<div id="sending" STYLE="LEFT: 0px; WIDTH: 95%; POSITION: absolute; TOP: 50%; HEIGHT: 95%; display: none"> 
+       <table width=400 height=80 border=0 cellspacing=2 cellpadding=0 >
+          <tr> 
+               <td bgcolor=#F1F4F9 align=center>正在保存数据，请稍候...</td>
+          </tr>
+       </table>
+</div>
+<div id="sendingbg" STYLE="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; display: none"></div>
+
+
+
+
+</center>
+</BODY>
+</HTML>
+

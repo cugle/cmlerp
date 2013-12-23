@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>角色管理</title>
+<LINK href="{path}css/button_css.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/page_title.css" rel="stylesheet" type="text/css">
+<LINK href="{path}css/browse.css" rel="stylesheet" type="text/css">
+<link href="{path}css/css.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+ <p>
+   <select name="roleid" id="roleid" onChange="location.href='role.php?roleid='+this.value;">
+<!-- BEGIN role -->
+     <option value="{roleid}">{rolename}</option>
+<!-- END role -->
+   </select>
+{add} {edit} {del} <script language="javascript">
+document.getElementById('roleid').value = parseInt('0{defrole}');
+</script>
+</p>
+ <table width="100%"  border="0" cellspacing="1" cellpadding="2" class="borderStyle">
+   <tr>
+     <td width="10%" height="23" class="colBgColor" align="right">角色所属工作组</td>
+     <td class="tdBgColor">{groups}</td>
+   </tr>
+ </table>
+ <br>
+ 全局权限
+ <table width="100%"  border="0" cellpadding="2" cellspacing="1" class="borderStyle">
+   <tr height="23" class="tabTh">
+     <td width="10%">权限名称</td>
+     <td width="40%">权限设置值</td>
+     <td width="10%">权限名称</td>
+     <td>权限设置值</td>
+   </tr>
+<!-- BEGIN ttr -->
+   <tr height="23" class="tdBgColor">
+<!-- BEGIN ttd -->
+     <td align="right" class="colBgColor">{name}</td>
+     <td>{value}</td>
+<!-- END ttd -->
+   </tr>
+<!-- END ttr -->
+ </table>
+<br>
+页面权限
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="borderStyle">
+<tr class="tabTh">
+     <td width="200" height="25">菜单名</td>
+     <td width="50">超用户</td>
+     <td width="50">浏览</td>
+     <td width="50">增加</td>
+     <td width="50">修改</td>
+     <td width="50">删除</td>
+     <td width="50">导入</td>
+     <td width="50">导出</td>
+     <td width="50">反冲</td>
+     <td width="50">审核</td>
+    <td colspan="2">附加值</td>
+  </tr>
+<!-- BEGIN ruleList -->
+   <tr {tdstyle}>
+     <td height="25">{space}{rulename}</td>
+     <td align="center">{superuser}</td>
+     <td align="center">{browsestr}</td>
+     <td align="center">{appendstr}</td>
+     <td align="center">{modifystr}</td>
+     <td align="center">{deletestr}</td>
+     <td align="center">{importstr}</td>
+     <td align="center">{exportstr}</td>
+     <td align="center">{recoilstr}</td>
+     <td align="center">{auditstr}</td>
+     <td colspan="2">
+	   <table border="0" cellpadding="2" cellspacing="1">
+<!-- BEGIN attachList -->
+         <tr><td align="right">{name}:</td><td>{value}</td></tr>
+<!-- END attachList -->
+       </table>
+	 </td>
+<!-- END ruleList -->
+</table>
+
+</body>
+</html>

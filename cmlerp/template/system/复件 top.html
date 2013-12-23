@@ -1,0 +1,167 @@
+<html xmlns:ntb>
+<head>
+<title>top</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="{skin}page_title.css" rel="stylesheet" type="text/css">
+<LINK href="../include/DatePicker.css" rel=stylesheet type=text/css>
+<LINK href="{skin}browse.css" type=text/css rel=stylesheet>
+<SCRIPT language=javascript src="../include/dateobject.js"></SCRIPT>
+<SCRIPT language=javascript src="../include/datepicker.js"></SCRIPT>
+
+<SCRIPT language="JavaScript" src="../main/magicToolTip.js"></SCRIPT>
+<script>
+
+	function onLoad()
+	{
+		type();	
+		//loadingok.value = "1";
+	}
+
+</script>
+
+<style type="text/css">
+<!--
+body {	
+	margin:0px
+}
+.zicolor {
+	font-size:13px
+}
+.topfont2 {
+	FONT-SIZE: 13px; COLOR: #ff954f
+}
+.topfont1 {
+	FONT-SIZE: 13px
+}
+.topfont {
+	LINE-HEIGHT: 120%
+}
+*
+{
+	font-size:13px
+}
+-->
+</style></head>
+<script language="JavaScript">
+<!--
+document.oncontextmenu = function(evt){   
+	evt = evt || window.event;  
+	return false;   
+}	
+
+    function logoff(){
+	 
+	 if(form1.loadingok.value==""){
+         if (confirm("是否确定退出系统?")) {
+	          parent.parent.window.location.href="../index.php?logout=ture";   
+         }    
+	}else{
+	     return false;
+	}
+  } 	
+	function framesgomain(){
+	if(form1.loadingok.value ==""){      
+	          parent.parent.frames[2].location.href="right.php";   
+	}else{
+	     return false;
+	}       
+  }	
+    function framesprint() {
+	if(form1.loadingok.value==""){ 
+	     parent.parent.frames[2].focus();
+	     window.print(); 
+    }else{
+	     return false;
+	}   
+ }	
+   function framesreload() {
+   if(form1.loadingok.value ==""){
+  parent.parent.frames[2].document.location.reload()
+  }else{
+     return false;
+  }
+ } 
+ 
+function frameschangeorgan(){
+  parent.parent.frames[2].location.href="../sys/changloginorgan.php";
+} 
+ 
+var msg="提高您营运效率的好帮手";
+
+
+var len=msg.length+1
+var seq=0
+var speed=300
+var flag = 0;
+function type()
+{
+if(flag==0){
+a.style.color ="#000000"
+a.innerText=msg
+}else{
+a.style.color ="#ff9900"
+a.innerText=msg.substring(0,seq)
+}
+if(seq==len){seq=0;
+if(flag == 0){
+  msg="有疑问？操作不顺利？";
+  flag = 1 ;
+}else if(flag == 1){
+  msg="有困难请点击帮助!  ";
+  flag = 2 ;
+}else{
+  msg="提高您营运效率的好帮手";
+  flag = 0 ;
+  
+ }
+}
+else
+seq++
+setTimeout("type()",speed)
+} 
+function showservlist(compsid){
+	var szRef="servlist.php?compsid="+compsid;
+	window.showModalDialog(szRef,"","Help=no;status:no;dialogWidth=200px;dialogHeight=500px;vscroll=no;hscroll=no;");
+}
+// -->
+</script>
+<body onLoad="onLoad()">
+<form action="" method="post" name="form1">
+  <input type="hidden" name="loadingok" value="">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" >
+  <tr height="66">
+    <td  width="191" height="69"  valign="middle" ><img src="img/51.gif" border=0></td>
+   <td width="39"  align="left"  valign="middle" >&nbsp;</td>
+   <td  align="left" valign="bottom" class=topfont>
+   <span class=topfont1 id=a style="font-weight:bold ;color:#FF6668">提高您营运效率的好帮手</span><br>
+   <span class=topfont1>您好！</span><span class=topfont2>{loginstaname}<br></span>机构：{organname}<br>
+    </td>
+      <td   align="left"></td>
+	  <td width="210" align="left" valign="bottom" >
+	  
+	  <div style="margin:0px 0px 0px 0px;"><span style="cursor:pointer" onClick="javascript:history.back(-1)" onMouseOver="ddrivetip('后退',100)"onMouseOut="hideddrivetip()"><img src="img/top_back.gif" width="35" height="35"></span><span style="cursor:pointer" onClick="framesgomain()" onMouseOver="ddrivetip('主页',100)"onMouseOut="hideddrivetip()"><img src="img/top_main.gif" width="35" height="35"></span><span style="cursor:pointer" onClick="framesprint()" onMouseOver="ddrivetip('打印',100)"onMouseOut="hideddrivetip()"><img src="img/top_print.gif" width="35" height="35"></span><span style="cursor:pointer" onClick="parent.parent.frames[2].document.location.reload()" onMouseOver="ddrivetip('刷新',100)"onMouseOut="hideddrivetip()"><img src="img/top_reload.gif" width="35" height="35"></span><span style="cursor:pointer" onClick="logoff()" onMouseOver="ddrivetip('退出',100)"onMouseOut="hideddrivetip()"><img src="img/top_quit.gif" width="35" height="35"></span><span style="cursor:pointer;{isshowchageorgan}" onClick="frameschangeorgan()" onMouseOver="ddrivetip('转换机构',100)"onMouseOut="hideddrivetip()"><img src="img/top_zhuanhuan.gif" width="35" height="35"></span></div>	
+	  </div>
+	  </td>
+   	 <TD align="right" width="240px" valign="bottom"><table  border="0" cellpadding="0" cellspacing="0" >
+   <tr   height="32px"><td height="32px" >
+  <span style="cursor:pointer; color:#993333" onClick="parent.parent.frames[2].location.href='../teller/ownconfig.php'">个人设置</span> | <span    style="cursor:pointer;; color:#993333" onClick="parent.parent.frames[2].location.href='../individual/updatepass.php'">密码修改</span>&nbsp;&nbsp;</td>
+  </tr>
+  <tr   height="32px">
+    <td height="32px" align="left" valign="bottom">
+	      <span style="cursor:pointer">&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+     </table>
+	</TD> 
+</TR>
+
+
+  <tr>
+    <td height="14" colspan="20" background="img/top_bottom_line.jpg"></td>
+  </tr>
+</table>
+</form>
+<!--离线销售数据同步到服务器-->
+<iframe src="../offline/synDataToServer.html" width=0 height=0></iframe>
+</body>
+
+</html>
